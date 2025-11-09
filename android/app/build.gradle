@@ -66,11 +66,23 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    def v = 1
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
-            output.versionCodeOverride = flutterVersionCode.toInteger() + v * 10000
-            v += 1
+            def abi = output.getFilter(com.android.build.OutputFile.ABI)
+            def abiCode = 10
+            if (abi != null) {
+                if (abi.equals("arm64-v8a")) {
+                    abiCode = 1
+                } else if (abi.equals("x86_64")) {
+                    abiCode = 2
+                } else if (abi.equals("armeabi-v7a")) {
+                    abiCode = 3
+                } else if (abi.equals("x86")) {
+                    abiCode = 4
+                }
+            }
+            def version = abiCode * 100000000 + flutterVersionCode.toInteger()
+            output.versionCodeOverride = version
         }
     }
 

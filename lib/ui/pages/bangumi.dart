@@ -242,7 +242,9 @@ class BangumiPage extends StatelessWidget {
                 message: e.value.name,
                 child: RippleTap(
                   color: theme.colorScheme.surfaceContainerHighest,
-                  borderRadius: borderRadius6,
+                  shape: const RoundedSuperellipseBorder(
+                    borderRadius: borderRadius6,
+                  ),
                   onTap: () {
                     _showSubgroupPanel(context, model, e.key);
                   },
