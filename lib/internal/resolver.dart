@@ -269,11 +269,12 @@ class Resolver {
     for (final Element ele in eles) {
       record = RecordItem();
       elements = ele.querySelectorAll('td');
+      final t = elements[1].children[0];
       record.url = MikanUrls.baseUrl +
-          (elements[0].children[0].attributes['href']?.trim() ?? '');
-      temp = elements.getOrNull(0)?.children.getOrNull(0)?.text.trim();
+          (t.attributes['href']?.trim() ?? '');
+      temp = t.text.trim();
       if (temp.isNotBlank) {
-        temp = temp!.trim().replaceAll('【', '[').replaceAll('】', ']');
+        temp = temp.trim().replaceAll('【', '[').replaceAll('】', ']');
         tags = LinkedHashSet(equals: (a, b) => a == b);
         tempLowerCase = temp.toLowerCase();
         keywords.forEach((key, value) {
@@ -284,9 +285,9 @@ class Resolver {
         record.tags = tags.toList()..sort((a, b) => b.compareTo(a));
         record.title = temp;
       }
-      final String size = elements[1].text.trim();
+      final String size = elements[2].text.trim();
       record.size = RegExp(r'\d+.*').hasMatch(size) ? size : '';
-      temp = elements[2].text.trim();
+      temp = elements[3].text.trim();
       if (temp.isNotBlank &&
           RegExp(r'^\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}$').hasMatch(temp)) {
         record.publishAt =
@@ -295,9 +296,9 @@ class Resolver {
         record.publishAt = temp;
       }
       record.magnet =
-          elements[0].children[1].attributes['data-clipboard-text'] ?? '';
+          elements[1].children[1].attributes['data-clipboard-text'] ?? '';
       record.torrent = MikanUrls.baseUrl +
-          (elements[3].children[0].attributes['href'] ?? '');
+          (elements[4].children[0].attributes['href'] ?? '');
       searchs.add(record);
     }
     return SearchResult(
