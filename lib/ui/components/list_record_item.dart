@@ -35,6 +35,9 @@ class ListRecordItem extends StatelessWidget {
     );
     return TransitionContainer(
       closedColor: closedColor,
+      shape: const RoundedSuperellipseBorder(
+        borderRadius: borderRadius24,
+      ),
       builder: (context, open) {
         return RippleTap(
           onTap: open,
