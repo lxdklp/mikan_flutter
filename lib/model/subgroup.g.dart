@@ -8,7 +8,7 @@ part of 'subgroup.dart';
 
 class SubgroupAdapter extends TypeAdapter<Subgroup> {
   @override
-  final int typeId = 7;
+  final typeId = 7;
 
   @override
   Subgroup read(BinaryReader reader) {
@@ -16,10 +16,7 @@ class SubgroupAdapter extends TypeAdapter<Subgroup> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Subgroup(
-      id: fields[0] as String?,
-      name: fields[1] as String,
-    );
+    return Subgroup(id: fields[0] as String?, name: fields[1] as String);
   }
 
   @override

@@ -8,7 +8,7 @@ part of 'carousel.dart';
 
 class CarouselAdapter extends TypeAdapter<Carousel> {
   @override
-  final int typeId = 4;
+  final typeId = 4;
 
   @override
   Carousel read(BinaryReader reader) {

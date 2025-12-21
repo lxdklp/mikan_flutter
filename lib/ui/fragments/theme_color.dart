@@ -1,6 +1,6 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
 import '../../internal/dynamic_color.dart';
 import '../../internal/hive.dart';

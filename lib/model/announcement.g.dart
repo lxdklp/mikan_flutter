@@ -8,7 +8,7 @@ part of 'announcement.dart';
 
 class AnnouncementAdapter extends TypeAdapter<Announcement> {
   @override
-  final int typeId = 11;
+  final typeId = 11;
 
   @override
   Announcement read(BinaryReader reader) {
@@ -45,7 +45,7 @@ class AnnouncementAdapter extends TypeAdapter<Announcement> {
 
 class AnnouncementNodeAdapter extends TypeAdapter<AnnouncementNode> {
   @override
-  final int typeId = 12;
+  final typeId = 12;
 
   @override
   AnnouncementNode read(BinaryReader reader) {

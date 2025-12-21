@@ -8,7 +8,7 @@ part of 'index.dart';
 
 class IndexAdapter extends TypeAdapter<Index> {
   @override
-  final int typeId = 5;
+  final typeId = 5;
 
   @override
   Index read(BinaryReader reader) {
@@ -19,8 +19,10 @@ class IndexAdapter extends TypeAdapter<Index> {
     return Index(
       years: (fields[0] as List).cast<YearSeason>(),
       bangumiRows: (fields[1] as List).cast<BangumiRow>(),
-      rss: (fields[2] as Map).map((dynamic k, dynamic v) =>
-          MapEntry(k as String, (v as List).cast<RecordItem>())),
+      rss: (fields[2] as Map).map(
+        (dynamic k, dynamic v) =>
+            MapEntry(k as String, (v as List).cast<RecordItem>()),
+      ),
       carousels: (fields[3] as List).cast<Carousel>(),
       user: fields[4] as User?,
       announcements: (fields[5] as List?)?.cast<Announcement>(),

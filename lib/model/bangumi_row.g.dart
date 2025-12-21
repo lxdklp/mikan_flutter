@@ -8,7 +8,7 @@ part of 'bangumi_row.dart';
 
 class BangumiRowAdapter extends TypeAdapter<BangumiRow> {
   @override
-  final int typeId = 3;
+  final typeId = 3;
 
   @override
   BangumiRow read(BinaryReader reader) {
@@ -19,10 +19,10 @@ class BangumiRowAdapter extends TypeAdapter<BangumiRow> {
     return BangumiRow()
       ..name = fields[0] as String
       ..sname = fields[1] as String
-      ..num = fields[2] as int
-      ..updatedNum = fields[3] as int
-      ..subscribedNum = fields[4] as int
-      ..subscribedUpdatedNum = fields[5] as int
+      ..num = (fields[2] as num).toInt()
+      ..updatedNum = (fields[3] as num).toInt()
+      ..subscribedNum = (fields[4] as num).toInt()
+      ..subscribedUpdatedNum = (fields[5] as num).toInt()
       ..bangumis = (fields[6] as List).cast<Bangumi>();
   }
 

@@ -8,7 +8,7 @@ part of 'year_season.dart';
 
 class YearSeasonAdapter extends TypeAdapter<YearSeason> {
   @override
-  final int typeId = 9;
+  final typeId = 9;
 
   @override
   YearSeason read(BinaryReader reader) {

@@ -8,7 +8,7 @@ part of 'bangumi.dart';
 
 class BangumiAdapter extends TypeAdapter<Bangumi> {
   @override
-  final int typeId = 2;
+  final typeId = 2;
 
   @override
   Bangumi read(BinaryReader reader) {
@@ -19,7 +19,7 @@ class BangumiAdapter extends TypeAdapter<Bangumi> {
     return Bangumi()
       ..id = fields[0] as String
       ..updateAt = fields[1] as String
-      ..num = fields[2] as int?
+      ..num = (fields[2] as num?)?.toInt()
       ..name = fields[3] as String
       ..cover = fields[4] as String
       ..subscribed = fields[5] as bool
