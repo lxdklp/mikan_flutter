@@ -48,12 +48,12 @@ class MBottomSheet extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.only(
-          left: 16.0,
-          right: 16.0,
-          bottom: 16.0 + navKey.currentContext!.navBarHeight,
+          left: 8.0,
+          right: 8.0,
+          bottom: 8.0 + navKey.currentContext!.navBarHeight,
           top: heightFactor == 1.0
-              ? navKey.currentContext!.statusBarHeight + 16.0
-              : 16.0,
+              ? navKey.currentContext!.statusBarHeight + 8.0
+              : 8.0,
         ),
         child: height != null
             ? SizedBox(height: height, child: clipRRect)
