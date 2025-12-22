@@ -241,10 +241,12 @@ class RecordPage extends StatelessWidget {
                           horizontal: 6.0,
                           vertical: 4.0,
                         ),
-                        decoration: BoxDecoration(
+                        decoration: ShapeDecoration(
                           color: theme.colorScheme.secondaryContainer,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(6.0),
+                          shape: const RoundedSuperellipseBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(6.0),
+                            ),
                           ),
                         ),
                         child: Text(
