@@ -6,6 +6,7 @@ import 'package:flutter/material.dart' hide EdgeInsets;
 import 'package:gap/gap.dart';
 
 import 'internal/kit.dart';
+import 'widget/custom_refresh_header.dart';
 
 EdgeInsets edge16WithStatusBar(BuildContext context) => EdgeInsets.only(
   top: 16.0 + context.statusBarHeight,
@@ -80,10 +81,10 @@ const centerLoading = Center(child: CupertinoActivityIndicator());
 double kMaterialHeaderFactorFactor(double overscrollFraction) =>
     2.0 * math.pow(1 - overscrollFraction, 2);
 
-const defaultHeader = MaterialHeader(
-  triggerOffset: 180.0,
+const defaultHeader = CustomRefreshHeader(
+  triggerOffset: 80.0,
   hapticFeedback: true,
-  frictionFactor: kMaterialHeaderFactorFactor,
+  frictionFactor: kCustomHeaderFactorFactor,
 );
 
 Footer defaultFooter(BuildContext context) {
