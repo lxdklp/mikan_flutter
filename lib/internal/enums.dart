@@ -7,8 +7,7 @@ enum WeekSection {
   sat('星期六', '土'),
   sun('星期日', '日'),
   mv('剧场版', '剧'),
-  ova('OVA', 'O'),
-  ;
+  ova('OVA', 'O');
 
   const WeekSection(this.name, this.shortName);
 

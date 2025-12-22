@@ -37,33 +37,33 @@ class SettingsPanel extends StatelessWidget {
       create: (_) => SettingsModel(),
       child: Builder(
         builder: (context) {
-          final settingsModel =
-              Provider.of<SettingsModel>(context, listen: false);
+          final settingsModel = Provider.of<SettingsModel>(
+            context,
+            listen: false,
+          );
           return Scaffold(
             body: CustomScrollView(
               slivers: [
                 _buildHeader(theme),
                 SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      _buildSection(theme, '界面'),
-                      _buildThemeMode(theme),
-                      _buildThemeColor(context, theme),
-                      _buildFontManager(context, theme),
-                      _buildCardStyle(context, theme),
-                      _buildCardRatio(context, theme),
-                      _buildCardWidth(context, theme),
-                      _buildTabletMode(context, theme),
-                      _buildSection(theme, '更多'),
-                      _buildMirror(context, theme),
-                      _buildDonate(context, theme),
-                      _buildLicense(context, theme),
-                      _buildPrivacyPolicy(context, theme),
-                      _buildClearCache(context, settingsModel, theme),
-                      _buildCheckUpdate(context, theme),
-                      sizedBoxH24WithNavBarHeight(context),
-                    ],
-                  ),
+                  delegate: SliverChildListDelegate([
+                    _buildSection(theme, '界面'),
+                    _buildThemeMode(theme),
+                    _buildThemeColor(context, theme),
+                    _buildFontManager(context, theme),
+                    _buildCardStyle(context, theme),
+                    _buildCardRatio(context, theme),
+                    _buildCardWidth(context, theme),
+                    _buildTabletMode(context, theme),
+                    _buildSection(theme, '更多'),
+                    _buildMirror(context, theme),
+                    _buildDonate(context, theme),
+                    _buildLicense(context, theme),
+                    _buildPrivacyPolicy(context, theme),
+                    _buildClearCache(context, settingsModel, theme),
+                    _buildCheckUpdate(context, theme),
+                    gapH24WithNavBarHeight(context),
+                  ]),
                 ),
               ],
             ),
@@ -75,11 +75,8 @@ class SettingsPanel extends StatelessWidget {
 
   Widget _buildSection(ThemeData theme, String title) {
     return Padding(
-      padding: edgeH24V16,
-      child: Text(
-        title,
-        style: theme.textTheme.titleLarge,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+      child: Text(title, style: theme.textTheme.titleLarge),
     );
   }
 
@@ -117,18 +114,14 @@ class SettingsPanel extends StatelessWidget {
       },
       child: Container(
         height: 50.0,
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '字体管理',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('字体管理', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
-              valueListenable: MyHive.settings
-                  .listenable(keys: [SettingsHiveKey.fontFamily]),
+              valueListenable: MyHive.settings.listenable(
+                keys: [SettingsHiveKey.fontFamily],
+              ),
               builder: (context, _, child) {
                 return Text(
                   MyHive.getFontFamily()?.key ?? '默认',
@@ -152,15 +145,10 @@ class SettingsPanel extends StatelessWidget {
       },
       child: Container(
         height: 50.0,
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '镜像地址',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('镜像地址', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
               valueListenable: MyHive.settings.listenable(
                 keys: [SettingsHiveKey.mirrorUrl],
@@ -185,26 +173,19 @@ class SettingsPanel extends StatelessWidget {
         MBottomSheet.show(
           context,
           barrierColor: Colors.transparent,
-          (context) => const MBottomSheet(
-            height: 200.0,
-            child: CardRatio(),
-          ),
+          (context) => const MBottomSheet(height: 200.0, child: CardRatio()),
         );
       },
       child: Container(
         height: 50.0,
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '卡片比例',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('卡片比例', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
-              valueListenable:
-                  MyHive.settings.listenable(keys: [SettingsHiveKey.cardRatio]),
+              valueListenable: MyHive.settings.listenable(
+                keys: [SettingsHiveKey.cardRatio],
+              ),
               builder: (context, _, child) {
                 return Text(
                   MyHive.getCardRatio().toStringAsFixed(2),
@@ -225,26 +206,19 @@ class SettingsPanel extends StatelessWidget {
         MBottomSheet.show(
           context,
           barrierColor: Colors.transparent,
-          (context) => const MBottomSheet(
-            height: 200.0,
-            child: CardWidth(),
-          ),
+          (context) => const MBottomSheet(height: 200.0, child: CardWidth()),
         );
       },
       child: Container(
         height: 50.0,
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '卡片宽度',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('卡片宽度', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
-              valueListenable:
-                  MyHive.settings.listenable(keys: [SettingsHiveKey.cardWidth]),
+              valueListenable: MyHive.settings.listenable(
+                keys: [SettingsHiveKey.cardWidth],
+              ),
               builder: (context, _, child) {
                 return Text(
                   MyHive.getCardWidth().toStringAsFixed(0),
@@ -265,26 +239,19 @@ class SettingsPanel extends StatelessWidget {
         MBottomSheet.show(
           context,
           barrierColor: Colors.transparent,
-          (context) => const MBottomSheet(
-            height: 200.0,
-            child: CardStyle(),
-          ),
+          (context) => const MBottomSheet(height: 200.0, child: CardStyle()),
         );
       },
       child: Container(
         height: 50.0,
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '卡片样式',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('卡片样式', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
-              valueListenable:
-                  MyHive.settings.listenable(keys: [SettingsHiveKey.cardStyle]),
+              valueListenable: MyHive.settings.listenable(
+                keys: [SettingsHiveKey.cardStyle],
+              ),
               builder: (context, _, child) {
                 return Text(
                   '样式${MyHive.getCardStyle()}',
@@ -308,18 +275,14 @@ class SettingsPanel extends StatelessWidget {
       },
       child: Container(
         height: 50.0,
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '平板模式',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('平板模式', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
-              valueListenable: MyHive.settings
-                  .listenable(keys: [SettingsHiveKey.tabletMode]),
+              valueListenable: MyHive.settings.listenable(
+                keys: [SettingsHiveKey.tabletMode],
+              ),
               builder: (context, _, child) {
                 return Text(
                   MyHive.getTabletMode().label,
@@ -346,20 +309,16 @@ class SettingsPanel extends StatelessWidget {
     );
     return Container(
       height: 50.0,
-      padding: edgeH24,
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Row(
         children: [
-          Expanded(
-            child: Text(
-              '主题模式',
-              style: theme.textTheme.titleMedium,
-            ),
-          ),
+          Expanded(child: Text('主题模式', style: theme.textTheme.titleMedium)),
           Transform.translate(
             offset: const Offset(8.0, 0.0),
             child: ValueListenableBuilder(
-              valueListenable:
-                  MyHive.settings.listenable(keys: [SettingsHiveKey.themeMode]),
+              valueListenable: MyHive.settings.listenable(
+                keys: [SettingsHiveKey.themeMode],
+              ),
               builder: (context, _, child) {
                 final themeMode = MyHive.getThemeMode();
                 return Row(
@@ -368,16 +327,18 @@ class SettingsPanel extends StatelessWidget {
                       onPressed: () {
                         MyHive.setThemeMode(ThemeMode.system);
                       },
-                      style:
-                          themeMode == ThemeMode.system ? selectedStyle : null,
+                      style: themeMode == ThemeMode.system
+                          ? selectedStyle
+                          : null,
                       icon: const Icon(Icons.auto_awesome_rounded),
                     ),
                     IconButton(
                       onPressed: () {
                         MyHive.setThemeMode(ThemeMode.light);
                       },
-                      style:
-                          themeMode == ThemeMode.light ? selectedStyle : null,
+                      style: themeMode == ThemeMode.light
+                          ? selectedStyle
+                          : null,
                       icon: const Icon(Icons.light_mode_rounded),
                     ),
                     IconButton(
@@ -403,16 +364,11 @@ class SettingsPanel extends StatelessWidget {
         Navigator.of(context).pushNamed(Routes.license.name);
       },
       child: Container(
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         height: 50.0,
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '开源协议',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('开源协议', style: theme.textTheme.titleMedium)),
             const Icon(Icons.east_rounded),
           ],
         ),
@@ -429,16 +385,11 @@ class SettingsPanel extends StatelessWidget {
         );
       },
       child: Container(
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         height: 50.0,
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '支持一下',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('支持一下', style: theme.textTheme.titleMedium)),
             const Icon(Icons.thumb_up_outlined),
           ],
         ),
@@ -460,22 +411,14 @@ class SettingsPanel extends StatelessWidget {
       },
       child: Container(
         height: 50.0,
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '清除缓存',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('清除缓存', style: theme.textTheme.titleMedium)),
             Selector<SettingsModel, String>(
               selector: (_, model) => model.formatCacheSize,
               builder: (context, value, _) {
-                return Text(
-                  value,
-                  style: theme.textTheme.bodyMedium,
-                );
+                return Text(value, style: theme.textTheme.bodyMedium);
               },
             ),
           ],
@@ -493,15 +436,10 @@ class SettingsPanel extends StatelessWidget {
       },
       child: Container(
         height: 50.0,
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '隐私政策',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('隐私政策', style: theme.textTheme.titleMedium)),
             const Icon(Icons.east_rounded),
           ],
         ),
@@ -512,21 +450,18 @@ class SettingsPanel extends StatelessWidget {
   Widget _buildCheckUpdate(BuildContext context, ThemeData theme) {
     return RippleTap(
       onTap: () {
-        final HomeModel homeModel =
-            Provider.of<HomeModel>(context, listen: false);
+        final HomeModel homeModel = Provider.of<HomeModel>(
+          context,
+          listen: false,
+        );
         homeModel.checkAppVersion(false);
       },
       child: Container(
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         height: 50.0,
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '检查更新',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('检查更新', style: theme.textTheme.titleMedium)),
             Selector<HomeModel, bool>(
               selector: (_, model) => model.checkingUpgrade,
               shouldRebuild: (pre, next) => pre != next,
@@ -534,7 +469,7 @@ class SettingsPanel extends StatelessWidget {
                 if (checking) {
                   return const CupertinoActivityIndicator();
                 }
-                return sizedBox;
+                return const SizedBox();
               },
             ),
           ],
@@ -547,10 +482,7 @@ class SettingsPanel extends StatelessWidget {
     Navigator.pushNamed(context, Routes.fonts.name);
   }
 
-  Future<bool?> _showClearCacheModal(
-    BuildContext context,
-    ThemeData theme,
-  ) {
+  Future<bool?> _showClearCacheModal(BuildContext context, ThemeData theme) {
     return showDialog<bool>(
       context: context,
       builder: (context) {
@@ -589,15 +521,10 @@ class SettingsPanel extends StatelessWidget {
       },
       child: Container(
         height: 50.0,
-        padding: edgeH24,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Row(
           children: [
-            Expanded(
-              child: Text(
-                '主题色',
-                style: theme.textTheme.titleMedium,
-              ),
-            ),
+            Expanded(child: Text('主题色', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
               valueListenable: MyHive.settings.listenable(
                 keys: [SettingsHiveKey.colorSeed, SettingsHiveKey.dynamicColor],
@@ -605,10 +532,7 @@ class SettingsPanel extends StatelessWidget {
               builder: (context, _, child) {
                 final useDynamic = MyHive.dynamicColorEnabled();
                 if (useDynamic) {
-                  return Text(
-                    '跟随系统',
-                    style: theme.textTheme.bodyMedium,
-                  );
+                  return Text('跟随系统', style: theme.textTheme.bodyMedium);
                 }
                 final colorSeed = MyHive.getColorSeed();
                 return Transform.translate(
@@ -621,10 +545,7 @@ class SettingsPanel extends StatelessWidget {
                             const MBottomSheet(child: ThemeColorPanel()),
                       );
                     },
-                    icon: Icon(
-                      Icons.circle_rounded,
-                      color: Color(colorSeed),
-                    ),
+                    icon: Icon(Icons.circle_rounded, color: Color(colorSeed)),
                   ),
                 );
               },
@@ -638,7 +559,7 @@ class SettingsPanel extends StatelessWidget {
 
 Widget buildAvatar(String? avatar) {
   return ClipRRect(
-    borderRadius: borderRadius24,
+    borderRadius: const BorderRadius.all(Radius.circular(24.0)),
     child: avatar != null
         ? Image(
             image: CacheImage(avatar),

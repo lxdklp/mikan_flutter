@@ -19,10 +19,7 @@ class ActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tooltip(
       message: tooltip,
-      child: IconButton(
-        onPressed: onTap,
-        icon: Icon(icon),
-      ),
+      child: IconButton(onPressed: onTap, icon: Icon(icon)),
     );
   }
 }

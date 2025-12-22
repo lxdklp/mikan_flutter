@@ -13,10 +13,7 @@ class CardStyle extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverPinnedAppBar(
-            title: '卡片样式',
-            maxExtent: 120.0,
-          ),
+          const SliverPinnedAppBar(title: '卡片样式', maxExtent: 120.0),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -30,10 +27,7 @@ class CardStyle extends StatelessWidget {
                     showSelectedIcon: false,
                     segments: List.generate(4, (index) {
                       final v = index + 1;
-                      return ButtonSegment(
-                        value: v,
-                        label: Text('样式$v'),
-                      );
+                      return ButtonSegment(value: v, label: Text('样式$v'));
                     }),
                     onSelectionChanged: (v) {
                       MyHive.setCardStyle(v.first);
@@ -41,7 +35,7 @@ class CardStyle extends StatelessWidget {
                     style: ButtonStyle(
                       shape: WidgetStateProperty.resolveWith((states) {
                         return const RoundedRectangleBorder(
-                          borderRadius: borderRadius6,
+                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
                         );
                       }),
                     ),
@@ -51,7 +45,7 @@ class CardStyle extends StatelessWidget {
               ),
             ),
           ),
-          sliverSizedBoxH24WithNavBarHeight(context),
+          sliverGapH24WithNavBarHeight(context),
         ],
       ),
     );

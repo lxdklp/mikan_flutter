@@ -1,6 +1,7 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:ff_annotation_route_core/ff_annotation_route_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 
@@ -48,7 +49,7 @@ class Fonts extends StatelessWidget {
               ],
             ),
             SliverPadding(
-              padding: edgeH24,
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
               sliver: Selector<FontsModel, List<Font>>(
                 shouldRebuild: (pre, next) => pre.ne(next),
                 selector: (_, model) => model.fonts,
@@ -56,28 +57,25 @@ class Fonts extends StatelessWidget {
                   return SliverWaterfallFlow(
                     gridDelegate:
                         SliverWaterfallFlowDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 400.0,
-                      mainAxisSpacing: context.margins,
-                      crossAxisSpacing: context.margins,
-                    ),
-                    delegate: SliverChildBuilderDelegate(
-                      (_, index) {
-                        final font = fonts[index];
-                        return _buildFontItem(
-                          theme,
-                          style1,
-                          style2,
-                          fontsModel,
-                          font,
-                        );
-                      },
-                      childCount: fonts.length,
-                    ),
+                          maxCrossAxisExtent: 400.0,
+                          mainAxisSpacing: context.margins,
+                          crossAxisSpacing: context.margins,
+                        ),
+                    delegate: SliverChildBuilderDelegate((_, index) {
+                      final font = fonts[index];
+                      return _buildFontItem(
+                        theme,
+                        style1,
+                        style2,
+                        fontsModel,
+                        font,
+                      );
+                    }, childCount: fonts.length),
                   );
                 },
               ),
             ),
-            sliverSizedBoxH24WithNavBarHeight(context),
+            sliverGapH24WithNavBarHeight(context),
           ],
         ),
       ),
@@ -110,85 +108,78 @@ class Fonts extends StatelessWidget {
                     style: theme.textTheme.titleMedium,
                   ),
                 ),
-                sizedBoxW4,
+                const Gap(4),
                 _buildLoadingOrChecked(theme, model, font),
               ],
             ),
-            sizedBoxH4,
+            const Gap(4),
             Row(
               children: [
                 RippleTap(
                   onTap: () {},
                   color: theme.colorScheme.tertiaryContainer,
-                  borderRadius: borderRadius6,
+                  borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   child: Padding(
-                    padding: edgeH6V4,
-                    child: Text(
-                      '${font.files.length}个字体',
-                      style: style1,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0,
+                      vertical: 4.0,
                     ),
+                    child: Text('${font.files.length}个字体', style: style1),
                   ),
                 ),
-                sizedBoxW4,
+                const Gap(4),
                 RippleTap(
                   onTap: () {
                     font.official.launchAppAndCopy();
                   },
                   color: theme.colorScheme.secondaryContainer,
-                  borderRadius: borderRadius6,
+                  borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   child: Padding(
-                    padding: edgeH6V4,
-                    child: Text(
-                      '官网',
-                      style: style2,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0,
+                      vertical: 4.0,
                     ),
+                    child: Text('官网', style: style2),
                   ),
                 ),
-                sizedBoxW4,
+                const Gap(4),
                 RippleTap(
                   onTap: () {
                     font.license.url.launchAppAndCopy();
                   },
                   color: theme.colorScheme.secondaryContainer,
-                  borderRadius: borderRadius6,
+                  borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   child: Padding(
-                    padding: edgeH6V4,
-                    child: Text(
-                      font.license.name,
-                      style: style2,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0,
+                      vertical: 4.0,
                     ),
+                    child: Text(font.license.name, style: style2),
                   ),
                 ),
               ],
             ),
-            sizedBoxH8,
-            Text(
-              font.desc,
-              style: theme.textTheme.bodySmall,
-            ),
+            const Gap(8),
+            Text(font.desc, style: theme.textTheme.bodySmall),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildLoadingOrChecked(
-    ThemeData theme,
-    FontsModel model,
-    Font font,
-  ) {
+  Widget _buildLoadingOrChecked(ThemeData theme, FontsModel model, Font font) {
     return Selector<FontsModel, ProgressChunkEvent?>(
       selector: (_, model) => model.fontProgress[font.id],
       shouldRebuild: (pre, next) => pre?.progress != next?.progress,
       builder: (_, event, __) {
         if (event == null) {
-          return sizedBox;
+          return const SizedBox();
         }
         if (event.percent == 1.0) {
           if (model.usedFontFamilyId == font.id) {
             return const Icon(Icons.check_circle_outline_rounded);
           } else {
-            return sizedBox;
+            return const SizedBox();
           }
         }
         return SizedBox(

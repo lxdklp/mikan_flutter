@@ -15,10 +15,9 @@ Future<T> wrapLoading<T>(
       SmartDialog.showLoading(
         backType: SmartBackType.block,
         clickMaskDismiss: false,
-        maskColor: Theme.of(navKey.currentContext!)
-            .colorScheme
-            .surface
-            .withValues(alpha: 0.64),
+        maskColor: Theme.of(
+          navKey.currentContext!,
+        ).colorScheme.surface.withValues(alpha: 0.64),
         msg: msg,
       ),
     );

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../topvars.dart';
-
 class ToastWidget extends StatelessWidget {
   const ToastWidget({super.key, required this.msg});
 
@@ -13,12 +11,9 @@ class ToastWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: theme.colorScheme.tertiaryContainer,
-        borderRadius: borderRadius6,
+        borderRadius: const BorderRadius.all(Radius.circular(6.0)),
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12.0,
-        vertical: 8.0,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: Text(
         msg,
         style: TextStyle(color: theme.colorScheme.onTertiaryContainer),

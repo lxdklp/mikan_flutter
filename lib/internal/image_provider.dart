@@ -29,9 +29,7 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
   final Map<String, String>? headers;
 
   @override
-  Future<CacheImage> obtainKey(
-    painting.ImageConfiguration configuration,
-  ) {
+  Future<CacheImage> obtainKey(painting.ImageConfiguration configuration) {
     return SynchronousFuture<CacheImage>(this);
   }
 
@@ -46,8 +44,11 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
         StreamController<ImageChunkEvent>();
 
     return MultiFrameImageStreamCompleter(
-      codec:
-          _loadAsync(key as CacheImage, chunkEvents, decodeDeprecated: decode),
+      codec: _loadAsync(
+        key as CacheImage,
+        chunkEvents,
+        decodeDeprecated: decode,
+      ),
       chunkEvents: chunkEvents.stream,
       scale: key.scale,
       debugLabel: key.url,
@@ -210,16 +211,19 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
     DecoderBufferCallback? decodeDeprecated,
   ) async {
     if (decode != null) {
-      final ui.ImmutableBuffer buffer =
-          await ui.ImmutableBuffer.fromUint8List(bytes);
+      final ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(
+        bytes,
+      );
       return decode(buffer);
     } else if (decodeBufferDeprecated != null) {
-      final ui.ImmutableBuffer buffer =
-          await ui.ImmutableBuffer.fromUint8List(bytes);
+      final ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(
+        bytes,
+      );
       return decodeBufferDeprecated(buffer);
     } else {
-      final ui.ImmutableBuffer buffer =
-          await ui.ImmutableBuffer.fromUint8List(bytes);
+      final ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(
+        bytes,
+      );
       assert(decodeDeprecated != null);
       return decodeDeprecated!(buffer);
     }
@@ -230,9 +234,7 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
     if (Platform.isWindows) {
       cacheDir = join(
         (await getTemporaryDirectory()).path,
-        (await getApplicationSupportDirectory())
-            .parent
-            .path
+        (await getApplicationSupportDirectory()).parent.path
             .split(Platform.pathSeparator)
             .last,
         'images',
@@ -263,5 +265,6 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
       '${objectRuntimeType(this, 'NetworkImage')}("$url", scale: $scale)';
 
   @override
-  WebHtmlElementStrategy get webHtmlElementStrategy => WebHtmlElementStrategy.never;
+  WebHtmlElementStrategy get webHtmlElementStrategy =>
+      WebHtmlElementStrategy.never;
 }

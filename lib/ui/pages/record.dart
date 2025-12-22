@@ -6,6 +6,7 @@ import 'package:ff_annotation_route_core/ff_annotation_route_core.dart';
 @FFAutoImport()
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../internal/extension.dart';
@@ -39,8 +40,10 @@ class RecordPage extends StatelessWidget {
         create: (_) => RecordDetailModel(record),
         child: Builder(
           builder: (context) {
-            final model =
-                Provider.of<RecordDetailModel>(context, listen: false);
+            final model = Provider.of<RecordDetailModel>(
+              context,
+              listen: false,
+            );
             return Scaffold(
               body: NotificationListener<ScrollUpdateNotification>(
                 onNotification: (ScrollUpdateNotification notification) {
@@ -83,7 +86,7 @@ class RecordPage extends StatelessWidget {
                             child: Row(
                               children: [
                                 const BackIconButton(),
-                                sizedBoxW16,
+                                const Gap(16),
                                 if (ratio > 0.88)
                                   Expanded(
                                     child: Selector<RecordDetailModel, String?>(
@@ -92,7 +95,7 @@ class RecordPage extends StatelessWidget {
                                       shouldRebuild: (pre, next) => pre != next,
                                       builder: (_, value, __) {
                                         if (value == null) {
-                                          return sizedBox;
+                                          return const SizedBox();
                                         }
                                         return Text(
                                           value,
@@ -105,7 +108,7 @@ class RecordPage extends StatelessWidget {
                                   )
                                 else
                                   spacer,
-                                sizedBoxW16,
+                                const Gap(16),
                                 IconButton(
                                   onPressed: () {
                                     model.recordDetail.share.share();
@@ -186,13 +189,13 @@ class RecordPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildBangumiCover(context, detail),
-                      sizedBoxW16,
+                      const Gap(16),
                       Expanded(
                         child: SelectionArea(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              sizedBoxH12,
+                              const Gap(12),
                               AutoSizeText(
                                 detail.name,
                                 maxLines: 3,
@@ -200,7 +203,7 @@ class RecordPage extends StatelessWidget {
                                   color: theme.colorScheme.secondary,
                                 ),
                               ),
-                              sizedBoxH8,
+                              const Gap(8),
                               ...detail.more.entries.map(
                                 (e) => Text(
                                   '${e.key}: ${e.value}',
@@ -219,19 +222,13 @@ class RecordPage extends StatelessWidget {
             ),
             Transform.scale(
               scale: scale,
-              child: Container(
-                color: theme.colorScheme.surface,
-                height: 36.0,
-              ),
+              child: Container(color: theme.colorScheme.surface, height: 36.0),
             ),
             if (detail.title.isNotBlank)
               SelectionArea(
-                child: Text(
-                  detail.title,
-                  style: theme.textTheme.bodyMedium,
-                ),
+                child: Text(detail.title, style: theme.textTheme.bodyMedium),
               ),
-            sizedBoxH8,
+            const Gap(8),
             if (!detail.tags.isNullOrEmpty)
               SelectionArea(
                 child: Wrap(
@@ -240,10 +237,15 @@ class RecordPage extends StatelessWidget {
                   children: [
                     if (record.size.isNotBlank)
                       Container(
-                        padding: edgeH6V4,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0,
+                          vertical: 4.0,
+                        ),
                         decoration: BoxDecoration(
                           color: theme.colorScheme.secondaryContainer,
-                          borderRadius: borderRadius6,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(6.0),
+                          ),
                         ),
                         child: Text(
                           record.size,
@@ -252,34 +254,33 @@ class RecordPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ...List.generate(
-                      detail.tags.length,
-                      (index) {
-                        return Container(
-                          padding: edgeH6V4,
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.tertiaryContainer,
-                            borderRadius: borderRadius6,
+                    ...List.generate(detail.tags.length, (index) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0,
+                          vertical: 4.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.tertiaryContainer,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(6.0),
                           ),
-                          child: Text(
-                            detail.tags[index],
-                            style: theme.textTheme.labelMedium!.copyWith(
-                              color: theme.colorScheme.onTertiaryContainer,
-                            ),
+                        ),
+                        child: Text(
+                          detail.tags[index],
+                          style: theme.textTheme.labelMedium!.copyWith(
+                            color: theme.colorScheme.onTertiaryContainer,
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ),
-            sizedBoxH24,
+            const Gap(24),
             if (detail.intro.isNotEmpty)
-              Text(
-                '概况简介',
-                style: theme.textTheme.titleLarge,
-              ),
-            sizedBoxH12,
+              Text('概况简介', style: theme.textTheme.titleLarge),
+            const Gap(12),
             SelectionArea(
               child: HtmlWidget(
                 detail.intro,
@@ -320,12 +321,9 @@ class RecordPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBangumiCover(
-    BuildContext context,
-    RecordDetail record,
-  ) {
+  Widget _buildBangumiCover(BuildContext context, RecordDetail record) {
     return ClipRRect(
-      borderRadius: borderRadius12,
+      borderRadius: const BorderRadius.all(Radius.circular(12.0)),
       child: Image(
         image: CacheImage(record.cover),
         width: 136.0,
@@ -335,10 +333,8 @@ class RecordPage extends StatelessWidget {
               : AspectRatio(
                   aspectRatio: 3 / 4,
                   child: Container(
-                    padding: edge28,
-                    child: Center(
-                      child: Assets.mikan.image(),
-                    ),
+                    padding: const EdgeInsets.all(2.0),
+                    child: Center(child: Assets.mikan.image()),
                   ),
                 );
         },
@@ -424,16 +420,11 @@ class RecordPage extends StatelessWidget {
       child: Container(
         width: double.infinity,
         color: Colors.grey.withValues(alpha: 0.24),
-        child: Center(
-          child: Image.asset(
-            Assets.mikan.path,
-            width: 56.0,
-          ),
-        ),
+        child: Center(child: Image.asset(Assets.mikan.path, width: 56.0)),
       ),
     );
     return ClipRRect(
-      borderRadius: borderRadius12,
+      borderRadius: const BorderRadius.all(Radius.circular(12.0)),
       child: Image(
         image: CacheImage(url),
         loadingBuilder: (_, child, event) {

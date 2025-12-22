@@ -37,9 +37,7 @@ class SearchModel extends BaseModel {
     _keywordsController.value = TextEditingValue(
       text: keywords,
       selection: TextSelection.fromPosition(
-        TextPosition(
-          offset: keywords.length,
-        ),
+        TextPosition(offset: keywords.length),
       ),
     );
     _searching(keywords);
@@ -66,8 +64,10 @@ class SearchModel extends BaseModel {
   }
 
   void _saveNewKeywords(String keywords) {
-    final List<String> history =
-        MyHive.db.get(HiveDBKey.mikanSearch, defaultValue: <String>[]);
+    final List<String> history = MyHive.db.get(
+      HiveDBKey.mikanSearch,
+      defaultValue: <String>[],
+    );
     if (history.contains(keywords)) {
       return;
     }

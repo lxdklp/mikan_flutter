@@ -63,11 +63,7 @@ class SubgroupBangumis extends StatelessWidget {
                       ),
                     ],
                   ),
-                  _buildList(
-                    context,
-                    theme,
-                    subgroupBangumi,
-                  ),
+                  _buildList(context, theme, subgroupBangumi),
                 ],
               ),
             );
@@ -83,25 +79,22 @@ class SubgroupBangumis extends StatelessWidget {
     SubgroupBangumi subgroupBangumi,
   ) {
     return SliverPadding(
-      padding: edgeH24V8,
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
       sliver: Selector<BangumiModel, List<RecordItem>>(
         selector: (_, model) => subgroupBangumi.records,
         shouldRebuild: (pre, next) => pre.ne(next),
         builder: (_, records, __) {
           return SliverWaterfallFlow(
-            delegate: SliverChildBuilderDelegate(
-              (context, ind) {
-                final record = records[ind];
-                return SimpleRecordItem(record: record);
-              },
-              childCount: records.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, ind) {
+              final record = records[ind];
+              return SimpleRecordItem(record: record);
+            }, childCount: records.length),
             gridDelegate:
                 const SliverWaterfallFlowDelegateWithMinCrossAxisExtent(
-              minCrossAxisExtent: 400.0,
-              mainAxisSpacing: 8.0,
-              crossAxisSpacing: 8.0,
-            ),
+                  minCrossAxisExtent: 400.0,
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8.0,
+                ),
           );
         },
       ),

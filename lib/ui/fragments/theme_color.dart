@@ -5,7 +5,6 @@ import 'package:hive_ce_flutter/hive_flutter.dart';
 import '../../internal/dynamic_color.dart';
 import '../../internal/hive.dart';
 import '../../internal/lifecycle.dart';
-import '../../topvars.dart';
 import '../../widget/particle.dart';
 import '../../widget/sliver_pinned_header.dart';
 
@@ -59,7 +58,7 @@ class _ThemeColorPanelState extends LifecycleAppState<ThemeColorPanel> {
                   padding: const EdgeInsets.only(bottom: 12.0),
                   child: Container(
                     height: 50.0,
-                    padding: edgeH24,
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
                     child: Row(
                       children: [
                         Expanded(
@@ -79,10 +78,12 @@ class _ThemeColorPanelState extends LifecycleAppState<ThemeColorPanel> {
                                 MyHive.enableDynamicColor(v);
                                 if (v) {
                                   theme.brightness == Brightness.light
-                                      ? _controller
-                                          .play(_colorSchemePair!.light.primary)
-                                      : _controller
-                                          .play(_colorSchemePair!.dark.primary);
+                                      ? _controller.play(
+                                          _colorSchemePair!.light.primary,
+                                        )
+                                      : _controller.play(
+                                          _colorSchemePair!.dark.primary,
+                                        );
                                 }
                                 setState(() {});
                               },
@@ -98,7 +99,10 @@ class _ThemeColorPanelState extends LifecycleAppState<ThemeColorPanel> {
             if (_colorSchemePair == null || !MyHive.dynamicColorEnabled())
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: edgeH24V8,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24.0,
+                    vertical: 8.0,
+                  ),
                   child: ValueListenableBuilder(
                     valueListenable: MyHive.settings.listenable(
                       keys: [SettingsHiveKey.colorSeed],

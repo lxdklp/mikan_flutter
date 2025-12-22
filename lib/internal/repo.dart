@@ -11,9 +11,7 @@ class Repo {
   static Future<Resp> season(String year, String season) {
     final parameters = {'year': year, 'seasonStr': season};
     final extra = {'$MikanFunc': MikanFunc.season};
-    final Options options = Options(
-      extra: extra,
-    );
+    final Options options = Options(extra: extra);
     return Http.get(
       MikanUrls.seasonUpdate,
       queryParameters: parameters,
@@ -36,10 +34,7 @@ class Repo {
     return day(-1, -1);
   }
 
-  static Future<Resp> search(
-    String? keywords, {
-    String? subgroupId,
-  }) {
+  static Future<Resp> search(String? keywords, {String? subgroupId}) {
     final parameters = {'searchstr': keywords, 'subgroupid': subgroupId};
     final extra = {'$MikanFunc': MikanFunc.search};
     final Options options = Options(extra: extra);
@@ -65,10 +60,7 @@ class Repo {
   static Future<Resp> subgroup(String? subgroupId) {
     final extra = {'$MikanFunc': MikanFunc.subgroup};
     final Options options = Options(extra: extra);
-    return Http.get(
-      '${MikanUrls.subgroup}/$subgroupId',
-      options: options,
-    );
+    return Http.get('${MikanUrls.subgroup}/$subgroupId', options: options);
   }
 
   static Future<Resp> bangumi(String id) {
@@ -123,19 +115,13 @@ class Repo {
     );
   }
 
-  static Future<Resp> mySubscribedSeasonBangumi(
-    String year,
-    String season,
-  ) {
+  static Future<Resp> mySubscribedSeasonBangumi(String year, String season) {
     final Options options = Options(
       extra: {'$MikanFunc': MikanFunc.subscribedSeason},
     );
     return Http.get(
       MikanUrls.subscribedSeason,
-      queryParameters: <String, dynamic>{
-        'year': year,
-        'seasonStr': season,
-      },
+      queryParameters: <String, dynamic>{'year': year, 'seasonStr': season},
       options: options,
     );
   }
@@ -158,11 +144,7 @@ class Repo {
       contentType: Headers.formUrlEncodedContentType,
       responseType: ResponseType.plain,
     );
-    return Http.form(
-      MikanUrls.register,
-      data: params,
-      options: options,
-    );
+    return Http.form(MikanUrls.register, data: params, options: options);
   }
 
   static Future<Resp> forgotPassword(Map<String, dynamic> params) {
@@ -170,41 +152,28 @@ class Repo {
       contentType: Headers.formUrlEncodedContentType,
       responseType: ResponseType.plain,
     );
-    return Http.form(
-      MikanUrls.forgotPassword,
-      data: params,
-      options: options,
-    );
+    return Http.form(MikanUrls.forgotPassword, data: params, options: options);
   }
 
   static Future<Resp> refreshLoginToken() {
     final Options options = Options(
       extra: {'$MikanFunc': MikanFunc.refreshLoginToken},
     );
-    return Http.get(
-      MikanUrls.mySubscribed,
-      options: options,
-    );
+    return Http.get(MikanUrls.mySubscribed, options: options);
   }
 
   static Future<Resp> refreshForgotPasswordToken() {
     final Options options = Options(
       extra: {'$MikanFunc': MikanFunc.refreshForgotPasswordToken},
     );
-    return Http.get(
-      MikanUrls.forgotPassword,
-      options: options,
-    );
+    return Http.get(MikanUrls.forgotPassword, options: options);
   }
 
   static Future<Resp> refreshRegisterToken() {
     final Options options = Options(
       extra: {'$MikanFunc': MikanFunc.refreshRegisterToken},
     );
-    return Http.get(
-      MikanUrls.register,
-      options: options,
-    );
+    return Http.get(MikanUrls.register, options: options);
   }
 
   static Future<Resp> fonts() {

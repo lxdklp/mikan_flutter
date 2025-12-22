@@ -71,8 +71,9 @@ Future<void> _initWindow() async {
 
 Future _initFirebase() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseCrashlytics.instance
-      .setCrashlyticsCollectionEnabled(kDebugMode);
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
+    kDebugMode,
+  );
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 }
 
@@ -155,19 +156,13 @@ class _MikanAppState extends State<MikanApp> {
         ChangeNotifierProvider<SubscribedModel>(
           create: (_) => SubscribedModel(),
         ),
-        ChangeNotifierProvider<OpModel>(
-          create: (_) => OpModel(),
-        ),
+        ChangeNotifierProvider<OpModel>(create: (_) => OpModel()),
         ChangeNotifierProvider<IndexModel>(
           create: (context) => IndexModel(context.read<SubscribedModel>()),
           lazy: false,
         ),
-        ChangeNotifierProvider<ListModel>(
-          create: (_) => ListModel(),
-        ),
-        ChangeNotifierProvider<HomeModel>(
-          create: (_) => HomeModel(),
-        ),
+        ChangeNotifierProvider<ListModel>(create: (_) => ListModel()),
+        ChangeNotifierProvider<HomeModel>(create: (_) => HomeModel()),
       ],
       child: _buildMaterialApp(context),
     );
@@ -213,10 +208,8 @@ class _MikanAppState extends State<MikanApp> {
           builder: FlutterSmartDialog.init(
             toastBuilder: (msg) => ToastWidget(msg: msg),
             loadingBuilder: (msg) => LoadingWidget(msg: msg),
-            builder: (context, child) => GestureDetector(
-              onTap: hideKeyboard,
-              child: child,
-            ),
+            builder: (context, child) =>
+                GestureDetector(onTap: hideKeyboard, child: child),
           ),
           onGenerateRoute: (RouteSettings settings) {
             return onGenerateRoute(
@@ -247,7 +240,8 @@ class ThemeProvider extends StatefulWidget {
     ColorScheme lightColorScheme,
     ColorScheme darkColorScheme,
     String? fontFamily,
-  ) builder;
+  )
+  builder;
 
   @override
   State<ThemeProvider> createState() => _ThemeProviderState();

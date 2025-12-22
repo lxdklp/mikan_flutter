@@ -6,7 +6,6 @@ import '../../internal/image_provider.dart';
 import '../../internal/kit.dart';
 import '../../model/bangumi_row.dart';
 import '../../providers/index_model.dart';
-import '../../topvars.dart';
 import 'sliver_bangumi_list.dart';
 
 class BangumiCoverScrollListFragment extends StatefulWidget {
@@ -37,7 +36,7 @@ class _BangumiCoverScrollListFragmentState
         .sortedBy((e) => e.id);
     final length = bangumis.length;
     if (length == 0) {
-      return sizedBox;
+      return const SizedBox();
     }
     const maxCrossAxisExtent = 120.0;
     const spacing = 8.0;
@@ -58,19 +57,12 @@ class _BangumiCoverScrollListFragmentState
       itemBuilder: (_, index) {
         final bangumi = bangumis[index % length];
         return ClipRRect(
-          borderRadius: borderRadius4,
+          borderRadius: const BorderRadius.all(Radius.circular(4.0)),
           child: Image(
-            image: ResizeImage(
-              CacheImage(bangumi.cover),
-              width: imageWidth,
-            ),
+            image: ResizeImage(CacheImage(bangumi.cover), width: imageWidth),
             fit: BoxFit.cover,
             isAntiAlias: true,
-            loadingBuilder: (
-              context,
-              child,
-              loadingProgress,
-            ) {
+            loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) {
                 return child;
               }

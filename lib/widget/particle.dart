@@ -44,13 +44,14 @@ class ParticleController extends ChangeNotifier
       (index) => Particle(
         size: _random.nextDouble() * (maxSize - minSize) + minSize,
         color: color,
-        percentOfDistance: _random.nextDouble() *
+        percentOfDistance:
+            _random.nextDouble() *
                 (maxPercentOfDistance - minPercentOfDistance) +
             minPercentOfDistance,
         shape: ParticleShape.from(_random.nextDouble()),
         speedOfRotate:
             _random.nextDouble() * (maxSpeedOfRotate - minSpeedOfRotate) +
-                minSpeedOfRotate,
+            minSpeedOfRotate,
       ),
     );
     notifyListeners();
@@ -121,8 +122,7 @@ enum ParticleShape {
   circle,
   square,
   rectangle,
-  triangle,
-  ;
+  triangle;
 
   factory ParticleShape.from(double v) {
     if (v < 0.05) {
@@ -194,16 +194,17 @@ class ParticlePainter extends CustomPainter {
       final ty = size.height + progress * height * math.sin(radians);
       final paint = ParticleShape.rectangle == particle.shape
           ? (Paint()
-            ..color = particle.color.withValues(alpha: 
-              progress > 0.75
-                  ? (progress < 0.999 ? 1.0 : (1 - progress) / 0.001)
-                  : progress / 0.75,
-            )
-            ..style = PaintingStyle.fill)
+              ..color = particle.color.withValues(
+                alpha: progress > 0.75
+                    ? (progress < 0.999 ? 1.0 : (1 - progress) / 0.001)
+                    : progress / 0.75,
+              )
+              ..style = PaintingStyle.fill)
           : (Paint()
-            ..color = particle.color
-                .withValues(alpha: progress < 0.999 ? 1.0 : (1 - progress) / 0.001)
-            ..style = PaintingStyle.fill);
+              ..color = particle.color.withValues(
+                alpha: progress < 0.999 ? 1.0 : (1 - progress) / 0.001,
+              )
+              ..style = PaintingStyle.fill);
       canvas.save();
       canvas.translate(tx, ty + particle.size / 2);
       if (particle.shape case ParticleShape.circle) {

@@ -32,8 +32,10 @@ class SeasonBangumi extends StatelessWidget {
         create: (_) => SeasonListModel(years),
         child: Builder(
           builder: (context) {
-            final seasonListModel =
-                Provider.of<SeasonListModel>(context, listen: false);
+            final seasonListModel = Provider.of<SeasonListModel>(
+              context,
+              listen: false,
+            );
             return Scaffold(
               body: Selector<SeasonListModel, List<SeasonBangumis>>(
                 selector: (_, model) => model.bangumis,
@@ -74,19 +76,19 @@ class SeasonBangumi extends StatelessWidget {
                                           context
                                               .read<OpModel>()
                                               .subscribeBangumi(
-                                            bangumi.id,
-                                            bangumi.subscribed,
-                                            onSuccess: () {
-                                              bangumi.subscribed =
-                                                  !bangumi.subscribed;
-                                              context
-                                                  .read<OpModel>()
-                                                  .subscribeChanged(flag);
-                                            },
-                                            onError: (msg) {
-                                              '订阅失败：$msg'.toast();
-                                            },
-                                          );
+                                                bangumi.id,
+                                                bangumi.subscribed,
+                                                onSuccess: () {
+                                                  bangumi.subscribed =
+                                                      !bangumi.subscribed;
+                                                  context
+                                                      .read<OpModel>()
+                                                      .subscribeChanged(flag);
+                                                },
+                                                onError: (msg) {
+                                                  '订阅失败：$msg'.toast();
+                                                },
+                                              );
                                         },
                                       ),
                                     ],
@@ -114,20 +116,14 @@ class SeasonBangumi extends StatelessWidget {
         offset: offsetY_1,
         child: Container(
           color: theme.colorScheme.surface,
-          padding: edgeH24T8,
-          child: Text(
-            seasonTitle,
-            style: theme.textTheme.titleMedium,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+          child: Text(seasonTitle, style: theme.textTheme.titleMedium),
         ),
       ),
     );
   }
 
-  Widget _buildBangumiRowSection(
-    ThemeData theme,
-    BangumiRow bangumiRow,
-  ) {
+  Widget _buildBangumiRowSection(ThemeData theme, BangumiRow bangumiRow) {
     final simple = [
       if (bangumiRow.updatedNum > 0) '🚀 ${bangumiRow.updatedNum}部',
       if (bangumiRow.subscribedUpdatedNum > 0)
@@ -147,7 +143,7 @@ class SeasonBangumi extends StatelessWidget {
         offset: offsetY_2,
         child: Container(
           color: theme.colorScheme.surface,
-          padding: edgeH24V8,
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
           child: Row(
             children: <Widget>[
               Expanded(
@@ -158,10 +154,7 @@ class SeasonBangumi extends StatelessWidget {
               ),
               Tooltip(
                 message: full,
-                child: Text(
-                  simple,
-                  style: theme.textTheme.bodySmall,
-                ),
+                child: Text(simple, style: theme.textTheme.bodySmall),
               ),
             ],
           ),

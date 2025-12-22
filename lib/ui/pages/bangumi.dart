@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../internal/extension.dart';
@@ -94,7 +95,7 @@ class BangumiPage extends StatelessWidget {
                           child: Row(
                             children: [
                               const BackIconButton(),
-                              sizedBoxW16,
+                              const Gap(16),
                               if (ratio > 0.88)
                                 Expanded(
                                   child: name == null
@@ -105,7 +106,7 @@ class BangumiPage extends StatelessWidget {
                                               pre != next,
                                           builder: (_, value, __) {
                                             if (value == null) {
-                                              return sizedBox;
+                                              return const SizedBox();
                                             }
                                             return Text(
                                               value,
@@ -124,7 +125,7 @@ class BangumiPage extends StatelessWidget {
                                 )
                               else
                                 spacer,
-                              sizedBoxW16,
+                              const Gap(16),
                               IconButton(
                                 onPressed: () {
                                   model.bangumiDetail?.share.share();
@@ -142,8 +143,9 @@ class BangumiPage extends StatelessWidget {
                                       subscribed
                                           ? Icons.favorite_rounded
                                           : Icons.favorite_border_rounded,
-                                      color:
-                                          subscribed ? theme.secondary : null,
+                                      color: subscribed
+                                          ? theme.secondary
+                                          : null,
                                     );
                                   },
                                 ),
@@ -163,11 +165,7 @@ class BangumiPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(
-    BuildContext context,
-    ThemeData theme,
-    BangumiModel model,
-  ) {
+  Widget _buildBody(BuildContext context, ThemeData theme, BangumiModel model) {
     final safeArea = MediaQuery.of(context).padding;
     return Selector<BangumiModel, int>(
       selector: (_, model) => model.refreshFlag,
@@ -182,68 +180,64 @@ class BangumiPage extends StatelessWidget {
           for (final e in subgroups) {
             final length = e.value.records.length;
             final maxItemLen = length > 4 ? 4 : length;
-            subList.addAll(
-              [
-                sizedBoxH24,
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        e.value.name,
-                        style: theme.textTheme.titleLarge,
-                      ),
-                    ),
-                    sizedBoxW8,
-                    if (!e.value.rss.isNullOrBlank)
-                      ElevatedButton(
-                        onPressed: () {
-                          e.value.rss.copy();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(32.0, 32.0),
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: borderRadius6,
-                          ),
-                        ),
-                        child: e.value.subscribed
-                            ? Row(
-                                children: [
-                                  const Icon(Icons.rss_feed_rounded),
-                                  sizedBoxW4,
-                                  Text(e.value.sublang!),
-                                ],
-                              )
-                            : const Icon(Icons.rss_feed_rounded),
-                      ),
-                    Transform.translate(
-                      offset: const Offset(12.0, 0.0),
-                      child: IconButton(
-                        onPressed: () {
-                          _showSubgroupPanel(context, model, e.value.dataId);
-                        },
-                        icon: const Icon(Icons.east_rounded),
-                      ),
-                    ),
-                  ],
-                ),
-                sizedBoxH12,
-                for (int index = 0; index < maxItemLen; index++)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: SimpleRecordItem(
-                      record: e.value.records[index],
+            subList.addAll([
+              const Gap(24),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      e.value.name,
+                      style: theme.textTheme.titleLarge,
                     ),
                   ),
-              ],
-            );
+                  const Gap(8),
+                  if (!e.value.rss.isNullOrBlank)
+                    ElevatedButton(
+                      onPressed: () {
+                        e.value.rss.copy();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(32.0, 32.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                        ),
+                      ),
+                      child: e.value.subscribed
+                          ? Row(
+                              children: [
+                                const Icon(Icons.rss_feed_rounded),
+                                const Gap(4),
+                                Text(e.value.sublang!),
+                              ],
+                            )
+                          : const Icon(Icons.rss_feed_rounded),
+                    ),
+                  Transform.translate(
+                    offset: const Offset(12.0, 0.0),
+                    child: IconButton(
+                      onPressed: () {
+                        _showSubgroupPanel(context, model, e.value.dataId);
+                      },
+                      icon: const Icon(Icons.east_rounded),
+                    ),
+                  ),
+                ],
+              ),
+              const Gap(12),
+              for (int index = 0; index < maxItemLen; index++)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: SimpleRecordItem(record: e.value.records[index]),
+                ),
+            ]);
             subTags.add(
               Tooltip(
                 message: e.value.name,
                 child: RippleTap(
                   color: theme.colorScheme.surfaceContainerHighest,
                   shape: const RoundedSuperellipseBorder(
-                    borderRadius: borderRadius6,
+                    borderRadius: BorderRadius.all(Radius.circular(6.0)),
                   ),
                   onTap: () {
                     _showSubgroupPanel(context, model, e.key);
@@ -299,16 +293,14 @@ class BangumiPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                  top: 120.0 + context.statusBarHeight,
-                ),
+                padding: EdgeInsets.only(top: 120.0 + context.statusBarHeight),
                 child: Row(
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: _buildCover(cover),
                     ),
-                    sizedBoxW16,
+                    const Gap(16),
                     if (detail != null)
                       Expanded(
                         child: SelectionArea(
@@ -319,13 +311,14 @@ class BangumiPage extends StatelessWidget {
                                 message: detail.name,
                                 child: AutoSizeText(
                                   '${detail.name}\n',
-                                  style: theme.textTheme.titleLarge
-                                      ?.copyWith(color: theme.secondary),
+                                  style: theme.textTheme.titleLarge?.copyWith(
+                                    color: theme.secondary,
+                                  ),
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              sizedBoxH4,
+                              const Gap(4),
                               ...detail.more.entries.mapIndexed((index, e) {
                                 final child = Row(
                                   children: [
@@ -356,8 +349,9 @@ class BangumiPage extends StatelessWidget {
                                 return index == detail.more.length - 1
                                     ? child
                                     : Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 8.0),
+                                        padding: const EdgeInsets.only(
+                                          bottom: 8.0,
+                                        ),
                                         child: child,
                                       );
                               }),
@@ -371,8 +365,9 @@ class BangumiPage extends StatelessWidget {
                           message: name,
                           child: AutoSizeText(
                             '$name\n',
-                            style: theme.textTheme.titleLarge
-                                ?.copyWith(color: theme.secondary),
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              color: theme.secondary,
+                            ),
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -385,20 +380,12 @@ class BangumiPage extends StatelessWidget {
           ),
           Transform.scale(
             scale: scale,
-            child: Container(
-              color: theme.colorScheme.surface,
-              height: 36.0,
-            ),
+            child: Container(color: theme.colorScheme.surface, height: 36.0),
           ),
           if (subTags.isNotEmpty) ...[
             Row(
               children: [
-                Expanded(
-                  child: Text(
-                    '字幕组',
-                    style: theme.textTheme.titleLarge,
-                  ),
-                ),
+                Expanded(child: Text('字幕组', style: theme.textTheme.titleLarge)),
                 ElevatedButton.icon(
                   onPressed: () {
                     MBottomSheet.show(
@@ -413,7 +400,7 @@ class BangumiPage extends StatelessWidget {
                     minimumSize: const Size(0.0, 32.0),
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     shape: const RoundedRectangleBorder(
-                      borderRadius: borderRadius6,
+                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
                     ),
                   ),
                   icon: const Icon(Icons.edit_note_rounded),
@@ -421,20 +408,13 @@ class BangumiPage extends StatelessWidget {
                 ),
               ],
             ),
-            sizedBoxH8,
-            Wrap(
-              spacing: 8.0,
-              runSpacing: 8.0,
-              children: subTags,
-            ),
+            const Gap(8),
+            Wrap(spacing: 8.0, runSpacing: 8.0, children: subTags),
           ],
           if (notNull && detail.intro.isNotBlank) ...[
-            sizedBoxH24,
-            Text(
-              '概况简介',
-              style: theme.textTheme.titleLarge,
-            ),
-            sizedBoxH12,
+            const Gap(24),
+            Text('概况简介', style: theme.textTheme.titleLarge),
+            const Gap(12),
             SelectionArea(
               child: Text(
                 detail.intro,
@@ -481,10 +461,8 @@ class BangumiPage extends StatelessWidget {
               : AspectRatio(
                   aspectRatio: 3 / 4,
                   child: Container(
-                    padding: edge28,
-                    child: Center(
-                      child: Assets.mikan.image(),
-                    ),
+                    padding: const EdgeInsets.all(2.0),
+                    child: Center(child: Assets.mikan.image()),
                   ),
                 );
         },
@@ -496,8 +474,10 @@ class BangumiPage extends StatelessWidget {
                 image: DecorationImage(
                   image: Assets.mikan.provider(),
                   fit: BoxFit.cover,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.grey, BlendMode.color),
+                  colorFilter: const ColorFilter.mode(
+                    Colors.grey,
+                    BlendMode.color,
+                  ),
                 ),
               ),
             ),

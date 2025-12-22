@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +12,6 @@ import '../../internal/kit.dart';
 import '../../model/bangumi.dart';
 import '../../providers/op_model.dart';
 import '../../res/assets.gen.dart';
-import '../../topvars.dart';
 import '../../widget/scalable_tap.dart';
 import '../../widget/transition_container.dart';
 import '../pages/bangumi.dart';
@@ -36,7 +36,7 @@ class SliverBangumiList extends StatelessWidget {
     final theme = Theme.of(context);
     final margins = context.margins;
     return SliverPadding(
-      padding: edgeH24B16,
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       sliver: ValueListenableBuilder(
         valueListenable: MyHive.settings.listenable(
           keys: [
@@ -52,12 +52,12 @@ class SliverBangumiList extends StatelessWidget {
           final build = cardStyle == 1
               ? _buildItemStyle1
               : cardStyle == 2
-                  ? _buildItemStyle2
-                  : cardStyle == 3
-                      ? _buildItemStyle3
-                      : cardStyle == 4
-                          ? _buildItemStyle4
-                          : _buildItemStyle1;
+              ? _buildItemStyle2
+              : cardStyle == 3
+              ? _buildItemStyle3
+              : cardStyle == 4
+              ? _buildItemStyle4
+              : _buildItemStyle1;
           final size = calcGridItemSizeWithMaxCrossAxisExtent(
             crossAxisExtent: context.screenWidth - 48.0,
             maxCrossAxisExtent: cardWidth,
@@ -72,17 +72,9 @@ class SliverBangumiList extends StatelessWidget {
               maxCrossAxisExtent: cardWidth,
               childAspectRatio: cardRatio,
             ),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return build(
-                  context,
-                  theme,
-                  imageWidth,
-                  bangumis[index],
-                );
-              },
-              childCount: bangumis.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              return build(context, theme, imageWidth, bangumis[index]);
+            }, childCount: bangumis.length),
           );
         },
       ),
@@ -130,7 +122,10 @@ class SliverBangumiList extends StatelessWidget {
                           color: theme.colorScheme.error,
                           shape: const StadiumBorder(),
                         ),
-                        padding: edgeH6V2,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0,
+                          vertical: 2.0,
+                        ),
                         child: Text(
                           bangumi.num! > 99 ? '99+' : '+${bangumi.num}',
                           style: theme.textTheme.labelMedium?.copyWith(
@@ -161,10 +156,7 @@ class SliverBangumiList extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
-            Colors.transparent,
-            Colors.black45,
-          ],
+          colors: [Colors.transparent, Colors.black45],
           stops: [0.5, 1.0],
         ),
       ),
@@ -202,7 +194,10 @@ class SliverBangumiList extends StatelessWidget {
                           color: theme.colorScheme.error,
                           shape: const StadiumBorder(),
                         ),
-                        padding: edgeH6V2,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0,
+                          vertical: 2.0,
+                        ),
                         child: Text(
                           bangumi.num! > 99 ? '99+' : '+${bangumi.num}',
                           style: theme.textTheme.labelMedium?.copyWith(
@@ -225,15 +220,17 @@ class SliverBangumiList extends StatelessWidget {
                       bangumi.updateAt,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.bodySmall!
-                          .copyWith(color: Colors.white),
+                      style: theme.textTheme.bodySmall!.copyWith(
+                        color: Colors.white,
+                      ),
                     ),
                     Text(
                       bangumi.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.titleSmall!
-                          .copyWith(color: Colors.white),
+                      style: theme.textTheme.titleSmall!.copyWith(
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -276,9 +273,7 @@ class SliverBangumiList extends StatelessWidget {
                     ? cover
                     : Stack(
                         children: [
-                          Positioned.fill(
-                            child: cover,
-                          ),
+                          Positioned.fill(child: cover),
                           PositionedDirectional(
                             top: 0.0,
                             end: 12.0,
@@ -294,16 +289,19 @@ class SliverBangumiList extends StatelessWidget {
                                       color: theme.colorScheme.error,
                                       shape: const StadiumBorder(),
                                     ),
-                                    padding: edgeH6V2,
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 6.0,
+                                      vertical: 2.0,
+                                    ),
                                     child: Text(
                                       bangumi.num! > 99
                                           ? '99+'
                                           : '+${bangumi.num}',
-                                      style:
-                                          theme.textTheme.labelMedium?.copyWith(
-                                        color: theme.colorScheme.onError,
-                                        height: 1.25,
-                                      ),
+                                      style: theme.textTheme.labelMedium
+                                          ?.copyWith(
+                                            color: theme.colorScheme.onError,
+                                            height: 1.25,
+                                          ),
                                     ),
                                   ),
                               ],
@@ -315,7 +313,7 @@ class SliverBangumiList extends StatelessWidget {
             },
           ),
         ),
-        sizedBoxH8,
+        const Gap(8),
         Text(
           bangumi.name,
           maxLines: 1,
@@ -329,7 +327,7 @@ class SliverBangumiList extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: theme.textTheme.bodySmall,
           ),
-        sizedBoxH8,
+        const Gap(8),
       ],
     );
   }
@@ -375,7 +373,10 @@ class SliverBangumiList extends StatelessWidget {
                                 color: theme.colorScheme.error,
                                 shape: const StadiumBorder(),
                               ),
-                              padding: edgeH6V2,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6.0,
+                                vertical: 2.0,
+                              ),
                               child: Text(
                                 bangumi.num! > 99 ? '99+' : '+${bangumi.num}',
                                 style: theme.textTheme.labelMedium?.copyWith(
@@ -391,7 +392,7 @@ class SliverBangumiList extends StatelessWidget {
             },
           ),
         ),
-        sizedBoxH4,
+        const Gap(4),
         Row(
           children: [
             Expanded(
@@ -420,7 +421,7 @@ class SliverBangumiList extends StatelessWidget {
             ),
           ],
         ),
-        sizedBoxH8,
+        const Gap(8),
       ],
     );
   }
@@ -463,16 +464,10 @@ class SliverBangumiList extends StatelessWidget {
     );
   }
 
-  Widget _buildBangumiItemCover(
-    int cacheWidth,
-    Bangumi bangumi,
-  ) {
+  Widget _buildBangumiItemCover(int cacheWidth, Bangumi bangumi) {
     final image = FadeInImage(
       placeholder: Assets.mikan.provider(),
-      image: ResizeImage(
-        CacheImage(bangumi.cover),
-        width: cacheWidth,
-      ),
+      image: ResizeImage(CacheImage(bangumi.cover), width: cacheWidth),
       fit: BoxFit.cover,
       imageErrorBuilder: (_, __, ___) {
         return _buildBangumiItemError();

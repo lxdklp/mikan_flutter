@@ -1,5 +1,6 @@
 import 'package:ff_annotation_route_core/ff_annotation_route_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../internal/extension.dart';
@@ -30,8 +31,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         create: (_) => ForgotPasswordModel(),
         child: Builder(
           builder: (context) {
-            final forgotModel =
-                Provider.of<ForgotPasswordModel>(context, listen: false);
+            final forgotModel = Provider.of<ForgotPasswordModel>(
+              context,
+              listen: false,
+            );
             return Scaffold(
               body: Center(
                 child: ConstrainedBox(
@@ -43,22 +46,16 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         key: _formKey,
                         child: Column(
                           children: <Widget>[
-                            Image.asset(
-                              Assets.mikan.path,
-                              width: 64.0,
-                            ),
-                            sizedBoxH8,
+                            Image.asset(Assets.mikan.path, width: 64.0),
+                            const Gap(8),
                             Text(
                               'Mikan Project',
                               style: theme.textTheme.bodySmall,
                             ),
-                            Text(
-                              '蜜柑计划',
-                              style: theme.textTheme.titleLarge,
-                            ),
-                            sizedBoxH42,
+                            Text('蜜柑计划', style: theme.textTheme.titleLarge),
+                            const Gap(42),
                             _buildEmailField(theme, forgotModel),
-                            sizedBoxH42,
+                            const Gap(42),
                             Row(
                               children: [
                                 ElevatedButton(
@@ -67,11 +64,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                   },
                                   child: const Icon(Icons.west_rounded),
                                 ),
-                                sizedBoxW16,
+                                const Gap(16),
                                 Expanded(child: _buildSubmitButton(theme)),
                               ],
                             ),
-                            sizedBoxH42,
+                            const Gap(42),
                           ],
                         ),
                       ),
@@ -108,10 +105,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  Widget _buildEmailField(
-    ThemeData theme,
-    ForgotPasswordModel model,
-  ) {
+  Widget _buildEmailField(ThemeData theme, ForgotPasswordModel model) {
     return TextFormField(
       controller: model.emailController,
       decoration: const InputDecoration(

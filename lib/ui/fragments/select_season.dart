@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../internal/delegate.dart';
@@ -45,7 +46,7 @@ class SelectSeasonFragment extends StatelessWidget {
             ],
           ),
           _buildSeasonItemList(context, theme, indexModel),
-          sliverSizedBoxH24WithNavBarHeight(context),
+          sliverGapH24WithNavBarHeight(context),
         ],
       ),
     );
@@ -60,7 +61,7 @@ class SelectSeasonFragment extends StatelessWidget {
       child: FractionallySizedBox(
         widthFactor: 1,
         child: Padding(
-          padding: edgeH4,
+          padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Selector<IndexModel, Season?>(
             selector: (_, model) => model.selectedSeason,
             shouldRebuild: (pre, next) => pre != next,
@@ -72,7 +73,7 @@ class SelectSeasonFragment extends StatelessWidget {
                   color: selected
                       ? theme.colorScheme.primaryContainer
                       : theme.colorScheme.surfaceContainerHighest,
-                  borderRadius: borderRadius6,
+                  borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   onTap: () {
                     Navigator.pop(context);
                     indexModel.selectSeason(season);
@@ -107,7 +108,7 @@ class SelectSeasonFragment extends StatelessWidget {
     IndexModel indexModel,
   ) {
     return SliverPadding(
-      padding: edgeH24V8,
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
       sliver: Selector<IndexModel, List<YearSeason>>(
         selector: (_, model) => model.years,
         shouldRebuild: (pre, next) => pre.ne(next),
@@ -122,41 +123,32 @@ class SelectSeasonFragment extends StatelessWidget {
               mainAxisSpacing: context.margins,
               mainAxisExtent: 40.0,
             ),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final YearSeason year = years[index];
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 78.0,
-                      child: Text(
-                        year.year,
-                        style: theme.textTheme.titleLarge,
-                      ),
-                    ),
-                    sizedBoxW12,
-                    ...List.generate(
-                      4,
-                      (index) {
-                        if (year.seasons.length > index) {
-                          return _buildSeasonItem(
-                            theme,
-                            year.seasons[index],
-                            indexModel,
-                          );
-                        } else {
-                          return const Flexible(
-                            child: FractionallySizedBox(widthFactor: 1),
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                );
-              },
-              childCount: years.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final YearSeason year = years[index];
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 78.0,
+                    child: Text(year.year, style: theme.textTheme.titleLarge),
+                  ),
+                  const Gap(12),
+                  ...List.generate(4, (index) {
+                    if (year.seasons.length > index) {
+                      return _buildSeasonItem(
+                        theme,
+                        year.seasons[index],
+                        indexModel,
+                      );
+                    } else {
+                      return const Flexible(
+                        child: FractionallySizedBox(widthFactor: 1),
+                      );
+                    }
+                  }),
+                ],
+              );
+            }, childCount: years.length),
           );
         },
       ),

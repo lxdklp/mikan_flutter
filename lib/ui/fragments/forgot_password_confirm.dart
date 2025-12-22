@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../topvars.dart';
+import 'package:gap/gap.dart';
 import '../../widget/sliver_pinned_header.dart';
 
 class ForgotPasswordConfirm extends StatelessWidget {
@@ -20,9 +20,9 @@ class ForgotPasswordConfirm extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('如果您填入的邮箱已在本网站注册，则您会在几分钟内收到重置密码邮件，如果长时间等待后仍收不到邮件请确认'),
-                  sizedBoxH12,
+                  Gap(12),
                   Text('1. 您是否已经注册'),
-                  sizedBoxH4,
+                  Gap(4),
                   Text('2. 邮件是否输入正确'),
                 ],
               ),

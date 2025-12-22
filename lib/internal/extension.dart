@@ -107,10 +107,7 @@ extension NullableStringExt on String? {
     if (isNullOrBlank) {
       return;
     }
-    SmartDialog.showToast(
-      this!,
-      alignment: const Alignment(0.0, 0.72),
-    );
+    SmartDialog.showToast(this!, alignment: const Alignment(0.0, 0.72));
     HapticFeedback.mediumImpact();
   }
 
@@ -267,8 +264,9 @@ extension BrightnessColor on Color {
   Color lighten([double amount = .1]) {
     assert(amount >= 0 && amount <= 1);
     final hsl = HSLColor.fromColor(this);
-    final hslLight =
-        hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+    final hslLight = hsl.withLightness(
+      (hsl.lightness + amount).clamp(0.0, 1.0),
+    );
     return hslLight.toColor();
   }
 }

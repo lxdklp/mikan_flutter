@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
@@ -35,8 +36,10 @@ class SearchPage extends StatelessWidget {
         create: (_) => SearchModel(),
         child: Builder(
           builder: (context) {
-            final searchModel =
-                Provider.of<SearchModel>(context, listen: false);
+            final searchModel = Provider.of<SearchModel>(
+              context,
+              listen: false,
+            );
             return Scaffold(
               body: CustomScrollView(
                 slivers: [
@@ -57,7 +60,7 @@ class SearchPage extends StatelessWidget {
                               onPressed: () {},
                             );
                           }
-                          return sizedBox;
+                          return const SizedBox();
                         },
                       ),
                     ],
@@ -79,12 +82,9 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSearchResultList(
-    ThemeData theme,
-    SearchModel searchModel,
-  ) {
+  Widget _buildSearchResultList(ThemeData theme, SearchModel searchModel) {
     return SliverPadding(
-      padding: edgeH24B16,
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       sliver: Selector<SearchModel, List<RecordItem>?>(
         selector: (_, model) => model.searchResult?.records,
         shouldRebuild: (pre, next) => pre.ne(next),
@@ -93,13 +93,10 @@ class SearchPage extends StatelessWidget {
             return emptySliverToBoxAdapter;
           }
           return SliverWaterfallFlow(
-            delegate: SliverChildBuilderDelegate(
-              (_, index) {
-                final record = records[index];
-                return SimpleRecordItem(record: record);
-              },
-              childCount: records!.length,
-            ),
+            delegate: SliverChildBuilderDelegate((_, index) {
+              final record = records[index];
+              return SimpleRecordItem(record: record);
+            }, childCount: records!.length),
             gridDelegate: SliverWaterfallFlowDelegateWithMinCrossAxisExtent(
               minCrossAxisExtent: 400.0,
               mainAxisSpacing: context.margins,
@@ -121,11 +118,11 @@ class SearchPage extends StatelessWidget {
         }
         return SliverToBoxAdapter(
           child: Padding(
-            padding: edgeH24V8,
-            child: Text(
-              '搜索结果',
-              style: theme.textTheme.titleMedium,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 8.0,
             ),
+            child: Text('搜索结果', style: theme.textTheme.titleMedium),
           ),
         );
       },
@@ -144,16 +141,15 @@ class SearchPage extends StatelessWidget {
           child: SizedBox(
             height: 200.0,
             child: ListView.builder(
-              padding: edgeH24B16,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 16.0,
+              ),
               scrollDirection: Axis.horizontal,
               itemCount: bangumis!.length,
               itemBuilder: (_, index) {
                 final bangumi = bangumis[index];
-                return _buildRecommendListItem(
-                  context,
-                  theme,
-                  bangumi,
-                );
+                return _buildRecommendListItem(context, theme, bangumi);
               },
             ),
           ),
@@ -173,12 +169,7 @@ class SearchPage extends StatelessWidget {
       child: Container(
         height: double.infinity,
         margin: EdgeInsetsDirectional.only(end: context.margins),
-        child: _buildBangumiListItem(
-          context,
-          theme,
-          currFlag,
-          bangumi,
-        ),
+        child: _buildBangumiListItem(context, theme, currFlag, bangumi),
       ),
     );
   }
@@ -194,19 +185,13 @@ class SearchPage extends StatelessWidget {
         return SliverToBoxAdapter(child: child);
       },
       child: Padding(
-        padding: edgeH24V8,
-        child: Text(
-          '相关推荐',
-          style: theme.textTheme.titleMedium,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+        child: Text('相关推荐', style: theme.textTheme.titleMedium),
       ),
     );
   }
 
-  Widget _buildSubgroupList(
-    ThemeData theme,
-    SearchModel searchModel,
-  ) {
+  Widget _buildSubgroupList(ThemeData theme, SearchModel searchModel) {
     return Selector<SearchModel, List<Subgroup>?>(
       selector: (_, model) => model.searchResult?.subgroups,
       shouldRebuild: (pre, next) => pre.ne(next),
@@ -218,22 +203,18 @@ class SearchPage extends StatelessWidget {
           child: Transform.translate(
             offset: offsetY_1,
             child: Padding(
-              padding: edgeH24B16,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 16.0,
+              ),
               child: Wrap(
                 runSpacing: 8.0,
                 spacing: 8.0,
                 crossAxisAlignment: WrapCrossAlignment.center,
-                children: List.generate(
-                  subgroups!.length,
-                  (index) {
-                    final subgroup = subgroups[index];
-                    return _buildSubgroupListItem(
-                      theme,
-                      subgroup,
-                      searchModel,
-                    );
-                  },
-                ),
+                children: List.generate(subgroups!.length, (index) {
+                  final subgroup = subgroups[index];
+                  return _buildSubgroupListItem(theme, subgroup, searchModel);
+                }),
               ),
             ),
           ),
@@ -256,7 +237,7 @@ class SearchPage extends StatelessWidget {
           color: selected
               ? theme.colorScheme.primaryContainer
               : theme.colorScheme.surfaceContainerHighest,
-          borderRadius: borderRadius6,
+          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
           onTap: () {
             searchModel.subgroupId = subgroup.id;
           },
@@ -292,29 +273,20 @@ class SearchPage extends StatelessWidget {
         return SliverToBoxAdapter(child: child);
       },
       child: Padding(
-        padding: edgeH24V8,
-        child: Text(
-          '字幕组',
-          style: theme.textTheme.titleMedium,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+        child: Text('字幕组', style: theme.textTheme.titleMedium),
       ),
     );
   }
 
-  Widget _buildHeaderSearchField(
-    ThemeData theme,
-    SearchModel searchModel,
-  ) {
+  Widget _buildHeaderSearchField(ThemeData theme, SearchModel searchModel) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: edgeH24V8,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
         child: TextField(
           decoration: InputDecoration(
             labelText: '请输入关键字',
-            prefixIcon: const Icon(
-              Icons.search_rounded,
-              size: 24.0,
-            ),
+            prefixIcon: const Icon(Icons.search_rounded, size: 24.0),
             isDense: true,
             border: const OutlineInputBorder(),
             suffixIcon: Padding(
@@ -330,16 +302,10 @@ class SearchPage extends StatelessWidget {
                           onPressed: () {
                             searchModel.keywordsController.clear();
                           },
-                          icon: const Icon(
-                            Icons.clear_rounded,
-                            size: 24.0,
-                          ),
+                          icon: const Icon(Icons.clear_rounded, size: 24.0),
                         ),
                         IconButton(
-                          icon: const Icon(
-                            Icons.rss_feed_rounded,
-                            size: 24.0,
-                          ),
+                          icon: const Icon(Icons.rss_feed_rounded, size: 24.0),
                           onPressed: () {
                             '${MikanUrls.baseUrl}/RSS/Search?searchstr=${Uri.encodeComponent(searchModel.keywordsController.text)}'
                                 .copy();
@@ -349,10 +315,7 @@ class SearchPage extends StatelessWidget {
                     );
                   }
                   return IconButton(
-                    icon: const Icon(
-                      Icons.rss_feed_rounded,
-                      size: 24.0,
-                    ),
+                    icon: const Icon(Icons.rss_feed_rounded, size: 24.0),
                     onPressed: () {
                       '${MikanUrls.baseUrl}/RSS/Search?searchstr=${Uri.encodeComponent(searchModel.keywordsController.text)}'
                           .copy();
@@ -402,10 +365,8 @@ class SearchPage extends StatelessWidget {
                           : Hero(
                               tag: currFlag,
                               child: Container(
-                                padding: edge28,
-                                child: Center(
-                                  child: Assets.mikan.image(),
-                                ),
+                                padding: const EdgeInsets.all(2.0),
+                                child: Center(child: Assets.mikan.image()),
                               ),
                             );
                     },
@@ -449,7 +410,7 @@ class SearchPage extends StatelessWidget {
               ),
             ),
           ),
-          sizedBoxH8,
+          const Gap(8),
           Text(
             '${bangumi.name}\n',
             maxLines: 2,
@@ -465,15 +426,18 @@ class SearchPage extends StatelessWidget {
   Widget _buildSearchHistory(ThemeData theme, SearchModel searchModel) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: edgeH24B16,
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
         child: ValueListenableBuilder<Box>(
-          valueListenable:
-              Hive.box(HiveBoxKey.db).listenable(keys: [HiveDBKey.mikanSearch]),
+          valueListenable: Hive.box(
+            HiveBoxKey.db,
+          ).listenable(keys: [HiveDBKey.mikanSearch]),
           builder: (context, box, widget) {
-            final keywords =
-                box.get(HiveDBKey.mikanSearch, defaultValue: <String>[]);
+            final keywords = box.get(
+              HiveDBKey.mikanSearch,
+              defaultValue: <String>[],
+            );
             return keywords.isEmpty
-                ? sizedBox
+                ? const SizedBox()
                 : Wrap(
                     spacing: 8.0,
                     runSpacing: 8.0,
@@ -482,7 +446,9 @@ class SearchPage extends StatelessWidget {
                       ...keywords.map((it) {
                         return RippleTap(
                           color: theme.primary.withValues(alpha: 0.1),
-                          borderRadius: borderRadius6,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(6.0),
+                          ),
                           onTap: () {
                             hideKeyboard();
                             searchModel.search(it);

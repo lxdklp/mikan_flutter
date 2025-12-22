@@ -29,10 +29,7 @@ class ListFragment extends StatelessWidget {
         onRefresh: model.refresh,
         onLoad: model.loadMore,
         child: CustomScrollView(
-          slivers: [
-            _buildHeader(),
-            _buildList(theme, model),
-          ],
+          slivers: [_buildHeader(), _buildList(theme, model)],
         ),
       ),
     );
@@ -40,7 +37,7 @@ class ListFragment extends StatelessWidget {
 
   Widget _buildList(ThemeData theme, ListModel listModel) {
     return SliverPadding(
-      padding: edgeH24V16,
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       sliver: Selector<ListModel, int>(
         selector: (_, model) => model.changeFlag,
         shouldRebuild: (pre, next) => pre != next,
@@ -56,16 +53,10 @@ class ListFragment extends StatelessWidget {
               mainAxisSpacing: margins,
               minCrossAxisExtent: 300.0,
             ),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final record = records[index];
-                return ListRecordItem(
-                  index: index,
-                  record: record,
-                );
-              },
-              childCount: records.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final record = records[index];
+              return ListRecordItem(index: index, record: record);
+            }, childCount: records.length),
           );
         },
       ),

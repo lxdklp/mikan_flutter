@@ -31,8 +31,10 @@ class SubgroupPage extends StatelessWidget {
         create: (_) => SubgroupModel(subgroup),
         child: Builder(
           builder: (context) {
-            final subgroupModel =
-                Provider.of<SubgroupModel>(context, listen: false);
+            final subgroupModel = Provider.of<SubgroupModel>(
+              context,
+              listen: false,
+            );
             return Scaffold(
               body: Selector<SubgroupModel, List<SeasonGallery>>(
                 selector: (_, model) => model.galleries,
@@ -97,14 +99,11 @@ class SubgroupPage extends StatelessWidget {
       child: Transform.translate(
         offset: offsetY_1,
         child: Container(
-          padding: edgeH24,
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           height: 48.0,
           color: theme.colorScheme.surface,
           alignment: AlignmentDirectional.centerStart,
-          child: Text(
-            section,
-            style: theme.textTheme.titleMedium,
-          ),
+          child: Text(section, style: theme.textTheme.titleMedium),
         ),
       ),
     );

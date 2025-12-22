@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -98,9 +99,8 @@ class HomeModel extends BaseModel {
           // ignore: use_build_context_synchronously
           MBottomSheet.show(
             navKey.currentState!.context,
-            (context) => MBottomSheet(
-              child: _buildUpgradeWidget(context, resp.data),
-            ),
+            (context) =>
+                MBottomSheet(child: _buildUpgradeWidget(context, resp.data)),
           ),
         );
       } else {
@@ -136,9 +136,11 @@ class HomeModel extends BaseModel {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: edgeH4,
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
                           decoration: BoxDecoration(
-                            borderRadius: borderRadius2,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(2.0),
+                            ),
                             color: theme.colorScheme.error,
                           ),
                           child: Text(
@@ -148,7 +150,7 @@ class HomeModel extends BaseModel {
                             ),
                           ),
                         ),
-                        sizedBoxH4,
+                        const Gap(4),
                         Text(
                           '发布于 ${jiffy.yMMMMEEEEdjm}',
                           style: theme.textTheme.bodySmall,
@@ -157,12 +159,15 @@ class HomeModel extends BaseModel {
                     ),
                   ),
                 ),
-                const SliverToBoxAdapter(child: sizedBoxH16),
+                const SliverToBoxAdapter(child: Gap(16)),
                 SliverList.separated(
                   itemBuilder: (context, index) {
                     final item = release['assets'][index];
                     return Padding(
-                      padding: edgeH24V12,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0,
+                        vertical: 12.0,
+                      ),
                       child: Row(
                         children: [
                           Expanded(
@@ -170,11 +175,16 @@ class HomeModel extends BaseModel {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(item['name']),
-                                sizedBoxH8,
+                                const Gap(8),
                                 Container(
-                                  padding: edgeH6V4,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 6.0,
+                                    vertical: 4.0,
+                                  ),
                                   decoration: BoxDecoration(
-                                    borderRadius: borderRadius6,
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(6.0),
+                                    ),
                                     color: theme.colorScheme.primaryContainer,
                                   ),
                                   child: Text(
@@ -207,7 +217,9 @@ class HomeModel extends BaseModel {
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size(120.0, 36.0),
                               shape: const RoundedRectangleBorder(
-                                borderRadius: borderRadius6,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(6.0),
+                                ),
                               ),
                               textStyle: const TextStyle(fontSize: 12.0),
                             ),
@@ -256,18 +268,16 @@ class HomeModel extends BaseModel {
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(0.0, 36.0),
                     shape: const RoundedRectangleBorder(
-                      borderRadius: borderRadius6,
+                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
                     ),
                     backgroundColor: theme.colorScheme.errorContainer,
                   ),
                   child: Text(
                     '下次一定',
-                    style: TextStyle(
-                      color: theme.colorScheme.onErrorContainer,
-                    ),
+                    style: TextStyle(color: theme.colorScheme.onErrorContainer),
                   ),
                 ),
-                sizedBoxW12,
+                const Gap(12),
                 ElevatedButton(
                   onPressed: () {
                     release['html_url'].toString().launchAppAndCopy();
@@ -275,7 +285,7 @@ class HomeModel extends BaseModel {
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(0.0, 36.0),
                     shape: const RoundedRectangleBorder(
-                      borderRadius: borderRadius6,
+                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
                     ),
                   ),
                   child: const Text('前往下载'),

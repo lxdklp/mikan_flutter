@@ -27,10 +27,7 @@ class Font {
 
 @JsonSerializable()
 class License {
-  License({
-    required this.name,
-    required this.url,
-  });
+  License({required this.name, required this.url});
 
   factory License.fromJson(Map<String, dynamic> json) =>
       _$LicenseFromJson(json);

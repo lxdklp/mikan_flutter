@@ -25,10 +25,7 @@ Future<void> main() async {
     final files = [
       ...result['assets'].map((it) {
         final name = it['name'];
-        final arch = arches.firstWhere(
-          name.contains,
-          orElse: () => null,
-        );
+        final arch = arches.firstWhere(name.contains, orElse: () => null);
         final size = it['size'];
         final sizefmt = (size / 1024 / 1024).toStringAsFixed(2) + 'MB';
         return {

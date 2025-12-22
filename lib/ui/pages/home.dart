@@ -36,11 +36,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final body = IndexedStack(
       index: _selectedIndex,
-      children: const [
-        ListFragment(),
-        IndexFragment(),
-        SubscribedFragment(),
-      ],
+      children: const [ListFragment(), IndexFragment(), SubscribedFragment()],
     );
     return PopScope(
       canPop: false,
@@ -50,10 +46,7 @@ class _HomePageState extends State<HomePage> {
           width: 400.0,
           content: Text('想要退出？不可能的'),
           duration: Duration(seconds: 3),
-          action: SnackBarAction(
-            label: '哦',
-            onPressed: exitApp,
-          ),
+          action: SnackBarAction(label: '哦', onPressed: exitApp),
         );
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -135,10 +128,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        const VerticalDivider(
-                          thickness: 0.0,
-                          width: 1.0,
-                        ),
+                        const VerticalDivider(thickness: 0.0, width: 1.0),
                         Expanded(child: body),
                       ],
                     )

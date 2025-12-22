@@ -18,21 +18,18 @@ class SelectTabletMode extends StatelessWidget {
         slivers: [
           const SliverPinnedAppBar(title: '平板模式'),
           SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final mode = TabletMode.values[index];
-                return RadioListTile<TabletMode>(
-                  title: Text(mode.label),
-                  value: mode,
-                  groupValue: selectedMode,
-                  onChanged: (value) {
-                    MyHive.setTabletMode(mode);
-                    Navigator.pop(context);
-                  },
-                );
-              },
-              childCount: TabletMode.values.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final mode = TabletMode.values[index];
+              return RadioListTile<TabletMode>(
+                title: Text(mode.label),
+                value: mode,
+                groupValue: selectedMode,
+                onChanged: (value) {
+                  MyHive.setTabletMode(mode);
+                  Navigator.pop(context);
+                },
+              );
+            }, childCount: TabletMode.values.length),
           ),
         ],
       ),
@@ -41,11 +38,7 @@ class SelectTabletMode extends StatelessWidget {
 }
 
 class TabletModeBuilder extends StatefulWidget {
-  const TabletModeBuilder({
-    super.key,
-    required this.builder,
-    this.child,
-  });
+  const TabletModeBuilder({super.key, required this.builder, this.child});
 
   final ValueWidgetBuilder<bool> builder;
   final Widget? child;
@@ -62,9 +55,8 @@ class _TabletModeBuilderState extends State<TabletModeBuilder> {
   @override
   void initState() {
     super.initState();
-    _listenable = MyHive.settings.listenable(
-      keys: [SettingsHiveKey.tabletMode],
-    )..addListener(_onChange);
+    _listenable = MyHive.settings.listenable(keys: [SettingsHiveKey.tabletMode])
+      ..addListener(_onChange);
   }
 
   void _onChange() {

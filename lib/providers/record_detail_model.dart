@@ -8,16 +8,16 @@ import 'base_model.dart';
 
 class RecordDetailModel extends BaseModel {
   RecordDetailModel(this.record)
-      : _recordDetail = RecordDetail()
-          ..name = record.name
-          ..url = record.url
-          ..title = record.title
-          ..subgroups = record.groups
-          ..id = record.id
-          ..cover = record.cover
-          ..tags = record.tags
-          ..torrent = record.torrent
-          ..magnet = record.magnet;
+    : _recordDetail = RecordDetail()
+        ..name = record.name
+        ..url = record.url
+        ..title = record.title
+        ..subgroups = record.groups
+        ..id = record.id
+        ..cover = record.cover
+        ..tags = record.tags
+        ..torrent = record.torrent
+        ..magnet = record.magnet;
 
   final RecordItem record;
 

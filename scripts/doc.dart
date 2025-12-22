@@ -7,9 +7,7 @@ void main() {
   final before = DateTime.now().millisecondsSinceEpoch;
   final screenshots = getScreenshots();
   // var libs = getLibs();
-  writeDoc2README(
-    screenshots, /*libs*/
-  );
+  writeDoc2README(screenshots /*libs*/);
   print(
     'write doc end...${(DateTime.now().millisecondsSinceEpoch - before) / 1000.0}s',
   );
@@ -25,8 +23,8 @@ void writeDoc2README(
   var flag = false;
   lines.removeWhere((line) {
     if (line.startsWith('## Screenshot')
-        /*|| line.startsWith("## Dependencies")*/
-        ) {
+    /*|| line.startsWith("## Dependencies")*/
+    ) {
       flag = true;
     } else if (line.startsWith('## ')) {
       flag = false;

@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:infinite_carousel/infinite_carousel.dart';
 import 'package:provider/provider.dart';
 import 'package:sliver_tools/sliver_tools.dart';
@@ -96,38 +97,33 @@ class _IndexFragmentState extends LifecycleState<IndexFragment> {
                 slivers: [
                   const _PinedHeader(),
                   _buildCarousels(theme),
-                  ...List.generate(
-                    bangumiRows.length,
-                    (index) {
-                      final bangumiRow = bangumiRows[index];
-                      return MultiSliver(
-                        pushPinnedChildren: true,
-                        children: [
-                          _buildWeekSection(theme, bangumiRow),
-                          SliverBangumiList(
-                            bangumis: bangumiRow.bangumis,
-                            handleSubscribe: (bangumi, flag) {
-                              context.read<OpModel>().subscribeBangumi(
-                                bangumi.id,
-                                bangumi.subscribed,
-                                onSuccess: () {
-                                  bangumi.subscribed = !bangumi.subscribed;
-                                  context
-                                      .read<OpModel>()
-                                      .subscribeChanged(flag);
-                                },
-                                onError: (msg) {
-                                  '订阅失败：$msg'.toast();
-                                },
-                              );
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+                  ...List.generate(bangumiRows.length, (index) {
+                    final bangumiRow = bangumiRows[index];
+                    return MultiSliver(
+                      pushPinnedChildren: true,
+                      children: [
+                        _buildWeekSection(theme, bangumiRow),
+                        SliverBangumiList(
+                          bangumis: bangumiRow.bangumis,
+                          handleSubscribe: (bangumi, flag) {
+                            context.read<OpModel>().subscribeBangumi(
+                              bangumi.id,
+                              bangumi.subscribed,
+                              onSuccess: () {
+                                bangumi.subscribed = !bangumi.subscribed;
+                                context.read<OpModel>().subscribeChanged(flag);
+                              },
+                              onError: (msg) {
+                                '订阅失败：$msg'.toast();
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    );
+                  }),
                   _buildOVA(theme),
-                  sliverSizedBoxH80WithNavBarHeight(context),
+                  sliverGapH80WithNavBarHeight(context),
                 ],
               );
             },
@@ -137,10 +133,7 @@ class _IndexFragmentState extends LifecycleState<IndexFragment> {
     );
   }
 
-  Widget _buildWeekSection(
-    ThemeData theme,
-    BangumiRow bangumiRow,
-  ) {
+  Widget _buildWeekSection(ThemeData theme, BangumiRow bangumiRow) {
     final simple = [
       if (bangumiRow.updatedNum > 0) '🚀 ${bangumiRow.updatedNum}部',
       if (bangumiRow.subscribedUpdatedNum > 0)
@@ -160,7 +153,7 @@ class _IndexFragmentState extends LifecycleState<IndexFragment> {
       child: Transform.translate(
         offset: offsetY_1,
         child: Container(
-          padding: edgeH24,
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           height: 48.0,
           decoration: BoxDecoration(color: theme.colorScheme.surface),
           child: Row(
@@ -263,7 +256,10 @@ class _IndexFragmentState extends LifecycleState<IndexFragment> {
           children: [
             SliverPinnedHeader(
               child: Container(
-                padding: edgeH24V8,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24.0,
+                  vertical: 8.0,
+                ),
                 decoration: BoxDecoration(color: theme.scaffoldBackgroundColor),
                 child: Row(
                   children: <Widget>[
@@ -289,20 +285,20 @@ class _IndexFragmentState extends LifecycleState<IndexFragment> {
               ),
             ),
             SliverPadding(
-              padding: edgeH24B16T4,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 4.0,
+              ),
               sliver: SliverWaterfallFlow(
                 gridDelegate: SliverWaterfallFlowDelegateWithMaxCrossAxisExtent(
                   crossAxisSpacing: margins,
                   mainAxisSpacing: margins,
                   maxCrossAxisExtent: 400.0,
                 ),
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final record = records[index];
-                    return SimpleRecordItem(record: record);
-                  },
-                  childCount: records.length,
-                ),
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final record = records[index];
+                  return SimpleRecordItem(record: record);
+                }, childCount: records.length),
               ),
             ),
           ],
@@ -344,154 +340,168 @@ class _PinedHeader extends StatelessWidget {
           delegate: WrapSliverPersistentHeaderDelegate(
             maxExtent: maxHeight,
             minExtent: minHeight,
-            onBuild: (
-              BuildContext context,
-              double shrinkOffset,
-              bool overlapsContent,
-            ) {
-              final offsetRatio = math.min(shrinkOffset / offsetHeight, 1.0);
-              final display = offsetRatio >= 0.8;
-              final children = <Widget>[
-                if (display)
-                  RippleTap(
-                    onTap: () {
-                      showYearSeasonBottomSheet(context);
-                    },
-                    borderRadius: borderRadius28,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 8.0,
-                      ),
-                      child: Row(
-                        children: [
-                          Selector<IndexModel, Season?>(
-                            selector: (_, model) => model.selectedSeason,
-                            shouldRebuild: (pre, next) => pre != next,
-                            builder: (_, season, __) {
-                              return season == null
-                                  ? sizedBox
-                                  : Text(
-                                      season.title,
-                                      style: theme.textTheme.titleLarge,
-                                    );
-                            },
-                          ),
-                          sizedBoxW8,
-                          const Icon(Icons.keyboard_arrow_down_rounded),
-                        ],
-                      ),
-                    ),
-                  ),
-                const Spacer(),
-              ];
-              if (!isTablet) {
-                children.add(
-                  TransitionContainer(
-                    next: const SearchPage(),
-                    builder: (context, open) {
-                      return RippleTap(
-                        onTap: open,
-                        shape: const CircleBorder(),
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(Icons.search_rounded),
+            onBuild:
+                (
+                  BuildContext context,
+                  double shrinkOffset,
+                  bool overlapsContent,
+                ) {
+                  final offsetRatio = math.min(
+                    shrinkOffset / offsetHeight,
+                    1.0,
+                  );
+                  final display = offsetRatio >= 0.8;
+                  final children = <Widget>[
+                    if (display)
+                      RippleTap(
+                        onTap: () {
+                          showYearSeasonBottomSheet(context);
+                        },
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(2.0),
                         ),
-                      );
-                    },
-                  ),
-                );
-                children.add(buildAvatarWithAction(context));
-              }
-              return Stack(
-                children: [
-                  PositionedDirectional(
-                    start: 12.0,
-                    bottom: 12.0,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Selector<IndexModel, User?>(
-                            selector: (_, model) => model.user,
-                            shouldRebuild: (pre, next) => pre != next,
-                            builder: (_, user, __) {
-                              final withoutName =
-                                  user == null || user.name.isNullOrBlank;
-                              return Text(
-                                withoutName
-                                    ? 'Mikan Project'
-                                    : 'Hi, ${user.name}',
-                                style: theme.textTheme.bodySmall,
-                              );
-                            },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12.0,
+                            vertical: 8.0,
+                          ),
+                          child: Row(
+                            children: [
+                              Selector<IndexModel, Season?>(
+                                selector: (_, model) => model.selectedSeason,
+                                shouldRebuild: (pre, next) => pre != next,
+                                builder: (_, season, __) {
+                                  return season == null
+                                      ? const SizedBox()
+                                      : Text(
+                                          season.title,
+                                          style: theme.textTheme.titleLarge,
+                                        );
+                                },
+                              ),
+                              const Gap(8),
+                              const Icon(Icons.keyboard_arrow_down_rounded),
+                            ],
                           ),
                         ),
-                        RippleTap(
-                          onTap: () {
-                            showYearSeasonBottomSheet(context);
-                          },
-                          borderRadius: borderRadius28,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12.0,
-                              vertical: 8.0,
+                      ),
+                    const Spacer(),
+                  ];
+                  if (!isTablet) {
+                    children.add(
+                      TransitionContainer(
+                        next: const SearchPage(),
+                        builder: (context, open) {
+                          return RippleTap(
+                            onTap: open,
+                            shape: const CircleBorder(),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Icon(Icons.search_rounded),
                             ),
-                            child: Row(
-                              children: [
-                                Selector<IndexModel, Season?>(
-                                  selector: (_, model) => model.selectedSeason,
-                                  shouldRebuild: (pre, next) => pre != next,
-                                  builder: (_, season, __) {
-                                    return season == null
-                                        ? sizedBox
-                                        : Text(
-                                            season.title,
-                                            style:
-                                                theme.textTheme.headlineMedium,
-                                          );
-                                  },
-                                ),
-                                sizedBoxW8,
-                                const Icon(Icons.keyboard_arrow_down_rounded),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    left: 0.0,
-                    right: 0.0,
-                    top: 0.0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.surface,
-                        border: offsetRatio > 0.1
-                            ? Border(
-                                bottom: Divider.createBorderSide(
-                                  context,
-                                  color: theme.colorScheme.outlineVariant,
-                                  width: 0.0,
-                                ),
-                              )
-                            : null,
+                          );
+                        },
                       ),
-                      padding: EdgeInsetsDirectional.only(
+                    );
+                    children.add(buildAvatarWithAction(context));
+                  }
+                  return Stack(
+                    children: [
+                      PositionedDirectional(
                         start: 12.0,
-                        end: 12.0,
-                        top: statusBarHeight,
+                        bottom: 12.0,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12.0,
+                              ),
+                              child: Selector<IndexModel, User?>(
+                                selector: (_, model) => model.user,
+                                shouldRebuild: (pre, next) => pre != next,
+                                builder: (_, user, __) {
+                                  final withoutName =
+                                      user == null || user.name.isNullOrBlank;
+                                  return Text(
+                                    withoutName
+                                        ? 'Mikan Project'
+                                        : 'Hi, ${user.name}',
+                                    style: theme.textTheme.bodySmall,
+                                  );
+                                },
+                              ),
+                            ),
+                            RippleTap(
+                              onTap: () {
+                                showYearSeasonBottomSheet(context);
+                              },
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(2.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12.0,
+                                  vertical: 8.0,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Selector<IndexModel, Season?>(
+                                      selector: (_, model) =>
+                                          model.selectedSeason,
+                                      shouldRebuild: (pre, next) => pre != next,
+                                      builder: (_, season, __) {
+                                        return season == null
+                                            ? const SizedBox()
+                                            : Text(
+                                                season.title,
+                                                style: theme
+                                                    .textTheme
+                                                    .headlineMedium,
+                                              );
+                                      },
+                                    ),
+                                    const Gap(8),
+                                    const Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      height: statusBarHeight + appbarHeight,
-                      child: Row(children: children),
-                    ),
-                  ),
-                ],
-              );
-            },
+                      Positioned(
+                        left: 0.0,
+                        right: 0.0,
+                        top: 0.0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.surface,
+                            border: offsetRatio > 0.1
+                                ? Border(
+                                    bottom: Divider.createBorderSide(
+                                      context,
+                                      color: theme.colorScheme.outlineVariant,
+                                      width: 0.0,
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          padding: EdgeInsetsDirectional.only(
+                            start: 12.0,
+                            end: 12.0,
+                            top: statusBarHeight,
+                          ),
+                          height: statusBarHeight + appbarHeight,
+                          child: Row(children: children),
+                        ),
+                      ),
+                    ],
+                  );
+                },
           ),
         );
       },

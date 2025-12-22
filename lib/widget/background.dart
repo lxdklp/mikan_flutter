@@ -101,7 +101,7 @@ class BubbleBackgroundState extends State<BubbleBackground>
 
 class ParticlePainter extends CustomPainter {
   ParticlePainter(this.particles, Listenable listenable)
-      : super(repaint: listenable);
+    : super(repaint: listenable);
 
   final List<Particle> particles;
 

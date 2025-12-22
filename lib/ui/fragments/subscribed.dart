@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:infinite_carousel/infinite_carousel.dart';
 import 'package:provider/provider.dart';
 import 'package:sliver_tools/sliver_tools.dart';
@@ -85,18 +86,15 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
     final theme = Theme.of(context);
     return AnnotatedRegion(
       value: context.fitSystemUiOverlayStyle,
-      child: Scaffold(
-        body: _buildSubscribedView(context, theme),
-      ),
+      child: Scaffold(body: _buildSubscribedView(context, theme)),
     );
   }
 
-  Widget _buildSubscribedView(
-    BuildContext context,
-    ThemeData theme,
-  ) {
-    final subscribedModel =
-        Provider.of<SubscribedModel>(context, listen: false);
+  Widget _buildSubscribedView(BuildContext context, ThemeData theme) {
+    final subscribedModel = Provider.of<SubscribedModel>(
+      context,
+      listen: false,
+    );
     return EasyRefresh.builder(
       onRefresh: subscribedModel.refresh,
       refreshOnStart: true,
@@ -128,17 +126,14 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
               ],
             ),
             _buildSeeMore(theme, subscribedModel),
-            sliverSizedBoxH80WithNavBarHeight(context),
+            sliverGapH80WithNavBarHeight(context),
           ],
         );
       },
     );
   }
 
-  Widget _buildSeasonRssList(
-    ThemeData theme,
-    SubscribedModel subscribedModel,
-  ) {
+  Widget _buildSeasonRssList(ThemeData theme, SubscribedModel subscribedModel) {
     return Selector<SubscribedModel, List<Bangumi>?>(
       selector: (_, model) => model.bangumis,
       builder: (context, bangumis, __) {
@@ -146,10 +141,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
           return _buildLoading();
         }
         if (bangumis.isEmpty) {
-          return _buildEmpty(
-            theme,
-            '本季度您还没有订阅任何番组哦\n快去添加订阅吧',
-          );
+          return _buildEmpty(theme, '本季度您还没有订阅任何番组哦\n快去添加订阅吧');
         }
         return SliverBangumiList(
           flag: 'subscribed',
@@ -181,14 +173,15 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
         offset: offsetY_1,
         child: Container(
           color: theme.scaffoldBackgroundColor,
-          padding: edgeS24E12,
+          padding: const EdgeInsetsDirectional.only(start: 24.0, end: 12.0),
           height: 48.0,
           child: Selector<SubscribedModel, List<Bangumi>?>(
             selector: (_, model) => model.bangumis,
             builder: (context, bangumis, _) {
               final hasVal = bangumis.isSafeNotEmpty;
-              final updateNum =
-                  bangumis?.where((e) => e.num != null && e.num! > 0).length;
+              final updateNum = bangumis
+                  ?.where((e) => e.num != null && e.num! > 0)
+                  .length;
               return Row(
                 children: [
                   Expanded(
@@ -208,7 +201,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
                         style: theme.textTheme.bodySmall,
                       ),
                     ),
-                  sizedBoxW16,
+                  const Gap(16),
                   if (hasVal)
                     IconButton(
                       icon: const Icon(Icons.east_rounded),
@@ -239,16 +232,13 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
     );
   }
 
-  Widget _buildRssSection(
-    BuildContext context,
-    ThemeData theme,
-  ) {
+  Widget _buildRssSection(BuildContext context, ThemeData theme) {
     return SliverPinnedHeader(
       child: Transform.translate(
         offset: offsetY_1,
         child: Container(
           color: theme.scaffoldBackgroundColor,
-          padding: edgeS24E12,
+          padding: const EdgeInsetsDirectional.only(start: 24.0, end: 12.0),
           height: 48.0,
           child: Selector<SubscribedModel, Map<String, List<RecordItem>>?>(
             selector: (_, model) => model.rss,
@@ -267,7 +257,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
                         style: theme.textTheme.bodySmall,
                       ),
                     ),
-                  sizedBoxW16,
+                  const Gap(16),
                   if (!isEmpty)
                     IconButton(
                       onPressed: () {
@@ -296,10 +286,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
           return _buildLoading();
         }
         if (rss.isEmpty) {
-          return _buildEmpty(
-            theme,
-            '您的订阅中最近三天还没有更新内容哦\n快去添加订阅吧',
-          );
+          return _buildEmpty(theme, '您的订阅中最近三天还没有更新内容哦\n快去添加订阅吧');
         }
         final entries = rss.entries.toList(growable: false);
         return SliverToBoxAdapter(
@@ -325,16 +312,16 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
   Widget _buildEmpty(ThemeData theme, String text) {
     return SliverToBoxAdapter(
       child: Container(
-        margin: edgeH24B16,
+        margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
         child: ScalableCard(
           onTap: () {},
           child: Padding(
-            padding: edge24,
+            padding: const EdgeInsets.all(24.0),
             child: Center(
               child: Column(
                 children: [
                   Assets.mikan.image(width: 64.0),
-                  sizedBoxH12,
+                  const Gap(12),
                   Text(
                     text,
                     textAlign: TextAlign.center,
@@ -353,7 +340,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
     return SliverToBoxAdapter(
       child: Container(
         height: 180.0,
-        margin: edgeH24B16,
+        margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
         child: SizedBox.expand(
           child: ScalableCard(onTap: () {}, child: centerLoading),
         ),
@@ -365,8 +352,9 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
     Navigator.pushNamed(
       context,
       Routes.subscribedRecent.name,
-      arguments: Routes.subscribedRecent
-          .d(loaded: context.read<SubscribedModel>().records ?? []),
+      arguments: Routes.subscribedRecent.d(
+        loaded: context.read<SubscribedModel>().records ?? [],
+      ),
     );
   }
 
@@ -426,7 +414,10 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
                           color: theme.colorScheme.error,
                           shape: const StadiumBorder(),
                         ),
-                        padding: edgeH6V2,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0,
+                          vertical: 2.0,
+                        ),
                         child: Text(
                           badge,
                           style: theme.textTheme.labelMedium?.copyWith(
@@ -440,7 +431,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
               },
             ),
           ),
-          sizedBoxH10,
+          const Gap(10),
           Text(
             record.name,
             maxLines: 1,
@@ -459,10 +450,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
     );
   }
 
-  Widget _buildRssRecordsSection(
-    BuildContext context,
-    ThemeData theme,
-  ) {
+  Widget _buildRssRecordsSection(BuildContext context, ThemeData theme) {
     return Selector<SubscribedModel, List<RecordItem>?>(
       selector: (_, model) => model.records,
       shouldRebuild: (pre, next) => pre.ne(next),
@@ -475,7 +463,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
             offset: offsetY_1,
             child: Container(
               color: theme.scaffoldBackgroundColor,
-              padding: edgeS24E12,
+              padding: const EdgeInsetsDirectional.only(start: 24.0, end: 12.0),
               height: 48.0,
               child: Row(
                 children: [
@@ -499,7 +487,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
 
   Widget _buildRssRecordsList(BuildContext context, ThemeData theme) {
     return SliverPadding(
-      padding: edgeH24V8,
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
       sliver: Selector<SubscribedModel, List<RecordItem>?>(
         selector: (_, model) => model.records,
         shouldRebuild: (pre, next) => pre.ne(next),
@@ -514,23 +502,17 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
               crossAxisSpacing: margins,
               mainAxisSpacing: margins,
             ),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final record = records[index];
-                return RssRecordItem(index: index, record: record);
-              },
-              childCount: records!.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final record = records[index];
+              return RssRecordItem(index: index, record: record);
+            }, childCount: records!.length),
           );
         },
       ),
     );
   }
 
-  Widget _buildSeeMore(
-    ThemeData theme,
-    SubscribedModel subscribedModel,
-  ) {
+  Widget _buildSeeMore(ThemeData theme, SubscribedModel subscribedModel) {
     return Selector<SubscribedModel, int>(
       builder: (context, length, _) {
         if (length == 0) {
@@ -538,7 +520,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
         }
         return SliverToBoxAdapter(
           child: Padding(
-            padding: edge24,
+            padding: const EdgeInsets.all(24.0),
             child: Center(
               child: ElevatedButton(
                 onPressed: () {

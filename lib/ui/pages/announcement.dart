@@ -2,6 +2,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:ff_annotation_route_core/ff_annotation_route_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -38,7 +39,7 @@ class Announcements extends StatelessWidget {
                         child: Column(
                           children: [
                             Assets.mikan.image(width: 64.0),
-                            sizedBoxH12,
+                            const Gap(12),
                             Text(
                               '暂无数据',
                               textAlign: TextAlign.center,
@@ -64,8 +65,8 @@ class Announcements extends StatelessWidget {
                       }
                       final a = v[index ~/ 2];
                       return Container(
-                        margin: edgeH24,
-                        padding: edgeV16,
+                        margin: const EdgeInsets.symmetric(horizontal: 24.0),
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: PlaceholderText(
                           a.text,
                           onMatched: (pos, matched) {
@@ -120,7 +121,7 @@ class Announcements extends StatelessWidget {
               },
               selector: (_, model) => model.announcements,
             ),
-            sliverSizedBoxH24WithNavBarHeight(context),
+            sliverGapH24WithNavBarHeight(context),
           ],
         ),
       ),

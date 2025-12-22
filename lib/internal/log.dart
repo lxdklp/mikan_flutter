@@ -32,13 +32,7 @@ extension Log on Object? {
     StackTrace? stackTrace,
     int level = 2,
   }) {
-    e(
-      msg: msg,
-      tag: tag,
-      error: this,
-      stackTrace: stackTrace,
-      level: level,
-    );
+    e(msg: msg, tag: tag, error: this, stackTrace: stackTrace, level: level);
   }
 
   static void d(

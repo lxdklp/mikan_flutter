@@ -83,10 +83,9 @@ class MyHive {
   }
 
   static Map<String, dynamic> getLogin() {
-    return db.get(
-      HiveBoxKey.login,
-      defaultValue: <String, dynamic>{},
-    ).cast<String, dynamic>();
+    return db
+        .get(HiveBoxKey.login, defaultValue: <String, dynamic>{})
+        .cast<String, dynamic>();
   }
 
   static Future<void> removeCookies() async {
@@ -97,12 +96,10 @@ class MyHive {
   }
 
   static Future<void> clearCache() async {
-    await Future.wait(
-      <Future<void>>[
-        for (final FileSystemEntity f in cacheDir.listSync())
-          f.delete(recursive: true),
-      ],
-    );
+    await Future.wait(<Future<void>>[
+      for (final FileSystemEntity f in cacheDir.listSync())
+        f.delete(recursive: true),
+    ]);
   }
 
   static Future<int> getCacheSize() async {
@@ -163,10 +160,7 @@ class MyHive {
   }
 
   static bool dynamicColorEnabled() {
-    return settings.get(
-      SettingsHiveKey.dynamicColor,
-      defaultValue: false,
-    );
+    return settings.get(SettingsHiveKey.dynamicColor, defaultValue: false);
   }
 
   static Future<void> enableDynamicColor(bool enable) {
@@ -210,10 +204,7 @@ class MyHive {
   }
 
   static Decimal getCardRatio() {
-    final value = settings.get(
-      SettingsHiveKey.cardRatio,
-      defaultValue: '0.9',
-    );
+    final value = settings.get(SettingsHiveKey.cardRatio, defaultValue: '0.9');
     return Decimal.parse(value);
   }
 
@@ -269,8 +260,7 @@ class SettingsHiveKey {
 enum TabletMode {
   tablet('平板模式'),
   auto('自动'),
-  disable('禁用'),
-  ;
+  disable('禁用');
 
   const TabletMode(this.label);
 

@@ -1,5 +1,6 @@
 import 'package:ff_annotation_route_core/ff_annotation_route_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../internal/extension.dart';
@@ -31,8 +32,10 @@ class _RegisterPageState extends State<RegisterPage> {
         create: (_) => RegisterModel(),
         child: Builder(
           builder: (context) {
-            final registerModel =
-                Provider.of<RegisterModel>(context, listen: false);
+            final registerModel = Provider.of<RegisterModel>(
+              context,
+              listen: false,
+            );
             return Scaffold(
               body: Center(
                 child: ConstrainedBox(
@@ -45,26 +48,23 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: Column(
                           children: <Widget>[
                             Assets.mikan.image(width: 64.0),
-                            sizedBoxH8,
+                            const Gap(8),
                             Text(
                               'Mikan Project',
                               style: theme.textTheme.bodySmall,
                             ),
-                            Text(
-                              '蜜柑计划',
-                              style: theme.textTheme.titleLarge,
-                            ),
-                            sizedBoxH16,
+                            Text('蜜柑计划', style: theme.textTheme.titleLarge),
+                            const Gap(16),
                             _buildUserNameField(theme, registerModel),
-                            sizedBoxH16,
+                            const Gap(16),
                             _buildPasswordField(theme, registerModel),
-                            sizedBoxH16,
+                            const Gap(16),
                             _buildConfirmPasswordField(theme, registerModel),
-                            sizedBoxH16,
+                            const Gap(16),
                             _buildEmailField(theme, registerModel),
-                            sizedBoxH16,
+                            const Gap(16),
                             _buildQQField(theme, registerModel),
-                            sizedBoxH56,
+                            const Gap(56),
                             Row(
                               children: [
                                 ElevatedButton(
@@ -73,11 +73,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                   },
                                   child: const Icon(Icons.west_rounded),
                                 ),
-                                sizedBoxW16,
+                                const Gap(16),
                                 Expanded(child: _buildRegisterButton(theme)),
                               ],
                             ),
-                            sizedBoxH56,
+                            const Gap(56),
                           ],
                         ),
                       ),
@@ -119,10 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildUserNameField(
-    ThemeData theme,
-    RegisterModel registerModel,
-  ) {
+  Widget _buildUserNameField(ThemeData theme, RegisterModel registerModel) {
     return TextFormField(
       controller: registerModel.userNameController,
       decoration: const InputDecoration(
@@ -151,10 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildEmailField(
-    ThemeData theme,
-    RegisterModel registerModel,
-  ) {
+  Widget _buildEmailField(ThemeData theme, RegisterModel registerModel) {
     return TextFormField(
       controller: registerModel.emailController,
       decoration: const InputDecoration(
@@ -180,10 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildQQField(
-    ThemeData theme,
-    RegisterModel registerModel,
-  ) {
+  Widget _buildQQField(ThemeData theme, RegisterModel registerModel) {
     return TextFormField(
       controller: registerModel.qqController,
       decoration: const InputDecoration(
@@ -210,10 +201,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildPasswordField(
-    ThemeData theme,
-    RegisterModel registerModel,
-  ) {
+  Widget _buildPasswordField(ThemeData theme, RegisterModel registerModel) {
     return Selector<RegisterModel, bool>(
       selector: (_, model) => model.showPassword,
       shouldRebuild: (pre, next) => pre != next,

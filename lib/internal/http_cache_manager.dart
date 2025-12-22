@@ -69,17 +69,17 @@ class HttpCacheManager {
   Future<Directory> _getCacheDir([String? cacheDir]) async {
     if (cacheDir == null) {
       if (Platform.isWindows) {
-        cacheDir = (await getTemporaryDirectory()).path +
+        cacheDir =
+            (await getTemporaryDirectory()).path +
             Platform.pathSeparator +
-            (await getApplicationSupportDirectory())
-                .parent
-                .path
+            (await getApplicationSupportDirectory()).parent.path
                 .split(Platform.pathSeparator)
                 .last +
             Platform.pathSeparator +
             _cacheDir;
       } else {
-        cacheDir = (await getTemporaryDirectory()).path +
+        cacheDir =
+            (await getTemporaryDirectory()).path +
             Platform.pathSeparator +
             _cacheDir;
       }
@@ -104,8 +104,11 @@ class HttpCacheManager {
     Cancelable? cancelable,
   }) async {
     final Uri uri = Uri.parse(url);
-    final checkResp =
-        await _createNewRequest(uri, withBody: false, headers: headers);
+    final checkResp = await _createNewRequest(
+      uri,
+      withBody: false,
+      headers: headers,
+    );
 
     final rawFileKey = cacheKey ?? base64Url.encode(utf8.encode(url));
     final parentDir = await _getCacheDir(cacheDir);
@@ -130,8 +133,9 @@ class HttpCacheManager {
     checkResp.listen(null);
 
     bool isExpired = false;
-    final String? cacheControl =
-        checkResp.headers.value(HttpHeaders.cacheControlHeader);
+    final String? cacheControl = checkResp.headers.value(
+      HttpHeaders.cacheControlHeader,
+    );
     final File tempFile = _childFile(parentDir, '$rawFileKey.temp');
     if (cacheControl != null) {
       if (cacheControl.contains('no-store')) {
@@ -190,7 +194,7 @@ class HttpCacheManager {
 
     final bool breakpointTransmission =
         checkResp.headers.value(HttpHeaders.acceptRangesHeader) == 'bytes' &&
-            checkResp.contentLength > 0;
+        checkResp.contentLength > 0;
     // if not expired && is support breakpoint transmission && temp file exists
     if (!isExpired && breakpointTransmission && tempFile.existsSync()) {
       final int received = await tempFile.length();
@@ -200,7 +204,7 @@ class HttpCacheManager {
           req.headers.add(HttpHeaders.rangeHeader, 'bytes=$received-');
           final String? flag =
               checkResp.headers.value(HttpHeaders.etagHeader) ??
-                  checkResp.headers.value(HttpHeaders.lastModifiedHeader);
+              checkResp.headers.value(HttpHeaders.lastModifiedHeader);
           if (flag != null) {
             req.headers.add(HttpHeaders.ifRangeHeader, flag);
           }
@@ -261,11 +265,7 @@ class HttpCacheManager {
     if (chunkEvents != null) {
       final int length = await rawFile.length();
       chunkEvents.add(
-        ProgressChunkEvent(
-          key: uri,
-          progress: length,
-          total: length,
-        ),
+        ProgressChunkEvent(key: uri, progress: length, total: length),
       );
     }
   }
@@ -307,7 +307,8 @@ class HttpCacheManager {
     Cancelable? cancelable,
   }) async {
     final Completer<File> completer = Completer<File>();
-    final bool compressed = response.compressionState ==
+    final bool compressed =
+        response.compressionState ==
         HttpClientResponseCompressionState.compressed;
     final int? total = compressed || response.contentLength < 0
         ? null
@@ -324,11 +325,7 @@ class HttpCacheManager {
         ioSink.add(bytes);
         received += bytes.length;
         chunkEvents?.add(
-          ProgressChunkEvent(
-            key: uri,
-            progress: received,
-            total: total,
-          ),
+          ProgressChunkEvent(key: uri, progress: received, total: total),
         );
       },
       onDone: () async {
@@ -375,8 +372,9 @@ class HttpCacheManager {
     bool withBody = true,
     void Function(HttpClientRequest)? beforeRequest,
   }) async {
-    final HttpClientRequest request =
-        await (withBody ? _client.getUrl(uri) : _client.headUrl(uri));
+    final HttpClientRequest request = await (withBody
+        ? _client.getUrl(uri)
+        : _client.headUrl(uri));
     headers?.forEach((String key, dynamic value) {
       request.headers.add(key, value);
     });

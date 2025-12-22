@@ -84,12 +84,9 @@ class _LicenseDetailState extends State<LicenseDetail> {
                     case ConnectionState.done:
                       final data = snapshot.data!;
                       return SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (_, index) {
-                            return data[index];
-                          },
-                          childCount: data.length,
-                        ),
+                        delegate: SliverChildBuilderDelegate((_, index) {
+                          return data[index];
+                        }, childCount: data.length),
                       );
                   }
                 },
@@ -104,18 +101,15 @@ class _LicenseDetailState extends State<LicenseDetail> {
   Future<List<Widget>> _buildLicenseLines() async {
     final licenses = <Widget>[];
     for (final license in widget.licenseEntries) {
-      final paragraphs =
-          await SchedulerBinding.instance.scheduleTask<List<LicenseParagraph>>(
-        license.paragraphs.toList,
-        Priority.animation,
-        debugLabel: 'License',
-      );
+      final paragraphs = await SchedulerBinding.instance
+          .scheduleTask<List<LicenseParagraph>>(
+            license.paragraphs.toList,
+            Priority.animation,
+            debugLabel: 'License',
+          );
       if (licenses.isNotEmpty) {
         licenses.add(
-          const Padding(
-            padding: EdgeInsets.all(18.0),
-            child: Divider(),
-          ),
+          const Padding(padding: EdgeInsets.all(18.0), child: Divider()),
         );
       }
       for (final LicenseParagraph paragraph in paragraphs) {
@@ -142,10 +136,7 @@ class _LicenseDetailState extends State<LicenseDetail> {
               ),
               child: Text(
                 paragraph.text,
-                style: const TextStyle(
-                  fontFamily: 'mono',
-                  height: 1.5,
-                ),
+                style: const TextStyle(fontFamily: 'mono', height: 1.5),
               ),
             ),
           );

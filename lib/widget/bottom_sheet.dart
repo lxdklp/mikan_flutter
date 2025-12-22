@@ -38,13 +38,13 @@ class MBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final clipRRect = ClipRSuperellipse(
-      borderRadius: borderRadius24,
+      borderRadius: const BorderRadius.all(Radius.circular(24.0)),
       child: child,
     );
     return Material(
       color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.27),
       shape: const RoundedSuperellipseBorder(
-        borderRadius: borderRadiusT28,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28.0)),
       ),
       child: Padding(
         padding: EdgeInsets.only(
@@ -56,10 +56,7 @@ class MBottomSheet extends StatelessWidget {
               : 16.0,
         ),
         child: height != null
-            ? SizedBox(
-                height: height,
-                child: clipRRect,
-              )
+            ? SizedBox(height: height, child: clipRRect)
             : FractionallySizedBox(
                 heightFactor: heightFactor,
                 child: clipRRect,

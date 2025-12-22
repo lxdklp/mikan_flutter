@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'log.dart';
 
 Future<ColorSchemePair?> getDynamicColorScheme() async {
-  final corePalette =
-      await DynamicColorPlugin.getCorePalette().catchError((Object? e, s) {
+  final corePalette = await DynamicColorPlugin.getCorePalette().catchError((
+    Object? e,
+    s,
+  ) {
     e.$error(stackTrace: s);
     return null;
   });
@@ -15,8 +17,10 @@ Future<ColorSchemePair?> getDynamicColorScheme() async {
       dark: corePalette.toColorScheme(brightness: Brightness.dark),
     );
   }
-  final accentColor =
-      await DynamicColorPlugin.getAccentColor().catchError((Object? e, s) {
+  final accentColor = await DynamicColorPlugin.getAccentColor().catchError((
+    Object? e,
+    s,
+  ) {
     e.$error(stackTrace: s);
     return null;
   });
@@ -32,10 +36,7 @@ Future<ColorSchemePair?> getDynamicColorScheme() async {
 }
 
 class ColorSchemePair {
-  ColorSchemePair({
-    required this.dark,
-    required this.light,
-  });
+  ColorSchemePair({required this.dark, required this.light});
 
   final ColorScheme dark;
   final ColorScheme light;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:gap/gap.dart';
 import '../../internal/consts.dart';
 import '../../internal/hive.dart';
 import '../../mikan_routes.dart';
-import '../../topvars.dart';
 import '../../widget/restart.dart';
 import '../../widget/sliver_pinned_header.dart';
 
@@ -26,22 +26,19 @@ class SelectMirror extends StatelessWidget {
                   valueListenable: notifier,
                   builder: (context, selected, child) {
                     return SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          final url = MikanUrls.baseUrls[index];
-                          return RadioListTile<String>(
-                            title: Text(
-                              url + (url.endsWith('.me') ? '' : ' (中国大陆)'),
-                            ),
-                            value: url,
-                            groupValue: selected,
-                            onChanged: (value) {
-                              notifier.value = value!;
-                            },
-                          );
-                        },
-                        childCount: MikanUrls.baseUrls.length,
-                      ),
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final url = MikanUrls.baseUrls[index];
+                        return RadioListTile<String>(
+                          title: Text(
+                            url + (url.endsWith('.me') ? '' : ' (中国大陆)'),
+                          ),
+                          value: url,
+                          groupValue: selected,
+                          onChanged: (value) {
+                            notifier.value = value!;
+                          },
+                        );
+                      }, childCount: MikanUrls.baseUrls.length),
                     );
                   },
                 ),
@@ -53,7 +50,8 @@ class SelectMirror extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                    color: theme.colorScheme.surfaceContainerHighest,),
+                  color: theme.colorScheme.surfaceContainerHighest,
+                ),
               ),
             ),
             child: Row(
@@ -67,7 +65,7 @@ class SelectMirror extends StatelessWidget {
                     child: const Text('取消'),
                   ),
                 ),
-                sizedBoxW12,
+                const Gap(12),
                 Expanded(
                   flex: 3,
                   child: ValueListenableBuilder(

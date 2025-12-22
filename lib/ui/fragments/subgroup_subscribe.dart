@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../internal/extension.dart';
@@ -86,14 +87,16 @@ class SubgroupSubscribe extends StatelessWidget {
                                       horizontal: 8.0,
                                     ),
                                     shape: const RoundedRectangleBorder(
-                                      borderRadius: borderRadius6,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(6.0),
+                                      ),
                                     ),
                                   ),
                                   child: sub.subscribed
                                       ? Row(
                                           children: [
                                             const Icon(Icons.rss_feed_rounded),
-                                            sizedBoxW4,
+                                            const Gap(4),
                                             Text(sub.sublang!),
                                           ],
                                         )
@@ -101,7 +104,7 @@ class SubgroupSubscribe extends StatelessWidget {
                                 ),
                             ],
                           ),
-                          sizedBoxH4,
+                          const Gap(4),
                           SegmentedButton<int>(
                             showSelectedIcon: false,
                             segments: const [
@@ -112,10 +115,11 @@ class SubgroupSubscribe extends StatelessWidget {
                             ],
                             selected: {sub.state},
                             style: ButtonStyle(
-                              shape:
-                                  WidgetStateProperty.resolveWith((states) {
+                              shape: WidgetStateProperty.resolveWith((states) {
                                 return const RoundedRectangleBorder(
-                                  borderRadius: borderRadius12,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12.0),
+                                  ),
                                 );
                               }),
                             ),
@@ -148,7 +152,7 @@ class SubgroupSubscribe extends StatelessWidget {
                 );
               },
             ),
-            sliverSizedBoxH24WithNavBarHeight(context),
+            sliverGapH24WithNavBarHeight(context),
           ],
         ),
       ),

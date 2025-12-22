@@ -19,9 +19,10 @@ import 'subscribed_model.dart';
 
 class IndexModel extends BaseModel {
   IndexModel(this._subscribedModel) {
-    _ovas = (MyHive.db.get(HiveDBKey.mikanOva, defaultValue: <RecordItem>[])
-            as List)
-        .cast<RecordItem>();
+    _ovas =
+        (MyHive.db.get(HiveDBKey.mikanOva, defaultValue: <RecordItem>[])
+                as List)
+            .cast<RecordItem>();
     final index = MyHive.db.get(HiveDBKey.mikanIndex);
     _bindIndexData(index);
     refresh();
@@ -102,8 +103,9 @@ class IndexModel extends BaseModel {
     _announcements = index.announcements;
     if (years.isSafeNotEmpty) {
       for (final YearSeason year in years) {
-        _selectedSeason =
-            year.seasons.firstWhereOrNull((element) => element.active);
+        _selectedSeason = year.seasons.firstWhereOrNull(
+          (element) => element.active,
+        );
         if (_selectedSeason != null) {
           break;
         }

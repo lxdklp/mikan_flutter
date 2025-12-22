@@ -1,10 +1,10 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import '../internal/extension.dart';
 import '../internal/kit.dart';
-import '../topvars.dart';
 import 'icon_button.dart';
 
 class SliverPinnedAppBar extends StatelessWidget {
@@ -48,85 +48,80 @@ class SliverPinnedAppBar extends StatelessWidget {
       delegate: WrapSliverPersistentHeaderDelegate(
         maxExtent: maxHeight,
         minExtent: minHeight,
-        onBuild: (
-          BuildContext context,
-          double shrinkOffset,
-          bool overlapsContent,
-        ) {
-          final offsetRatio = math.min(shrinkOffset / offsetHeight, 1.0);
-          final display = offsetRatio >= 0.99;
-          final children = [
-            if (leading != null)
-              Padding(
-                padding: const EdgeInsetsDirectional.only(end: 12.0),
-                child: leading,
-              )
-            else if (autoImplLeading && canPop)
-              const Padding(
-                padding: EdgeInsetsDirectional.only(end: 12.0),
-                child: BackIconButton(),
-              ),
-            if (display)
-              Expanded(
-                child: Text(
-                  title,
-                  style: theme.textTheme.titleLarge,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              )
-            else
-              const Spacer(),
-          ];
-          if (!actions.isNullOrEmpty) {
-            children.add(sizedBoxW12);
-            children.addAll(actions!);
-          }
-          return Stack(
-            children: [
-              Positioned(
-                bottom: 12.0,
-                left: 24.0,
-                right: 24.0,
-                child: Text(
-                  title,
-                  style: theme.textTheme.headlineMedium,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Positioned(
-                left: 0.0,
-                right: 0.0,
-                top: 0.0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.surface,
-                    borderRadius: borderRadius,
-                    border: offsetRatio > 0.1
-                        ? Border(
-                            bottom: Divider.createBorderSide(
-                              context,
-                              color: theme.colorScheme.outlineVariant,
-                              width: 0.0,
-                            ),
-                          )
-                        : null,
+        onBuild:
+            (BuildContext context, double shrinkOffset, bool overlapsContent) {
+              final offsetRatio = math.min(shrinkOffset / offsetHeight, 1.0);
+              final display = offsetRatio >= 0.99;
+              final children = [
+                if (leading != null)
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(end: 12.0),
+                    child: leading,
+                  )
+                else if (autoImplLeading && canPop)
+                  const Padding(
+                    padding: EdgeInsetsDirectional.only(end: 12.0),
+                    child: BackIconButton(),
                   ),
-                  padding: EdgeInsetsDirectional.only(
-                    start: lp,
-                    end: rp,
-                    top: statusBarHeight,
+                if (display)
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: theme.textTheme.titleLarge,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
+                else
+                  const Spacer(),
+              ];
+              if (!actions.isNullOrEmpty) {
+                children.add(const Gap(12));
+                children.addAll(actions!);
+              }
+              return Stack(
+                children: [
+                  Positioned(
+                    bottom: 12.0,
+                    left: 24.0,
+                    right: 24.0,
+                    child: Text(
+                      title,
+                      style: theme.textTheme.headlineMedium,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  height: statusBarHeight + appbarHeight,
-                  child: Row(
-                    children: children,
+                  Positioned(
+                    left: 0.0,
+                    right: 0.0,
+                    top: 0.0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.surface,
+                        borderRadius: borderRadius,
+                        border: offsetRatio > 0.1
+                            ? Border(
+                                bottom: Divider.createBorderSide(
+                                  context,
+                                  color: theme.colorScheme.outlineVariant,
+                                  width: 0.0,
+                                ),
+                              )
+                            : null,
+                      ),
+                      padding: EdgeInsetsDirectional.only(
+                        start: lp,
+                        end: rp,
+                        top: statusBarHeight,
+                      ),
+                      height: statusBarHeight + appbarHeight,
+                      child: Row(children: children),
+                    ),
                   ),
-                ),
-              ),
-            ],
-          );
-        },
+                ],
+              );
+            },
       ),
       pinned: true,
     );
@@ -145,7 +140,8 @@ class StackSliverPinnedHeader extends StatelessWidget {
     BuildContext context,
     double ratio,
     double shrinkOffset,
-  ) childrenBuilder;
+  )
+  childrenBuilder;
   final double? maxExtent;
   final double? minExtent;
 
@@ -159,28 +155,25 @@ class StackSliverPinnedHeader extends StatelessWidget {
       delegate: WrapSliverPersistentHeaderDelegate(
         maxExtent: maxHeight,
         minExtent: minHeight,
-        onBuild: (
-          BuildContext context,
-          double shrinkOffset,
-          bool overlapsContent,
-        ) {
-          final offsetRatio = math.min(shrinkOffset / offsetHeight, 1.0);
-          return DecoratedBox(
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surface,
-              border: Border(
-                bottom: BorderSide(
-                  color: offsetRatio >= 0.99
-                      ? theme.colorScheme.surfaceContainerHighest
-                      : Colors.transparent,
+        onBuild:
+            (BuildContext context, double shrinkOffset, bool overlapsContent) {
+              final offsetRatio = math.min(shrinkOffset / offsetHeight, 1.0);
+              return DecoratedBox(
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surface,
+                  border: Border(
+                    bottom: BorderSide(
+                      color: offsetRatio >= 0.99
+                          ? theme.colorScheme.surfaceContainerHighest
+                          : Colors.transparent,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            child: Stack(
-              children: childrenBuilder(context, offsetRatio, shrinkOffset),
-            ),
-          );
-        },
+                child: Stack(
+                  children: childrenBuilder(context, offsetRatio, shrinkOffset),
+                ),
+              );
+            },
       ),
       pinned: true,
     );
@@ -212,7 +205,8 @@ class WrapSliverPersistentHeaderDelegate
     BuildContext context,
     double shrinkOffset,
     bool overlapsContent,
-  ) onBuild;
+  )
+  onBuild;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {

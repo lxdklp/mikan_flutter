@@ -14,10 +14,7 @@ class CardWidth extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverPinnedAppBar(
-            title: '卡片宽度',
-            maxExtent: 120.0,
-          ),
+          const SliverPinnedAppBar(title: '卡片宽度', maxExtent: 120.0),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -41,7 +38,7 @@ class CardWidth extends StatelessWidget {
               ),
             ),
           ),
-          sliverSizedBoxH24WithNavBarHeight(context),
+          sliverGapH24WithNavBarHeight(context),
         ],
       ),
     );

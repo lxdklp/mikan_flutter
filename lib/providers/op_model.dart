@@ -27,8 +27,11 @@ class OpModel extends BaseModel {
         return '字幕组id解析错误，忽略当前订阅'.toast();
       }
     }
-    final Resp resp =
-        await Repo.subscribeBangumi(bid, subscribed, subgroupId: sid);
+    final Resp resp = await Repo.subscribeBangumi(
+      bid,
+      subscribed,
+      subgroupId: sid,
+    );
     if (resp.success) {
       onSuccess?.call();
     } else {

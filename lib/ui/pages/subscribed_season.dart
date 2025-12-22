@@ -2,6 +2,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:ff_annotation_route_core/ff_annotation_route_core.dart';
 @FFAutoImport()
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
@@ -43,8 +44,10 @@ class SubscribedSeasonPage extends StatelessWidget {
         create: (_) => SubscribedSeasonModel(years, galleries),
         child: Builder(
           builder: (context) {
-            final model =
-                Provider.of<SubscribedSeasonModel>(context, listen: false);
+            final model = Provider.of<SubscribedSeasonModel>(
+              context,
+              listen: false,
+            );
             return Scaffold(
               body: Selector<SubscribedSeasonModel, List<SeasonGallery>>(
                 selector: (_, model) => model.galleries,
@@ -55,11 +58,7 @@ class SubscribedSeasonPage extends StatelessWidget {
                     footer: defaultFooter(context),
                     onRefresh: model.refresh,
                     onLoad: model.loadMore,
-                    child: _buildBody(
-                      context,
-                      theme,
-                      galleries,
-                    ),
+                    child: _buildBody(context, theme, galleries),
                   );
                 },
               ),
@@ -79,38 +78,35 @@ class SubscribedSeasonPage extends StatelessWidget {
       slivers: [
         const SliverPinnedAppBar(title: '季度订阅'),
         if (galleries.isNotEmpty)
-          ...List.generate(
-            galleries.length,
-            (index) {
-              final gallery = galleries[index];
-              return MultiSliver(
-                pushPinnedChildren: true,
-                children: <Widget>[
-                  _buildSeasonSection(context, theme, gallery),
-                  if (gallery.bangumis.isNullOrEmpty)
-                    _buildEmptySubscribedContainer(theme)
-                  else
-                    SliverBangumiList(
-                      flag: gallery.title,
-                      bangumis: gallery.bangumis,
-                      handleSubscribe: (bangumi, flag) {
-                        context.read<OpModel>().subscribeBangumi(
-                          bangumi.id,
-                          bangumi.subscribed,
-                          onSuccess: () {
-                            bangumi.subscribed = !bangumi.subscribed;
-                            context.read<OpModel>().subscribeChanged(flag);
-                          },
-                          onError: (msg) {
-                            '订阅失败：$msg'.toast();
-                          },
-                        );
-                      },
-                    ),
-                ],
-              );
-            },
-          ),
+          ...List.generate(galleries.length, (index) {
+            final gallery = galleries[index];
+            return MultiSliver(
+              pushPinnedChildren: true,
+              children: <Widget>[
+                _buildSeasonSection(context, theme, gallery),
+                if (gallery.bangumis.isNullOrEmpty)
+                  _buildEmptySubscribedContainer(theme)
+                else
+                  SliverBangumiList(
+                    flag: gallery.title,
+                    bangumis: gallery.bangumis,
+                    handleSubscribe: (bangumi, flag) {
+                      context.read<OpModel>().subscribeBangumi(
+                        bangumi.id,
+                        bangumi.subscribed,
+                        onSuccess: () {
+                          bangumi.subscribed = !bangumi.subscribed;
+                          context.read<OpModel>().subscribeChanged(flag);
+                        },
+                        onError: (msg) {
+                          '订阅失败：$msg'.toast();
+                        },
+                      );
+                    },
+                  ),
+              ],
+            );
+          }),
       ],
     );
   }
@@ -118,16 +114,16 @@ class SubscribedSeasonPage extends StatelessWidget {
   Widget _buildEmptySubscribedContainer(ThemeData theme) {
     return SliverToBoxAdapter(
       child: Container(
-        margin: edgeH24B16,
+        margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
         child: ScalableCard(
           onTap: () {},
           child: Padding(
-            padding: edge24,
+            padding: const EdgeInsets.all(24.0),
             child: Center(
               child: Column(
                 children: [
                   Assets.mikan.image(width: 64.0),
-                  sizedBoxH12,
+                  const Gap(12),
                   Text(
                     '>_< 您还没有订阅当前季度番组，快去添加订阅吧',
                     textAlign: TextAlign.center,
@@ -152,15 +148,12 @@ class SubscribedSeasonPage extends StatelessWidget {
         offset: offsetY_1,
         child: Container(
           color: theme.scaffoldBackgroundColor,
-          padding: edgeS24E12,
+          padding: const EdgeInsetsDirectional.only(start: 24.0, end: 12.0),
           height: 48.0,
           child: Row(
             children: [
               Expanded(
-                child: Text(
-                  gallery.title,
-                  style: theme.textTheme.titleMedium,
-                ),
+                child: Text(gallery.title, style: theme.textTheme.titleMedium),
               ),
               IconButton(
                 icon: const Icon(Icons.east_rounded),

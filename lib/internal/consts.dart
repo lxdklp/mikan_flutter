@@ -1,5 +1,7 @@
-const APP_CHANNEL =
-    String.fromEnvironment('APP_CHANNEL', defaultValue: 'github');
+const APP_CHANNEL = String.fromEnvironment(
+  'APP_CHANNEL',
+  defaultValue: 'github',
+);
 
 class MikanFunc {
   const MikanFunc._();

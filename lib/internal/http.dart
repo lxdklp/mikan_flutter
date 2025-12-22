@@ -89,10 +89,7 @@ class MikanTransformer extends SyncTransformer {
 }
 
 class _Http extends DioForNative {
-  _Http({
-    String? cookiesDir,
-    BaseOptions? options,
-  }) : super(options) {
+  _Http({String? cookiesDir, BaseOptions? options}) : super(options) {
     interceptors
       ..add(_BaseInterceptor())
       ..add(
@@ -156,9 +153,7 @@ class Http {
           return Resp.ok(resp.data);
         }
       } else {
-        return Resp.error(
-          '${resp.statusCode}: ${resp.statusMessage}',
-        );
+        return Resp.error('${resp.statusCode}: ${resp.statusMessage}');
       }
     } catch (e, s) {
       e.$error(stackTrace: s);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../topvars.dart';
 import '../../widget/ripple_tap.dart';
 import '../../widget/sliver_pinned_header.dart';
 
@@ -21,48 +21,40 @@ class Donate extends StatelessWidget {
         slivers: [
           const SliverPinnedAppBar(title: '支持一下'),
           SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final item = _list[index];
-                final title = Text(
-                  item[0],
-                  style: theme.textTheme.bodyLarge,
-                );
-                return RippleTap(
-                  child: Padding(
-                    padding: edgeH24V12,
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          child: Text(item[0][0]),
-                        ),
-                        sizedBoxW16,
-                        if (item[1].isEmpty)
-                          title
-                        else
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              title,
-                              Text(
-                                item[1],
-                                style: theme.textTheme.bodySmall,
-                              ),
-                            ],
-                          ),
-                      ],
-                    ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final item = _list[index];
+              final title = Text(item[0], style: theme.textTheme.bodyLarge);
+              return RippleTap(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24.0,
+                    vertical: 12.0,
                   ),
-                  onTap: () {
-                    launchUrlString(
-                      item[2],
-                      mode: LaunchMode.externalNonBrowserApplication,
-                    );
-                  },
-                );
-              },
-              childCount: _list.length,
-            ),
+                  child: Row(
+                    children: [
+                      CircleAvatar(child: Text(item[0][0])),
+                      const Gap(16),
+                      if (item[1].isEmpty)
+                        title
+                      else
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            title,
+                            Text(item[1], style: theme.textTheme.bodySmall),
+                          ],
+                        ),
+                    ],
+                  ),
+                ),
+                onTap: () {
+                  launchUrlString(
+                    item[2],
+                    mode: LaunchMode.externalNonBrowserApplication,
+                  );
+                },
+              );
+            }, childCount: _list.length),
           ),
         ],
       ),

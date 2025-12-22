@@ -75,10 +75,7 @@ class BangumiModel extends BaseModel {
     if (bid == null) {
       return '番组id为空，忽略当前订阅'.toast();
     }
-    final resp = await Repo.subscribeBangumi(
-      bid,
-      _bangumiDetail!.subscribed,
-    );
+    final resp = await Repo.subscribeBangumi(bid, _bangumiDetail!.subscribed);
     if (resp.success) {
       notifyListeners();
       await load();

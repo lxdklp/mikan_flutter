@@ -32,8 +32,10 @@ class RecentSubscribedPage extends StatelessWidget {
         create: (_) => RecentSubscribedModel(loaded),
         child: Builder(
           builder: (context) {
-            final model =
-                Provider.of<RecentSubscribedModel>(context, listen: false);
+            final model = Provider.of<RecentSubscribedModel>(
+              context,
+              listen: false,
+            );
             return Scaffold(
               body: EasyRefresh(
                 header: defaultHeader,
@@ -74,7 +76,7 @@ class RecentSubscribedPage extends StatelessWidget {
 
   Widget _buildList(ThemeData theme) {
     return SliverPadding(
-      padding: edgeH24V8,
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
       sliver: Selector<RecentSubscribedModel, List<RecordItem>>(
         selector: (_, model) => model.records,
         shouldRebuild: (pre, next) => pre.ne(next),
@@ -86,16 +88,10 @@ class RecentSubscribedPage extends StatelessWidget {
               crossAxisSpacing: margins,
               mainAxisSpacing: margins,
             ),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final record = records[index];
-                return RssRecordItem(
-                  index: index,
-                  record: record,
-                );
-              },
-              childCount: records.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final record = records[index];
+              return RssRecordItem(index: index, record: record);
+            }, childCount: records.length),
           );
         },
       ),

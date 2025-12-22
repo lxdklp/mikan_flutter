@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import '../../internal/extension.dart';
 import '../../model/record_item.dart';
-import '../../topvars.dart';
 import '../../widget/bottom_sheet.dart';
 import '../../widget/icon_button.dart';
 import '../../widget/ripple_tap.dart';
@@ -14,11 +14,7 @@ import '../pages/subgroup.dart';
 
 @immutable
 class ListRecordItem extends StatelessWidget {
-  const ListRecordItem({
-    super.key,
-    required this.index,
-    required this.record,
-  });
+  const ListRecordItem({super.key, required this.index, required this.record});
 
   final int index;
   final RecordItem record;
@@ -36,7 +32,7 @@ class ListRecordItem extends StatelessWidget {
     return TransitionContainer(
       closedColor: closedColor,
       shape: const RoundedSuperellipseBorder(
-        borderRadius: borderRadius24,
+        borderRadius: BorderRadius.all(Radius.circular(24.0)),
       ),
       builder: (context, open) {
         return RippleTap(
@@ -60,7 +56,9 @@ class ListRecordItem extends StatelessWidget {
                           closedColor: closedColor,
                           builder: (context, open) {
                             return RippleTap(
-                              borderRadius: borderRadius6,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(6.0),
+                              ),
                               onTap: () {
                                 if (subgroups.length == 1) {
                                   final subgroup = subgroups[0];
@@ -99,19 +97,18 @@ class ListRecordItem extends StatelessWidget {
                                       ),
                                       child: AutoSizeText(
                                         subgroups
-                                            .map(
-                                              (e) => e.name[0].toUpperCase(),
-                                            )
+                                            .map((e) => e.name[0].toUpperCase())
                                             .join(),
                                         style: TextStyle(
                                           fontWeight: FontWeight.w700,
                                           color: theme
-                                              .colorScheme.onPrimaryContainer,
+                                              .colorScheme
+                                              .onPrimaryContainer,
                                         ),
                                         minFontSize: 8.0,
                                       ),
                                     ),
-                                    sizedBoxW8,
+                                    const Gap(8),
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
@@ -141,7 +138,7 @@ class ListRecordItem extends StatelessWidget {
                         ),
                       ),
                     ),
-                    sizedBoxW8,
+                    const Gap(8),
                     TMSMenuButton(
                       torrent: record.torrent,
                       magnet: record.magnet,
@@ -151,11 +148,8 @@ class ListRecordItem extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: edgeH16,
-                child: Text(
-                  record.title,
-                  style: theme.textTheme.bodySmall,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(record.title, style: theme.textTheme.bodySmall),
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -170,10 +164,15 @@ class ListRecordItem extends StatelessWidget {
                   children: [
                     if (record.size.isNotBlank)
                       Container(
-                        padding: edgeH6V4,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0,
+                          vertical: 4.0,
+                        ),
                         decoration: BoxDecoration(
                           color: theme.colorScheme.secondaryContainer,
-                          borderRadius: borderRadius6,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(6.0),
+                          ),
                         ),
                         child: Text(
                           record.size,
@@ -185,10 +184,15 @@ class ListRecordItem extends StatelessWidget {
                     if (!record.tags.isNullOrEmpty)
                       ...List.generate(record.tags.length, (index) {
                         return Container(
-                          padding: edgeH6V4,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6.0,
+                            vertical: 4.0,
+                          ),
                           decoration: BoxDecoration(
                             color: theme.colorScheme.tertiaryContainer,
-                            borderRadius: borderRadius6,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(6.0),
+                            ),
                           ),
                           child: Text(
                             record.tags[index],

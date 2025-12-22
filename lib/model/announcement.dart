@@ -6,10 +6,7 @@ part 'announcement.g.dart';
 
 @HiveType(typeId: MyHive.mikanAnnouncement)
 class Announcement extends HiveObject {
-  Announcement({
-    required this.date,
-    required this.nodes,
-  });
+  Announcement({required this.date, required this.nodes});
 
   @HiveField(0)
   late String date;
@@ -45,11 +42,7 @@ class Announcement extends HiveObject {
 
 @HiveType(typeId: MyHive.mikanAnnouncementNode)
 class AnnouncementNode extends HiveObject {
-  AnnouncementNode({
-    required this.text,
-    this.type,
-    this.place,
-  });
+  AnnouncementNode({required this.text, this.type, this.place});
 
   @HiveField(0)
   late String text;

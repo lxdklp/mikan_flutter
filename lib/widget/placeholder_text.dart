@@ -137,9 +137,9 @@ class PlaceholderText extends StatelessWidget {
       regExp ?? RegExp(r'\{(.+?)}', multiLine: true),
       onMatched ??
           (int position, Match matched) => TextSpan(
-                text: matched.group(1),
-                style: TextStyle(color: Theme.of(context).colorScheme.primary),
-              ),
+            text: matched.group(1),
+            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+          ),
       onText ?? (String value) => TextSpan(text: value),
     );
     return Text.rich(

@@ -55,9 +55,9 @@ class SingleSeasonPage extends StatelessWidget {
                                   bangumi.subscribed,
                                   onSuccess: () {
                                     bangumi.subscribed = !bangumi.subscribed;
-                                    context
-                                        .read<OpModel>()
-                                        .subscribeChanged(flag);
+                                    context.read<OpModel>().subscribeChanged(
+                                      flag,
+                                    );
                                   },
                                   onError: (msg) {
                                     '订阅失败：$msg'.toast();
@@ -68,7 +68,7 @@ class SingleSeasonPage extends StatelessWidget {
                           ],
                         );
                       }),
-                      sliverSizedBoxH24WithNavBarHeight(context),
+                      sliverGapH24WithNavBarHeight(context),
                     ],
                   ),
                 );
@@ -80,10 +80,7 @@ class SingleSeasonPage extends StatelessWidget {
     );
   }
 
-  Widget _buildWeekSection(
-    ThemeData theme,
-    BangumiRow bangumiRow,
-  ) {
+  Widget _buildWeekSection(ThemeData theme, BangumiRow bangumiRow) {
     final simple = [
       if (bangumiRow.updatedNum > 0) '🚀 ${bangumiRow.updatedNum}部',
       if (bangumiRow.subscribedUpdatedNum > 0)
@@ -103,10 +100,8 @@ class SingleSeasonPage extends StatelessWidget {
       child: Transform.translate(
         offset: offsetY_1,
         child: Container(
-          padding: edgeH24V8,
-          decoration: BoxDecoration(
-            color: theme.scaffoldBackgroundColor,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+          decoration: BoxDecoration(color: theme.scaffoldBackgroundColor),
           height: 48.0,
           child: Row(
             children: <Widget>[
@@ -118,10 +113,7 @@ class SingleSeasonPage extends StatelessWidget {
               ),
               Tooltip(
                 message: full,
-                child: Text(
-                  simple,
-                  style: theme.textTheme.bodySmall,
-                ),
+                child: Text(simple, style: theme.textTheme.bodySmall),
               ),
             ],
           ),

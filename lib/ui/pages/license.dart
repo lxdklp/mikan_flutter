@@ -1,6 +1,7 @@
 import 'package:ff_annotation_route_core/ff_annotation_route_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 
 import '../../internal/delegate.dart';
@@ -8,7 +9,6 @@ import '../../internal/extension.dart';
 import '../../internal/kit.dart';
 import '../../mikan_routes.dart';
 import '../../res/assets.gen.dart';
-import '../../topvars.dart';
 import '../../widget/scalable_tap.dart';
 import '../../widget/sliver_pinned_header.dart';
 
@@ -78,57 +78,52 @@ class LicenseList extends StatelessWidget {
                         vertical: 8.0,
                       ),
                       sliver: SliverWaterfallFlow(
-                        delegate: SliverChildBuilderDelegate(
-                          (_, index) {
-                            final String packageName = data.packages[index];
-                            final List<int> bindings =
-                                data.packageLicenseBindings[packageName]!;
-                            return ScalableCard(
-                              onTap: () {
-                                Navigator.of(context).pushNamed(
-                                  Routes.licenseDetail.name,
-                                  arguments: Routes.licenseDetail.d(
-                                    packageName: packageName,
-                                    licenseEntries: bindings
-                                        .map((int i) => data.licenses[i])
-                                        .toList(growable: false),
-                                  ),
-                                );
-                              },
-                              child: Padding(
-                                padding: edge16,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      packageName,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 18.0,
-                                        height: 1.25,
-                                        fontFamily: 'mono',
-                                      ),
-                                    ),
-                                    sizedBoxH8,
-                                    Text(
-                                      '${bindings.length}条协议',
-                                      style: const TextStyle(
-                                        fontFamily: 'mono',
-                                      ),
-                                    ),
-                                  ],
+                        delegate: SliverChildBuilderDelegate((_, index) {
+                          final String packageName = data.packages[index];
+                          final List<int> bindings =
+                              data.packageLicenseBindings[packageName]!;
+                          return ScalableCard(
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                Routes.licenseDetail.name,
+                                arguments: Routes.licenseDetail.d(
+                                  packageName: packageName,
+                                  licenseEntries: bindings
+                                      .map((int i) => data.licenses[i])
+                                      .toList(growable: false),
                                 ),
+                              );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    packageName,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 18.0,
+                                      height: 1.25,
+                                      fontFamily: 'mono',
+                                    ),
+                                  ),
+                                  const Gap(8),
+                                  Text(
+                                    '${bindings.length}条协议',
+                                    style: const TextStyle(fontFamily: 'mono'),
+                                  ),
+                                ],
                               ),
-                            );
-                          },
-                          childCount: data.packages.length,
-                        ),
+                            ),
+                          );
+                        }, childCount: data.packages.length),
                         gridDelegate:
                             SliverWaterfallFlowDelegateWithMinCrossAxisExtent(
-                          crossAxisSpacing: context.margins,
-                          mainAxisSpacing: context.margins,
-                          minCrossAxisExtent: 240.0,
-                        ),
+                              crossAxisSpacing: context.margins,
+                              mainAxisSpacing: context.margins,
+                              minCrossAxisExtent: 240.0,
+                            ),
                       ),
                     );
                 }
@@ -144,22 +139,14 @@ class LicenseList extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Image.asset(
-                        Assets.mikan.path,
-                        width: 36.0,
-                      ),
-                      sizedBoxW12,
+                      Image.asset(Assets.mikan.path, width: 36.0),
+                      const Gap(12),
                       const Text(
                         '❤',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.red,
-                        ),
+                        style: TextStyle(fontSize: 18.0, color: Colors.red),
                       ),
-                      sizedBoxW12,
-                      const FlutterLogo(
-                        size: 32.0,
-                      ),
+                      const Gap(12),
+                      const FlutterLogo(size: 32.0),
                     ],
                   ),
                 ),

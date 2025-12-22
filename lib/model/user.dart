@@ -7,12 +7,7 @@ part 'user.g.dart';
 
 @HiveType(typeId: MyHive.mikanUser)
 class User extends HiveObject {
-  User({
-    this.name,
-    this.avatar,
-    this.token,
-    this.rss,
-  });
+  User({this.name, this.avatar, this.token, this.rss});
 
   @HiveField(0)
   String? name;

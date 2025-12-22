@@ -43,76 +43,48 @@ FFRouteSettings getRouteSettings({
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        builder: () => Announcements(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-        ),
+        builder: () => Announcements(key: asT<Key?>(safeArguments['key'])),
       );
     case '/bangumi/season':
       return FFRouteSettings(
         name: name,
         arguments: arguments,
         builder: () => SeasonBangumi(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-          years: asT<List<YearSeason>>(
-            safeArguments['years'],
-          )!,
+          key: asT<Key?>(safeArguments['key']),
+          years: asT<List<YearSeason>>(safeArguments['years'])!,
         ),
       );
     case '/fonts':
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        builder: () => Fonts(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-        ),
+        builder: () => Fonts(key: asT<Key?>(safeArguments['key'])),
       );
     case '/forget-password':
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        builder: () => ForgotPasswordPage(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-        ),
+        builder: () => ForgotPasswordPage(key: asT<Key?>(safeArguments['key'])),
       );
     case '/index':
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        builder: () => HomePage(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-        ),
+        builder: () => HomePage(key: asT<Key?>(safeArguments['key'])),
       );
     case '/license':
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        builder: () => LicenseList(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-        ),
+        builder: () => LicenseList(key: asT<Key?>(safeArguments['key'])),
       );
     case '/license/detail':
       return FFRouteSettings(
         name: name,
         arguments: arguments,
         builder: () => LicenseDetail(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-          packageName: asT<String>(
-            safeArguments['packageName'],
-          )!,
+          key: asT<Key?>(safeArguments['key']),
+          packageName: asT<String>(safeArguments['packageName'])!,
           licenseEntries: asT<List<LicenseEntry>>(
             safeArguments['licenseEntries'],
           )!,
@@ -122,56 +94,36 @@ FFRouteSettings getRouteSettings({
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        builder: () => LoginPage(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-        ),
+        builder: () => LoginPage(key: asT<Key?>(safeArguments['key'])),
       );
     case '/register':
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        builder: () => RegisterPage(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-        ),
+        builder: () => RegisterPage(key: asT<Key?>(safeArguments['key'])),
       );
     case '/season':
       return FFRouteSettings(
         name: name,
         arguments: arguments,
         builder: () => SingleSeasonPage(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-          season: asT<Season>(
-            safeArguments['season'],
-          )!,
+          key: asT<Key?>(safeArguments['key']),
+          season: asT<Season>(safeArguments['season'])!,
         ),
       );
     case '/splash':
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        builder: () => SplashPage(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-        ),
+        builder: () => SplashPage(key: asT<Key?>(safeArguments['key'])),
       );
     case '/subgroup':
       return FFRouteSettings(
         name: name,
         arguments: arguments,
         builder: () => SubgroupPage(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-          subgroup: asT<Subgroup>(
-            safeArguments['subgroup'],
-          )!,
+          key: asT<Key?>(safeArguments['key']),
+          subgroup: asT<Subgroup>(safeArguments['subgroup'])!,
         ),
       );
     case '/subscribed/recent':
@@ -179,12 +131,8 @@ FFRouteSettings getRouteSettings({
         name: name,
         arguments: arguments,
         builder: () => RecentSubscribedPage(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-          loaded: asT<List<RecordItem>>(
-            safeArguments['loaded'],
-          )!,
+          key: asT<Key?>(safeArguments['key']),
+          loaded: asT<List<RecordItem>>(safeArguments['loaded'])!,
         ),
       );
     case '/subscribed/season':
@@ -192,15 +140,9 @@ FFRouteSettings getRouteSettings({
         name: name,
         arguments: arguments,
         builder: () => SubscribedSeasonPage(
-          key: asT<Key?>(
-            safeArguments['key'],
-          ),
-          years: asT<List<YearSeason>>(
-            safeArguments['years'],
-          )!,
-          galleries: asT<List<SeasonGallery>>(
-            safeArguments['galleries'],
-          )!,
+          key: asT<Key?>(safeArguments['key']),
+          years: asT<List<YearSeason>>(safeArguments['years'])!,
+          galleries: asT<List<SeasonGallery>>(safeArguments['galleries'])!,
         ),
       );
     default:

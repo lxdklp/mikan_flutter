@@ -9,8 +9,10 @@ import 'base_model.dart';
 
 class SeasonListModel extends BaseModel {
   SeasonListModel(this._years) {
-    _seasons =
-        _years.map((e) => e.seasons).expand((element) => element).toList();
+    _seasons = _years
+        .map((e) => e.seasons)
+        .expand((element) => element)
+        .toList();
   }
 
   List<Season> _seasons = [];

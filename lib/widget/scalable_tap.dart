@@ -234,11 +234,7 @@ class _ScalableTapState extends State<ScalableTap> {
 }
 
 class ScalableCard extends StatelessWidget {
-  const ScalableCard({
-    super.key,
-    required this.child,
-    required this.onTap,
-  });
+  const ScalableCard({super.key, required this.child, required this.onTap});
 
   final Widget child;
   final VoidCallback? onTap;

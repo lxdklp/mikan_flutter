@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:gap/gap.dart';
 import '../../internal/extension.dart';
 import '../../model/record_item.dart';
-import '../../topvars.dart';
 import '../../widget/icon_button.dart';
 import '../../widget/ripple_tap.dart';
 import '../../widget/transition_container.dart';
@@ -10,10 +10,7 @@ import '../pages/record.dart';
 
 @immutable
 class SimpleRecordItem extends StatelessWidget {
-  const SimpleRecordItem({
-    super.key,
-    required this.record,
-  });
+  const SimpleRecordItem({super.key, required this.record});
 
   final RecordItem record;
 
@@ -46,31 +43,38 @@ class SimpleRecordItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  record.title,
-                  style: theme.textTheme.bodyMedium,
-                ),
-                sizedBoxH8,
+                Text(record.title, style: theme.textTheme.bodyMedium),
+                const Gap(8),
                 Wrap(
                   runSpacing: 6.0,
                   spacing: 6.0,
                   children: [
                     if (record.size.isNotBlank)
                       Container(
-                        padding: edgeH6V4,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0,
+                          vertical: 4.0,
+                        ),
                         decoration: BoxDecoration(
                           color: theme.colorScheme.secondaryContainer,
-                          borderRadius: borderRadius6,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(6.0),
+                          ),
                         ),
                         child: Text(record.size, style: sizeStyle),
                       ),
                     if (!record.tags.isNullOrEmpty)
                       for (final tag in record.tags)
                         Container(
-                          padding: edgeH6V4,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6.0,
+                            vertical: 4.0,
+                          ),
                           decoration: BoxDecoration(
                             color: theme.colorScheme.tertiaryContainer,
-                            borderRadius: borderRadius6,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(6.0),
+                            ),
                           ),
                           child: Text(tag, style: tagStyle),
                         ),
@@ -86,7 +90,7 @@ class SimpleRecordItem extends StatelessWidget {
                         style: theme.textTheme.bodySmall,
                       ),
                     ),
-                    sizedBoxW8,
+                    const Gap(8),
                     TMSMenuButton(
                       torrent: record.torrent,
                       magnet: record.magnet,

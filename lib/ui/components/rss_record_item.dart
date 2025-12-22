@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../internal/extension.dart';
 import '../../internal/image_provider.dart';
 import '../../model/record_item.dart';
-import '../../topvars.dart';
 import '../../widget/icon_button.dart';
 import '../../widget/ripple_tap.dart';
 import '../../widget/transition_container.dart';
@@ -12,11 +11,7 @@ import '../pages/record.dart';
 
 @immutable
 class RssRecordItem extends StatelessWidget {
-  const RssRecordItem({
-    super.key,
-    required this.index,
-    required this.record,
-  });
+  const RssRecordItem({super.key, required this.index, required this.record});
 
   final int index;
   final RecordItem record;
@@ -56,10 +51,15 @@ class RssRecordItem extends StatelessWidget {
                   TransitionContainer(
                     builder: (context, open) {
                       return RippleTap(
-                        borderRadius: borderRadius6,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(6.0),
+                        ),
                         onTap: open,
                         child: Padding(
-                          padding: edgeH16V12,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 12.0,
+                          ),
                           child: Row(
                             children: [
                               Expanded(
@@ -101,34 +101,46 @@ class RssRecordItem extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: edgeH16,
-                    child: Text(
-                      record.title,
-                      style: theme.textTheme.bodySmall,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(record.title, style: theme.textTheme.bodySmall),
                   ),
                   Container(
-                    padding: edgeHB16T8,
+                    padding: const EdgeInsets.only(
+                      left: 16.0,
+                      right: 16.0,
+                      bottom: 16.0,
+                      top: 8.0,
+                    ),
                     child: Wrap(
                       spacing: 6.0,
                       runSpacing: 6.0,
                       children: [
                         if (record.size.isNotBlank)
                           Container(
-                            padding: edgeH6V4,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6.0,
+                              vertical: 4.0,
+                            ),
                             decoration: BoxDecoration(
                               color: theme.colorScheme.secondaryContainer,
-                              borderRadius: borderRadius6,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(6.0),
+                              ),
                             ),
                             child: Text(record.size, style: sizeStyle),
                           ),
                         if (!tags.isNullOrEmpty)
                           for (final tag in tags)
                             Container(
-                              padding: edgeH6V4,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6.0,
+                                vertical: 4.0,
+                              ),
                               decoration: BoxDecoration(
                                 color: theme.colorScheme.tertiaryContainer,
-                                borderRadius: borderRadius6,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(6.0),
+                                ),
                               ),
                               child: Text(tag, style: tagStyle),
                             ),

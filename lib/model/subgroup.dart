@@ -6,10 +6,7 @@ part 'subgroup.g.dart';
 
 @HiveType(typeId: MyHive.mikanSubgroup)
 class Subgroup extends HiveObject {
-  Subgroup({
-    this.id,
-    required this.name,
-  });
+  Subgroup({this.id, required this.name});
 
   @HiveField(0)
   String? id;

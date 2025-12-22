@@ -47,15 +47,13 @@ class SubscribedModel extends BaseModel {
     final completer = Completer<IndicatorResult>();
     _completer = completer;
     Future(() {
-      return Future.wait(
-        [
-          _loadRecentRecords(),
-          _loadMySubscribedSeasonBangumi(_season),
-        ],
-      )
-          .then((value) => IndicatorResult.success)
-          .catchError((_) => IndicatorResult.fail);
-    })
+          return Future.wait([
+                _loadRecentRecords(),
+                _loadMySubscribedSeasonBangumi(_season),
+              ])
+              .then((value) => IndicatorResult.success)
+              .catchError((_) => IndicatorResult.fail);
+        })
         .then(completer.complete)
         .catchError(completer.completeError)
         .whenComplete(() => _completer = null);
@@ -67,8 +65,10 @@ class SubscribedModel extends BaseModel {
       return;
     }
     _season = season;
-    final resp =
-        await Repo.mySubscribedSeasonBangumi(season.year, season.season);
+    final resp = await Repo.mySubscribedSeasonBangumi(
+      season.year,
+      season.season,
+    );
     if (resp.success) {
       _bangumis = resp.data;
       notifyListeners();

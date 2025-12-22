@@ -1,5 +1,6 @@
 import 'package:ff_annotation_route_core/ff_annotation_route_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 import '../../internal/extension.dart';
@@ -44,22 +45,19 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           children: <Widget>[
                             Assets.mikan.image(width: 64.0),
-                            sizedBoxH8,
+                            const Gap(8),
                             Text(
                               'Mikan Project',
                               style: theme.textTheme.bodySmall,
                             ),
-                            Text(
-                              '蜜柑计划',
-                              style: theme.textTheme.titleLarge,
-                            ),
-                            sizedBoxH42,
+                            Text('蜜柑计划', style: theme.textTheme.titleLarge),
+                            const Gap(42),
                             _buildUserNameField(theme, loginModel),
-                            sizedBoxH16,
+                            const Gap(16),
                             _buildPasswordField(theme, loginModel),
-                            sizedBoxH16,
+                            const Gap(16),
                             _buildRememberRow(context, theme, loginModel),
-                            sizedBoxH16,
+                            const Gap(16),
                             TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(
@@ -69,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child: const Text('还没有账号？赶紧来注册一个吧~'),
                             ),
-                            sizedBoxH16,
+                            const Gap(16),
                             Row(
                               children: [
                                 ElevatedButton(
@@ -78,11 +76,11 @@ class _LoginPageState extends State<LoginPage> {
                                   },
                                   child: const Icon(Icons.west_rounded),
                                 ),
-                                sizedBoxW16,
+                                const Gap(16),
                                 Expanded(child: _buildLoginButton(theme)),
                               ],
                             ),
-                            sizedBoxH56,
+                            const Gap(56),
                           ],
                         ),
                       ),
@@ -154,10 +152,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildUserNameField(
-    ThemeData theme,
-    LoginModel loginModel,
-  ) {
+  Widget _buildUserNameField(ThemeData theme, LoginModel loginModel) {
     return TextFormField(
       controller: loginModel.accountController,
       decoration: const InputDecoration(
@@ -186,10 +181,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildPasswordField(
-    ThemeData theme,
-    LoginModel loginModel,
-  ) {
+  Widget _buildPasswordField(ThemeData theme, LoginModel loginModel) {
     return Selector<LoginModel, bool>(
       selector: (_, model) => model.showPassword,
       shouldRebuild: (pre, next) => pre != next,
