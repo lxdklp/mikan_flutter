@@ -186,25 +186,28 @@ class ParticlePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final progress = curve.transform(animation.value);
     final gap = size.width / (particles.length + 1);
+    
+    final normalPaint = Paint()..style = PaintingStyle.fill;
+    final rectanglePaint = Paint()..style = PaintingStyle.fill;
+    
+    const cosValue = 0.0;
+    const sinValue = -1.0;
+    
     for (int i = 0; i < particles.length; ++i) {
       final particle = particles[i];
       final height = size.height * particle.percentOfDistance;
-      const radians = math.pi * 3 / 2;
-      final tx = gap * (i + 1) + progress * math.cos(radians);
-      final ty = size.height + progress * height * math.sin(radians);
-      final paint = ParticleShape.rectangle == particle.shape
-          ? (Paint()
-              ..color = particle.color.withValues(
-                alpha: progress > 0.75
-                    ? (progress < 0.999 ? 1.0 : (1 - progress) / 0.001)
-                    : progress / 0.75,
-              )
-              ..style = PaintingStyle.fill)
-          : (Paint()
-              ..color = particle.color.withValues(
-                alpha: progress < 0.999 ? 1.0 : (1 - progress) / 0.001,
-              )
-              ..style = PaintingStyle.fill);
+      final tx = gap * (i + 1) + progress * cosValue;
+      final ty = size.height + progress * height * sinValue;
+      
+      final paint = particle.shape == ParticleShape.rectangle ? rectanglePaint : normalPaint;
+      paint.color = particle.color.withValues(
+        alpha: particle.shape == ParticleShape.rectangle
+            ? (progress > 0.75
+                ? (progress < 0.999 ? 1.0 : (1 - progress) / 0.001)
+                : progress / 0.75)
+            : (progress < 0.999 ? 1.0 : (1 - progress) / 0.001),
+      );
+      
       canvas.save();
       canvas.translate(tx, ty + particle.size / 2);
       if (particle.shape case ParticleShape.circle) {
@@ -240,8 +243,6 @@ class ParticlePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant ParticlePainter oldDelegate) {
-    return oldDelegate.animation.value != animation.value ||
-        oldDelegate.curve != curve ||
-        !listEquals(oldDelegate.particles, particles);
+    return oldDelegate.animation.value != animation.value;
   }
 }
