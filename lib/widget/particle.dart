@@ -16,7 +16,7 @@ class ParticleController extends ChangeNotifier
     this.minNumberOfParticle = 48,
     this.maxSpeedOfRotate = 16.0,
     this.minSpeedOfRotate = 1.0,
-    this.duration = const Duration(milliseconds: 2400),
+    this.duration = const Duration(milliseconds: 2000),
   });
 
   final double maxSize;
@@ -185,59 +185,94 @@ class ParticlePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final progress = curve.transform(animation.value);
+
+    if (progress >= 1.0) {
+      return;
+    }
+
     final gap = size.width / (particles.length + 1);
-    
+
     final normalPaint = Paint()..style = PaintingStyle.fill;
     final rectanglePaint = Paint()..style = PaintingStyle.fill;
-    
-    const cosValue = 0.0;
+
     const sinValue = -1.0;
+
+    final alpha = progress < 0.999 ? 1.0 : (1 - progress) / 0.001;
+
+    if (alpha <= 0.0) {
+      return;
+    }
     
     for (int i = 0; i < particles.length; ++i) {
       final particle = particles[i];
-      final height = size.height * particle.percentOfDistance;
-      final tx = gap * (i + 1) + progress * cosValue;
-      final ty = size.height + progress * height * sinValue;
-      
-      final paint = particle.shape == ParticleShape.rectangle ? rectanglePaint : normalPaint;
-      paint.color = particle.color.withValues(
-        alpha: particle.shape == ParticleShape.rectangle
-            ? (progress > 0.75
-                ? (progress < 0.999 ? 1.0 : (1 - progress) / 0.001)
-                : progress / 0.75)
-            : (progress < 0.999 ? 1.0 : (1 - progress) / 0.001),
-      );
-      
-      canvas.save();
-      canvas.translate(tx, ty + particle.size / 2);
-      if (particle.shape case ParticleShape.circle) {
-        canvas.drawCircle(Offset.zero, particle.size / 2, paint);
-      } else if (particle.shape case ParticleShape.square) {
-        canvas.rotate(2 * math.pi * progress * particle.speedOfRotate);
+
+      if (particle.shape == ParticleShape.rectangle) {
+        final rectAlpha = progress > 0.75
+            ? (progress < 0.999 ? 1.0 : (1 - progress) / 0.001)
+            : progress / 0.75;
+
+        if (rectAlpha <= 0.0) {
+          continue;
+        }
+
+        final height = size.height * particle.percentOfDistance;
+        final tx = gap * (i + 1);
+        final ty = size.height + progress * height * sinValue;
+
+        rectanglePaint.color = particle.color.withValues(alpha: rectAlpha);
+
         final rect = Rect.fromCenter(
-          center: Offset.zero,
-          width: particle.size,
-          height: particle.size,
-        );
-        canvas.drawRect(rect, paint);
-      } else if (particle.shape case ParticleShape.triangle) {
-        canvas.rotate(2 * math.pi * progress * particle.speedOfRotate);
-        final path = Path();
-        final halfSize = particle.size / 2;
-        path.moveTo(0, -halfSize);
-        path.lineTo(-halfSize, halfSize);
-        path.lineTo(halfSize, halfSize);
-        path.close();
-        canvas.drawPath(path, paint);
-      } else if (particle.shape case ParticleShape.rectangle) {
-        final rect = Rect.fromCenter(
-          center: Offset(0, height / 2 * (1 - progress)),
+          center:
+              Offset(tx, ty + height / 2 * (1 - progress) + particle.size / 2),
           width: particle.size,
           height: math.max(particle.size, height / 2 - height / 2 * progress),
         );
-        canvas.drawRect(rect, paint);
+        canvas.drawRect(rect, rectanglePaint);
+      } else {
+        final height = size.height * particle.percentOfDistance;
+        final tx = gap * (i + 1);
+        final ty = size.height + progress * height * sinValue;
+
+        final particleColor = particle.color.withValues(alpha: alpha);
+
+        if (particle.shape == ParticleShape.circle) {
+          normalPaint.color = particleColor;
+          canvas.drawCircle(
+            Offset(tx, ty + particle.size / 2),
+            particle.size / 2,
+            normalPaint,
+          );
+        } else {
+          canvas.save();
+          canvas.translate(tx, ty + particle.size / 2);
+
+          final rotationAngle = 2 * math.pi * progress * particle.speedOfRotate;
+          canvas.rotate(rotationAngle);
+
+          final halfSize = particle.size / 2;
+
+          if (particle.shape == ParticleShape.square) {
+            final rect = Rect.fromLTRB(
+              -halfSize,
+              -halfSize,
+              halfSize,
+              halfSize,
+            );
+            normalPaint.color = particleColor;
+            canvas.drawRect(rect, normalPaint);
+          } else if (particle.shape == ParticleShape.triangle) {
+            final path = Path()
+              ..moveTo(0, -halfSize)
+              ..lineTo(-halfSize, halfSize)
+              ..lineTo(halfSize, halfSize)
+              ..close();
+            normalPaint.color = particleColor;
+            canvas.drawPath(path, normalPaint);
+          }
+
+          canvas.restore();
+        }
       }
-      canvas.restore();
     }
   }
 
