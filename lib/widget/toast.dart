@@ -9,14 +9,16 @@ class ToastWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.tertiaryContainer,
-        borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+      decoration: ShapeDecoration(
+        color: theme.colorScheme.inverseSurface,
+        shape: const RoundedSuperellipseBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12.0)),
+        ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: Text(
         msg,
-        style: TextStyle(color: theme.colorScheme.onTertiaryContainer),
+        style: TextStyle(color: theme.colorScheme.onInverseSurface),
       ),
     );
   }
