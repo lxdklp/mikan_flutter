@@ -10,8 +10,7 @@ const _yellow = '${_esc}33m';
 const _cyan = '${_esc}36m';
 const _white = '${_esc}37m';
 const _green = '${_esc}32m';
-const _line =
-    '════════════════════════════════════════════════════════════════════════════════════════════════════';
+const _line = '════════════════════════════════════════════════════════════════════════════════════════════════════';
 
 extension Log on Object? {
   void $debug({String? tag, StackTrace? stackTrace, int level = 2}) {
@@ -26,91 +25,40 @@ extension Log on Object? {
     w(this, tag: tag, stackTrace: stackTrace, level: level);
   }
 
-  void $error({
-    Object? msg,
-    String? tag,
-    StackTrace? stackTrace,
-    int level = 2,
-  }) {
+  void $error({Object? msg, String? tag, StackTrace? stackTrace, int level = 2}) {
     e(msg: msg, tag: tag, error: this, stackTrace: stackTrace, level: level);
   }
 
-  static void d(
-    Object? msg, {
-    String? tag,
-    StackTrace? stackTrace,
-    int level = 1,
-  }) {
+  static void d(Object? msg, {String? tag, StackTrace? stackTrace, int level = 1}) {
     if (!kDebugMode) {
       return;
     }
     final track = tag ?? _trackStackTraceId(StackTrace.current, level);
-    _log(
-      msg: msg,
-      track: track,
-      stackTrace: stackTrace,
-      level: ' D ',
-      levelColor: _green,
-    );
+    _log(msg: msg, track: track, stackTrace: stackTrace, level: ' D ', levelColor: _green);
   }
 
-  static void i(
-    Object? msg, {
-    String? tag,
-    StackTrace? stackTrace,
-    int level = 1,
-  }) {
+  static void i(Object? msg, {String? tag, StackTrace? stackTrace, int level = 1}) {
     if (!kDebugMode) {
       return;
     }
     final track = tag ?? _trackStackTraceId(StackTrace.current, level);
-    _log(
-      msg: msg,
-      track: track,
-      stackTrace: stackTrace,
-      level: ' I ',
-      levelColor: _cyan,
-    );
+    _log(msg: msg, track: track, stackTrace: stackTrace, level: ' I ', levelColor: _cyan);
   }
 
-  static void w(
-    Object? msg, {
-    String? tag,
-    StackTrace? stackTrace,
-    int level = 1,
-  }) {
+  static void w(Object? msg, {String? tag, StackTrace? stackTrace, int level = 1}) {
     if (!kDebugMode) {
       return;
     }
     final track = tag ?? _trackStackTraceId(StackTrace.current, level);
-    _log(
-      msg: msg,
-      track: track,
-      stackTrace: stackTrace,
-      level: ' W ',
-      levelColor: _yellow,
-    );
+    _log(msg: msg, track: track, stackTrace: stackTrace, level: ' W ', levelColor: _yellow);
   }
 
-  static void e({
-    Object? msg,
-    String? tag,
-    Object? error,
-    StackTrace? stackTrace,
-    int level = 1,
-  }) {
+  static void e({Object? msg, String? tag, Object? error, StackTrace? stackTrace, int level = 1}) {
     if (!kDebugMode) {
       return;
     }
     final track = tag ?? _trackStackTraceId(StackTrace.current, level);
-    _log(
-      msg: msg,
-      track: track,
-      error: error,
-      stackTrace: stackTrace,
-      level: ' E ',
-      levelColor: _red,
-    );
+    _log(msg: msg, track: track, error: error, stackTrace: stackTrace, level: ' E ', levelColor: _red);
   }
 
   static void _log({

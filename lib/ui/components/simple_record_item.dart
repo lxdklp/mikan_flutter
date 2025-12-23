@@ -17,29 +17,16 @@ class SimpleRecordItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final tagStyle = theme.textTheme.labelSmall!.copyWith(
-      color: theme.colorScheme.onTertiaryContainer,
-    );
-    final sizeStyle = theme.textTheme.labelSmall!.copyWith(
-      color: theme.colorScheme.onSecondaryContainer,
-    );
-    final closedColor = ElevationOverlay.applySurfaceTint(
-      theme.cardColor,
-      theme.colorScheme.surfaceTint,
-      1.0,
-    );
+    final tagStyle = theme.textTheme.labelSmall!.copyWith(color: theme.colorScheme.onTertiaryContainer);
+    final sizeStyle = theme.textTheme.labelSmall!.copyWith(color: theme.colorScheme.onSecondaryContainer);
+    final closedColor = ElevationOverlay.applySurfaceTint(theme.cardColor, theme.colorScheme.surfaceTint, 1.0);
     return TransitionContainer(
       closedColor: closedColor,
       builder: (context, open) {
         return RippleTap(
           onTap: open,
           child: Padding(
-            padding: const EdgeInsets.only(
-              left: 16.0,
-              right: 16.0,
-              top: 16.0,
-              bottom: 4.0,
-            ),
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 4.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -51,30 +38,20 @@ class SimpleRecordItem extends StatelessWidget {
                   children: [
                     if (record.size.isNotBlank)
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6.0,
-                          vertical: 4.0,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                         decoration: BoxDecoration(
                           color: theme.colorScheme.secondaryContainer,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(6.0),
-                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                         ),
                         child: Text(record.size, style: sizeStyle),
                       ),
                     if (!record.tags.isNullOrEmpty)
                       for (final tag in record.tags)
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6.0,
-                            vertical: 4.0,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                           decoration: BoxDecoration(
                             color: theme.colorScheme.tertiaryContainer,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(6.0),
-                            ),
+                            borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                           ),
                           child: Text(tag, style: tagStyle),
                         ),
@@ -91,11 +68,7 @@ class SimpleRecordItem extends StatelessWidget {
                       ),
                     ),
                     const Gap(8),
-                    TMSMenuButton(
-                      torrent: record.torrent,
-                      magnet: record.magnet,
-                      share: record.share,
-                    ),
+                    TMSMenuButton(torrent: record.torrent, magnet: record.magnet, share: record.share),
                   ],
                 ),
               ],

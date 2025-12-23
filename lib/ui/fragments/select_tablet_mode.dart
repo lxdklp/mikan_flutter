@@ -55,8 +55,7 @@ class _TabletModeBuilderState extends State<TabletModeBuilder> {
   @override
   void initState() {
     super.initState();
-    _listenable = MyHive.settings.listenable(keys: [SettingsHiveKey.tabletMode])
-      ..addListener(_onChange);
+    _listenable = MyHive.settings.listenable(keys: [SettingsHiveKey.tabletMode])..addListener(_onChange);
   }
 
   void _onChange() {

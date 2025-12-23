@@ -234,29 +234,28 @@ class _ScalableTapState extends State<ScalableTap> {
 }
 
 class ScalableCard extends StatelessWidget {
-  const ScalableCard({super.key, required this.child, required this.onTap});
+  const ScalableCard({super.key, required this.child, required this.onTap, this.borderRadius, this.shape});
 
   final Widget child;
   final VoidCallback? onTap;
+
+  final BorderRadius? borderRadius;
+  final ShapeBorder? shape;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final color = ElevationOverlay.applySurfaceTint(
-      theme.cardColor,
-      colorScheme.surfaceTint,
-      1.0,
-    );
+    final color = ElevationOverlay.applySurfaceTint(theme.cardColor, colorScheme.surfaceTint, 1.0);
     return ScalableTap(
       onTap: onTap,
       type: MaterialType.card,
       color: color,
       shadowColor: colorScheme.shadow,
       surfaceTintColor: colorScheme.surfaceTint,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(6.0)),
-      ),
+      shape:
+          shape ??
+          RoundedSuperellipseBorder(borderRadius: borderRadius ?? const BorderRadius.all(Radius.circular(16.0))),
       child: child,
     );
   }

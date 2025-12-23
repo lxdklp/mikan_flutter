@@ -7,21 +7,13 @@ Future<void> main() async {
   final metaFile = File('releases/meta.json');
   final httpClient = HttpClient();
   final request = await httpClient.getUrl(
-    Uri.parse(
-      'https://api.github.com/repos/iota9star/mikan_flutter/releases/latest',
-    ),
+    Uri.parse('https://api.github.com/repos/iota9star/mikan_flutter/releases/latest'),
   );
   final response = await request.close();
   if (response.statusCode == HttpStatus.ok) {
     final join = await response.transform(const Utf8Decoder()).join();
     final result = jsonDecode(join);
-    final arches = <String?>{
-      'arm64-v8a',
-      'armeabi-v7a',
-      'x86_64',
-      'universal',
-      'win32',
-    };
+    final arches = <String?>{'arm64-v8a', 'armeabi-v7a', 'x86_64', 'universal', 'win32'};
     final files = [
       ...result['assets'].map((it) {
         final name = it['name'];
@@ -34,8 +26,7 @@ Future<void> main() async {
           'size': size,
           'sizefmt': sizefmt,
           'dl': it['browser_download_url'],
-          'cdl':
-              'https://cdn.jsdelivr.net/gh/iota9star/mikan_flutter@master/releases/$name',
+          'cdl': 'https://cdn.jsdelivr.net/gh/iota9star/mikan_flutter@master/releases/$name',
         };
       }),
     ];

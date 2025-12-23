@@ -17,8 +17,7 @@ class NetworkFontLoader {
 
   static Future<void> init({String? cacheDir}) async {
     if (cacheDir == null || cacheDir.isEmpty) {
-      cacheDir =
-          '${(await getApplicationSupportDirectory()).path}${Platform.pathSeparator}fonts';
+      cacheDir = '${(await getApplicationSupportDirectory()).path}${Platform.pathSeparator}fonts';
     }
     final Directory directory = Directory(cacheDir);
     if (!directory.existsSync()) {
@@ -34,13 +33,7 @@ class NetworkFontLoader {
     StreamController<Iterable<ProgressChunkEvent>>? chunkEvents,
     Cancelable? cancelable,
   }) async {
-    await _fontManager._load(
-      fontFamily,
-      urls,
-      headers: headers,
-      chunkEvents: chunkEvents,
-      cancelable: cancelable,
-    );
+    await _fontManager._load(fontFamily, urls, headers: headers, chunkEvents: chunkEvents, cancelable: cancelable);
   }
 
   Future<ByteData> _loadFont(
@@ -75,8 +68,7 @@ class NetworkFontLoader {
     StreamController<ProgressChunkEvent>? eventBus;
     try {
       if (chunkEvents != null) {
-        final Map<Uri, ProgressChunkEvent> combine =
-            <Uri, ProgressChunkEvent>{};
+        final Map<Uri, ProgressChunkEvent> combine = <Uri, ProgressChunkEvent>{};
         eventBus = StreamController();
         eventBus.stream.listen((event) {
           combine[event.key] = event;

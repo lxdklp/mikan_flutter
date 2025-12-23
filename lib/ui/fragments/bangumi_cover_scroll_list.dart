@@ -15,8 +15,7 @@ class BangumiCoverScrollListFragment extends StatefulWidget {
   State<StatefulWidget> createState() => _BangumiCoverScrollListFragmentState();
 }
 
-class _BangumiCoverScrollListFragmentState
-    extends State<BangumiCoverScrollListFragment> {
+class _BangumiCoverScrollListFragmentState extends State<BangumiCoverScrollListFragment> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -30,10 +29,7 @@ class _BangumiCoverScrollListFragmentState
   }
 
   Widget _buildList(ThemeData theme, List<BangumiRow> bangumiRows) {
-    final bangumis = bangumiRows
-        .map((e) => e.bangumis)
-        .expand((e) => e)
-        .sortedBy((e) => e.id);
+    final bangumis = bangumiRows.map((e) => e.bangumis).expand((e) => e).sortedBy((e) => e.id);
     final length = bangumis.length;
     if (length == 0) {
       return const SizedBox();

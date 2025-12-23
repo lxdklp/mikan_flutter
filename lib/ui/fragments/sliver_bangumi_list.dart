@@ -20,12 +20,7 @@ typedef HandleSubscribe = void Function(Bangumi bangumi, String flag);
 
 @immutable
 class SliverBangumiList extends StatelessWidget {
-  const SliverBangumiList({
-    super.key,
-    this.flag,
-    required this.bangumis,
-    required this.handleSubscribe,
-  });
+  const SliverBangumiList({super.key, this.flag, required this.bangumis, required this.handleSubscribe});
 
   final String? flag;
   final List<Bangumi> bangumis;
@@ -39,11 +34,7 @@ class SliverBangumiList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       sliver: ValueListenableBuilder(
         valueListenable: MyHive.settings.listenable(
-          keys: [
-            SettingsHiveKey.cardRatio,
-            SettingsHiveKey.cardStyle,
-            SettingsHiveKey.cardWidth,
-          ],
+          keys: [SettingsHiveKey.cardRatio, SettingsHiveKey.cardStyle, SettingsHiveKey.cardWidth],
         ),
         builder: (context, _, child) {
           final cardRatio = MyHive.getCardRatio().toDouble();
@@ -81,20 +72,11 @@ class SliverBangumiList extends StatelessWidget {
     );
   }
 
-  Widget _buildItemStyle4(
-    BuildContext context,
-    ThemeData theme,
-    int imageWidth,
-    Bangumi bangumi,
-  ) {
+  Widget _buildItemStyle4(BuildContext context, ThemeData theme, int imageWidth, Bangumi bangumi) {
     final currFlag = '$flag:bangumi:${bangumi.id}:${bangumi.cover}';
     final cover = _buildBangumiItemCover(imageWidth, bangumi);
     return TransitionContainer(
-      next: BangumiPage(
-        bangumiId: bangumi.id,
-        cover: bangumi.cover,
-        name: bangumi.name,
-      ),
+      next: BangumiPage(bangumiId: bangumi.id, cover: bangumi.cover, name: bangumi.name),
       builder: (context, open) {
         return ScalableCard(
           onTap: () {
@@ -118,20 +100,11 @@ class SliverBangumiList extends StatelessWidget {
                     if (bangumi.num != null && bangumi.num! > 0)
                       Container(
                         clipBehavior: Clip.antiAlias,
-                        decoration: ShapeDecoration(
-                          color: theme.colorScheme.error,
-                          shape: const StadiumBorder(),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6.0,
-                          vertical: 2.0,
-                        ),
+                        decoration: ShapeDecoration(color: theme.colorScheme.error, shape: const StadiumBorder()),
+                        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
                         child: Text(
                           bangumi.num! > 99 ? '99+' : '+${bangumi.num}',
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            color: theme.colorScheme.onError,
-                            height: 1.25,
-                          ),
+                          style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.onError, height: 1.25),
                         ),
                       ),
                   ],
@@ -144,12 +117,7 @@ class SliverBangumiList extends StatelessWidget {
     );
   }
 
-  Widget _buildItemStyle3(
-    BuildContext context,
-    ThemeData theme,
-    int imageWidth,
-    Bangumi bangumi,
-  ) {
+  Widget _buildItemStyle3(BuildContext context, ThemeData theme, int imageWidth, Bangumi bangumi) {
     final currFlag = '$flag:bangumi:${bangumi.id}:${bangumi.cover}';
     final cover = Container(
       foregroundDecoration: const BoxDecoration(
@@ -163,11 +131,7 @@ class SliverBangumiList extends StatelessWidget {
       child: _buildBangumiItemCover(imageWidth, bangumi),
     );
     return TransitionContainer(
-      next: BangumiPage(
-        bangumiId: bangumi.id,
-        cover: bangumi.cover,
-        name: bangumi.name,
-      ),
+      next: BangumiPage(bangumiId: bangumi.id, cover: bangumi.cover, name: bangumi.name),
       builder: (context, open) {
         return ScalableCard(
           onTap: () {
@@ -190,20 +154,11 @@ class SliverBangumiList extends StatelessWidget {
                     if (bangumi.num != null && bangumi.num! > 0)
                       Container(
                         clipBehavior: Clip.antiAlias,
-                        decoration: ShapeDecoration(
-                          color: theme.colorScheme.error,
-                          shape: const StadiumBorder(),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6.0,
-                          vertical: 2.0,
-                        ),
+                        decoration: ShapeDecoration(color: theme.colorScheme.error, shape: const StadiumBorder()),
+                        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
                         child: Text(
                           bangumi.num! > 99 ? '99+' : '+${bangumi.num}',
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            color: theme.colorScheme.onError,
-                            height: 1.25,
-                          ),
+                          style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.onError, height: 1.25),
                         ),
                       ),
                   ],
@@ -220,17 +175,13 @@ class SliverBangumiList extends StatelessWidget {
                       bangumi.updateAt,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.bodySmall!.copyWith(
-                        color: Colors.white,
-                      ),
+                      style: theme.textTheme.bodySmall!.copyWith(color: Colors.white),
                     ),
                     Text(
                       bangumi.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.titleSmall!.copyWith(
-                        color: Colors.white,
-                      ),
+                      style: theme.textTheme.titleSmall!.copyWith(color: Colors.white),
                     ),
                   ],
                 ),
@@ -242,12 +193,7 @@ class SliverBangumiList extends StatelessWidget {
     );
   }
 
-  Widget _buildItemStyle2(
-    BuildContext context,
-    ThemeData theme,
-    int imageWidth,
-    Bangumi bangumi,
-  ) {
+  Widget _buildItemStyle2(BuildContext context, ThemeData theme, int imageWidth, Bangumi bangumi) {
     final currFlag = '$flag:bangumi:${bangumi.id}:${bangumi.cover}';
     final cover = _buildBangumiItemCover(imageWidth, bangumi);
     return Column(
@@ -255,11 +201,7 @@ class SliverBangumiList extends StatelessWidget {
       children: [
         Expanded(
           child: TransitionContainer(
-            next: BangumiPage(
-              bangumiId: bangumi.id,
-              cover: bangumi.cover,
-              name: bangumi.name,
-            ),
+            next: BangumiPage(bangumiId: bangumi.id, cover: bangumi.cover, name: bangumi.name),
             builder: (context, open) {
               return ScalableCard(
                 onTap: () {
@@ -289,19 +231,13 @@ class SliverBangumiList extends StatelessWidget {
                                       color: theme.colorScheme.error,
                                       shape: const StadiumBorder(),
                                     ),
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 6.0,
-                                      vertical: 2.0,
-                                    ),
+                                    padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
                                     child: Text(
-                                      bangumi.num! > 99
-                                          ? '99+'
-                                          : '+${bangumi.num}',
-                                      style: theme.textTheme.labelMedium
-                                          ?.copyWith(
-                                            color: theme.colorScheme.onError,
-                                            height: 1.25,
-                                          ),
+                                      bangumi.num! > 99 ? '99+' : '+${bangumi.num}',
+                                      style: theme.textTheme.labelMedium?.copyWith(
+                                        color: theme.colorScheme.onError,
+                                        height: 1.25,
+                                      ),
                                     ),
                                   ),
                               ],
@@ -314,30 +250,15 @@ class SliverBangumiList extends StatelessWidget {
           ),
         ),
         const Gap(8),
-        Text(
-          bangumi.name,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: theme.textTheme.titleSmall,
-        ),
+        Text(bangumi.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: theme.textTheme.titleSmall),
         if (bangumi.updateAt.isNotBlank)
-          Text(
-            bangumi.updateAt,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: theme.textTheme.bodySmall,
-          ),
+          Text(bangumi.updateAt, maxLines: 1, overflow: TextOverflow.ellipsis, style: theme.textTheme.bodySmall),
         const Gap(8),
       ],
     );
   }
 
-  Widget _buildItemStyle1(
-    BuildContext context,
-    ThemeData theme,
-    int imageWidth,
-    Bangumi bangumi,
-  ) {
+  Widget _buildItemStyle1(BuildContext context, ThemeData theme, int imageWidth, Bangumi bangumi) {
     final currFlag = '$flag:bangumi:${bangumi.id}:${bangumi.cover}';
     final cover = _buildBangumiItemCover(imageWidth, bangumi);
     return Column(
@@ -345,11 +266,7 @@ class SliverBangumiList extends StatelessWidget {
       children: [
         Expanded(
           child: TransitionContainer(
-            next: BangumiPage(
-              bangumiId: bangumi.id,
-              cover: bangumi.cover,
-              name: bangumi.name,
-            ),
+            next: BangumiPage(bangumiId: bangumi.id, cover: bangumi.cover, name: bangumi.name),
             builder: (context, open) {
               return ScalableCard(
                 onTap: () {
@@ -369,14 +286,8 @@ class SliverBangumiList extends StatelessWidget {
                             end: 12.0,
                             child: Container(
                               clipBehavior: Clip.antiAlias,
-                              decoration: ShapeDecoration(
-                                color: theme.colorScheme.error,
-                                shape: const StadiumBorder(),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 6.0,
-                                vertical: 2.0,
-                              ),
+                              decoration: ShapeDecoration(color: theme.colorScheme.error, shape: const StadiumBorder()),
+                              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
                               child: Text(
                                 bangumi.num! > 99 ? '99+' : '+${bangumi.num}',
                                 style: theme.textTheme.labelMedium?.copyWith(
@@ -399,12 +310,7 @@ class SliverBangumiList extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    bangumi.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.titleSmall,
-                  ),
+                  Text(bangumi.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: theme.textTheme.titleSmall),
                   if (bangumi.updateAt.isNotBlank)
                     Text(
                       bangumi.updateAt,
@@ -415,10 +321,7 @@ class SliverBangumiList extends StatelessWidget {
                 ],
               ),
             ),
-            Transform.translate(
-              offset: const Offset(8.0, 0.0),
-              child: _buildSubscribeButton(theme, bangumi, currFlag),
-            ),
+            Transform.translate(offset: const Offset(8.0, 0.0), child: _buildSubscribeButton(theme, bangumi, currFlag)),
           ],
         ),
         const Gap(8),
@@ -426,11 +329,7 @@ class SliverBangumiList extends StatelessWidget {
     );
   }
 
-  Widget _buildSubscribeButton(
-    ThemeData theme,
-    Bangumi bangumi,
-    String currFlag,
-  ) {
+  Widget _buildSubscribeButton(ThemeData theme, Bangumi bangumi, String currFlag) {
     return Selector<OpModel, String>(
       selector: (_, model) => model.flag,
       shouldRebuild: (_, next) => next == currFlag,
@@ -439,10 +338,7 @@ class SliverBangumiList extends StatelessWidget {
             ? Tooltip(
                 message: '取消订阅',
                 child: IconButton(
-                  icon: Icon(
-                    Icons.favorite_rounded,
-                    color: theme.colorScheme.error,
-                  ),
+                  icon: Icon(Icons.favorite_rounded, color: theme.colorScheme.error),
                   onPressed: () {
                     handleSubscribe.call(bangumi, currFlag);
                   },
@@ -451,10 +347,7 @@ class SliverBangumiList extends StatelessWidget {
             : Tooltip(
                 message: '订阅',
                 child: IconButton(
-                  icon: Icon(
-                    Icons.favorite_border_rounded,
-                    color: theme.colorScheme.error,
-                  ),
+                  icon: Icon(Icons.favorite_border_rounded, color: theme.colorScheme.error),
                   onPressed: () {
                     handleSubscribe.call(bangumi, currFlag);
                   },
@@ -474,13 +367,7 @@ class SliverBangumiList extends StatelessWidget {
       },
     );
     return bangumi.grey
-        ? ColorFiltered(
-            colorFilter: const ColorFilter.mode(
-              Colors.grey,
-              BlendMode.saturation,
-            ),
-            child: image,
-          )
+        ? ColorFiltered(colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.saturation), child: image)
         : image;
   }
 
@@ -503,15 +390,11 @@ Size calcGridItemSizeWithMaxCrossAxisExtent({
   required double crossAxisSpacing,
   required double childAspectRatio,
 }) {
-  int crossAxisCount =
-      (crossAxisExtent / (maxCrossAxisExtent + crossAxisSpacing)).ceil();
+  int crossAxisCount = (crossAxisExtent / (maxCrossAxisExtent + crossAxisSpacing)).ceil();
   // Ensure a minimum count of 1, can be zero and result in an infinite extent
   // below when the window size is 0.
   crossAxisCount = math.max(1, crossAxisCount);
-  final double usableCrossAxisExtent = math.max(
-    0.0,
-    crossAxisExtent - crossAxisSpacing * (crossAxisCount - 1),
-  );
+  final double usableCrossAxisExtent = math.max(0.0, crossAxisExtent - crossAxisSpacing * (crossAxisCount - 1));
   final double childCrossAxisExtent = usableCrossAxisExtent / crossAxisCount;
   final double childMainAxisExtent = childCrossAxisExtent / childAspectRatio;
   return Size(childCrossAxisExtent, childMainAxisExtent);

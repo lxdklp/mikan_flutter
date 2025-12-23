@@ -31,10 +31,7 @@ class SubgroupPage extends StatelessWidget {
         create: (_) => SubgroupModel(subgroup),
         child: Builder(
           builder: (context) {
-            final subgroupModel = Provider.of<SubgroupModel>(
-              context,
-              listen: false,
-            );
+            final subgroupModel = Provider.of<SubgroupModel>(context, listen: false);
             return Scaffold(
               body: Selector<SubgroupModel, List<SeasonGallery>>(
                 selector: (_, model) => model.galleries,
@@ -64,11 +61,7 @@ class SubgroupPage extends StatelessWidget {
     );
   }
 
-  Widget _buildList(
-    BuildContext context,
-    ThemeData theme,
-    SeasonGallery gallery,
-  ) {
+  Widget _buildList(BuildContext context, ThemeData theme, SeasonGallery gallery) {
     return MultiSliver(
       pushPinnedChildren: true,
       children: <Widget>[

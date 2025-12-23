@@ -147,8 +147,7 @@ class _BangumiSeason {
 
   String get name => '/bangumi/season';
 
-  Map<String, dynamic> d({Key? key, required List<YearSeason> years}) =>
-      <String, dynamic>{'key': key, 'years': years};
+  Map<String, dynamic> d({Key? key, required List<YearSeason> years}) => <String, dynamic>{'key': key, 'years': years};
 
   @override
   String toString() => name;
@@ -203,15 +202,8 @@ class _LicenseDetail {
 
   String get name => '/license/detail';
 
-  Map<String, dynamic> d({
-    Key? key,
-    required String packageName,
-    required List<LicenseEntry> licenseEntries,
-  }) => <String, dynamic>{
-    'key': key,
-    'packageName': packageName,
-    'licenseEntries': licenseEntries,
-  };
+  Map<String, dynamic> d({Key? key, required String packageName, required List<LicenseEntry> licenseEntries}) =>
+      <String, dynamic>{'key': key, 'packageName': packageName, 'licenseEntries': licenseEntries};
 
   @override
   String toString() => name;
@@ -244,8 +236,7 @@ class _Season {
 
   String get name => '/season';
 
-  Map<String, dynamic> d({Key? key, required Season season}) =>
-      <String, dynamic>{'key': key, 'season': season};
+  Map<String, dynamic> d({Key? key, required Season season}) => <String, dynamic>{'key': key, 'season': season};
 
   @override
   String toString() => name;
@@ -267,8 +258,7 @@ class _Subgroup {
 
   String get name => '/subgroup';
 
-  Map<String, dynamic> d({Key? key, required Subgroup subgroup}) =>
-      <String, dynamic>{'key': key, 'subgroup': subgroup};
+  Map<String, dynamic> d({Key? key, required Subgroup subgroup}) => <String, dynamic>{'key': key, 'subgroup': subgroup};
 
   @override
   String toString() => name;
@@ -279,8 +269,10 @@ class _SubscribedRecent {
 
   String get name => '/subscribed/recent';
 
-  Map<String, dynamic> d({Key? key, required List<RecordItem> loaded}) =>
-      <String, dynamic>{'key': key, 'loaded': loaded};
+  Map<String, dynamic> d({Key? key, required List<RecordItem> loaded}) => <String, dynamic>{
+    'key': key,
+    'loaded': loaded,
+  };
 
   @override
   String toString() => name;
@@ -291,11 +283,8 @@ class _SubscribedSeason {
 
   String get name => '/subscribed/season';
 
-  Map<String, dynamic> d({
-    Key? key,
-    required List<YearSeason> years,
-    required List<SeasonGallery> galleries,
-  }) => <String, dynamic>{'key': key, 'years': years, 'galleries': galleries};
+  Map<String, dynamic> d({Key? key, required List<YearSeason> years, required List<SeasonGallery> galleries}) =>
+      <String, dynamic>{'key': key, 'years': years, 'galleries': galleries};
 
   @override
   String toString() => name;

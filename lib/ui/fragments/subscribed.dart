@@ -91,10 +91,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
   }
 
   Widget _buildSubscribedView(BuildContext context, ThemeData theme) {
-    final subscribedModel = Provider.of<SubscribedModel>(
-      context,
-      listen: false,
-    );
+    final subscribedModel = Provider.of<SubscribedModel>(context, listen: false);
     return EasyRefresh.builder(
       onRefresh: subscribedModel.refresh,
       refreshOnStart: true,
@@ -106,24 +103,15 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
             const _PinedHeader(),
             MultiSliver(
               pushPinnedChildren: true,
-              children: [
-                _buildRssSection(context, theme),
-                _buildRssList(context, theme, subscribedModel),
-              ],
+              children: [_buildRssSection(context, theme), _buildRssList(context, theme, subscribedModel)],
             ),
             MultiSliver(
               pushPinnedChildren: true,
-              children: [
-                _buildSeasonRssSection(theme, subscribedModel),
-                _buildSeasonRssList(theme, subscribedModel),
-              ],
+              children: [_buildSeasonRssSection(theme, subscribedModel), _buildSeasonRssList(theme, subscribedModel)],
             ),
             MultiSliver(
               pushPinnedChildren: true,
-              children: [
-                _buildRssRecordsSection(context, theme),
-                _buildRssRecordsList(context, theme),
-              ],
+              children: [_buildRssRecordsSection(context, theme), _buildRssRecordsList(context, theme)],
             ),
             _buildSeeMore(theme, subscribedModel),
             sliverGapH80WithNavBarHeight(context),
@@ -164,10 +152,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
     );
   }
 
-  Widget _buildSeasonRssSection(
-    ThemeData theme,
-    SubscribedModel subscribedModel,
-  ) {
+  Widget _buildSeasonRssSection(ThemeData theme, SubscribedModel subscribedModel) {
     return SliverPinnedHeader(
       child: Transform.translate(
         offset: offsetY_1,
@@ -179,25 +164,15 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
             selector: (_, model) => model.bangumis,
             builder: (context, bangumis, _) {
               final hasVal = bangumis.isSafeNotEmpty;
-              final updateNum = bangumis
-                  ?.where((e) => e.num != null && e.num! > 0)
-                  .length;
+              final updateNum = bangumis?.where((e) => e.num != null && e.num! > 0).length;
               return Row(
                 children: [
-                  Expanded(
-                    child: Text('季度订阅', style: theme.textTheme.titleMedium),
-                  ),
+                  Expanded(child: Text('季度订阅', style: theme.textTheme.titleMedium)),
                   if (hasVal)
                     Tooltip(
-                      message: [
-                        if (updateNum! > 0) '最近有更新 $updateNum部',
-                        '本季度共订阅 ${bangumis!.length}部',
-                      ].join('，'),
+                      message: [if (updateNum! > 0) '最近有更新 $updateNum部', '本季度共订阅 ${bangumis!.length}部'].join('，'),
                       child: Text(
-                        [
-                          if (updateNum > 0) '🚀 $updateNum部',
-                          '🎬 ${bangumis.length}部',
-                        ].join('，'),
+                        [if (updateNum > 0) '🚀 $updateNum部', '🎬 ${bangumis.length}部'].join('，'),
                         style: theme.textTheme.bodySmall,
                       ),
                     ),
@@ -246,16 +221,11 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
               final isEmpty = rss.isNullOrEmpty;
               return Row(
                 children: [
-                  Expanded(
-                    child: Text('最近更新', style: theme.textTheme.titleMedium),
-                  ),
+                  Expanded(child: Text('最近更新', style: theme.textTheme.titleMedium)),
                   if (!isEmpty)
                     Tooltip(
                       message: '最近三天共有${rss!.length}部订阅更新',
-                      child: Text(
-                        '🚀 ${rss.length}部',
-                        style: theme.textTheme.bodySmall,
-                      ),
+                      child: Text('🚀 ${rss.length}部', style: theme.textTheme.bodySmall),
                     ),
                   const Gap(16),
                   if (!isEmpty)
@@ -274,11 +244,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
     );
   }
 
-  Widget _buildRssList(
-    BuildContext context,
-    ThemeData theme,
-    SubscribedModel subscribedModel,
-  ) {
+  Widget _buildRssList(BuildContext context, ThemeData theme, SubscribedModel subscribedModel) {
     return Selector<SubscribedModel, Map<String, List<RecordItem>>?>(
       selector: (_, model) => model.rss,
       builder: (_, rss, __) {
@@ -322,11 +288,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
                 children: [
                   Assets.mikan.image(width: 64.0),
                   const Gap(12),
-                  Text(
-                    text,
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyMedium,
-                  ),
+                  Text(text, textAlign: TextAlign.center, style: theme.textTheme.bodyMedium),
                 ],
               ),
             ),
@@ -352,18 +314,11 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
     Navigator.pushNamed(
       context,
       Routes.subscribedRecent.name,
-      arguments: Routes.subscribedRecent.d(
-        loaded: context.read<SubscribedModel>().records ?? [],
-      ),
+      arguments: Routes.subscribedRecent.d(loaded: context.read<SubscribedModel>().records ?? []),
     );
   }
 
-  Widget _buildRssListItem(
-    BuildContext context,
-    ThemeData theme,
-    int index,
-    MapEntry<String, List<RecordItem>> entry,
-  ) {
+  Widget _buildRssListItem(BuildContext context, ThemeData theme, int index, MapEntry<String, List<RecordItem>> entry) {
     final List<RecordItem> records = entry.value;
     final int recordsLength = records.length;
     final record = records[0];
@@ -371,21 +326,13 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
     final String bangumiId = entry.key;
     final String badge = recordsLength > 99 ? '99+' : '+$recordsLength';
     return Padding(
-      padding: const EdgeInsetsDirectional.only(
-        start: 24.0,
-        top: 8.0,
-        bottom: 8.0,
-      ),
+      padding: const EdgeInsetsDirectional.only(start: 24.0, top: 8.0, bottom: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: TransitionContainer(
-              next: BangumiPage(
-                bangumiId: bangumiId,
-                cover: bangumiCover,
-                name: record.name,
-              ),
+              next: BangumiPage(bangumiId: bangumiId, cover: bangumiCover, name: record.name),
               builder: (context, open) {
                 return Stack(
                   children: [
@@ -410,19 +357,11 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
                       top: 12.0,
                       child: Container(
                         clipBehavior: Clip.antiAlias,
-                        decoration: ShapeDecoration(
-                          color: theme.colorScheme.error,
-                          shape: const StadiumBorder(),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6.0,
-                          vertical: 2.0,
-                        ),
+                        decoration: ShapeDecoration(color: theme.colorScheme.error, shape: const StadiumBorder()),
+                        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
                         child: Text(
                           badge,
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            color: theme.colorScheme.onError,
-                          ),
+                          style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.onError),
                         ),
                       ),
                     ),
@@ -432,19 +371,9 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
             ),
           ),
           const Gap(10),
-          Text(
-            record.name,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: theme.textTheme.titleSmall,
-          ),
+          Text(record.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: theme.textTheme.titleSmall),
           if (record.publishAt.isNotBlank)
-            Text(
-              record.publishAt,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: theme.textTheme.bodySmall,
-            ),
+            Text(record.publishAt, maxLines: 1, overflow: TextOverflow.ellipsis, style: theme.textTheme.bodySmall),
         ],
       ),
     );
@@ -467,9 +396,7 @@ class _SubscribedFragmentState extends LifecycleState<SubscribedFragment> {
               height: 48.0,
               child: Row(
                 children: [
-                  Expanded(
-                    child: Text('更新列表', style: theme.textTheme.titleMedium),
-                  ),
+                  Expanded(child: Text('更新列表', style: theme.textTheme.titleMedium)),
                   IconButton(
                     icon: const Icon(Icons.east_rounded),
                     onPressed: () {

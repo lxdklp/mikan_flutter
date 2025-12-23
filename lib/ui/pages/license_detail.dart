@@ -12,11 +12,7 @@ import '../../widget/sliver_pinned_header.dart';
 @FFRoute(name: '/license/detail')
 @immutable
 class LicenseDetail extends StatefulWidget {
-  const LicenseDetail({
-    super.key,
-    required this.packageName,
-    required this.licenseEntries,
-  });
+  const LicenseDetail({super.key, required this.packageName, required this.licenseEntries});
 
   final String packageName;
   final List<LicenseEntry> licenseEntries;
@@ -38,12 +34,7 @@ class _LicenseDetailState extends State<LicenseDetail> {
           slivers: [
             SliverPinnedAppBar(title: widget.packageName),
             SliverPadding(
-              padding: EdgeInsets.only(
-                top: 8.0,
-                left: 24.0,
-                right: 24.0,
-                bottom: 24.0 + context.navBarHeight,
-              ),
+              padding: EdgeInsets.only(top: 8.0, left: 24.0, right: 24.0, bottom: 24.0 + context.navBarHeight),
               sliver: FutureBuilder<List<Widget>>(
                 future: _licenses,
                 builder: (context, snapshot) {
@@ -56,10 +47,7 @@ class _LicenseDetailState extends State<LicenseDetail> {
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: Assets.mikan.provider(),
-                              colorFilter: const ColorFilter.mode(
-                                Colors.grey,
-                                BlendMode.color,
-                              ),
+                              colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.color),
                             ),
                           ),
                         ),
@@ -75,9 +63,7 @@ class _LicenseDetailState extends State<LicenseDetail> {
                           child: SizedBox(
                             width: 24,
                             height: 24,
-                            child: CircularProgressIndicator(
-                              color: theme.secondary,
-                            ),
+                            child: CircularProgressIndicator(color: theme.secondary),
                           ),
                         ),
                       );
@@ -101,16 +87,13 @@ class _LicenseDetailState extends State<LicenseDetail> {
   Future<List<Widget>> _buildLicenseLines() async {
     final licenses = <Widget>[];
     for (final license in widget.licenseEntries) {
-      final paragraphs = await SchedulerBinding.instance
-          .scheduleTask<List<LicenseParagraph>>(
-            license.paragraphs.toList,
-            Priority.animation,
-            debugLabel: 'License',
-          );
+      final paragraphs = await SchedulerBinding.instance.scheduleTask<List<LicenseParagraph>>(
+        license.paragraphs.toList,
+        Priority.animation,
+        debugLabel: 'License',
+      );
       if (licenses.isNotEmpty) {
-        licenses.add(
-          const Padding(padding: EdgeInsets.all(18.0), child: Divider()),
-        );
+        licenses.add(const Padding(padding: EdgeInsets.all(18.0), child: Divider()));
       }
       for (final LicenseParagraph paragraph in paragraphs) {
         if (paragraph.indent == LicenseParagraph.centeredIndent) {
@@ -119,25 +102,15 @@ class _LicenseDetailState extends State<LicenseDetail> {
               padding: const EdgeInsets.only(top: 16.0),
               child: Text(
                 paragraph.text,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'mono',
-                  height: 1.5,
-                ),
+                style: const TextStyle(fontWeight: FontWeight.w700, fontFamily: 'mono', height: 1.5),
               ),
             ),
           );
         } else {
           licenses.add(
             Padding(
-              padding: EdgeInsetsDirectional.only(
-                top: 8.0,
-                start: 16.0 * paragraph.indent,
-              ),
-              child: Text(
-                paragraph.text,
-                style: const TextStyle(fontFamily: 'mono', height: 1.5),
-              ),
+              padding: EdgeInsetsDirectional.only(top: 8.0, start: 16.0 * paragraph.indent),
+              child: Text(paragraph.text, style: const TextStyle(fontFamily: 'mono', height: 1.5)),
             ),
           );
         }

@@ -28,9 +28,7 @@ class Resolver {
   const Resolver._();
 
   static List<BangumiRow> parseSeason(Document document) {
-    final List<Element> rowElements = document.querySelectorAll(
-      'div.sk-bangumi',
-    );
+    final List<Element> rowElements = document.querySelectorAll('div.sk-bangumi');
     final List<BangumiRow> list = [];
     BangumiRow bangumiRow;
     Bangumi bangumi;
@@ -50,34 +48,20 @@ class Resolver {
         bangumi = Bangumi();
         attributes = ele.querySelector('span')?.attributes ?? {};
         bangumi.id = attributes['data-bangumiid']?.trim() ?? '';
-        bangumi.cover =
-            MikanUrls.baseUrl +
-            (attributes['data-src']?.split('?').first.trim() ?? '');
+        bangumi.cover = MikanUrls.baseUrl + (attributes['data-src']?.split('?').first.trim() ?? '');
         bangumi.grey = ele.querySelector('span.greyout') != null;
         bangumi.updateAt = ele.querySelector('.date-text')?.text.trim() ?? '';
-        attributes =
-            (ele.querySelector('.an-text') ??
-                    ele.querySelector('.date-text[title]'))
-                ?.attributes ??
-            {};
+        attributes = (ele.querySelector('.an-text') ?? ele.querySelector('.date-text[title]'))?.attributes ?? {};
         bangumi.name = attributes['title']?.trim() ?? '';
         bangumi.subscribed = ele.querySelector('.active') != null;
-        bangumi.num =
-            int.tryParse(ele.querySelector('.num-node')?.text.trim() ?? '0') ??
-            0;
+        bangumi.num = int.tryParse(ele.querySelector('.num-node')?.text.trim() ?? '0') ?? 0;
         bangumis.add(bangumi);
         bangumi.week = temp;
       }
       bangumiRow.num = bangumis.length;
-      bangumiRow.updatedNum = bangumis
-          .where((it) => it.num != null && it.num! > 0)
-          .length;
-      bangumiRow.subscribedNum = bangumis
-          .where((element) => element.subscribed)
-          .length;
-      bangumiRow.subscribedUpdatedNum = bangumis
-          .where((it) => it.subscribed && it.num != null && it.num! > 0)
-          .length;
+      bangumiRow.updatedNum = bangumis.where((it) => it.num != null && it.num! > 0).length;
+      bangumiRow.subscribedNum = bangumis.where((element) => element.subscribed).length;
+      bangumiRow.subscribedUpdatedNum = bangumis.where((it) => it.subscribed && it.num != null && it.num! > 0).length;
       bangumis.sort((a, b) {
         if (a.grey && b.grey) {
           if (a.subscribed && b.subscribed) {
@@ -107,9 +91,7 @@ class Resolver {
   }
 
   static List<RecordItem> parseDay(Document document) {
-    final List<Element> elements = document.querySelectorAll(
-      '#an-list-res .my-rss-item',
-    );
+    final List<Element> elements = document.querySelectorAll('#an-list-res .my-rss-item');
     RecordItem record;
     final List<RecordItem> list = [];
     Element? element;
@@ -123,9 +105,7 @@ class Resolver {
       if (element != null) {
         temp = element.attributes['style'];
         if (temp != null) {
-          record.cover =
-              MikanUrls.baseUrl +
-              RegExp(r'\((.*)\)').firstMatch(temp)!.group(1)!;
+          record.cover = MikanUrls.baseUrl + RegExp(r'\((.*)\)').firstMatch(temp)!.group(1)!;
         }
       }
       element = ele.querySelector('div.sk-col.rss-name > div > a');
@@ -164,19 +144,13 @@ class Resolver {
           }
         }
         element = tempEles.getOrNull(1);
-        record.magnet =
-            element?.attributes['data-clipboard-text']?.trim() ?? '';
+        record.magnet = element?.attributes['data-clipboard-text']?.trim() ?? '';
         element = tempEles.getOrNull(2);
-        record.url =
-            MikanUrls.baseUrl + (element?.attributes['href']?.trim() ?? '');
+        record.url = MikanUrls.baseUrl + (element?.attributes['href']?.trim() ?? '');
       }
       temp = ele.querySelector('div.sk-col.pull-right')?.text.trim() ?? '';
-      if (temp.isNotBlank &&
-          RegExp(r'^\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}$').hasMatch(temp)) {
-        record.publishAt = Jiffy.parse(
-          temp,
-          pattern: 'yyyy/MM/dd HH:mm',
-        ).yMMMEdjm;
+      if (temp.isNotBlank && RegExp(r'^\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}$').hasMatch(temp)) {
+        record.publishAt = Jiffy.parse(temp, pattern: 'yyyy/MM/dd HH:mm').yMMMEdjm;
       } else {
         record.publishAt = temp;
       }
@@ -186,22 +160,13 @@ class Resolver {
   }
 
   static User parseUser(Document document) {
-    final String? name = document
-        .querySelector('#user-name .text-right')
-        ?.text
-        .trim();
-    final String? avatar = document
-        .querySelector('#user-welcome #head-pic')
-        ?.attributes['src']
-        ?.trim();
+    final String? name = document.querySelector('#user-name .text-right')?.text.trim();
+    final String? avatar = document.querySelector('#user-welcome #head-pic')?.attributes['src']?.trim();
     final String? token = document
         .querySelector('#login input[name=__RequestVerificationToken]')
         ?.attributes['value']
         ?.trim();
-    final rss = document
-        .querySelector('#an-episode-updates .mikan-rss')
-        ?.attributes['href']
-        ?.trim();
+    final rss = document.querySelector('#an-episode-updates .mikan-rss')?.attributes['href']?.trim();
     return User(
       name: name,
       avatar: avatar == null ? null : MikanUrls.baseUrl + avatar,
@@ -228,18 +193,14 @@ class Resolver {
 
   static String? parseRefreshForgotPasswordToken(Document document) {
     final String? token = document
-        .querySelector(
-          '#resetpasswordform input[name=__RequestVerificationToken]',
-        )
+        .querySelector('#resetpasswordform input[name=__RequestVerificationToken]')
         ?.attributes['value']
         ?.trim();
     return token;
   }
 
   static SearchResult parseSearch(Document document) {
-    List<Element> eles = document.querySelectorAll(
-      'div.leftbar-container .leftbar-item .subgroup-longname',
-    );
+    List<Element> eles = document.querySelectorAll('div.leftbar-container .leftbar-item .subgroup-longname');
     final List<Subgroup> subgroups = [];
     String? temp;
     Subgroup subgroup;
@@ -258,16 +219,8 @@ class Resolver {
       temp = ele.querySelector('a')?.attributes['href']?.trim();
       bangumi.id = temp?.replaceAll('/Home/Bangumi/', '') ?? '';
       bangumi.cover =
-          MikanUrls.baseUrl +
-          (ele
-                  .querySelector('span')
-                  ?.attributes['data-src']
-                  ?.split('?')
-                  .first
-                  .trim() ??
-              '');
-      bangumi.name =
-          ele.querySelector('.an-text')?.attributes['title']?.trim() ?? '';
+          MikanUrls.baseUrl + (ele.querySelector('span')?.attributes['data-src']?.split('?').first.trim() ?? '');
+      bangumi.name = ele.querySelector('.an-text')?.attributes['title']?.trim() ?? '';
       bangumis.add(bangumi);
     }
     eles = document.querySelectorAll('tr.js-search-results-row');
@@ -297,33 +250,20 @@ class Resolver {
       final String size = elements[2].text.trim();
       record.size = RegExp(r'\d+.*').hasMatch(size) ? size : '';
       temp = elements[3].text.trim();
-      if (temp.isNotBlank &&
-          RegExp(r'^\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}$').hasMatch(temp)) {
-        record.publishAt = Jiffy.parse(
-          temp,
-          pattern: 'yyyy/MM/dd HH:mm',
-        ).yMMMEdjm;
+      if (temp.isNotBlank && RegExp(r'^\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}$').hasMatch(temp)) {
+        record.publishAt = Jiffy.parse(temp, pattern: 'yyyy/MM/dd HH:mm').yMMMEdjm;
       } else {
         record.publishAt = temp;
       }
-      record.magnet =
-          elements[1].children[1].attributes['data-clipboard-text'] ?? '';
-      record.torrent =
-          MikanUrls.baseUrl +
-          (elements[4].children[0].attributes['href'] ?? '');
+      record.magnet = elements[1].children[1].attributes['data-clipboard-text'] ?? '';
+      record.torrent = MikanUrls.baseUrl + (elements[4].children[0].attributes['href'] ?? '');
       searchs.add(record);
     }
-    return SearchResult(
-      bangumis: bangumis,
-      subgroups: subgroups,
-      records: searchs,
-    );
+    return SearchResult(bangumis: bangumis, subgroups: subgroups, records: searchs);
   }
 
   static List<RecordItem> parseList(Document document) {
-    final List<Element> eles = document.querySelectorAll(
-      '#sk-body > table > tbody > tr',
-    );
+    final List<Element> eles = document.querySelectorAll('#sk-body > table > tbody > tr');
     final List<RecordItem> records = [];
     RecordItem record;
     Subgroup subgroup;
@@ -339,12 +279,8 @@ class Resolver {
       elements = ele.children;
       record = RecordItem();
       temp = elements[0].text.trim();
-      if (temp.isNotBlank &&
-          RegExp(r'^\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}$').hasMatch(temp)) {
-        record.publishAt = Jiffy.parse(
-          temp,
-          pattern: 'yyyy/MM/dd HH:mm',
-        ).yMMMEdjm;
+      if (temp.isNotBlank && RegExp(r'^\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}$').hasMatch(temp)) {
+        record.publishAt = Jiffy.parse(temp, pattern: 'yyyy/MM/dd HH:mm').yMMMEdjm;
       } else {
         record.publishAt = temp;
       }
@@ -354,18 +290,12 @@ class Resolver {
       if (tempElements.isNotEmpty) {
         for (final ele in tempElements) {
           tempElement = ele.children[0];
-          subgroup = Subgroup(
-            id: tempElement.attributes['href']?.substring(19),
-            name: tempElement.text.trim(),
-          );
+          subgroup = Subgroup(id: tempElement.attributes['href']?.substring(19), name: tempElement.text.trim());
           subgroups.add(subgroup);
         }
       } else if (element.children.isNotEmpty) {
         tempElement = element.children[0];
-        subgroup = Subgroup(
-          id: tempElement.attributes['href']?.substring(19),
-          name: tempElement.text.trim(),
-        );
+        subgroup = Subgroup(id: tempElement.attributes['href']?.substring(19), name: tempElement.text.trim());
         subgroups.add(subgroup);
       } else {
         subgroup = Subgroup(name: element.text.trim());
@@ -403,15 +333,11 @@ class Resolver {
         //   "",
         // );
       }
-      record.url =
-          MikanUrls.baseUrl + (tempElement.attributes['href']?.trim() ?? '');
-      record.magnet =
-          tempElements[1].attributes['data-clipboard-text']?.trim() ?? '';
+      record.url = MikanUrls.baseUrl + (tempElement.attributes['href']?.trim() ?? '');
+      record.magnet = tempElements[1].attributes['data-clipboard-text']?.trim() ?? '';
       final String size = elements[3].text.trim();
       record.size = RegExp(r'\d+.*').hasMatch(size) ? size : '';
-      record.torrent =
-          MikanUrls.baseUrl +
-          (elements[4].children[0].attributes['href']?.trim() ?? '');
+      record.torrent = MikanUrls.baseUrl + (elements[4].children[0].attributes['href']?.trim() ?? '');
       records.add(record);
     }
     return records;
@@ -424,10 +350,7 @@ class Resolver {
     final List<YearSeason> years = parseYearSeason(document);
     final User user = parseUser(document);
     final List<Announcement> annos = parseAnnouncement(document);
-    final Map<String, List<RecordItem>> groupedRss = groupBy(
-      rss,
-      (it) => it.id!,
-    );
+    final Map<String, List<RecordItem>> groupedRss = groupBy(rss, (it) => it.id!);
     return Index(
       years: years,
       bangumiRows: bangumiRows,
@@ -439,9 +362,7 @@ class Resolver {
   }
 
   static List<Carousel> parseCarousel(Document document) {
-    final List<Element> eles = document.querySelectorAll(
-      '#myCarousel > div.carousel-inner > div.item.carousel-bg',
-    );
+    final List<Element> eles = document.querySelectorAll('#myCarousel > div.carousel-inner > div.item.carousel-bg');
     final List<Carousel> carousels = [];
     Carousel carousel;
     String? temp;
@@ -461,10 +382,7 @@ class Resolver {
     final List<Element> eles = document.querySelectorAll(
       '#sk-data-nav > div > ul.navbar-nav.date-select > li > ul > li',
     );
-    final String? selected = document
-        .querySelector('#sk-data-nav  .date-select  div.date-text')
-        ?.text
-        .trim();
+    final String? selected = document.querySelector('#sk-data-nav  .date-select  div.date-text')?.text.trim();
     final yearSeasons = <YearSeason>[];
     YearSeason yearSeason;
     List<Season> seasons;
@@ -492,9 +410,7 @@ class Resolver {
   }
 
   static List<SeasonGallery> parseSubgroup(Document document) {
-    final List<Element> eles = document.querySelectorAll(
-      '#js-sort-wrapper > div.pubgroup-timeline-item[data-index]',
-    );
+    final List<Element> eles = document.querySelectorAll('#js-sort-wrapper > div.pubgroup-timeline-item[data-index]');
     final list = <SeasonGallery>[];
     SeasonGallery subgroupGallery;
     Bangumi bangumi;
@@ -506,8 +422,7 @@ class Resolver {
       subgroupGallery.title =
           "${ele.querySelector(".pubgroup-date")?.text.trim()} "
           "${ele.querySelector(".pubgroup-season")?.text.trim()}";
-      subgroupGallery.active =
-          ele.querySelector('.pubgroup-season.current-season') != null;
+      subgroupGallery.active = ele.querySelector('.pubgroup-season.current-season') != null;
       elements = ele.querySelectorAll('li[data-bangumiid]');
       bangumis = [];
       for (final Element e in elements) {
@@ -518,13 +433,7 @@ class Resolver {
         bangumi.subscribed = e.querySelector('.an-info-icon.active') != null;
         bangumi.cover =
             MikanUrls.baseUrl +
-            (e
-                    .querySelector('span[data-bangumiid]')
-                    ?.attributes['data-src']
-                    ?.split('?')
-                    .elementAt(0)
-                    .trim() ??
-                '');
+            (e.querySelector('span[data-bangumiid]')?.attributes['data-src']?.split('?').elementAt(0).trim() ?? '');
         bangumis.add(bangumi);
       }
       bangumis = HashSet.from(bangumis).toList().cast<Bangumi>();
@@ -574,37 +483,19 @@ class Resolver {
                 .trim() ??
             '');
     detail.name =
-        document
-            .querySelector(
-              '#sk-container > div.pull-left.leftbar-container > p.bangumi-title',
-            )
-            ?.text
-            .trim() ??
-        '';
-    String? intro = document
-        .querySelector('#sk-container > div.central-container > p')
-        ?.text
-        .trim();
+        document.querySelector('#sk-container > div.pull-left.leftbar-container > p.bangumi-title')?.text.trim() ?? '';
+    String? intro = document.querySelector('#sk-container > div.central-container > p')?.text.trim();
     if (intro.isNotBlank) {
       intro = "\u3000\u3000${intro!.replaceAll("\n", "\n\u3000\u3000")}";
     }
     detail.intro = intro ?? '';
-    detail.subscribed =
-        document
-            .querySelector('.subscribed-badge')
-            ?.attributes['style']
-            .isNullOrBlank ??
-        false;
-    final more = document
-        .querySelectorAll(
-          '#sk-container > div.pull-left.leftbar-container > p.bangumi-info',
-        )
-        .map((e) {
-          final split = e.text.split('：');
-          final key = split[0].trim().replaceAll('番组计划链接', '');
-          final value = split[1].trim();
-          return MapEntry(key, value);
-        });
+    detail.subscribed = document.querySelector('.subscribed-badge')?.attributes['style'].isNullOrBlank ?? false;
+    final more = document.querySelectorAll('#sk-container > div.pull-left.leftbar-container > p.bangumi-info').map((e) {
+      final split = e.text.split('：');
+      final key = split[0].trim().replaceAll('番组计划链接', '');
+      final value = split[1].trim();
+      return MapEntry(key, value);
+    });
     detail.more = Map.fromEntries(more);
     final List<Element> tables = document.querySelectorAll(
       '#sk-container > div.central-container > div.episode-table > table',
@@ -629,8 +520,7 @@ class Resolver {
         subgroupBangumi.dataId = element.attributes['id']?.trim() ?? '';
         temp = element.nodes.getOrNull(0)?.text?.trim();
         if (temp.isNullOrBlank) {
-          final Element child =
-              element.querySelector('.dropdown span') ?? element.children[0];
+          final Element child = element.querySelector('.dropdown span') ?? element.children[0];
           subgroupBangumi.name = child.text.trim();
         } else {
           subgroupBangumi.name = temp!;
@@ -649,19 +539,13 @@ class Resolver {
         } else {
           subgroupBangumi.state = -1;
         }
-        final rss = element
-            .querySelector('.mikan-rss')
-            ?.attributes['href']
-            ?.trim();
+        final rss = element.querySelector('.mikan-rss')?.attributes['href']?.trim();
         subgroupBangumi.rss = rss == null ? null : MikanUrls.baseUrl + rss;
         subgroups = [];
         elements = element.querySelectorAll('ul > li > a');
         if (elements.isSafeNotEmpty) {
           for (final Element ele in elements) {
-            subgroup = Subgroup(
-              id: ele.attributes['href']?.split('/').last.trim(),
-              name: ele.text.trim(),
-            );
+            subgroup = Subgroup(id: ele.attributes['href']?.split('/').last.trim(), name: ele.text.trim());
             subgroups.add(subgroup);
           }
         }
@@ -670,10 +554,7 @@ class Resolver {
           if (element != null) {
             temp = element.attributes['href'];
             if (temp?.startsWith('/Home/PublishGroup') ?? false) {
-              subgroup = Subgroup(
-                id: temp?.split('/').last.trim(),
-                name: element.text.trim(),
-              );
+              subgroup = Subgroup(id: temp?.split('/').last.trim(), name: element.text.trim());
               subgroups.add(subgroup);
             }
           }
@@ -685,9 +566,7 @@ class Resolver {
         for (final Element ele in elements) {
           record = RecordItem();
           element = ele.children[1];
-          record.magnet =
-              element.children[1].attributes['data-clipboard-text']?.trim() ??
-              '';
+          record.magnet = element.children[1].attributes['data-clipboard-text']?.trim() ?? '';
           element = element.children[0];
           temp = element.text;
           if (temp.isNotBlank) {
@@ -706,18 +585,12 @@ class Resolver {
           final String size = ele.children[2].text.trim();
           record.size = RegExp(r'\d+.*').hasMatch(size) ? size : '';
           temp = ele.children[3].text.trim();
-          if (temp.isNotBlank &&
-              RegExp(r'^\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}$').hasMatch(temp)) {
-            record.publishAt = Jiffy.parse(
-              temp,
-              pattern: 'yyyy/MM/dd HH:mm',
-            ).yMMMEdjm;
+          if (temp.isNotBlank && RegExp(r'^\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}$').hasMatch(temp)) {
+            record.publishAt = Jiffy.parse(temp, pattern: 'yyyy/MM/dd HH:mm').yMMMEdjm;
           } else {
             record.publishAt = temp;
           }
-          record.torrent =
-              MikanUrls.baseUrl +
-              (ele.children[4].children[0].attributes['href']?.trim() ?? '');
+          record.torrent = MikanUrls.baseUrl + (ele.children[4].children[0].attributes['href']?.trim() ?? '');
           records.add(record);
         }
         subgroupBangumi.records = records;
@@ -731,18 +604,14 @@ class Resolver {
     final RecordDetail recordDetail = RecordDetail();
     recordDetail.id =
         document
-            .querySelector(
-              '#sk-container > div.pull-left.leftbar-container > div.leftbar-nav > button',
-            )
+            .querySelector('#sk-container > div.pull-left.leftbar-container > div.leftbar-nav > button')
             ?.attributes['data-bangumiid']
             ?.trim() ??
         '';
     recordDetail.cover =
         MikanUrls.baseUrl +
         (document
-                .querySelector(
-                  '#sk-container > div.pull-left.leftbar-container > div.bangumi-poster',
-                )
+                .querySelector('#sk-container > div.pull-left.leftbar-container > div.bangumi-poster')
                 ?.attributes['style']
                 ?.split("'")
                 .elementAt(1)
@@ -751,21 +620,9 @@ class Resolver {
                 .trim() ??
             '');
     recordDetail.name =
-        document
-            .querySelector(
-              '#sk-container > div.pull-left.leftbar-container > p.bangumi-title',
-            )
-            ?.text
-            .trim() ??
-        '';
+        document.querySelector('#sk-container > div.pull-left.leftbar-container > p.bangumi-title')?.text.trim() ?? '';
     String title =
-        document
-            .querySelector(
-              '#sk-container > div.central-container > div.episode-header > p',
-            )
-            ?.text
-            .trim() ??
-        '';
+        document.querySelector('#sk-container > div.central-container > div.episode-header > p')?.text.trim() ?? '';
     final Set<String> tags = LinkedHashSet(equals: (a, b) => a == b);
     if (title.isNotBlank) {
       title = title.trim().replaceAll('【', '[').replaceAll('】', ']');
@@ -778,16 +635,9 @@ class Resolver {
       });
       recordDetail.tags = tags.toList()..sort((a, b) => b.compareTo(a));
     }
-    recordDetail.subscribed =
-        document
-            .querySelector('.subscribed-badge')
-            ?.attributes['style']
-            .isNullOrBlank ??
-        false;
+    recordDetail.subscribed = document.querySelector('.subscribed-badge')?.attributes['style'].isNullOrBlank ?? false;
     final more = document
-        .querySelectorAll(
-          '#sk-container > div.pull-left.leftbar-container > p.bangumi-info',
-        )
+        .querySelectorAll('#sk-container > div.pull-left.leftbar-container > p.bangumi-info')
         .map((e) => e.text.split('：'));
     final Map<String, String> map = {};
     for (final List<String> element in more) {
@@ -795,21 +645,16 @@ class Resolver {
     }
     recordDetail.more = map;
     String? temp;
-    final elements = document.querySelectorAll(
-      '#sk-container > div.pull-left.leftbar-container > div.leftbar-nav > a',
-    );
+    final elements = document.querySelectorAll('#sk-container > div.pull-left.leftbar-container > div.leftbar-nav > a');
     for (final Element element in elements) {
       temp = element.text.trim();
       if (temp == '下载种子') {
-        recordDetail.torrent =
-            MikanUrls.baseUrl + (element.attributes['href']?.trim() ?? '');
+        recordDetail.torrent = MikanUrls.baseUrl + (element.attributes['href']?.trim() ?? '');
       } else if (temp == '磁力链接') {
         recordDetail.magnet = element.attributes['href']?.trim() ?? '';
       }
     }
-    final Element? element = document.querySelector(
-      '#sk-container > div.central-container > div.episode-desc',
-    );
+    final Element? element = document.querySelector('#sk-container > div.central-container > div.episode-desc');
     for (final Element ele in element?.children ?? []) {
       final style = ele.attributes['style']?.trim();
       if (style == 'margin-top: -10px; margin-bottom: 10px;') {
@@ -831,8 +676,7 @@ class Resolver {
     for (final Element ele in elements) {
       record = RecordItem();
       element = ele.children[0];
-      record.magnet =
-          element.children[1].attributes['data-clipboard-text']?.trim() ?? '';
+      record.magnet = element.children[1].attributes['data-clipboard-text']?.trim() ?? '';
       element = element.children[0];
       temp = element.text;
       if (temp.isNotBlank) {
@@ -851,18 +695,12 @@ class Resolver {
       final String size = ele.children[1].text.trim();
       record.size = RegExp(r'\d+.*').hasMatch(size) ? size : '';
       temp = ele.children[2].text.trim();
-      if (temp.isNotBlank &&
-          RegExp(r'^\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}$').hasMatch(temp)) {
-        record.publishAt = Jiffy.parse(
-          temp,
-          pattern: 'yyyy/MM/dd HH:mm',
-        ).yMMMEdjm;
+      if (temp.isNotBlank && RegExp(r'^\d{4}/\d{2}/\d{2}\s\d{2}:\d{2}$').hasMatch(temp)) {
+        record.publishAt = Jiffy.parse(temp, pattern: 'yyyy/MM/dd HH:mm').yMMMEdjm;
       } else {
         record.publishAt = temp;
       }
-      record.torrent =
-          MikanUrls.baseUrl +
-          (ele.children[3].children[0].attributes['href'] ?? '');
+      record.torrent = MikanUrls.baseUrl + (ele.children[3].children[0].attributes['href'] ?? '');
       records.add(record);
     }
     return records;
@@ -877,20 +715,13 @@ class Resolver {
       bangumi = Bangumi();
       attributes = ele.querySelector('span')?.attributes ?? {};
       bangumi.id = attributes['data-bangumiid']?.trim() ?? '';
-      bangumi.cover =
-          MikanUrls.baseUrl +
-          (attributes['data-src']?.split('?')[0].trim() ?? '');
+      bangumi.cover = MikanUrls.baseUrl + (attributes['data-src']?.split('?')[0].trim() ?? '');
       bangumi.grey = ele.querySelector('span.greyout') != null;
       bangumi.updateAt = ele.querySelector('.date-text')?.text.trim() ?? '';
-      attributes =
-          (ele.querySelector('.an-text') ??
-                  ele.querySelector('.date-text[title]'))
-              ?.attributes ??
-          {};
+      attributes = (ele.querySelector('.an-text') ?? ele.querySelector('.date-text[title]'))?.attributes ?? {};
       bangumi.name = attributes['title']?.trim() ?? '';
       bangumi.subscribed = ele.querySelector('.active') != null;
-      bangumi.num =
-          int.tryParse(ele.querySelector('.num-node')?.text.trim() ?? '0') ?? 0;
+      bangumi.num = int.tryParse(ele.querySelector('.num-node')?.text.trim() ?? '0') ?? 0;
       bangumis.add(bangumi);
     }
     return bangumis;
@@ -898,9 +729,7 @@ class Resolver {
 
   static List<Announcement> parseAnnouncement(Document document) {
     final annos = <Announcement>[];
-    final eles = document.querySelectorAll(
-      '.announcement-popover-content > div',
-    );
+    final eles = document.querySelectorAll('.announcement-popover-content > div');
     for (final ele in eles) {
       final date = ele.querySelector('.anndate');
       date!.remove();
@@ -908,13 +737,7 @@ class Resolver {
       for (final e in ele.nodes) {
         if (e is Element) {
           if (e.localName == 'a') {
-            nodes.add(
-              AnnouncementNode(
-                text: '{${e.text}}',
-                place: e.attributes['href'],
-                type: 'url',
-              ),
-            );
+            nodes.add(AnnouncementNode(text: '{${e.text}}', place: e.attributes['href'], type: 'url'));
             continue;
           } else if (e.localName == 'b') {
             nodes.add(AnnouncementNode(text: '{${e.text}}', type: 'bold'));

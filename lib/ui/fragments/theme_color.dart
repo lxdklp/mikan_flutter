@@ -57,28 +57,19 @@ class _ThemeColorPanelState extends LifecycleAppState<ThemeColorPanel> {
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Row(
                     children: [
-                      Expanded(
-                        child: Text(
-                          '跟随系统',
-                          style: theme.textTheme.titleMedium,
-                        ),
-                      ),
+                      Expanded(child: Text('跟随系统', style: theme.textTheme.titleMedium)),
                       ValueListenableBuilder(
-                        valueListenable: MyHive.settings.listenable(
-                          keys: [SettingsHiveKey.dynamicColor],
-                        ),
+                        valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.dynamicColor]),
                         builder: (context, _, child) {
                           final v = MyHive.dynamicColorEnabled();
                           return Switch(
                             onChanged: (v) {
                               MyHive.enableDynamicColor(v);
                               if (v) {
-                                final effectColor =
-                                    theme.brightness == Brightness.light
-                                        ? _colorSchemePair!.light.primary
-                                        : _colorSchemePair!.dark.primary;
-                                Future.delayed(
-                                    const Duration(milliseconds: 160), () {
+                                final effectColor = theme.brightness == Brightness.light
+                                    ? _colorSchemePair!.light.primary
+                                    : _colorSchemePair!.dark.primary;
+                                Future.delayed(const Duration(milliseconds: 160), () {
                                   if (mounted) {
                                     ParticleEffect.show(
                                       // ignore: use_build_context_synchronously
@@ -102,23 +93,15 @@ class _ThemeColorPanelState extends LifecycleAppState<ThemeColorPanel> {
           if (_colorSchemePair == null || !MyHive.dynamicColorEnabled())
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24.0,
-                  vertical: 8.0,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
                 child: ValueListenableBuilder(
-                  valueListenable: MyHive.settings.listenable(
-                    keys: [SettingsHiveKey.colorSeed],
-                  ),
+                  valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.colorSeed]),
                   builder: (context, _, child) {
                     final color = Color(MyHive.getColorSeed());
                     return ColorPicker(
                       color: color,
                       padding: EdgeInsets.zero,
-                      pickerTypeLabels: const {
-                        ColorPickerType.both: '主色调',
-                        ColorPickerType.wheel: '自定义',
-                      },
+                      pickerTypeLabels: const {ColorPickerType.both: '主色调', ColorPickerType.wheel: '自定义'},
                       pickersEnabled: const <ColorPickerType, bool>{
                         ColorPickerType.both: true,
                         ColorPickerType.primary: false,

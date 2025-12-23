@@ -26,10 +26,7 @@ class Donate extends StatelessWidget {
               final title = Text(item[0], style: theme.textTheme.bodyLarge);
               return RippleTap(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24.0,
-                    vertical: 12.0,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
                   child: Row(
                     children: [
                       CircleAvatar(child: Text(item[0][0])),
@@ -48,10 +45,7 @@ class Donate extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  launchUrlString(
-                    item[2],
-                    mode: LaunchMode.externalNonBrowserApplication,
-                  );
+                  launchUrlString(item[2], mode: LaunchMode.externalNonBrowserApplication);
                 },
               );
             }, childCount: _list.length),

@@ -23,12 +23,8 @@ class Fonts extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final fontsModel = Provider.of<FontsModel>(context, listen: false);
-    final style1 = theme.textTheme.labelSmall!.copyWith(
-      color: theme.colorScheme.onTertiaryContainer,
-    );
-    final style2 = theme.textTheme.labelSmall!.copyWith(
-      color: theme.colorScheme.onSecondaryContainer,
-    );
+    final style1 = theme.textTheme.labelSmall!.copyWith(color: theme.colorScheme.onTertiaryContainer);
+    final style2 = theme.textTheme.labelSmall!.copyWith(color: theme.colorScheme.onSecondaryContainer);
     return Scaffold(
       body: EasyRefresh(
         onRefresh: fontsModel.load,
@@ -55,21 +51,14 @@ class Fonts extends StatelessWidget {
                 selector: (_, model) => model.fonts,
                 builder: (_, fonts, __) {
                   return SliverWaterfallFlow(
-                    gridDelegate:
-                        SliverWaterfallFlowDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 400.0,
-                          mainAxisSpacing: context.margins,
-                          crossAxisSpacing: context.margins,
-                        ),
+                    gridDelegate: SliverWaterfallFlowDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 400.0,
+                      mainAxisSpacing: context.margins,
+                      crossAxisSpacing: context.margins,
+                    ),
                     delegate: SliverChildBuilderDelegate((_, index) {
                       final font = fonts[index];
-                      return _buildFontItem(
-                        theme,
-                        style1,
-                        style2,
-                        fontsModel,
-                        font,
-                      );
+                      return _buildFontItem(theme, style1, style2, fontsModel, font);
                     }, childCount: fonts.length),
                   );
                 },
@@ -82,13 +71,7 @@ class Fonts extends StatelessWidget {
     );
   }
 
-  Widget _buildFontItem(
-    ThemeData theme,
-    TextStyle style1,
-    TextStyle style2,
-    FontsModel model,
-    Font font,
-  ) {
+  Widget _buildFontItem(ThemeData theme, TextStyle style1, TextStyle style2, FontsModel model, Font font) {
     return ScalableCard(
       onTap: () {
         model.enableFont(font);
@@ -120,10 +103,7 @@ class Fonts extends StatelessWidget {
                   color: theme.colorScheme.tertiaryContainer,
                   borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6.0,
-                      vertical: 4.0,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                     child: Text('${font.files.length}个字体', style: style1),
                   ),
                 ),
@@ -135,10 +115,7 @@ class Fonts extends StatelessWidget {
                   color: theme.colorScheme.secondaryContainer,
                   borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6.0,
-                      vertical: 4.0,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                     child: Text('官网', style: style2),
                   ),
                 ),
@@ -150,10 +127,7 @@ class Fonts extends StatelessWidget {
                   color: theme.colorScheme.secondaryContainer,
                   borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6.0,
-                      vertical: 4.0,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                     child: Text(font.license.name, style: style2),
                   ),
                 ),
@@ -185,10 +159,7 @@ class Fonts extends StatelessWidget {
         return SizedBox(
           width: 16.0,
           height: 16.0,
-          child: CircularProgressIndicator(
-            value: event.percent,
-            strokeWidth: 2.0,
-          ),
+          child: CircularProgressIndicator(value: event.percent, strokeWidth: 2.0),
         );
       },
     );

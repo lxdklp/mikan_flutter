@@ -21,11 +21,7 @@ class Particle {
 }
 
 class BubbleBackground extends StatefulWidget {
-  const BubbleBackground({
-    super.key,
-    required this.child,
-    required this.colors,
-  });
+  const BubbleBackground({super.key, required this.child, required this.colors});
 
   final Widget child;
   final List<Color> colors;
@@ -34,8 +30,7 @@ class BubbleBackground extends StatefulWidget {
   BubbleBackgroundState createState() => BubbleBackgroundState();
 }
 
-class BubbleBackgroundState extends State<BubbleBackground>
-    with TickerProviderStateMixin {
+class BubbleBackgroundState extends State<BubbleBackground> with TickerProviderStateMixin {
   final List<Particle> particles = [];
 
   final _notifier = ValueNotifier(0);
@@ -78,41 +73,26 @@ class BubbleBackgroundState extends State<BubbleBackground>
       final radius = random.nextDouble() * 100 + 50;
       final speedX = random.nextDouble() * 2 - 1;
       final speedY = random.nextDouble() * 2 - 1;
-      final particle = Particle(
-        x: x,
-        y: y,
-        radius: radius,
-        speedX: speedX,
-        speedY: speedY,
-        color: color,
-      );
+      final particle = Particle(x: x, y: y, radius: radius, speedX: speedX, speedY: speedY, color: color);
       particles.add(particle);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: ParticlePainter(particles, _notifier),
-      child: widget.child,
-    );
+    return CustomPaint(painter: ParticlePainter(particles, _notifier), child: widget.child);
   }
 }
 
 class ParticlePainter extends CustomPainter {
-  ParticlePainter(this.particles, Listenable listenable)
-    : super(repaint: listenable);
+  ParticlePainter(this.particles, Listenable listenable) : super(repaint: listenable);
 
   final List<Particle> particles;
 
   @override
   void paint(Canvas canvas, Size size) {
     for (final particle in particles) {
-      canvas.drawCircle(
-        Offset(particle.x, particle.y),
-        particle.radius,
-        Paint()..color = particle.color,
-      );
+      canvas.drawCircle(Offset(particle.x, particle.y), particle.radius, Paint()..color = particle.color);
     }
   }
 

@@ -9,10 +9,7 @@ class SeasonBangumis {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SeasonBangumis &&
-          runtimeType == other.runtimeType &&
-          season == other.season;
+      identical(this, other) || other is SeasonBangumis && runtimeType == other.runtimeType && season == other.season;
 
   @override
   int get hashCode => season.hashCode;

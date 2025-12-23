@@ -32,10 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
         create: (_) => RegisterModel(),
         child: Builder(
           builder: (context) {
-            final registerModel = Provider.of<RegisterModel>(
-              context,
-              listen: false,
-            );
+            final registerModel = Provider.of<RegisterModel>(context, listen: false);
             return Scaffold(
               body: Center(
                 child: ConstrainedBox(
@@ -49,10 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           children: <Widget>[
                             Assets.mikan.image(width: 64.0),
                             const Gap(8),
-                            Text(
-                              'Mikan Project',
-                              style: theme.textTheme.bodySmall,
-                            ),
+                            Text('Mikan Project', style: theme.textTheme.bodySmall),
                             Text('蜜柑计划', style: theme.textTheme.titleLarge),
                             const Gap(16),
                             _buildUserNameField(theme, registerModel),
@@ -106,10 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
               context.read<RegisterModel>().submit(() {
                 context.read<IndexModel>().refresh();
                 context.read<SubscribedModel>().refresh();
-                Navigator.popUntil(
-                  context,
-                  (route) => route.settings.name == Routes.index.name,
-                );
+                Navigator.popUntil(context, (route) => route.settings.name == Routes.index.name);
               });
             }
           },
@@ -216,9 +207,7 @@ class _RegisterPageState extends State<RegisterPage> {
             hintText: '请输入密码',
             prefixIcon: const Icon(Icons.password_rounded),
             suffixIcon: IconButton(
-              icon: showPassword
-                  ? const Icon(Icons.visibility_rounded)
-                  : const Icon(Icons.visibility_off_rounded),
+              icon: showPassword ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
               onPressed: () {
                 registerModel.showPassword = !showPassword;
               },
@@ -242,10 +231,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildConfirmPasswordField(
-    ThemeData theme,
-    RegisterModel registerModel,
-  ) {
+  Widget _buildConfirmPasswordField(ThemeData theme, RegisterModel registerModel) {
     return Selector<RegisterModel, bool>(
       selector: (_, model) => model.showPassword,
       shouldRebuild: (pre, next) => pre != next,
@@ -260,9 +246,7 @@ class _RegisterPageState extends State<RegisterPage> {
             hintText: '请输入确认密码',
             prefixIcon: const Icon(Icons.key_rounded),
             suffixIcon: IconButton(
-              icon: showPassword
-                  ? const Icon(Icons.visibility_rounded)
-                  : const Icon(Icons.visibility_off_rounded),
+              icon: showPassword ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
               onPressed: () {
                 registerModel.showPassword = !showPassword;
               },

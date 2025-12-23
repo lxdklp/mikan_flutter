@@ -14,8 +14,7 @@ class HttpCacheManager {
 
   static Future<void> init({String? cacheDir}) async {
     if (cacheDir == null || cacheDir.isEmpty) {
-      cacheDir =
-          '${(await getApplicationSupportDirectory()).path}${Platform.pathSeparator}http_cache_manager';
+      cacheDir = '${(await getApplicationSupportDirectory()).path}${Platform.pathSeparator}http_cache_manager';
     }
     _httpCacheManager = HttpCacheManager._(cacheDir);
   }
@@ -24,8 +23,7 @@ class HttpCacheManager {
 
   static final Map<String, String> _lockCache = <String, String>{};
 
-  static final Map<String, Completer<File?>> _tasks =
-      <String, Completer<File?>>{};
+  static final Map<String, Completer<File?>> _tasks = <String, Completer<File?>>{};
 
   static Future<File?> get(
     String url, {
@@ -72,16 +70,11 @@ class HttpCacheManager {
         cacheDir =
             (await getTemporaryDirectory()).path +
             Platform.pathSeparator +
-            (await getApplicationSupportDirectory()).parent.path
-                .split(Platform.pathSeparator)
-                .last +
+            (await getApplicationSupportDirectory()).parent.path.split(Platform.pathSeparator).last +
             Platform.pathSeparator +
             _cacheDir;
       } else {
-        cacheDir =
-            (await getTemporaryDirectory()).path +
-            Platform.pathSeparator +
-            _cacheDir;
+        cacheDir = (await getTemporaryDirectory()).path + Platform.pathSeparator + _cacheDir;
       }
     }
     final Directory dir = Directory(cacheDir);
@@ -104,11 +97,7 @@ class HttpCacheManager {
     Cancelable? cancelable,
   }) async {
     final Uri uri = Uri.parse(url);
-    final checkResp = await _createNewRequest(
-      uri,
-      withBody: false,
-      headers: headers,
-    );
+    final checkResp = await _createNewRequest(uri, withBody: false, headers: headers);
 
     final rawFileKey = cacheKey ?? base64Url.encode(utf8.encode(url));
     final parentDir = await _getCacheDir(cacheDir);
@@ -133,9 +122,7 @@ class HttpCacheManager {
     checkResp.listen(null);
 
     bool isExpired = false;
-    final String? cacheControl = checkResp.headers.value(
-      HttpHeaders.cacheControlHeader,
-    );
+    final String? cacheControl = checkResp.headers.value(HttpHeaders.cacheControlHeader);
     final File tempFile = _childFile(parentDir, '$rawFileKey.temp');
     if (cacheControl != null) {
       if (cacheControl.contains('no-store')) {
@@ -193,8 +180,7 @@ class HttpCacheManager {
     }
 
     final bool breakpointTransmission =
-        checkResp.headers.value(HttpHeaders.acceptRangesHeader) == 'bytes' &&
-        checkResp.contentLength > 0;
+        checkResp.headers.value(HttpHeaders.acceptRangesHeader) == 'bytes' && checkResp.contentLength > 0;
     // if not expired && is support breakpoint transmission && temp file exists
     if (!isExpired && breakpointTransmission && tempFile.existsSync()) {
       final int received = await tempFile.length();
@@ -225,48 +211,23 @@ class HttpCacheManager {
         );
       } else if (resp.statusCode == HttpStatus.requestedRangeNotSatisfiable) {
         // 416 Requested Range Not Satisfiable
-        return _nrw(
-          uri,
-          rawFile,
-          tempFile,
-          chunkEvents: chunkEvents,
-          cancelable: cancelable,
-        );
+        return _nrw(uri, rawFile, tempFile, chunkEvents: chunkEvents, cancelable: cancelable);
       } else if (resp.statusCode == HttpStatus.ok) {
-        return _rw(
-          uri,
-          resp,
-          rawFile,
-          tempFile,
-          chunkEvents: chunkEvents,
-          cancelable: cancelable,
-        );
+        return _rw(uri, resp, rawFile, tempFile, chunkEvents: chunkEvents, cancelable: cancelable);
       } else {
         // request error.
         resp.listen(null);
         return null;
       }
     } else {
-      return _nrw(
-        uri,
-        rawFile,
-        tempFile,
-        chunkEvents: chunkEvents,
-        cancelable: cancelable,
-      );
+      return _nrw(uri, rawFile, tempFile, chunkEvents: chunkEvents, cancelable: cancelable);
     }
   }
 
-  Future<void> _justFinished(
-    Uri uri,
-    File rawFile,
-    StreamController<ProgressChunkEvent>? chunkEvents,
-  ) async {
+  Future<void> _justFinished(Uri uri, File rawFile, StreamController<ProgressChunkEvent>? chunkEvents) async {
     if (chunkEvents != null) {
       final int length = await rawFile.length();
-      chunkEvents.add(
-        ProgressChunkEvent(key: uri, progress: length, total: length),
-      );
+      chunkEvents.add(ProgressChunkEvent(key: uri, progress: length, total: length));
     }
   }
 
@@ -278,22 +239,12 @@ class HttpCacheManager {
     StreamController<ProgressChunkEvent>? chunkEvents,
     Cancelable? cancelable,
   }) async {
-    final HttpClientResponse resp = await _createNewRequest(
-      uri,
-      headers: headers,
-    );
+    final HttpClientResponse resp = await _createNewRequest(uri, headers: headers);
     if (resp.statusCode != HttpStatus.ok) {
       resp.listen(null);
       return null;
     }
-    return _rw(
-      uri,
-      resp,
-      rawFile,
-      tempFile,
-      chunkEvents: chunkEvents,
-      cancelable: cancelable,
-    );
+    return _rw(uri, resp, rawFile, tempFile, chunkEvents: chunkEvents, cancelable: cancelable);
   }
 
   Future<File> _rw(
@@ -307,12 +258,8 @@ class HttpCacheManager {
     Cancelable? cancelable,
   }) async {
     final Completer<File> completer = Completer<File>();
-    final bool compressed =
-        response.compressionState ==
-        HttpClientResponseCompressionState.compressed;
-    final int? total = compressed || response.contentLength < 0
-        ? null
-        : response.contentLength;
+    final bool compressed = response.compressionState == HttpClientResponseCompressionState.compressed;
+    final int? total = compressed || response.contentLength < 0 ? null : response.contentLength;
     final IOSink ioSink = tempFile.openWrite(mode: fileMode);
     late StreamSubscription<List<int>> subscription;
     subscription = response.listen(
@@ -324,9 +271,7 @@ class HttpCacheManager {
         }
         ioSink.add(bytes);
         received += bytes.length;
-        chunkEvents?.add(
-          ProgressChunkEvent(key: uri, progress: received, total: total),
-        );
+        chunkEvents?.add(ProgressChunkEvent(key: uri, progress: received, total: total));
       },
       onDone: () async {
         try {
@@ -336,13 +281,7 @@ class HttpCacheManager {
             final List<int> convert = gzip.decoder.convert(buffer);
             buffer = Uint8List.fromList(convert);
             await tempFile.writeAsBytes(convert);
-            chunkEvents?.add(
-              ProgressChunkEvent(
-                key: uri,
-                progress: buffer.length,
-                total: buffer.length,
-              ),
-            );
+            chunkEvents?.add(ProgressChunkEvent(key: uri, progress: buffer.length, total: buffer.length));
           }
           await tempFile.rename(rawFile.path);
           completer.complete(rawFile);
@@ -372,9 +311,7 @@ class HttpCacheManager {
     bool withBody = true,
     void Function(HttpClientRequest)? beforeRequest,
   }) async {
-    final HttpClientRequest request = await (withBody
-        ? _client.getUrl(uri)
-        : _client.headUrl(uri));
+    final HttpClientRequest request = await (withBody ? _client.getUrl(uri) : _client.headUrl(uri));
     headers?.forEach((String key, dynamic value) {
       request.headers.add(key, value);
     });
@@ -414,18 +351,13 @@ class Cancelable {
 
 @immutable
 class ProgressChunkEvent {
-  const ProgressChunkEvent({
-    required this.key,
-    required this.progress,
-    required this.total,
-  });
+  const ProgressChunkEvent({required this.key, required this.progress, required this.total});
 
   final dynamic key;
   final int progress;
   final int? total;
 
-  double? get percent =>
-      total == null || total == 0 ? null : (progress / total!).clamp(0, 1);
+  double? get percent => total == null || total == 0 ? null : (progress / total!).clamp(0, 1);
 
   @override
   String toString() {
@@ -434,10 +366,7 @@ class ProgressChunkEvent {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is ProgressChunkEvent &&
-          runtimeType == other.runtimeType &&
-          key == other.key;
+      identical(this, other) || other is ProgressChunkEvent && runtimeType == other.runtimeType && key == other.key;
 
   @override
   int get hashCode => key.hashCode;

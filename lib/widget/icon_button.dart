@@ -4,12 +4,7 @@ import '../internal/extension.dart';
 import 'ripple_tap.dart';
 
 class ActionButton extends StatelessWidget {
-  const ActionButton({
-    super.key,
-    required this.onTap,
-    required this.icon,
-    required this.tooltip,
-  });
+  const ActionButton({super.key, required this.onTap, required this.icon, required this.tooltip});
 
   final IconData icon;
   final VoidCallback onTap;
@@ -31,11 +26,7 @@ class TorrentButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActionButton(
-      onTap: payload.launchAppAndCopy,
-      icon: Icons.send_and_archive_rounded,
-      tooltip: '复制并尝试打开种子链接',
-    );
+    return ActionButton(onTap: payload.launchAppAndCopy, icon: Icons.send_and_archive_rounded, tooltip: '复制并尝试打开种子链接');
   }
 }
 
@@ -46,11 +37,7 @@ class MagnetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActionButton(
-      onTap: payload.launchAppAndCopy,
-      icon: Icons.downloading_rounded,
-      tooltip: '复制并尝试打开磁力链接',
-    );
+    return ActionButton(onTap: payload.launchAppAndCopy, icon: Icons.downloading_rounded, tooltip: '复制并尝试打开磁力链接');
   }
 }
 
@@ -61,21 +48,12 @@ class ShareButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ActionButton(
-      onTap: payload.share,
-      icon: Icons.share_rounded,
-      tooltip: '分享',
-    );
+    return ActionButton(onTap: payload.share, icon: Icons.share_rounded, tooltip: '分享');
   }
 }
 
 class TMSMenuButton extends StatelessWidget {
-  const TMSMenuButton({
-    super.key,
-    required this.torrent,
-    required this.magnet,
-    required this.share,
-  });
+  const TMSMenuButton({super.key, required this.torrent, required this.magnet, required this.share});
 
   final String torrent;
   final String magnet;
@@ -96,11 +74,7 @@ class TMSMenuButton extends StatelessWidget {
           leadingIcon: const Icon(Icons.downloading_rounded),
           child: const Text('打开磁力'),
         ),
-        MenuItemButton(
-          onPressed: share.share,
-          leadingIcon: const Icon(Icons.share_rounded),
-          child: const Text('分享信息'),
-        ),
+        MenuItemButton(onPressed: share.share, leadingIcon: const Icon(Icons.share_rounded), child: const Text('分享信息')),
       ],
       builder: (context, controller, child) {
         return IconButton(
@@ -119,20 +93,12 @@ class BackIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () => Navigator.maybePop(context),
-      icon: const Icon(Icons.west_rounded),
-    );
+    return IconButton(onPressed: () => Navigator.maybePop(context), icon: const Icon(Icons.west_rounded));
   }
 }
 
 class SmallCircleButton extends StatelessWidget {
-  const SmallCircleButton({
-    super.key,
-    required this.onTap,
-    required this.icon,
-    this.color,
-  });
+  const SmallCircleButton({super.key, required this.onTap, required this.icon, this.color});
 
   final IconData icon;
   final VoidCallback onTap;
@@ -144,10 +110,7 @@ class SmallCircleButton extends StatelessWidget {
       onTap: onTap,
       color: color ?? Theme.of(context).colorScheme.surface,
       shape: const CircleBorder(),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Icon(icon, size: 16.0),
-      ),
+      child: Padding(padding: const EdgeInsets.all(8.0), child: Icon(icon, size: 16.0)),
     );
   }
 }
@@ -160,10 +123,6 @@ class RightArrowButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SmallCircleButton(
-      onTap: onTap,
-      icon: Icons.east_rounded,
-      color: color,
-    );
+    return SmallCircleButton(onTap: onTap, icon: Icons.east_rounded, color: color);
   }
 }

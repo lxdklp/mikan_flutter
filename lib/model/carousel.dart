@@ -15,10 +15,7 @@ class Carousel extends HiveObject {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Carousel &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          cover == other.cover;
+      other is Carousel && runtimeType == other.runtimeType && id == other.id && cover == other.cover;
 
   @override
   int get hashCode => id.hashCode ^ cover.hashCode;

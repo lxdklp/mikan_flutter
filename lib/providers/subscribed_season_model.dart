@@ -9,10 +9,7 @@ import 'base_model.dart';
 
 class SubscribedSeasonModel extends BaseModel {
   SubscribedSeasonModel(this._years, this._galleries) {
-    _seasons = _years
-        .map((e) => e.seasons)
-        .expand((element) => element)
-        .toList();
+    _seasons = _years.map((e) => e.seasons).expand((element) => element).toList();
   }
 
   late List<Season> _seasons;
@@ -32,10 +29,7 @@ class SubscribedSeasonModel extends BaseModel {
       return IndicatorResult.noMore;
     }
     final season = _seasons[_loadIndex];
-    final resp = await Repo.mySubscribedSeasonBangumi(
-      season.year,
-      season.season,
-    );
+    final resp = await Repo.mySubscribedSeasonBangumi(season.year, season.season);
     if (resp.success) {
       final seasonGallery = SeasonGallery(
         year: season.year,

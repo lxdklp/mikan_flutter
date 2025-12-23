@@ -9,10 +9,7 @@ import 'base_model.dart';
 
 class SeasonListModel extends BaseModel {
   SeasonListModel(this._years) {
-    _seasons = _years
-        .map((e) => e.seasons)
-        .expand((element) => element)
-        .toList();
+    _seasons = _years.map((e) => e.seasons).expand((element) => element).toList();
   }
 
   List<Season> _seasons = [];
@@ -33,10 +30,7 @@ class SeasonListModel extends BaseModel {
     final season = _seasons[_loadIndex];
     final resp = await Repo.season(season.year, season.season);
     if (resp.success) {
-      final seasonBangumis = SeasonBangumis(
-        season: season,
-        bangumiRows: resp.data ?? [],
-      );
+      final seasonBangumis = SeasonBangumis(season: season, bangumiRows: resp.data ?? []);
       if (_loadIndex == 0) {
         _bangumis = [seasonBangumis];
       } else {

@@ -36,10 +36,7 @@ class SearchPage extends StatelessWidget {
         create: (_) => SearchModel(),
         child: Builder(
           builder: (context) {
-            final searchModel = Provider.of<SearchModel>(
-              context,
-              listen: false,
-            );
+            final searchModel = Provider.of<SearchModel>(context, listen: false);
             return Scaffold(
               body: CustomScrollView(
                 slivers: [
@@ -52,11 +49,7 @@ class SearchPage extends StatelessWidget {
                         builder: (_, loading, __) {
                           if (loading) {
                             return IconButton(
-                              icon: const SizedBox(
-                                width: 24.0,
-                                height: 24.0,
-                                child: CircularProgressIndicator(),
-                              ),
+                              icon: const SizedBox(width: 24.0, height: 24.0, child: CircularProgressIndicator()),
                               onPressed: () {},
                             );
                           }
@@ -118,10 +111,7 @@ class SearchPage extends StatelessWidget {
         }
         return SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 24.0,
-              vertical: 8.0,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
             child: Text('搜索结果', style: theme.textTheme.titleMedium),
           ),
         );
@@ -141,10 +131,7 @@ class SearchPage extends StatelessWidget {
           child: SizedBox(
             height: 200.0,
             child: ListView.builder(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24.0,
-                vertical: 16.0,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
               scrollDirection: Axis.horizontal,
               itemCount: bangumis!.length,
               itemBuilder: (_, index) {
@@ -158,11 +145,7 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget _buildRecommendListItem(
-    BuildContext context,
-    ThemeData theme,
-    Bangumi bangumi,
-  ) {
+  Widget _buildRecommendListItem(BuildContext context, ThemeData theme, Bangumi bangumi) {
     final String currFlag = 'bangumi:${bangumi.id}:${bangumi.cover}';
     return Tooltip(
       message: bangumi.name,
@@ -203,10 +186,7 @@ class SearchPage extends StatelessWidget {
           child: Transform.translate(
             offset: offsetY_1,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24.0,
-                vertical: 16.0,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
               child: Wrap(
                 runSpacing: 8.0,
                 spacing: 8.0,
@@ -223,37 +203,26 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSubgroupListItem(
-    ThemeData theme,
-    Subgroup subgroup,
-    SearchModel searchModel,
-  ) {
+  Widget _buildSubgroupListItem(ThemeData theme, Subgroup subgroup, SearchModel searchModel) {
     return Selector<SearchModel, String?>(
       selector: (_, model) => model.subgroupId,
       shouldRebuild: (pre, next) => pre != next,
       builder: (_, subgroupId, __) {
         final selected = subgroup.id == subgroupId;
         return RippleTap(
-          color: selected
-              ? theme.colorScheme.primaryContainer
-              : theme.colorScheme.surfaceContainerHighest,
+          color: selected ? theme.colorScheme.primaryContainer : theme.colorScheme.surfaceContainerHighest,
           borderRadius: const BorderRadius.all(Radius.circular(6.0)),
           onTap: () {
             searchModel.subgroupId = subgroup.id;
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12.0,
-              vertical: 8.0,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
             child: Text(
               subgroup.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.labelLarge!.copyWith(
-                color: selected
-                    ? theme.colorScheme.onPrimaryContainer
-                    : theme.colorScheme.onSurfaceVariant,
+                color: selected ? theme.colorScheme.onPrimaryContainer : theme.colorScheme.onSurfaceVariant,
               ),
             ),
           ),
@@ -340,12 +309,7 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBangumiListItem(
-    BuildContext context,
-    ThemeData theme,
-    String currFlag,
-    Bangumi bangumi,
-  ) {
+  Widget _buildBangumiListItem(BuildContext context, ThemeData theme, String currFlag, Bangumi bangumi) {
     final provider = CacheImage(bangumi.cover);
     return AspectRatio(
       aspectRatio: 1.0,
@@ -378,10 +342,7 @@ class SearchPage extends StatelessWidget {
                             image: DecorationImage(
                               image: Assets.mikan.provider(),
                               fit: BoxFit.cover,
-                              colorFilter: const ColorFilter.mode(
-                                Colors.grey,
-                                BlendMode.color,
-                              ),
+                              colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.color),
                             ),
                           ),
                         ),
@@ -392,10 +353,7 @@ class SearchPage extends StatelessWidget {
                         tag: currFlag,
                         child: Container(
                           decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: provider,
-                              fit: BoxFit.cover,
-                            ),
+                            image: DecorationImage(image: provider, fit: BoxFit.cover),
                           ),
                         ),
                       );
@@ -403,11 +361,7 @@ class SearchPage extends StatelessWidget {
                   ),
                 );
               },
-              next: BangumiPage(
-                bangumiId: bangumi.id,
-                cover: bangumi.cover,
-                name: bangumi.name,
-              ),
+              next: BangumiPage(bangumiId: bangumi.id, cover: bangumi.cover, name: bangumi.name),
             ),
           ),
           const Gap(8),
@@ -428,14 +382,9 @@ class SearchPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
         child: ValueListenableBuilder<Box>(
-          valueListenable: Hive.box(
-            HiveBoxKey.db,
-          ).listenable(keys: [HiveDBKey.mikanSearch]),
+          valueListenable: Hive.box(HiveBoxKey.db).listenable(keys: [HiveDBKey.mikanSearch]),
           builder: (context, box, widget) {
-            final keywords = box.get(
-              HiveDBKey.mikanSearch,
-              defaultValue: <String>[],
-            );
+            final keywords = box.get(HiveDBKey.mikanSearch, defaultValue: <String>[]);
             return keywords.isEmpty
                 ? const SizedBox()
                 : Wrap(
@@ -446,18 +395,13 @@ class SearchPage extends StatelessWidget {
                       ...keywords.map((it) {
                         return RippleTap(
                           color: theme.primary.withValues(alpha: 0.1),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(6.0),
-                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                           onTap: () {
                             hideKeyboard();
                             searchModel.search(it);
                           },
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12.0,
-                              vertical: 6.0,
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
                             child: Text(
                               it,
                               maxLines: 1,

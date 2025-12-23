@@ -15,10 +15,7 @@ class YearSeason extends HiveObject {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is YearSeason &&
-          runtimeType == other.runtimeType &&
-          year == other.year &&
-          seasons == other.seasons;
+      other is YearSeason && runtimeType == other.runtimeType && year == other.year && seasons == other.seasons;
 
   @override
   int get hashCode => year.hashCode ^ seasons.hashCode;

@@ -32,10 +32,7 @@ class RecentSubscribedPage extends StatelessWidget {
         create: (_) => RecentSubscribedModel(loaded),
         child: Builder(
           builder: (context) {
-            final model = Provider.of<RecentSubscribedModel>(
-              context,
-              listen: false,
-            );
+            final model = Provider.of<RecentSubscribedModel>(context, listen: false);
             return Scaffold(
               body: EasyRefresh(
                 header: defaultHeader,

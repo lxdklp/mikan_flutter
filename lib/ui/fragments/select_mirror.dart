@@ -29,9 +29,7 @@ class SelectMirror extends StatelessWidget {
                       delegate: SliverChildBuilderDelegate((context, index) {
                         final url = MikanUrls.baseUrls[index];
                         return RadioListTile<String>(
-                          title: Text(
-                            url + (url.endsWith('.me') ? '' : ' (中国大陆)'),
-                          ),
+                          title: Text(url + (url.endsWith('.me') ? '' : ' (中国大陆)')),
                           value: url,
                           groupValue: selected,
                           onChanged: (value) {
@@ -48,11 +46,7 @@ class SelectMirror extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: theme.colorScheme.surfaceContainerHighest,
-                ),
-              ),
+              border: Border(top: BorderSide(color: theme.colorScheme.surfaceContainerHighest)),
             ),
             child: Row(
               children: [
@@ -77,11 +71,7 @@ class SelectMirror extends StatelessWidget {
                             : () {
                                 MikanUrls.baseUrl = selected;
                                 MyHive.setMirrorUrl(selected);
-                                Navigator.popUntil(
-                                  context,
-                                  (route) =>
-                                      Routes.index.name == route.settings.name,
-                                );
+                                Navigator.popUntil(context, (route) => Routes.index.name == route.settings.name);
                                 Restart.restartApp(context);
                               },
                         child: const Text('设置并重启'),

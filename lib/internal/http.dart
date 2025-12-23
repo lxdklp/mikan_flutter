@@ -37,10 +37,7 @@ class _BaseInterceptor extends InterceptorsWrapper {
 
 class MikanTransformer extends SyncTransformer {
   @override
-  Future transformResponse(
-    RequestOptions options,
-    ResponseBody responseBody,
-  ) async {
+  Future transformResponse(RequestOptions options, ResponseBody responseBody) async {
     final rep = await super.transformResponse(options, responseBody);
     if (rep is String) {
       final String? func = options.extra['$MikanFunc'];
@@ -92,14 +89,7 @@ class _Http extends DioForNative {
   _Http({String? cookiesDir, BaseOptions? options}) : super(options) {
     interceptors
       ..add(_BaseInterceptor())
-      ..add(
-        LogInterceptor(
-          requestHeader: false,
-          responseHeader: false,
-          request: false,
-          logPrint: (m) => m.$debug(),
-        ),
-      )
+      ..add(LogInterceptor(requestHeader: false, responseHeader: false, request: false, logPrint: (m) => m.$debug()))
       ..add(CookieManager(PersistCookieJar(storage: FileStorage(cookiesDir))));
 
     transformer = MikanTransformer();
@@ -118,11 +108,7 @@ class Http {
     try {
       Response resp;
       if (options.method == _InnerMethod.get) {
-        resp = await _http!.get(
-          options.url,
-          queryParameters: options.queryParameters,
-          options: options.options,
-        );
+        resp = await _http!.get(options.url, queryParameters: options.queryParameters, options: options.options);
       } else if (options.method == _InnerMethod.form) {
         resp = await _http!.post(
           options.url,
@@ -142,13 +128,8 @@ class Http {
       }
       if (resp.statusCode == HttpStatus.ok) {
         if (options.method == _InnerMethod.form &&
-            (resp.requestOptions.path == MikanUrls.login ||
-                resp.requestOptions.path == MikanUrls.register)) {
-          return Resp.error(
-            resp.requestOptions.path == MikanUrls.login
-                ? '登录失败，请检查帐号密码后重试'
-                : '注册失败，请检查表单正确填写后重试',
-          );
+            (resp.requestOptions.path == MikanUrls.login || resp.requestOptions.path == MikanUrls.register)) {
+          return Resp.error(resp.requestOptions.path == MikanUrls.login ? '登录失败，请检查帐号密码后重试' : '注册失败，请检查表单正确填写后重试');
         } else {
           return Resp.ok(resp.data);
         }
@@ -173,11 +154,7 @@ class Http {
     }
   }
 
-  static Future<Resp> get(
-    String url, {
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-  }) {
+  static Future<Resp> get(String url, {Map<String, dynamic>? queryParameters, Options? options}) {
     final proto = _CallOptions(
       url,
       _InnerMethod.get,
@@ -189,12 +166,7 @@ class Http {
     return Isolate.run(() => _request(proto));
   }
 
-  static Future<Resp> form(
-    String url, {
-    dynamic data,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-  }) {
+  static Future<Resp> form(String url, {dynamic data, Map<String, dynamic>? queryParameters, Options? options}) {
     final _CallOptions proto = _CallOptions(
       url,
       _InnerMethod.form,
@@ -207,12 +179,7 @@ class Http {
     return Isolate.run(() => _request(proto));
   }
 
-  static Future<Resp> json(
-    String url, {
-    dynamic data,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-  }) async {
+  static Future<Resp> json(String url, {dynamic data, Map<String, dynamic>? queryParameters, Options? options}) async {
     final _CallOptions proto = _CallOptions(
       url,
       _InnerMethod.json,

@@ -18,9 +18,7 @@ class CardStyle extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: ValueListenableBuilder(
-                valueListenable: MyHive.settings.listenable(
-                  keys: [SettingsHiveKey.cardStyle],
-                ),
+                valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.cardStyle]),
                 builder: (context, _, child) {
                   final value = MyHive.getCardStyle();
                   return SegmentedButton<int>(
@@ -34,9 +32,7 @@ class CardStyle extends StatelessWidget {
                     },
                     style: ButtonStyle(
                       shape: WidgetStateProperty.resolveWith((states) {
-                        return const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                        );
+                        return const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6.0)));
                       }),
                     ),
                     selected: {value},

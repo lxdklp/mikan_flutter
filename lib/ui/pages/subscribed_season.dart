@@ -25,11 +25,7 @@ import '../fragments/sliver_bangumi_list.dart';
 @FFRoute(name: '/subscribed/season')
 @immutable
 class SubscribedSeasonPage extends StatelessWidget {
-  const SubscribedSeasonPage({
-    super.key,
-    required this.years,
-    required this.galleries,
-  });
+  const SubscribedSeasonPage({super.key, required this.years, required this.galleries});
 
   final List<YearSeason> years;
 
@@ -44,10 +40,7 @@ class SubscribedSeasonPage extends StatelessWidget {
         create: (_) => SubscribedSeasonModel(years, galleries),
         child: Builder(
           builder: (context) {
-            final model = Provider.of<SubscribedSeasonModel>(
-              context,
-              listen: false,
-            );
+            final model = Provider.of<SubscribedSeasonModel>(context, listen: false);
             return Scaffold(
               body: Selector<SubscribedSeasonModel, List<SeasonGallery>>(
                 selector: (_, model) => model.galleries,
@@ -69,11 +62,7 @@ class SubscribedSeasonPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(
-    BuildContext context,
-    ThemeData theme,
-    List<SeasonGallery> galleries,
-  ) {
+  Widget _buildBody(BuildContext context, ThemeData theme, List<SeasonGallery> galleries) {
     return CustomScrollView(
       slivers: [
         const SliverPinnedAppBar(title: '季度订阅'),
@@ -124,11 +113,7 @@ class SubscribedSeasonPage extends StatelessWidget {
                 children: [
                   Assets.mikan.image(width: 64.0),
                   const Gap(12),
-                  Text(
-                    '>_< 您还没有订阅当前季度番组，快去添加订阅吧',
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyMedium,
-                  ),
+                  Text('>_< 您还没有订阅当前季度番组，快去添加订阅吧', textAlign: TextAlign.center, style: theme.textTheme.bodyMedium),
                 ],
               ),
             ),
@@ -138,11 +123,7 @@ class SubscribedSeasonPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSeasonSection(
-    BuildContext context,
-    ThemeData theme,
-    SeasonGallery gallery,
-  ) {
+  Widget _buildSeasonSection(BuildContext context, ThemeData theme, SeasonGallery gallery) {
     return SliverPinnedHeader(
       child: Transform.translate(
         offset: offsetY_1,
@@ -152,9 +133,7 @@ class SubscribedSeasonPage extends StatelessWidget {
           height: 48.0,
           child: Row(
             children: [
-              Expanded(
-                child: Text(gallery.title, style: theme.textTheme.titleMedium),
-              ),
+              Expanded(child: Text(gallery.title, style: theme.textTheme.titleMedium)),
               IconButton(
                 icon: const Icon(Icons.east_rounded),
                 onPressed: () {

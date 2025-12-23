@@ -55,9 +55,7 @@ class SingleSeasonPage extends StatelessWidget {
                                   bangumi.subscribed,
                                   onSuccess: () {
                                     bangumi.subscribed = !bangumi.subscribed;
-                                    context.read<OpModel>().subscribeChanged(
-                                      flag,
-                                    );
+                                    context.read<OpModel>().subscribeChanged(flag);
                                   },
                                   onError: (msg) {
                                     '订阅失败：$msg'.toast();
@@ -83,15 +81,13 @@ class SingleSeasonPage extends StatelessWidget {
   Widget _buildWeekSection(ThemeData theme, BangumiRow bangumiRow) {
     final simple = [
       if (bangumiRow.updatedNum > 0) '🚀 ${bangumiRow.updatedNum}部',
-      if (bangumiRow.subscribedUpdatedNum > 0)
-        '💖 ${bangumiRow.subscribedUpdatedNum}部',
+      if (bangumiRow.subscribedUpdatedNum > 0) '💖 ${bangumiRow.subscribedUpdatedNum}部',
       if (bangumiRow.subscribedNum > 0) '❤ ${bangumiRow.subscribedNum}部',
       '🎬 ${bangumiRow.num}部',
     ].join('，');
     final full = [
       if (bangumiRow.updatedNum > 0) '更新${bangumiRow.updatedNum}部',
-      if (bangumiRow.subscribedUpdatedNum > 0)
-        '订阅更新${bangumiRow.subscribedUpdatedNum}部',
+      if (bangumiRow.subscribedUpdatedNum > 0) '订阅更新${bangumiRow.subscribedUpdatedNum}部',
       if (bangumiRow.subscribedNum > 0) '订阅${bangumiRow.subscribedNum}部',
       '共${bangumiRow.num}部',
     ].join('，');
@@ -105,12 +101,7 @@ class SingleSeasonPage extends StatelessWidget {
           height: 48.0,
           child: Row(
             children: <Widget>[
-              Expanded(
-                child: Text(
-                  bangumiRow.name,
-                  style: theme.textTheme.titleMedium,
-                ),
-              ),
+              Expanded(child: Text(bangumiRow.name, style: theme.textTheme.titleMedium)),
               Tooltip(
                 message: full,
                 child: Text(simple, style: theme.textTheme.bodySmall),

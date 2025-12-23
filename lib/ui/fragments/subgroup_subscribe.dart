@@ -28,14 +28,11 @@ class SubgroupSubscribe extends StatelessWidget {
                 IconButton(
                   onPressed: () => wrapLoading(model.changeSubscribe),
                   icon: Selector<BangumiModel, bool>(
-                    selector: (_, model) =>
-                        model.bangumiDetail?.subscribed ?? false,
+                    selector: (_, model) => model.bangumiDetail?.subscribed ?? false,
                     shouldRebuild: (pre, next) => pre != next,
                     builder: (_, subscribed, __) {
                       return Icon(
-                        subscribed
-                            ? Icons.favorite_rounded
-                            : Icons.favorite_border_rounded,
+                        subscribed ? Icons.favorite_rounded : Icons.favorite_border_rounded,
                         color: subscribed ? theme.colorScheme.secondary : null,
                       );
                     },
@@ -54,28 +51,19 @@ class SubgroupSubscribe extends StatelessWidget {
             ),
             Consumer<BangumiModel>(
               builder: (context, model, child) {
-                final subgroups = model.bangumiDetail!.subgroupBangumis.values
-                    .toList(growable: false);
+                final subgroups = model.bangumiDetail!.subgroupBangumis.values.toList(growable: false);
                 return SliverList.builder(
                   itemBuilder: (context, index) {
                     final sub = subgroups[index];
                     return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24.0,
-                        vertical: 10.0,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Row(
                             children: [
-                              Expanded(
-                                child: Text(
-                                  sub.name,
-                                  style: theme.textTheme.titleMedium,
-                                ),
-                              ),
+                              Expanded(child: Text(sub.name, style: theme.textTheme.titleMedium)),
                               if (!sub.rss.isNullOrBlank)
                                 ElevatedButton(
                                   onPressed: () {
@@ -83,13 +71,9 @@ class SubgroupSubscribe extends StatelessWidget {
                                   },
                                   style: ElevatedButton.styleFrom(
                                     minimumSize: const Size(32.0, 32.0),
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0,
-                                    ),
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                     shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(6.0),
-                                      ),
+                                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
                                     ),
                                   ),
                                   child: sub.subscribed
@@ -117,9 +101,7 @@ class SubgroupSubscribe extends StatelessWidget {
                             style: ButtonStyle(
                               shape: WidgetStateProperty.resolveWith((states) {
                                 return const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(12.0),
-                                  ),
+                                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
                                 );
                               }),
                             ),

@@ -31,8 +31,7 @@ class FontsModel extends BaseModel {
 
   late DateTime _lastUpdate;
 
-  final Map<String, ProgressChunkEvent> fontProgress =
-      <String, ProgressChunkEvent>{};
+  final Map<String, ProgressChunkEvent> fontProgress = <String, ProgressChunkEvent>{};
   final Map<String, Cancelable> _loadingTask = <String, Cancelable>{};
 
   Future<void> load() async {
@@ -42,9 +41,7 @@ class FontsModel extends BaseModel {
       _fonts = resp.data
           .map((it) {
             final Font font = Font.fromJson(it);
-            font.files = font.files
-                .map((e) => '${ExtraUrl.fontsBaseUrl}/$e')
-                .toList();
+            font.files = font.files.map((e) => '${ExtraUrl.fontsBaseUrl}/$e').toList();
             return font;
           })
           .toList()
@@ -80,11 +77,7 @@ class FontsModel extends BaseModel {
         total += value.total ?? 0;
         progress += value.progress;
       }
-      fontProgress[font.id] = ProgressChunkEvent(
-        total: hasNull ? null : total,
-        progress: progress,
-        key: font.id,
-      );
+      fontProgress[font.id] = ProgressChunkEvent(total: hasNull ? null : total, progress: progress, key: font.id);
       final DateTime now = DateTime.now();
       if (now.isAfter(_lastUpdate)) {
         _lastUpdate = now.add(const Duration(milliseconds: 500));
@@ -92,12 +85,7 @@ class FontsModel extends BaseModel {
       }
     });
     try {
-      await NetworkFontLoader.load(
-        font.id,
-        font.files,
-        chunkEvents: chunkEvents,
-        cancelable: _loadingTask[font.id],
-      );
+      await NetworkFontLoader.load(font.id, font.files, chunkEvents: chunkEvents, cancelable: _loadingTask[font.id]);
       if (_lastEnableFont == font.id) {
         await MyHive.setFontFamily(MapEntry(font.name, font.id));
       }

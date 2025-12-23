@@ -8,45 +8,23 @@ import 'package:gap/gap.dart';
 import 'internal/kit.dart';
 import 'widget/md3e_header.dart';
 
-EdgeInsets edge16WithStatusBar(BuildContext context) => EdgeInsets.only(
-  top: 16.0 + context.statusBarHeight,
-  left: 16.0,
-  right: 16.0,
-  bottom: 16.0,
-);
+EdgeInsets edge16WithStatusBar(BuildContext context) =>
+    EdgeInsets.only(top: 16.0 + context.statusBarHeight, left: 16.0, right: 16.0, bottom: 16.0);
 
-EdgeInsets edgeH24V36WithStatusBar(BuildContext context) => EdgeInsets.only(
-  top: context.statusBarHeight + 36.0,
-  bottom: 36.0,
-  left: 24.0,
-  right: 24.0,
-);
+EdgeInsets edgeH24V36WithStatusBar(BuildContext context) =>
+    EdgeInsets.only(top: context.statusBarHeight + 36.0, bottom: 36.0, left: 24.0, right: 24.0);
 
-EdgeInsets edgeH16T96B48WithSafeHeight(BuildContext context) => EdgeInsets.only(
-  top: 96.0 + context.statusBarHeight,
-  left: 16.0,
-  right: 16.0,
-  bottom: 48.0 + context.navBarHeight,
-);
+EdgeInsets edgeH16T96B48WithSafeHeight(BuildContext context) =>
+    EdgeInsets.only(top: 96.0 + context.statusBarHeight, left: 16.0, right: 16.0, bottom: 48.0 + context.navBarHeight);
 
-EdgeInsets edgeHT16B24WithNavbarHeight(BuildContext context) => EdgeInsets.only(
-  top: 16.0,
-  left: 16.0,
-  right: 16.0,
-  bottom: 24.0 + context.navBarHeight,
-);
+EdgeInsets edgeHT16B24WithNavbarHeight(BuildContext context) =>
+    EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 24.0 + context.navBarHeight);
 
-EdgeInsets edgeH16B24WithNavbarHeight(BuildContext context) => EdgeInsets.only(
-  left: 16.0,
-  right: 16.0,
-  bottom: 24.0 + context.navBarHeight,
-);
+EdgeInsets edgeH16B24WithNavbarHeight(BuildContext context) =>
+    EdgeInsets.only(left: 16.0, right: 16.0, bottom: 24.0 + context.navBarHeight);
 
 BorderRadius scrollHeaderBorderRadius(bool hasScrolled) => hasScrolled
-    ? const BorderRadius.only(
-        bottomLeft: Radius.circular(16.0),
-        bottomRight: Radius.circular(16.0),
-      )
+    ? const BorderRadius.only(bottomLeft: Radius.circular(16.0), bottomRight: Radius.circular(16.0))
     : BorderRadius.zero;
 
 List<BoxShadow> scrollHeaderBoxShadow(bool hasScrolled) => hasScrolled
@@ -63,8 +41,7 @@ List<BoxShadow> scrollHeaderBoxShadow(bool hasScrolled) => hasScrolled
 Widget sliverGapH80WithNavBarHeight(BuildContext context) =>
     SliverToBoxAdapter(child: Gap(80.0 + context.navBarHeight));
 
-Widget gapH24WithNavBarHeight(BuildContext context) =>
-    Gap(24.0 + context.navBarHeight);
+Widget gapH24WithNavBarHeight(BuildContext context) => Gap(24.0 + context.navBarHeight);
 
 Widget sliverGapH24WithNavBarHeight(BuildContext context) =>
     SliverToBoxAdapter(child: Gap(24.0 + context.navBarHeight));
@@ -78,8 +55,7 @@ const emptySliverToBoxAdapter = SliverToBoxAdapter();
 
 const centerLoading = Center(child: CupertinoActivityIndicator());
 
-double kMaterialHeaderFactorFactor(double overscrollFraction) =>
-    2.0 * math.pow(1 - overscrollFraction, 2);
+double kMaterialHeaderFactorFactor(double overscrollFraction) => 2.0 * math.pow(1 - overscrollFraction, 2);
 
 const defaultHeader = Md3eHeader();
 

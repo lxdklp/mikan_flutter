@@ -32,9 +32,7 @@ class SliverGridDelegateWithMinCrossAxisExtent extends SliverGridDelegate {
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) {
     assert(_debugAssertIsValid(constraints.crossAxisExtent));
-    int crossAxisCount =
-        (constraints.crossAxisExtent / (minCrossAxisExtent + crossAxisSpacing))
-            .floor();
+    int crossAxisCount = (constraints.crossAxisExtent / (minCrossAxisExtent + crossAxisSpacing)).floor();
     if (crossAxisCount <= 0) {
       crossAxisCount = 1;
     }
@@ -43,8 +41,7 @@ class SliverGridDelegateWithMinCrossAxisExtent extends SliverGridDelegate {
       constraints.crossAxisExtent - crossAxisSpacing * (crossAxisCount - 1),
     );
     final double childCrossAxisExtent = usableCrossAxisExtent / crossAxisCount;
-    final double childMainAxisExtent =
-        mainAxisExtent ?? childCrossAxisExtent / childAspectRatio;
+    final double childMainAxisExtent = mainAxisExtent ?? childCrossAxisExtent / childAspectRatio;
     return SliverGridRegularTileLayout(
       crossAxisCount: crossAxisCount,
       mainAxisStride: childMainAxisExtent + mainAxisSpacing,
@@ -65,8 +62,7 @@ class SliverGridDelegateWithMinCrossAxisExtent extends SliverGridDelegate {
   }
 }
 
-class SliverWaterfallFlowDelegateWithMinCrossAxisExtent
-    extends SliverWaterfallFlowDelegate {
+class SliverWaterfallFlowDelegateWithMinCrossAxisExtent extends SliverWaterfallFlowDelegate {
   const SliverWaterfallFlowDelegateWithMinCrossAxisExtent({
     required this.minCrossAxisExtent,
     super.mainAxisSpacing,
@@ -81,9 +77,7 @@ class SliverWaterfallFlowDelegateWithMinCrossAxisExtent
 
   @override
   int getCrossAxisCount(SliverConstraints constraints) {
-    final int val =
-        (constraints.crossAxisExtent / (minCrossAxisExtent + crossAxisSpacing))
-            .floor();
+    final int val = (constraints.crossAxisExtent / (minCrossAxisExtent + crossAxisSpacing)).floor();
     return val < 1 ? 1 : val;
   }
 
@@ -94,7 +88,6 @@ class SliverWaterfallFlowDelegateWithMinCrossAxisExtent
     }
 
     return oldDelegate is SliverWaterfallFlowDelegateWithMaxCrossAxisExtent &&
-        (oldDelegate.maxCrossAxisExtent != minCrossAxisExtent ||
-            super.shouldRelayout(oldDelegate));
+        (oldDelegate.maxCrossAxisExtent != minCrossAxisExtent || super.shouldRelayout(oldDelegate));
   }
 }

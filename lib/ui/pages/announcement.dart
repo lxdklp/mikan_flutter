@@ -40,11 +40,7 @@ class Announcements extends StatelessWidget {
                           children: [
                             Assets.mikan.image(width: 64.0),
                             const Gap(12),
-                            Text(
-                              '暂无数据',
-                              textAlign: TextAlign.center,
-                              style: theme.textTheme.bodyMedium,
-                            ),
+                            Text('暂无数据', textAlign: TextAlign.center, style: theme.textTheme.bodyMedium),
                           ],
                         ),
                       ),
@@ -52,71 +48,55 @@ class Announcements extends StatelessWidget {
                   );
                 }
                 return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    childCount: v!.length + v.length - 1,
-                    (context, index) {
-                      if (index.isOdd) {
-                        return const Divider(
-                          indent: 24.0,
-                          endIndent: 24.0,
-                          height: 1.0,
-                          thickness: 1.0,
-                        );
-                      }
-                      final a = v[index ~/ 2];
-                      return Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 24.0),
-                        padding: const EdgeInsets.symmetric(vertical: 16.0),
-                        child: PlaceholderText(
-                          a.text,
-                          onMatched: (pos, matched) {
-                            if (pos == 0) {
-                              return TextSpan(
-                                text: matched.group(1),
-                                style: TextStyle(
-                                  color: theme.colorScheme.primary,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              );
-                            }
-                            int p = 0;
-                            for (int i = 0; i < a.nodes.length; ++i) {
-                              final n = a.nodes[i];
-                              if (n.type != null) {
-                                p++;
-                                if (p == pos) {
-                                  if (n.type == 'url') {
-                                    return TextSpan(
-                                      text: matched.group(1),
-                                      style: TextStyle(
-                                        color: theme.colorScheme.secondary,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          if (!n.place.isNullOrBlank) {
-                                            launchUrlString(n.place!);
-                                          }
-                                        },
-                                    );
-                                  }
-                                  if (n.type == 'bold') {
-                                    return TextSpan(
-                                      text: matched.group(1),
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    );
-                                  }
+                  delegate: SliverChildBuilderDelegate(childCount: v!.length + v.length - 1, (context, index) {
+                    if (index.isOdd) {
+                      return const Divider(indent: 24.0, endIndent: 24.0, height: 1.0, thickness: 1.0);
+                    }
+                    final a = v[index ~/ 2];
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 24.0),
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: PlaceholderText(
+                        a.text,
+                        onMatched: (pos, matched) {
+                          if (pos == 0) {
+                            return TextSpan(
+                              text: matched.group(1),
+                              style: TextStyle(color: theme.colorScheme.primary, fontWeight: FontWeight.w700),
+                            );
+                          }
+                          int p = 0;
+                          for (int i = 0; i < a.nodes.length; ++i) {
+                            final n = a.nodes[i];
+                            if (n.type != null) {
+                              p++;
+                              if (p == pos) {
+                                if (n.type == 'url') {
+                                  return TextSpan(
+                                    text: matched.group(1),
+                                    style: TextStyle(color: theme.colorScheme.secondary, fontWeight: FontWeight.w400),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        if (!n.place.isNullOrBlank) {
+                                          launchUrlString(n.place!);
+                                        }
+                                      },
+                                  );
+                                }
+                                if (n.type == 'bold') {
+                                  return TextSpan(
+                                    text: matched.group(1),
+                                    style: const TextStyle(fontWeight: FontWeight.w700),
+                                  );
                                 }
                               }
                             }
-                            return TextSpan(text: matched.group(1));
-                          },
-                        ),
-                      );
-                    },
-                  ),
+                          }
+                          return TextSpan(text: matched.group(1));
+                        },
+                      ),
+                    );
+                  }),
                 );
               },
               selector: (_, model) => model.announcements,

@@ -128,10 +128,7 @@ extension NullableStringExt on String? {
       unawaited(
         AndroidIntent(
           action: 'android.intent.action.VIEW',
-          flags: [
-            Flag.FLAG_ACTIVITY_NEW_TASK,
-            Flag.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED,
-          ],
+          flags: [Flag.FLAG_ACTIVITY_NEW_TASK, Flag.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED],
           data: this,
         ).launch().catchError((e, s) async {
           e.debug(stackTrace: s);
@@ -232,9 +229,7 @@ const SystemUiOverlayStyle darkSystemUiOverlayStyle = SystemUiOverlayStyle(
 
 extension BuildContextExt on BuildContext {
   SystemUiOverlayStyle get fitSystemUiOverlayStyle {
-    return Theme.of(this).colorScheme.surface.isDark
-        ? lightSystemUiOverlayStyle
-        : darkSystemUiOverlayStyle;
+    return Theme.of(this).colorScheme.surface.isDark ? lightSystemUiOverlayStyle : darkSystemUiOverlayStyle;
   }
 
   ThemeData get theme => Theme.of(this);
@@ -246,12 +241,7 @@ extension BuildContextExt on BuildContext {
 
 extension BrightnessColor on Color {
   static Color lightRandom() {
-    return HSLColor.fromAHSL(
-      1,
-      math.Random().nextDouble() * 360,
-      0.5,
-      0.75,
-    ).toColor();
+    return HSLColor.fromAHSL(1, math.Random().nextDouble() * 360, 0.5, 0.75).toColor();
   }
 
   Color darken([double amount = .1]) {
@@ -264,9 +254,7 @@ extension BrightnessColor on Color {
   Color lighten([double amount = .1]) {
     assert(amount >= 0 && amount <= 1);
     final hsl = HSLColor.fromColor(this);
-    final hslLight = hsl.withLightness(
-      (hsl.lightness + amount).clamp(0.0, 1.0),
-    );
+    final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
     return hslLight.toColor();
   }
 }

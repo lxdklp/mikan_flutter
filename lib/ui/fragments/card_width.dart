@@ -19,9 +19,7 @@ class CardWidth extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
               child: ValueListenableBuilder(
-                valueListenable: MyHive.settings.listenable(
-                  keys: [SettingsHiveKey.cardWidth],
-                ),
+                valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.cardWidth]),
                 builder: (context, _, child) {
                   final cardWidth = MyHive.getCardWidth();
                   return Slider(

@@ -8,9 +8,7 @@ void main() {
   final screenshots = getScreenshots();
   // var libs = getLibs();
   writeDoc2README(screenshots /*libs*/);
-  print(
-    'write doc end...${(DateTime.now().millisecondsSinceEpoch - before) / 1000.0}s',
-  );
+  print('write doc end...${(DateTime.now().millisecondsSinceEpoch - before) / 1000.0}s');
   exit(0);
 }
 
@@ -47,9 +45,7 @@ String getScreenshots() {
   for (final part in parts) {
     sb.writeln('  <tr>');
     for (final p in part) {
-      sb.writeln(
-        '    <td><img alt="" src="${p.path.replaceAll(RegExp(r'\\'), '/')}"></td>',
-      );
+      sb.writeln('    <td><img alt="" src="${p.path.replaceAll(RegExp(r'\\'), '/')}"></td>');
     }
     sb.writeln('  <tr>');
   }

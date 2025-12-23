@@ -32,11 +32,7 @@ class _SplashPageState extends State<SplashPage> {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (--second == 0) {
         timer.cancel();
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          Routes.index.name,
-          (_) => true,
-        );
+        Navigator.pushNamedAndRemoveUntil(context, Routes.index.name, (_) => true);
       }
       _counter.value = second;
     });
@@ -57,11 +53,7 @@ class _SplashPageState extends State<SplashPage> {
         body: RippleTap(
           onTap: () {
             _timer?.cancel();
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              Routes.index.name,
-              (_) => true,
-            );
+            Navigator.pushNamedAndRemoveUntil(context, Routes.index.name, (_) => true);
           },
           child: SizedBox.expand(
             child: BubbleBackground(
@@ -83,10 +75,7 @@ class _SplashPageState extends State<SplashPage> {
                       child: ValueListenableBuilder(
                         valueListenable: _counter,
                         builder: (context, v, child) {
-                          return PlaceholderText(
-                            '点击屏幕马上进入 ({$v秒})',
-                            style: theme.textTheme.bodyMedium,
-                          );
+                          return PlaceholderText('点击屏幕马上进入 ({$v秒})', style: theme.textTheme.bodyMedium);
                         },
                       ),
                     ),

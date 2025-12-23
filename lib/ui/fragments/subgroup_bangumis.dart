@@ -18,11 +18,7 @@ import 'select_subgroup.dart';
 
 @immutable
 class SubgroupBangumis extends StatelessWidget {
-  const SubgroupBangumis({
-    super.key,
-    required this.bangumiModel,
-    required this.dataId,
-  });
+  const SubgroupBangumis({super.key, required this.bangumiModel, required this.dataId});
 
   final BangumiModel bangumiModel;
   final String dataId;
@@ -36,8 +32,7 @@ class SubgroupBangumis extends StatelessWidget {
         child: Builder(
           builder: (context) {
             final model = Provider.of<BangumiModel>(context, listen: false);
-            final subgroupBangumi =
-                model.bangumiDetail!.subgroupBangumis[dataId]!;
+            final subgroupBangumi = model.bangumiDetail!.subgroupBangumis[dataId]!;
             return EasyRefresh(
               footer: defaultFooter(context),
               onLoad: () => bangumiModel.loadSubgroupList(dataId),
@@ -73,11 +68,7 @@ class SubgroupBangumis extends StatelessWidget {
     );
   }
 
-  Widget _buildList(
-    BuildContext context,
-    ThemeData theme,
-    SubgroupBangumi subgroupBangumi,
-  ) {
+  Widget _buildList(BuildContext context, ThemeData theme, SubgroupBangumi subgroupBangumi) {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
       sliver: Selector<BangumiModel, List<RecordItem>>(
@@ -89,12 +80,11 @@ class SubgroupBangumis extends StatelessWidget {
               final record = records[ind];
               return SimpleRecordItem(record: record);
             }, childCount: records.length),
-            gridDelegate:
-                const SliverWaterfallFlowDelegateWithMinCrossAxisExtent(
-                  minCrossAxisExtent: 400.0,
-                  mainAxisSpacing: 8.0,
-                  crossAxisSpacing: 8.0,
-                ),
+            gridDelegate: const SliverWaterfallFlowDelegateWithMinCrossAxisExtent(
+              minCrossAxisExtent: 400.0,
+              mainAxisSpacing: 8.0,
+              crossAxisSpacing: 8.0,
+            ),
           );
         },
       ),
@@ -109,15 +99,8 @@ void showSelectSubgroupPanel(BuildContext context, List<Subgroup> subgroups) {
       '无字幕组详情'.toast();
       return;
     }
-    Navigator.pushNamed(
-      context,
-      Routes.subgroup.name,
-      arguments: Routes.subgroup.d(subgroup: subgroup),
-    );
+    Navigator.pushNamed(context, Routes.subgroup.name, arguments: Routes.subgroup.d(subgroup: subgroup));
   } else {
-    MBottomSheet.show(
-      context,
-      (context) => MBottomSheet(child: SelectSubgroup(subgroups: subgroups)),
-    );
+    MBottomSheet.show(context, (context) => MBottomSheet(child: SelectSubgroup(subgroups: subgroups)));
   }
 }

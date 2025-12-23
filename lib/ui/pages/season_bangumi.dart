@@ -32,10 +32,7 @@ class SeasonBangumi extends StatelessWidget {
         create: (_) => SeasonListModel(years),
         child: Builder(
           builder: (context) {
-            final seasonListModel = Provider.of<SeasonListModel>(
-              context,
-              listen: false,
-            );
+            final seasonListModel = Provider.of<SeasonListModel>(context, listen: false);
             return Scaffold(
               body: Selector<SeasonListModel, List<SeasonBangumis>>(
                 selector: (_, model) => model.bangumis,
@@ -57,44 +54,32 @@ class SeasonBangumi extends StatelessWidget {
                             pushPinnedChildren: true,
                             children: <Widget>[
                               _buildSeasonSection(theme, seasonTitle),
-                              ...List.generate(
-                                seasonBangumis.bangumiRows.length,
-                                (ind) {
-                                  final bangumiRow =
-                                      seasonBangumis.bangumiRows[ind];
-                                  return MultiSliver(
-                                    pushPinnedChildren: true,
-                                    children: <Widget>[
-                                      _buildBangumiRowSection(
-                                        theme,
-                                        bangumiRow,
-                                      ),
-                                      SliverBangumiList(
-                                        flag: seasonTitle,
-                                        bangumis: bangumiRow.bangumis,
-                                        handleSubscribe: (bangumi, flag) {
-                                          context
-                                              .read<OpModel>()
-                                              .subscribeBangumi(
-                                                bangumi.id,
-                                                bangumi.subscribed,
-                                                onSuccess: () {
-                                                  bangumi.subscribed =
-                                                      !bangumi.subscribed;
-                                                  context
-                                                      .read<OpModel>()
-                                                      .subscribeChanged(flag);
-                                                },
-                                                onError: (msg) {
-                                                  '订阅失败：$msg'.toast();
-                                                },
-                                              );
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
+                              ...List.generate(seasonBangumis.bangumiRows.length, (ind) {
+                                final bangumiRow = seasonBangumis.bangumiRows[ind];
+                                return MultiSliver(
+                                  pushPinnedChildren: true,
+                                  children: <Widget>[
+                                    _buildBangumiRowSection(theme, bangumiRow),
+                                    SliverBangumiList(
+                                      flag: seasonTitle,
+                                      bangumis: bangumiRow.bangumis,
+                                      handleSubscribe: (bangumi, flag) {
+                                        context.read<OpModel>().subscribeBangumi(
+                                          bangumi.id,
+                                          bangumi.subscribed,
+                                          onSuccess: () {
+                                            bangumi.subscribed = !bangumi.subscribed;
+                                            context.read<OpModel>().subscribeChanged(flag);
+                                          },
+                                          onError: (msg) {
+                                            '订阅失败：$msg'.toast();
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                );
+                              }),
                             ],
                           );
                         }),
@@ -126,15 +111,13 @@ class SeasonBangumi extends StatelessWidget {
   Widget _buildBangumiRowSection(ThemeData theme, BangumiRow bangumiRow) {
     final simple = [
       if (bangumiRow.updatedNum > 0) '🚀 ${bangumiRow.updatedNum}部',
-      if (bangumiRow.subscribedUpdatedNum > 0)
-        '💖 ${bangumiRow.subscribedUpdatedNum}部',
+      if (bangumiRow.subscribedUpdatedNum > 0) '💖 ${bangumiRow.subscribedUpdatedNum}部',
       if (bangumiRow.subscribedNum > 0) '❤ ${bangumiRow.subscribedNum}部',
       '🎬 ${bangumiRow.num}部',
     ].join('，');
     final full = [
       if (bangumiRow.updatedNum > 0) '更新${bangumiRow.updatedNum}部',
-      if (bangumiRow.subscribedUpdatedNum > 0)
-        '订阅更新${bangumiRow.subscribedUpdatedNum}部',
+      if (bangumiRow.subscribedUpdatedNum > 0) '订阅更新${bangumiRow.subscribedUpdatedNum}部',
       if (bangumiRow.subscribedNum > 0) '订阅${bangumiRow.subscribedNum}部',
       '共${bangumiRow.num}部',
     ].join('，');
@@ -146,12 +129,7 @@ class SeasonBangumi extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
           child: Row(
             children: <Widget>[
-              Expanded(
-                child: Text(
-                  bangumiRow.name,
-                  style: theme.textTheme.titleMedium,
-                ),
-              ),
+              Expanded(child: Text(bangumiRow.name, style: theme.textTheme.titleMedium)),
               Tooltip(
                 message: full,
                 child: Text(simple, style: theme.textTheme.bodySmall),

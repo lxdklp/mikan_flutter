@@ -52,11 +52,7 @@ class SelectSeasonFragment extends StatelessWidget {
     );
   }
 
-  Widget _buildSeasonItem(
-    ThemeData theme,
-    Season season,
-    IndexModel indexModel,
-  ) {
+  Widget _buildSeasonItem(ThemeData theme, Season season, IndexModel indexModel) {
     return Flexible(
       child: FractionallySizedBox(
         widthFactor: 1,
@@ -70,26 +66,19 @@ class SelectSeasonFragment extends StatelessWidget {
               return Tooltip(
                 message: season.title,
                 child: RippleTap(
-                  color: selected
-                      ? theme.colorScheme.primaryContainer
-                      : theme.colorScheme.surfaceContainerHighest,
+                  color: selected ? theme.colorScheme.primaryContainer : theme.colorScheme.surfaceContainerHighest,
                   borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   onTap: () {
                     Navigator.pop(context);
                     indexModel.selectSeason(season);
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0,
-                      vertical: 8.0,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
                     child: Text(
                       season.season,
                       textAlign: TextAlign.center,
                       style: theme.textTheme.labelLarge!.copyWith(
-                        color: selected
-                            ? theme.colorScheme.onPrimaryContainer
-                            : theme.colorScheme.onSurfaceVariant,
+                        color: selected ? theme.colorScheme.onPrimaryContainer : theme.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -102,11 +91,7 @@ class SelectSeasonFragment extends StatelessWidget {
     );
   }
 
-  Widget _buildSeasonItemList(
-    BuildContext context,
-    ThemeData theme,
-    IndexModel indexModel,
-  ) {
+  Widget _buildSeasonItemList(BuildContext context, ThemeData theme, IndexModel indexModel) {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
       sliver: Selector<IndexModel, List<YearSeason>>(
@@ -128,22 +113,13 @@ class SelectSeasonFragment extends StatelessWidget {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: 78.0,
-                    child: Text(year.year, style: theme.textTheme.titleLarge),
-                  ),
+                  SizedBox(width: 78.0, child: Text(year.year, style: theme.textTheme.titleLarge)),
                   const Gap(12),
                   ...List.generate(4, (index) {
                     if (year.seasons.length > index) {
-                      return _buildSeasonItem(
-                        theme,
-                        year.seasons[index],
-                        indexModel,
-                      );
+                      return _buildSeasonItem(theme, year.seasons[index], indexModel);
                     } else {
-                      return const Flexible(
-                        child: FractionallySizedBox(widthFactor: 1),
-                      );
+                      return const Flexible(child: FractionallySizedBox(widthFactor: 1));
                     }
                   }),
                 ],

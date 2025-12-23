@@ -29,10 +29,7 @@ class ForgotPasswordModel extends BaseModel {
       notifyListeners();
       return '获取重置密码参数为空，请稍候重试'.toast();
     }
-    final Map<String, dynamic> params = {
-      'Email': _emailController.text,
-      '__RequestVerificationToken': token,
-    };
+    final Map<String, dynamic> params = {'Email': _emailController.text, '__RequestVerificationToken': token};
     final Resp resp = await Repo.forgotPassword(params);
     _loading = false;
     notifyListeners();

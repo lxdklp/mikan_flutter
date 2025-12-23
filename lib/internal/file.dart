@@ -8,12 +8,7 @@ Future<Directory> getExistsDirectory(String path) async {
   return directory;
 }
 
-Future<String> getExistsDirectoryPath(
-  Directory parent,
-  String childPath,
-) async {
-  final Directory directory = await getExistsDirectory(
-    parent.path + Platform.pathSeparator + childPath,
-  );
+Future<String> getExistsDirectoryPath(Directory parent, String childPath) async {
+  final Directory directory = await getExistsDirectory(parent.path + Platform.pathSeparator + childPath);
   return directory.path;
 }

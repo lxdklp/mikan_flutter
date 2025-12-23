@@ -9,8 +9,7 @@ class Lifecycle {
   static RouteObserver lifecycleRouteObserver = RouteObserver();
 }
 
-abstract class LifecycleState<T extends StatefulWidget> extends State<T>
-    with RouteAware, WidgetsBindingObserver {
+abstract class LifecycleState<T extends StatefulWidget> extends State<T> with RouteAware, WidgetsBindingObserver {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -79,8 +78,7 @@ abstract class LifecycleState<T extends StatefulWidget> extends State<T>
   void onResume() {}
 }
 
-abstract class LifecycleRouteState<T extends StatefulWidget> extends State<T>
-    with RouteAware {
+abstract class LifecycleRouteState<T extends StatefulWidget> extends State<T> with RouteAware {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -127,8 +125,7 @@ abstract class LifecycleRouteState<T extends StatefulWidget> extends State<T>
   void onResume() {}
 }
 
-abstract class LifecycleAppState<T extends StatefulWidget> extends State<T>
-    with WidgetsBindingObserver {
+abstract class LifecycleAppState<T extends StatefulWidget> extends State<T> with WidgetsBindingObserver {
   @override
   @mustCallSuper
   void didChangeAppLifecycleState(AppLifecycleState state) {

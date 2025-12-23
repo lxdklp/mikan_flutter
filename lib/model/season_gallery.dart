@@ -29,10 +29,5 @@ class SeasonGallery {
           bangumis == other.bangumis;
 
   @override
-  int get hashCode =>
-      year.hashCode ^
-      season.hashCode ^
-      title.hashCode ^
-      active.hashCode ^
-      bangumis.hashCode;
+  int get hashCode => year.hashCode ^ season.hashCode ^ title.hashCode ^ active.hashCode ^ bangumis.hashCode;
 }

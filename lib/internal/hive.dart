@@ -83,9 +83,7 @@ class MyHive {
   }
 
   static Map<String, dynamic> getLogin() {
-    return db
-        .get(HiveBoxKey.login, defaultValue: <String, dynamic>{})
-        .cast<String, dynamic>();
+    return db.get(HiveBoxKey.login, defaultValue: <String, dynamic>{}).cast<String, dynamic>();
   }
 
   static Future<void> removeCookies() async {
@@ -96,10 +94,7 @@ class MyHive {
   }
 
   static Future<void> clearCache() async {
-    await Future.wait(<Future<void>>[
-      for (final FileSystemEntity f in cacheDir.listSync())
-        f.delete(recursive: true),
-    ]);
+    await Future.wait(<Future<void>>[for (final FileSystemEntity f in cacheDir.listSync()) f.delete(recursive: true)]);
   }
 
   static Future<int> getCacheSize() async {
@@ -126,10 +121,7 @@ class MyHive {
   }
 
   static Future<void> setFontFamily(MapEntry<String, String>? font) {
-    return settings.put(
-      SettingsHiveKey.fontFamily,
-      font == null ? null : {'name': font.key, 'fontFamily': font.value},
-    );
+    return settings.put(SettingsHiveKey.fontFamily, font == null ? null : {'name': font.key, 'fontFamily': font.value});
   }
 
   static MapEntry<String, String>? getFontFamily() {
@@ -141,10 +133,7 @@ class MyHive {
   }
 
   static int getColorSeed() {
-    return settings.get(
-      SettingsHiveKey.colorSeed,
-      defaultValue: Colors.green.toARGB32(),
-    );
+    return settings.get(SettingsHiveKey.colorSeed, defaultValue: Colors.green.toARGB32());
   }
 
   static Future<void> setColorSeed(Color color) {
@@ -169,8 +158,7 @@ class MyHive {
 
   static ThemeMode getThemeMode() {
     final name = settings.get(SettingsHiveKey.themeMode);
-    return ThemeMode.values.firstWhereOrNull((e) => e.name == name) ??
-        ThemeMode.system;
+    return ThemeMode.values.firstWhereOrNull((e) => e.name == name) ?? ThemeMode.system;
   }
 
   static Future<void> setThemeMode(ThemeMode mode) async {
@@ -181,10 +169,7 @@ class MyHive {
   }
 
   static String getMirrorUrl() {
-    return settings.get(
-      SettingsHiveKey.mirrorUrl,
-      defaultValue: MikanUrls.baseUrls.last,
-    );
+    return settings.get(SettingsHiveKey.mirrorUrl, defaultValue: MikanUrls.baseUrls.last);
   }
 
   static Future<void> setMirrorUrl(String url) {
@@ -192,10 +177,7 @@ class MyHive {
   }
 
   static TabletMode getTabletMode() {
-    final mode = settings.get(
-      SettingsHiveKey.tabletMode,
-      defaultValue: TabletMode.auto.name,
-    );
+    final mode = settings.get(SettingsHiveKey.tabletMode, defaultValue: TabletMode.auto.name);
     return TabletMode.values.firstWhere((e) => e.name == mode);
   }
 
@@ -213,10 +195,7 @@ class MyHive {
   }
 
   static Decimal getCardWidth() {
-    final value = settings.get(
-      SettingsHiveKey.cardWidth,
-      defaultValue: '200.0',
-    );
+    final value = settings.get(SettingsHiveKey.cardWidth, defaultValue: '200.0');
     return Decimal.parse(value);
   }
 

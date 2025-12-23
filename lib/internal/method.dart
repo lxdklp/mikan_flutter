@@ -6,18 +6,13 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import '../topvars.dart';
 
-Future<T> wrapLoading<T>(
-  FutureOr<T> Function() block, {
-  String msg = '加载中...',
-}) async {
+Future<T> wrapLoading<T>(FutureOr<T> Function() block, {String msg = '加载中...'}) async {
   try {
     unawaited(
       SmartDialog.showLoading(
         backType: SmartBackType.block,
         clickMaskDismiss: false,
-        maskColor: Theme.of(
-          navKey.currentContext!,
-        ).colorScheme.surface.withValues(alpha: 0.64),
+        maskColor: Theme.of(navKey.currentContext!).colorScheme.surface.withValues(alpha: 0.64),
         msg: msg,
       ),
     );
@@ -28,7 +23,5 @@ Future<T> wrapLoading<T>(
 }
 
 Future<void> hideKeyboard() {
-  return SystemChannels.textInput
-      .invokeMethod('TextInput.hide')
-      .catchError((_) {});
+  return SystemChannels.textInput.invokeMethod('TextInput.hide').catchError((_) {});
 }

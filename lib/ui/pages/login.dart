@@ -46,10 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                           children: <Widget>[
                             Assets.mikan.image(width: 64.0),
                             const Gap(8),
-                            Text(
-                              'Mikan Project',
-                              style: theme.textTheme.bodySmall,
-                            ),
+                            Text('Mikan Project', style: theme.textTheme.bodySmall),
                             Text('蜜柑计划', style: theme.textTheme.titleLarge),
                             const Gap(42),
                             _buildUserNameField(theme, loginModel),
@@ -60,10 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                             const Gap(16),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  Routes.register.name,
-                                );
+                                Navigator.pushNamed(context, Routes.register.name);
                               },
                               child: const Text('还没有账号？赶紧来注册一个吧~'),
                             ),
@@ -109,10 +103,7 @@ class _LoginPageState extends State<LoginPage> {
               context.read<LoginModel>().submit(() {
                 context.read<IndexModel>().refresh();
                 context.read<SubscribedModel>().refresh();
-                Navigator.popUntil(
-                  context,
-                  (route) => route.settings.name == Routes.index.name,
-                );
+                Navigator.popUntil(context, (route) => route.settings.name == Routes.index.name);
               });
             }
           },
@@ -122,11 +113,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildRememberRow(
-    BuildContext context,
-    ThemeData theme,
-    LoginModel loginModel,
-  ) {
+  Widget _buildRememberRow(BuildContext context, ThemeData theme, LoginModel loginModel) {
     return Row(
       children: <Widget>[
         Selector<LoginModel, bool>(
@@ -196,9 +183,7 @@ class _LoginPageState extends State<LoginPage> {
             hintText: '请输入密码',
             prefixIcon: const Icon(Icons.password_rounded),
             suffixIcon: IconButton(
-              icon: showPassword
-                  ? const Icon(Icons.visibility_rounded)
-                  : const Icon(Icons.visibility_off_rounded),
+              icon: showPassword ? const Icon(Icons.visibility_rounded) : const Icon(Icons.visibility_off_rounded),
               onPressed: () {
                 loginModel.showPassword = !showPassword;
               },

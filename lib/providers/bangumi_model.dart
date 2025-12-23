@@ -30,11 +30,7 @@ class BangumiModel extends BaseModel {
     if ((sb?.records.length ?? 0) < 10) {
       return IndicatorResult.noMore;
     }
-    final resp = await Repo.bangumiMore(
-      id,
-      sb?.dataId ?? '',
-      (sb?.records.length ?? 0) + 20,
-    );
+    final resp = await Repo.bangumiMore(id, sb?.dataId ?? '', (sb?.records.length ?? 0) + 20);
     if (resp.success) {
       if (sb?.records.length == resp.data.length) {
         return IndicatorResult.noMore;

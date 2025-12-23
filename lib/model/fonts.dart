@@ -29,8 +29,7 @@ class Font {
 class License {
   License({required this.name, required this.url});
 
-  factory License.fromJson(Map<String, dynamic> json) =>
-      _$LicenseFromJson(json);
+  factory License.fromJson(Map<String, dynamic> json) => _$LicenseFromJson(json);
 
   Map<String, dynamic> toJson() => _$LicenseToJson(this);
 

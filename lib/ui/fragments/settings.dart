@@ -37,10 +37,7 @@ class SettingsPanel extends StatelessWidget {
       create: (_) => SettingsModel(),
       child: Builder(
         builder: (context) {
-          final settingsModel = Provider.of<SettingsModel>(
-            context,
-            listen: false,
-          );
+          final settingsModel = Provider.of<SettingsModel>(context, listen: false);
           return Scaffold(
             body: CustomScrollView(
               slivers: [
@@ -97,9 +94,7 @@ class SettingsPanel extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, Routes.login.name);
               },
-              icon: hasLogin
-                  ? const Icon(Icons.logout_rounded)
-                  : const Icon(Icons.login_rounded),
+              icon: hasLogin ? const Icon(Icons.logout_rounded) : const Icon(Icons.login_rounded),
             ),
           ],
         );
@@ -119,14 +114,9 @@ class SettingsPanel extends StatelessWidget {
           children: [
             Expanded(child: Text('字体管理', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
-              valueListenable: MyHive.settings.listenable(
-                keys: [SettingsHiveKey.fontFamily],
-              ),
+              valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.fontFamily]),
               builder: (context, _, child) {
-                return Text(
-                  MyHive.getFontFamily()?.key ?? '默认',
-                  style: theme.textTheme.bodyMedium,
-                );
+                return Text(MyHive.getFontFamily()?.key ?? '默认', style: theme.textTheme.bodyMedium);
               },
             ),
           ],
@@ -138,10 +128,7 @@ class SettingsPanel extends StatelessWidget {
   Widget _buildMirror(BuildContext context, ThemeData theme) {
     return RippleTap(
       onTap: () {
-        MBottomSheet.show(
-          context,
-          (context) => const MBottomSheet(child: SelectMirror()),
-        );
+        MBottomSheet.show(context, (context) => const MBottomSheet(child: SelectMirror()));
       },
       child: Container(
         height: 50.0,
@@ -150,14 +137,9 @@ class SettingsPanel extends StatelessWidget {
           children: [
             Expanded(child: Text('镜像地址', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
-              valueListenable: MyHive.settings.listenable(
-                keys: [SettingsHiveKey.mirrorUrl],
-              ),
+              valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.mirrorUrl]),
               builder: (context, _, child) {
-                return Text(
-                  Uri.parse(MyHive.getMirrorUrl()).host,
-                  style: theme.textTheme.bodyMedium,
-                );
+                return Text(Uri.parse(MyHive.getMirrorUrl()).host, style: theme.textTheme.bodyMedium);
               },
             ),
           ],
@@ -183,14 +165,9 @@ class SettingsPanel extends StatelessWidget {
           children: [
             Expanded(child: Text('卡片比例', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
-              valueListenable: MyHive.settings.listenable(
-                keys: [SettingsHiveKey.cardRatio],
-              ),
+              valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.cardRatio]),
               builder: (context, _, child) {
-                return Text(
-                  MyHive.getCardRatio().toStringAsFixed(2),
-                  style: theme.textTheme.bodyMedium,
-                );
+                return Text(MyHive.getCardRatio().toStringAsFixed(2), style: theme.textTheme.bodyMedium);
               },
             ),
           ],
@@ -216,14 +193,9 @@ class SettingsPanel extends StatelessWidget {
           children: [
             Expanded(child: Text('卡片宽度', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
-              valueListenable: MyHive.settings.listenable(
-                keys: [SettingsHiveKey.cardWidth],
-              ),
+              valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.cardWidth]),
               builder: (context, _, child) {
-                return Text(
-                  MyHive.getCardWidth().toStringAsFixed(0),
-                  style: theme.textTheme.bodyMedium,
-                );
+                return Text(MyHive.getCardWidth().toStringAsFixed(0), style: theme.textTheme.bodyMedium);
               },
             ),
           ],
@@ -249,14 +221,9 @@ class SettingsPanel extends StatelessWidget {
           children: [
             Expanded(child: Text('卡片样式', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
-              valueListenable: MyHive.settings.listenable(
-                keys: [SettingsHiveKey.cardStyle],
-              ),
+              valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.cardStyle]),
               builder: (context, _, child) {
-                return Text(
-                  '样式${MyHive.getCardStyle()}',
-                  style: theme.textTheme.bodyMedium,
-                );
+                return Text('样式${MyHive.getCardStyle()}', style: theme.textTheme.bodyMedium);
               },
             ),
           ],
@@ -268,10 +235,7 @@ class SettingsPanel extends StatelessWidget {
   Widget _buildTabletMode(BuildContext context, ThemeData theme) {
     return RippleTap(
       onTap: () {
-        MBottomSheet.show(
-          context,
-          (context) => const MBottomSheet(child: SelectTabletMode()),
-        );
+        MBottomSheet.show(context, (context) => const MBottomSheet(child: SelectTabletMode()));
       },
       child: Container(
         height: 50.0,
@@ -280,14 +244,9 @@ class SettingsPanel extends StatelessWidget {
           children: [
             Expanded(child: Text('平板模式', style: theme.textTheme.titleMedium)),
             ValueListenableBuilder(
-              valueListenable: MyHive.settings.listenable(
-                keys: [SettingsHiveKey.tabletMode],
-              ),
+              valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.tabletMode]),
               builder: (context, _, child) {
-                return Text(
-                  MyHive.getTabletMode().label,
-                  style: theme.textTheme.bodyMedium,
-                );
+                return Text(MyHive.getTabletMode().label, style: theme.textTheme.bodyMedium);
               },
             ),
           ],
@@ -316,9 +275,7 @@ class SettingsPanel extends StatelessWidget {
           Transform.translate(
             offset: const Offset(8.0, 0.0),
             child: ValueListenableBuilder(
-              valueListenable: MyHive.settings.listenable(
-                keys: [SettingsHiveKey.themeMode],
-              ),
+              valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.themeMode]),
               builder: (context, _, child) {
                 final themeMode = MyHive.getThemeMode();
                 return Row(
@@ -327,18 +284,14 @@ class SettingsPanel extends StatelessWidget {
                       onPressed: () {
                         MyHive.setThemeMode(ThemeMode.system);
                       },
-                      style: themeMode == ThemeMode.system
-                          ? selectedStyle
-                          : null,
+                      style: themeMode == ThemeMode.system ? selectedStyle : null,
                       icon: const Icon(Icons.auto_awesome_rounded),
                     ),
                     IconButton(
                       onPressed: () {
                         MyHive.setThemeMode(ThemeMode.light);
                       },
-                      style: themeMode == ThemeMode.light
-                          ? selectedStyle
-                          : null,
+                      style: themeMode == ThemeMode.light ? selectedStyle : null,
                       icon: const Icon(Icons.light_mode_rounded),
                     ),
                     IconButton(
@@ -379,10 +332,7 @@ class SettingsPanel extends StatelessWidget {
   Widget _buildDonate(BuildContext context, ThemeData theme) {
     return RippleTap(
       onTap: () {
-        MBottomSheet.show(
-          context,
-          (context) => const MBottomSheet(child: Donate()),
-        );
+        MBottomSheet.show(context, (context) => const MBottomSheet(child: Donate()));
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -397,11 +347,7 @@ class SettingsPanel extends StatelessWidget {
     );
   }
 
-  Widget _buildClearCache(
-    BuildContext context,
-    SettingsModel model,
-    ThemeData theme,
-  ) {
+  Widget _buildClearCache(BuildContext context, SettingsModel model, ThemeData theme) {
     return RippleTap(
       onTap: () async {
         final cleared = await _showClearCacheModal(context, theme);
@@ -430,9 +376,7 @@ class SettingsPanel extends StatelessWidget {
   Widget _buildPrivacyPolicy(BuildContext context, ThemeData theme) {
     return RippleTap(
       onTap: () {
-        launchUrlString(
-          'https://github.com/iota9star/mikan_flutter/blob/master/PrivacyPolicy.md',
-        );
+        launchUrlString('https://github.com/iota9star/mikan_flutter/blob/master/PrivacyPolicy.md');
       },
       child: Container(
         height: 50.0,
@@ -450,10 +394,7 @@ class SettingsPanel extends StatelessWidget {
   Widget _buildCheckUpdate(BuildContext context, ThemeData theme) {
     return RippleTap(
       onTap: () {
-        final HomeModel homeModel = Provider.of<HomeModel>(
-          context,
-          listen: false,
-        );
+        final HomeModel homeModel = Provider.of<HomeModel>(context, listen: false);
         homeModel.checkAppVersion(false);
       },
       child: Container(
@@ -498,9 +439,11 @@ class SettingsPanel extends StatelessWidget {
             ),
             FilledButton(
               onPressed: () {
-                MyHive.clearCache().whenComplete(() {
+                MyHive.clearCache().then((_) {
                   '清除成功'.toast();
-                  Navigator.pop(context, true);
+                  if (context.mounted) {
+                    Navigator.pop(context, true);
+                  }
                 });
               },
               child: const Text('确定'),
@@ -514,10 +457,7 @@ class SettingsPanel extends StatelessWidget {
   Widget _buildThemeColor(BuildContext context, ThemeData theme) {
     return RippleTap(
       onTap: () {
-        MBottomSheet.show(
-          context,
-          (context) => const MBottomSheet(child: ThemeColorPanel()),
-        );
+        MBottomSheet.show(context, (context) => const MBottomSheet(child: ThemeColorPanel()));
       },
       child: Container(
         height: 50.0,
@@ -539,11 +479,7 @@ class SettingsPanel extends StatelessWidget {
                   offset: const Offset(8.0, 0.0),
                   child: IconButton(
                     onPressed: () {
-                      MBottomSheet.show(
-                        context,
-                        (context) =>
-                            const MBottomSheet(child: ThemeColorPanel()),
-                      );
+                      MBottomSheet.show(context, (context) => const MBottomSheet(child: ThemeColorPanel()));
                     },
                     icon: Icon(Icons.circle_rounded, color: Color(colorSeed)),
                   ),

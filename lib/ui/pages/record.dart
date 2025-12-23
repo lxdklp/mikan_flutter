@@ -40,10 +40,7 @@ class RecordPage extends StatelessWidget {
         create: (_) => RecordDetailModel(record),
         child: Builder(
           builder: (context) {
-            final model = Provider.of<RecordDetailModel>(
-              context,
-              listen: false,
-            );
+            final model = Provider.of<RecordDetailModel>(context, listen: false);
             return Scaffold(
               body: NotificationListener<ScrollUpdateNotification>(
                 onNotification: (ScrollUpdateNotification notification) {
@@ -90,8 +87,7 @@ class RecordPage extends StatelessWidget {
                                 if (ratio > 0.88)
                                   Expanded(
                                     child: Selector<RecordDetailModel, String?>(
-                                      selector: (_, model) =>
-                                          model.recordDetail.name,
+                                      selector: (_, model) => model.recordDetail.name,
                                       shouldRebuild: (pre, next) => pre != next,
                                       builder: (_, value, __) {
                                         if (value == null) {
@@ -118,8 +114,7 @@ class RecordPage extends StatelessWidget {
                                 _buildSubscribeBtn(context, theme, model),
                                 IconButton(
                                   onPressed: () {
-                                    model.recordDetail.magnet
-                                        .launchAppAndCopy();
+                                    model.recordDetail.magnet.launchAppAndCopy();
                                   },
                                   icon: const Icon(Icons.downloading_rounded),
                                 ),
@@ -139,11 +134,7 @@ class RecordPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(
-    BuildContext context,
-    ThemeData theme,
-    RecordDetailModel model,
-  ) {
+  Widget _buildBody(BuildContext context, ThemeData theme, RecordDetailModel model) {
     final safeArea = MediaQuery.of(context).padding;
     final scale = (64.0 + context.screenWidth) / context.screenWidth;
     return Positioned.fill(
@@ -169,10 +160,7 @@ class RecordPage extends StatelessWidget {
                         ),
                         foregroundDecoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [
-                              theme.colorScheme.surface.withValues(alpha: 0.64),
-                              theme.colorScheme.surface,
-                            ],
+                            colors: [theme.colorScheme.surface.withValues(alpha: 0.64), theme.colorScheme.surface],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             stops: const [0.0, 0.56],
@@ -182,9 +170,7 @@ class RecordPage extends StatelessWidget {
                     ),
                   ),
                 Padding(
-                  padding: EdgeInsets.only(
-                    top: 120.0 + context.statusBarHeight,
-                  ),
+                  padding: EdgeInsets.only(top: 120.0 + context.statusBarHeight),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -199,17 +185,11 @@ class RecordPage extends StatelessWidget {
                               AutoSizeText(
                                 detail.name,
                                 maxLines: 3,
-                                style: theme.textTheme.titleLarge!.copyWith(
-                                  color: theme.colorScheme.secondary,
-                                ),
+                                style: theme.textTheme.titleLarge!.copyWith(color: theme.colorScheme.secondary),
                               ),
                               const Gap(8),
                               ...detail.more.entries.map(
-                                (e) => Text(
-                                  '${e.key}: ${e.value}',
-                                  softWrap: true,
-                                  style: theme.textTheme.bodyMedium,
-                                ),
+                                (e) => Text('${e.key}: ${e.value}', softWrap: true, style: theme.textTheme.bodyMedium),
                               ),
                             ],
                           ),
@@ -224,10 +204,7 @@ class RecordPage extends StatelessWidget {
               scale: scale,
               child: Container(color: theme.colorScheme.surface, height: 36.0),
             ),
-            if (detail.title.isNotBlank)
-              SelectionArea(
-                child: Text(detail.title, style: theme.textTheme.bodyMedium),
-              ),
+            if (detail.title.isNotBlank) SelectionArea(child: Text(detail.title, style: theme.textTheme.bodyMedium)),
             const Gap(8),
             if (!detail.tags.isNullOrEmpty)
               SelectionArea(
@@ -237,42 +214,26 @@ class RecordPage extends StatelessWidget {
                   children: [
                     if (record.size.isNotBlank)
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6.0,
-                          vertical: 4.0,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                         decoration: ShapeDecoration(
                           color: theme.colorScheme.secondaryContainer,
-                          shape: const RoundedSuperellipseBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(6.0),
-                            ),
-                          ),
+                          shape: const RoundedSuperellipseBorder(borderRadius: BorderRadius.all(Radius.circular(6.0))),
                         ),
                         child: Text(
                           record.size,
-                          style: theme.textTheme.labelSmall!.copyWith(
-                            color: theme.colorScheme.onSecondaryContainer,
-                          ),
+                          style: theme.textTheme.labelSmall!.copyWith(color: theme.colorScheme.onSecondaryContainer),
                         ),
                       ),
                     ...List.generate(detail.tags.length, (index) {
                       return Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6.0,
-                          vertical: 4.0,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                         decoration: BoxDecoration(
                           color: theme.colorScheme.tertiaryContainer,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(6.0),
-                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                         ),
                         child: Text(
                           detail.tags[index],
-                          style: theme.textTheme.labelMedium!.copyWith(
-                            color: theme.colorScheme.onTertiaryContainer,
-                          ),
+                          style: theme.textTheme.labelMedium!.copyWith(color: theme.colorScheme.onTertiaryContainer),
                         ),
                       );
                     }),
@@ -280,8 +241,7 @@ class RecordPage extends StatelessWidget {
                 ),
               ),
             const Gap(24),
-            if (detail.intro.isNotEmpty)
-              Text('概况简介', style: theme.textTheme.titleLarge),
+            if (detail.intro.isNotEmpty) Text('概况简介', style: theme.textTheme.titleLarge),
             const Gap(12),
             SelectionArea(
               child: HtmlWidget(
@@ -311,11 +271,7 @@ class RecordPage extends StatelessWidget {
                 return list[index];
               },
               itemCount: list.length,
-              padding: EdgeInsets.only(
-                left: 24.0,
-                right: 24.0,
-                bottom: safeArea.bottom + 36.0,
-              ),
+              padding: EdgeInsets.only(left: 24.0, right: 24.0, bottom: safeArea.bottom + 36.0),
             ),
           );
         },
@@ -348,10 +304,7 @@ class RecordPage extends StatelessWidget {
                 image: DecorationImage(
                   image: Assets.mikan.provider(),
                   fit: BoxFit.cover,
-                  colorFilter: const ColorFilter.mode(
-                    Colors.grey,
-                    BlendMode.color,
-                  ),
+                  colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.color),
                 ),
               ),
             ),
@@ -364,11 +317,7 @@ class RecordPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSubscribeBtn(
-    BuildContext context,
-    ThemeData theme,
-    RecordDetailModel model,
-  ) {
+  Widget _buildSubscribeBtn(BuildContext context, ThemeData theme, RecordDetailModel model) {
     return Selector<RecordDetailModel, bool>(
       selector: (_, model) => model.recordDetail.subscribed,
       shouldRebuild: (pre, next) => pre != next,
@@ -377,10 +326,7 @@ class RecordPage extends StatelessWidget {
         return subscribed
             ? IconButton(
                 tooltip: '取消订阅',
-                icon: Icon(
-                  Icons.favorite_rounded,
-                  color: theme.colorScheme.error,
-                ),
+                icon: Icon(Icons.favorite_rounded, color: theme.colorScheme.error),
                 onPressed: () {
                   context.read<OpModel>().subscribeBangumi(
                     recordDetail.id!,

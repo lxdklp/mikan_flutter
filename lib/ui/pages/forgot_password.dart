@@ -31,10 +31,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         create: (_) => ForgotPasswordModel(),
         child: Builder(
           builder: (context) {
-            final forgotModel = Provider.of<ForgotPasswordModel>(
-              context,
-              listen: false,
-            );
+            final forgotModel = Provider.of<ForgotPasswordModel>(context, listen: false);
             return Scaffold(
               body: Center(
                 child: ConstrainedBox(
@@ -48,10 +45,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           children: <Widget>[
                             Image.asset(Assets.mikan.path, width: 64.0),
                             const Gap(8),
-                            Text(
-                              'Mikan Project',
-                              style: theme.textTheme.bodySmall,
-                            ),
+                            Text('Mikan Project', style: theme.textTheme.bodySmall),
                             Text('蜜柑计划', style: theme.textTheme.titleLarge),
                             const Gap(42),
                             _buildEmailField(theme, forgotModel),
@@ -128,9 +122,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   void _showForgotPasswordConfirmationPanel(BuildContext context) {
-    MBottomSheet.show(
-      context,
-      (context) => const MBottomSheet(child: ForgotPasswordConfirm()),
-    );
+    MBottomSheet.show(context, (context) => const MBottomSheet(child: ForgotPasswordConfirm()));
   }
 }

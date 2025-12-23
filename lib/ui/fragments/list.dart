@@ -28,9 +28,7 @@ class ListFragment extends StatelessWidget {
         footer: defaultFooter(context),
         onRefresh: model.refresh,
         onLoad: model.loadMore,
-        child: CustomScrollView(
-          slivers: [_buildHeader(), _buildList(theme, model)],
-        ),
+        child: CustomScrollView(slivers: [_buildHeader(), _buildList(theme, model)]),
       ),
     );
   }
@@ -84,10 +82,7 @@ class _PinedHeader extends StatelessWidget {
                   TransitionContainer(
                     next: const SearchPage(),
                     builder: (context, open) {
-                      return IconButton(
-                        onPressed: open,
-                        icon: const Icon(Icons.search_rounded),
-                      );
+                      return IconButton(onPressed: open, icon: const Icon(Icons.search_rounded));
                     },
                   ),
                 ],

@@ -22,24 +22,14 @@ Future<void> main(List<String> arguments) async {
   final artifacts = parse['artifacts'];
   final shell = Shell();
   final result = await shell.run('git remote -v');
-  final urlParts = result.first.stdout
-      .toString()
-      .trim()
-      .split('\n')
-      .last
-      .split('/');
+  final urlParts = result.first.stdout.toString().trim().split('\n').last.split('/');
   final repo = [
     urlParts[urlParts.length - 2],
     urlParts[urlParts.length - 1].split(' ').first.replaceAll('.git', ''),
   ].join('/');
   switch (Fun.values.firstWhere((e) => e.name == parse['fun'])) {
     case Fun.release:
-      await _release(
-        shell: shell,
-        repo: repo,
-        token: token,
-        artifacts: artifacts,
-      );
+      await _release(shell: shell, repo: repo, token: token, artifacts: artifacts);
   }
 }
 
@@ -51,9 +41,7 @@ Future<void> _release({
 }) async {
   await shell.run('git remote set-url origin https://$token@github.com/$repo');
   var result = await shell.run('git show -s');
-  final commitId = RegExp(
-    r'\s([a-z\d]{40})\s',
-  ).firstMatch(result.first.stdout)?.group(1);
+  final commitId = RegExp(r'\s([a-z\d]{40})\s').firstMatch(result.first.stdout)?.group(1);
   if (commitId == null) {
     throw StateError("Can't get ref.");
   }
@@ -75,9 +63,7 @@ Future<void> _release({
   //     .last;
   result = await shell.run('git ls-remote --tags');
   final tags = result.first.stdout.toString();
-  final has = tags
-      .split('\n')
-      .any((s) => s.split('refs/tags/').last.startsWith(tag));
+  final has = tags.split('\n').any((s) => s.split('refs/tags/').last.startsWith(tag));
   if (!has) {
     try {
       await shell.run(
@@ -95,10 +81,7 @@ Future<void> _release({
   try {
     final response = await http.get(
       Uri.parse('https://api.github.com/repos/$repo/releases/tags/$tag'),
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Accept': 'application/vnd.github.v3+json',
-      },
+      headers: {'Authorization': 'Bearer $token', 'Accept': 'application/vnd.github.v3+json'},
     );
     id = jsonDecode(response.body)?['id'];
   } catch (e) {
@@ -117,10 +100,7 @@ Future<void> _release({
     final response = await http.post(
       Uri.parse('https://api.github.com/repos/$repo/releases'),
       body: data,
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Accept': 'application/vnd.github.v3+json',
-      },
+      headers: {'Authorization': 'Bearer $token', 'Accept': 'application/vnd.github.v3+json'},
     );
     id = jsonDecode(response.body)?['id'];
   }
@@ -131,10 +111,7 @@ Future<void> _release({
   final files = Glob(artifacts, recursive: true).listSync(root: root.path);
   final response = await http.get(
     Uri.parse('https://api.github.com/repos/$repo/releases/$id/assets'),
-    headers: {
-      'Authorization': 'Bearer $token',
-      'Accept': 'application/vnd.github.v3+json',
-    },
+    headers: {'Authorization': 'Bearer $token', 'Accept': 'application/vnd.github.v3+json'},
   );
   final assets = jsonDecode(response.body) as List?;
   print('assets: ${assets?.map((e) => e['name'])}');
@@ -150,28 +127,18 @@ Future<void> _release({
         print('exist asset: ${exist?['name']}');
         // delete exist assert
         final response = await http.delete(
-          Uri.parse(
-            'https://api.github.com/repos/$repo/releases/assets/${exist['id']}',
-          ),
-          headers: {
-            'Authorization': 'Bearer $token',
-            'Accept': 'application/vnd.github.v3+json',
-          },
+          Uri.parse('https://api.github.com/repos/$repo/releases/assets/${exist['id']}'),
+          headers: {'Authorization': 'Bearer $token', 'Accept': 'application/vnd.github.v3+json'},
         );
         print('delete end: ${response.statusCode}');
       }
       // upload asset.
       final request = http.MultipartRequest(
         'POST',
-        Uri.parse(
-          'https://uploads.github.com/repos/$repo/releases/$id/assets?name=$fileName',
-        ),
+        Uri.parse('https://uploads.github.com/repos/$repo/releases/$id/assets?name=$fileName'),
       );
       request.files.add(await http.MultipartFile.fromPath('file', filePath));
-      request.headers.addAll({
-        'Authorization': 'Bearer $token',
-        'Accept': 'application/vnd.github.v3+json',
-      });
+      request.headers.addAll({'Authorization': 'Bearer $token', 'Accept': 'application/vnd.github.v3+json'});
       final response = await request.send();
       print('upload end: ${response.statusCode}, $filePath');
     }

@@ -51,10 +51,7 @@ class RecordItem {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is RecordItem &&
-          runtimeType == other.runtimeType &&
-          url == other.url;
+      identical(this, other) || other is RecordItem && runtimeType == other.runtimeType && url == other.url;
 
   @override
   int get hashCode => url.hashCode;

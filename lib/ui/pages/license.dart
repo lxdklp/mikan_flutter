@@ -18,10 +18,7 @@ class LicenseList extends StatelessWidget {
   LicenseList({super.key});
 
   final Future<_LicenseData> _licenses = LicenseRegistry.licenses
-      .fold<_LicenseData>(
-        _LicenseData(),
-        (_LicenseData prev, LicenseEntry license) => prev..addLicense(license),
-      )
+      .fold<_LicenseData>(_LicenseData(), (_LicenseData prev, LicenseEntry license) => prev..addLicense(license))
       .then((_LicenseData licenseData) => licenseData..sortPackages());
 
   @override
@@ -45,10 +42,7 @@ class LicenseList extends StatelessWidget {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: Assets.mikan.provider(),
-                            colorFilter: const ColorFilter.mode(
-                              Colors.grey,
-                              BlendMode.color,
-                            ),
+                            colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.color),
                           ),
                         ),
                       ),
@@ -64,33 +58,25 @@ class LicenseList extends StatelessWidget {
                         child: SizedBox(
                           width: 24.0,
                           height: 24.0,
-                          child: CircularProgressIndicator(
-                            color: theme.secondary,
-                          ),
+                          child: CircularProgressIndicator(color: theme.secondary),
                         ),
                       ),
                     );
                   case ConnectionState.done:
                     final data = snapshot.data!;
                     return SliverPadding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24.0,
-                        vertical: 8.0,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
                       sliver: SliverWaterfallFlow(
                         delegate: SliverChildBuilderDelegate((_, index) {
                           final String packageName = data.packages[index];
-                          final List<int> bindings =
-                              data.packageLicenseBindings[packageName]!;
+                          final List<int> bindings = data.packageLicenseBindings[packageName]!;
                           return ScalableCard(
                             onTap: () {
                               Navigator.of(context).pushNamed(
                                 Routes.licenseDetail.name,
                                 arguments: Routes.licenseDetail.d(
                                   packageName: packageName,
-                                  licenseEntries: bindings
-                                      .map((int i) => data.licenses[i])
-                                      .toList(growable: false),
+                                  licenseEntries: bindings.map((int i) => data.licenses[i]).toList(growable: false),
                                 ),
                               );
                             },
@@ -109,21 +95,17 @@ class LicenseList extends StatelessWidget {
                                     ),
                                   ),
                                   const Gap(8),
-                                  Text(
-                                    '${bindings.length}条协议',
-                                    style: const TextStyle(fontFamily: 'mono'),
-                                  ),
+                                  Text('${bindings.length}条协议', style: const TextStyle(fontFamily: 'mono')),
                                 ],
                               ),
                             ),
                           );
                         }, childCount: data.packages.length),
-                        gridDelegate:
-                            SliverWaterfallFlowDelegateWithMinCrossAxisExtent(
-                              crossAxisSpacing: context.margins,
-                              mainAxisSpacing: context.margins,
-                              minCrossAxisExtent: 240.0,
-                            ),
+                        gridDelegate: SliverWaterfallFlowDelegateWithMinCrossAxisExtent(
+                          crossAxisSpacing: context.margins,
+                          mainAxisSpacing: context.margins,
+                          minCrossAxisExtent: 240.0,
+                        ),
                       ),
                     );
                 }
@@ -132,19 +114,13 @@ class LicenseList extends StatelessWidget {
             SliverToBoxAdapter(
               child: Center(
                 child: Padding(
-                  padding: EdgeInsets.only(
-                    top: 24.0,
-                    bottom: 24.0 + context.navBarHeight,
-                  ),
+                  padding: EdgeInsets.only(top: 24.0, bottom: 24.0 + context.navBarHeight),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset(Assets.mikan.path, width: 36.0),
                       const Gap(12),
-                      const Text(
-                        '❤',
-                        style: TextStyle(fontSize: 18.0, color: Colors.red),
-                      ),
+                      const Text('❤', style: TextStyle(fontSize: 18.0, color: Colors.red)),
                       const Gap(12),
                       const FlutterLogo(size: 32.0),
                     ],

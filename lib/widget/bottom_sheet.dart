@@ -4,12 +4,7 @@ import '../internal/kit.dart';
 import '../topvars.dart';
 
 class MBottomSheet extends StatelessWidget {
-  const MBottomSheet({
-    super.key,
-    required this.child,
-    this.height,
-    this.heightFactor = 0.618,
-  });
+  const MBottomSheet({super.key, required this.child, this.height, this.heightFactor = 0.618});
 
   final Widget child;
   final double? height;
@@ -37,30 +32,20 @@ class MBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final clipRRect = ClipRSuperellipse(
-      borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-      child: child,
-    );
+    final clipRRect = ClipRSuperellipse(borderRadius: const BorderRadius.all(Radius.circular(24.0)), child: child);
     return Material(
       color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.27),
-      shape: const RoundedSuperellipseBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28.0)),
-      ),
+      shape: const RoundedSuperellipseBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(28.0))),
       child: Padding(
         padding: EdgeInsets.only(
           left: 8.0,
           right: 8.0,
           bottom: 8.0 + navKey.currentContext!.navBarHeight,
-          top: heightFactor == 1.0
-              ? navKey.currentContext!.statusBarHeight + 8.0
-              : 8.0,
+          top: heightFactor == 1.0 ? navKey.currentContext!.statusBarHeight + 8.0 : 8.0,
         ),
         child: height != null
             ? SizedBox(height: height, child: clipRRect)
-            : FractionallySizedBox(
-                heightFactor: heightFactor,
-                child: clipRRect,
-              ),
+            : FractionallySizedBox(heightFactor: heightFactor, child: clipRRect),
       ),
     );
   }

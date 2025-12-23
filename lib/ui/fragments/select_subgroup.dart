@@ -23,10 +23,7 @@ class SelectSubgroup extends StatelessWidget {
               final sub = subgroups[index];
               return RippleTap(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24.0,
-                    vertical: 12.0,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
                   child: Row(
                     children: [
                       CircleAvatar(child: Text(sub.name[0])),
@@ -36,11 +33,7 @@ class SelectSubgroup extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.subgroup.name,
-                    arguments: Routes.subgroup.d(subgroup: sub),
-                  );
+                  Navigator.pushNamed(context, Routes.subgroup.name, arguments: Routes.subgroup.d(subgroup: sub));
                 },
               );
             }, childCount: subgroups.length),

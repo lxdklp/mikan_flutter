@@ -34,6 +34,5 @@ class User extends HiveObject {
           rss == other.rss;
 
   @override
-  int get hashCode =>
-      name.hashCode ^ avatar.hashCode ^ token.hashCode ^ rss.hashCode;
+  int get hashCode => name.hashCode ^ avatar.hashCode ^ token.hashCode ^ rss.hashCode;
 }

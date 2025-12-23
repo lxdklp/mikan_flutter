@@ -33,18 +33,13 @@ class HomeModel extends BaseModel {
         final v = await InAppUpdate.checkForUpdate().then(
           (v) {
             return (
-              availability:
-                  v.updateAvailability == UpdateAvailability.updateAvailable,
+              availability: v.updateAvailability == UpdateAvailability.updateAvailable,
               immediateUpdateAllowed: v.immediateUpdateAllowed,
               flexibleUpdateAllowed: v.flexibleUpdateAllowed,
             );
           },
           onError: (e, s) {
-            return (
-              availability: false,
-              immediateUpdateAllowed: false,
-              flexibleUpdateAllowed: false,
-            );
+            return (availability: false, immediateUpdateAllowed: false, flexibleUpdateAllowed: false);
           },
         );
         if (v.availability) {
@@ -66,6 +61,7 @@ class HomeModel extends BaseModel {
     if (_checkingUpgrade) {
       return;
     }
+    final context = navKey.currentState!.context;
     _checkingUpgrade = true;
     notifyListeners();
     try {
@@ -96,11 +92,10 @@ class HomeModel extends BaseModel {
       if (hasNewVersion) {
         await Jiffy.setLocale('zh_cn');
         unawaited(
-          // ignore: use_build_context_synchronously
           MBottomSheet.show(
-            navKey.currentState!.context,
-            (context) =>
-                MBottomSheet(child: _buildUpgradeWidget(context, resp.data)),
+            // ignore: use_build_context_synchronously
+            context,
+            (ctx) => MBottomSheet(child: _buildUpgradeWidget(ctx, resp.data)),
           ),
         );
       } else {
@@ -116,10 +111,7 @@ class HomeModel extends BaseModel {
     }
   }
 
-  Widget _buildUpgradeWidget(
-    BuildContext context,
-    Map<String, dynamic> release,
-  ) {
+  Widget _buildUpgradeWidget(BuildContext context, Map<String, dynamic> release) {
     final theme = Theme.of(context);
     final jiffy = Jiffy.parse(release['published_at'])..add(hours: 8);
     return Scaffold(
@@ -138,23 +130,16 @@ class HomeModel extends BaseModel {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
                           decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(2.0),
-                            ),
+                            borderRadius: const BorderRadius.all(Radius.circular(2.0)),
                             color: theme.colorScheme.error,
                           ),
                           child: Text(
                             'New ${release["tag_name"]}',
-                            style: theme.textTheme.labelSmall!.copyWith(
-                              color: theme.colorScheme.onError,
-                            ),
+                            style: theme.textTheme.labelSmall!.copyWith(color: theme.colorScheme.onError),
                           ),
                         ),
                         const Gap(4),
-                        Text(
-                          '发布于 ${jiffy.yMMMMEEEEdjm}',
-                          style: theme.textTheme.bodySmall,
-                        ),
+                        Text('发布于 ${jiffy.yMMMMEEEEdjm}', style: theme.textTheme.bodySmall),
                       ],
                     ),
                   ),
@@ -164,10 +149,7 @@ class HomeModel extends BaseModel {
                   itemBuilder: (context, index) {
                     final item = release['assets'][index];
                     return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24.0,
-                        vertical: 12.0,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
                       child: Row(
                         children: [
                           Expanded(
@@ -177,14 +159,9 @@ class HomeModel extends BaseModel {
                                 Text(item['name']),
                                 const Gap(8),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 6.0,
-                                    vertical: 4.0,
-                                  ),
+                                  padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                                   decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(6.0),
-                                    ),
+                                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                                     color: theme.colorScheme.primaryContainer,
                                   ),
                                   child: Text(
@@ -194,14 +171,10 @@ class HomeModel extends BaseModel {
                                           'x86_64',
                                           'universal',
                                           'win32',
-                                        }.firstWhere(
-                                          (arch) => item['name'].contains(arch),
-                                          orElse: () => null,
-                                        ) ??
+                                        }.firstWhere((arch) => item['name'].contains(arch), orElse: () => null) ??
                                         'universal',
                                     style: theme.textTheme.labelSmall!.copyWith(
-                                      color:
-                                          theme.colorScheme.onPrimaryContainer,
+                                      color: theme.colorScheme.onPrimaryContainer,
                                     ),
                                   ),
                                 ),
@@ -210,26 +183,15 @@ class HomeModel extends BaseModel {
                           ),
                           ElevatedButton.icon(
                             onPressed: () {
-                              item['browser_download_url']
-                                  .toString()
-                                  .launchAppAndCopy();
+                              item['browser_download_url'].toString().launchAppAndCopy();
                             },
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size(120.0, 36.0),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(6.0),
-                                ),
-                              ),
+                              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6.0))),
                               textStyle: const TextStyle(fontSize: 12.0),
                             ),
-                            icon: const Icon(
-                              Icons.download_rounded,
-                              size: 16.0,
-                            ),
-                            label: Text(
-                              '${(item['size'] / 1024 / 1024).toStringAsFixed(2)}MB',
-                            ),
+                            icon: const Icon(Icons.download_rounded, size: 16.0),
+                            label: Text('${(item['size'] / 1024 / 1024).toStringAsFixed(2)}MB'),
                           ),
                         ],
                       ),
@@ -237,12 +199,7 @@ class HomeModel extends BaseModel {
                   },
                   itemCount: (release['assets'] as List).length,
                   separatorBuilder: (context, index) {
-                    return const Divider(
-                      thickness: 0.0,
-                      height: 1.0,
-                      indent: 24.0,
-                      endIndent: 24.0,
-                    );
+                    return const Divider(thickness: 0.0, height: 1.0, indent: 24.0, endIndent: 24.0);
                   },
                 ),
               ],
@@ -250,32 +207,21 @@ class HomeModel extends BaseModel {
           ),
           const Divider(thickness: 0.0, height: 1.0),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 24.0,
-              vertical: 16.0,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    MyHive.db.put(
-                      HiveDBKey.ignoreUpdateVersion,
-                      release['tag_name'],
-                    );
+                    MyHive.db.put(HiveDBKey.ignoreUpdateVersion, release['tag_name']);
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(0.0, 36.0),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                    ),
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6.0))),
                     backgroundColor: theme.colorScheme.errorContainer,
                   ),
-                  child: Text(
-                    '下次一定',
-                    style: TextStyle(color: theme.colorScheme.onErrorContainer),
-                  ),
+                  child: Text('下次一定', style: TextStyle(color: theme.colorScheme.onErrorContainer)),
                 ),
                 const Gap(12),
                 ElevatedButton(
@@ -284,9 +230,7 @@ class HomeModel extends BaseModel {
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(0.0, 36.0),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                    ),
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6.0))),
                   ),
                   child: const Text('前往下载'),
                 ),

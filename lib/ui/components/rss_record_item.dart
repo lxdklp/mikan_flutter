@@ -22,21 +22,12 @@ class RssRecordItem extends StatelessWidget {
     final tags = record.tags;
     final cover = Container(
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: CacheImage(record.cover),
-          fit: BoxFit.cover,
-        ),
+        image: DecorationImage(image: CacheImage(record.cover), fit: BoxFit.cover),
       ),
-      foregroundDecoration: BoxDecoration(
-        color: theme.colorScheme.surface.withValues(alpha: 0.87),
-      ),
+      foregroundDecoration: BoxDecoration(color: theme.colorScheme.surface.withValues(alpha: 0.87)),
     );
-    final tagStyle = theme.textTheme.labelSmall!.copyWith(
-      color: theme.colorScheme.onTertiaryContainer,
-    );
-    final sizeStyle = theme.textTheme.labelSmall!.copyWith(
-      color: theme.colorScheme.onSecondaryContainer,
-    );
+    final tagStyle = theme.textTheme.labelSmall!.copyWith(color: theme.colorScheme.onTertiaryContainer);
+    final sizeStyle = theme.textTheme.labelSmall!.copyWith(color: theme.colorScheme.onSecondaryContainer);
     return TransitionContainer(
       builder: (context, open) {
         return RippleTap(
@@ -51,15 +42,10 @@ class RssRecordItem extends StatelessWidget {
                   TransitionContainer(
                     builder: (context, open) {
                       return RippleTap(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(6.0),
-                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                         onTap: open,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 12.0,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
                           child: Row(
                             children: [
                               Expanded(
@@ -84,63 +70,40 @@ class RssRecordItem extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              TMSMenuButton(
-                                torrent: record.torrent,
-                                magnet: record.magnet,
-                                share: record.share,
-                              ),
+                              TMSMenuButton(torrent: record.torrent, magnet: record.magnet, share: record.share),
                             ],
                           ),
                         ),
                       );
                     },
-                    next: BangumiPage(
-                      bangumiId: record.id!,
-                      cover: record.cover,
-                      name: record.name,
-                    ),
+                    next: BangumiPage(bangumiId: record.id!, cover: record.cover, name: record.name),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(record.title, style: theme.textTheme.bodySmall),
                   ),
                   Container(
-                    padding: const EdgeInsets.only(
-                      left: 16.0,
-                      right: 16.0,
-                      bottom: 16.0,
-                      top: 8.0,
-                    ),
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0, top: 8.0),
                     child: Wrap(
                       spacing: 6.0,
                       runSpacing: 6.0,
                       children: [
                         if (record.size.isNotBlank)
                           Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6.0,
-                              vertical: 4.0,
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                             decoration: BoxDecoration(
                               color: theme.colorScheme.secondaryContainer,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(6.0),
-                              ),
+                              borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                             ),
                             child: Text(record.size, style: sizeStyle),
                           ),
                         if (!tags.isNullOrEmpty)
                           for (final tag in tags)
                             Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 6.0,
-                                vertical: 4.0,
-                              ),
+                              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                               decoration: BoxDecoration(
                                 color: theme.colorScheme.tertiaryContainer,
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(6.0),
-                                ),
+                                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                               ),
                               child: Text(tag, style: tagStyle),
                             ),

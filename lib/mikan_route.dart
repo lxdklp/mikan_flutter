@@ -36,8 +36,7 @@ FFRouteSettings getRouteSettings({
   Map<String, dynamic>? arguments,
   PageBuilder? notFoundPageBuilder,
 }) {
-  final Map<String, dynamic> safeArguments =
-      arguments ?? const <String, dynamic>{};
+  final Map<String, dynamic> safeArguments = arguments ?? const <String, dynamic>{};
   switch (name) {
     case '/announcements':
       return FFRouteSettings(
@@ -49,10 +48,8 @@ FFRouteSettings getRouteSettings({
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        builder: () => SeasonBangumi(
-          key: asT<Key?>(safeArguments['key']),
-          years: asT<List<YearSeason>>(safeArguments['years'])!,
-        ),
+        builder: () =>
+            SeasonBangumi(key: asT<Key?>(safeArguments['key']), years: asT<List<YearSeason>>(safeArguments['years'])!),
       );
     case '/fonts':
       return FFRouteSettings(
@@ -85,9 +82,7 @@ FFRouteSettings getRouteSettings({
         builder: () => LicenseDetail(
           key: asT<Key?>(safeArguments['key']),
           packageName: asT<String>(safeArguments['packageName'])!,
-          licenseEntries: asT<List<LicenseEntry>>(
-            safeArguments['licenseEntries'],
-          )!,
+          licenseEntries: asT<List<LicenseEntry>>(safeArguments['licenseEntries'])!,
         ),
       );
     case '/login':
@@ -106,10 +101,8 @@ FFRouteSettings getRouteSettings({
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        builder: () => SingleSeasonPage(
-          key: asT<Key?>(safeArguments['key']),
-          season: asT<Season>(safeArguments['season'])!,
-        ),
+        builder: () =>
+            SingleSeasonPage(key: asT<Key?>(safeArguments['key']), season: asT<Season>(safeArguments['season'])!),
       );
     case '/splash':
       return FFRouteSettings(
@@ -121,10 +114,8 @@ FFRouteSettings getRouteSettings({
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        builder: () => SubgroupPage(
-          key: asT<Key?>(safeArguments['key']),
-          subgroup: asT<Subgroup>(safeArguments['subgroup'])!,
-        ),
+        builder: () =>
+            SubgroupPage(key: asT<Key?>(safeArguments['key']), subgroup: asT<Subgroup>(safeArguments['subgroup'])!),
       );
     case '/subscribed/recent':
       return FFRouteSettings(

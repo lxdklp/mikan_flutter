@@ -12,8 +12,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 @immutable
-class CacheImage extends painting.ImageProvider<painting.NetworkImage>
-    implements painting.NetworkImage {
+class CacheImage extends painting.ImageProvider<painting.NetworkImage> implements painting.NetworkImage {
   /// Creates an object that fetches the image at the given URL.
   ///
   /// The arguments [url] and [scale] must not be null.
@@ -33,22 +32,14 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
     return SynchronousFuture<CacheImage>(this);
   }
 
-  ImageStreamCompleter load(
-    painting.NetworkImage key,
-    painting.DecoderBufferCallback decode,
-  ) {
+  ImageStreamCompleter load(painting.NetworkImage key, painting.DecoderBufferCallback decode) {
     // Ownership of this controller is handed off to [_loadAsync]; it is that
     // method's responsibility to close the controller's stream when the image
     // has been loaded or an error is thrown.
-    final StreamController<ImageChunkEvent> chunkEvents =
-        StreamController<ImageChunkEvent>();
+    final StreamController<ImageChunkEvent> chunkEvents = StreamController<ImageChunkEvent>();
 
     return MultiFrameImageStreamCompleter(
-      codec: _loadAsync(
-        key as CacheImage,
-        chunkEvents,
-        decodeDeprecated: decode,
-      ),
+      codec: _loadAsync(key as CacheImage, chunkEvents, decodeDeprecated: decode),
       chunkEvents: chunkEvents.stream,
       scale: key.scale,
       debugLabel: key.url,
@@ -60,22 +51,14 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
   }
 
   @override
-  ImageStreamCompleter loadBuffer(
-    painting.NetworkImage key,
-    painting.DecoderBufferCallback decode,
-  ) {
+  ImageStreamCompleter loadBuffer(painting.NetworkImage key, painting.DecoderBufferCallback decode) {
     // Ownership of this controller is handed off to [_loadAsync]; it is that
     // method's responsibility to close the controller's stream when the image
     // has been loaded or an error is thrown.
-    final StreamController<ImageChunkEvent> chunkEvents =
-        StreamController<ImageChunkEvent>();
+    final StreamController<ImageChunkEvent> chunkEvents = StreamController<ImageChunkEvent>();
 
     return MultiFrameImageStreamCompleter(
-      codec: _loadAsync(
-        key as CacheImage,
-        chunkEvents,
-        decodeBufferDeprecated: decode,
-      ),
+      codec: _loadAsync(key as CacheImage, chunkEvents, decodeBufferDeprecated: decode),
       chunkEvents: chunkEvents.stream,
       scale: key.scale,
       debugLabel: key.url,
@@ -87,15 +70,11 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
   }
 
   @override
-  ImageStreamCompleter loadImage(
-    painting.NetworkImage key,
-    painting.ImageDecoderCallback decode,
-  ) {
+  ImageStreamCompleter loadImage(painting.NetworkImage key, painting.ImageDecoderCallback decode) {
     // Ownership of this controller is handed off to [_loadAsync]; it is that
     // method's responsibility to close the controller's stream when the image
     // has been loaded or an error is thrown.
-    final StreamController<ImageChunkEvent> chunkEvents =
-        StreamController<ImageChunkEvent>();
+    final StreamController<ImageChunkEvent> chunkEvents = StreamController<ImageChunkEvent>();
 
     return MultiFrameImageStreamCompleter(
       codec: _loadAsync(key as CacheImage, chunkEvents, decode: decode),
@@ -113,8 +92,7 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
   // We set `autoUncompress` to false to ensure that we can trust the value of
   // the `Content-Length` HTTP header. We automatically uncompress the content
   // in our call to [consolidateHttpClientResponseBytes].
-  static final HttpClient _sharedHttpClient = HttpClient()
-    ..autoUncompress = false;
+  static final HttpClient _sharedHttpClient = HttpClient()..autoUncompress = false;
 
   static HttpClient get _httpClient {
     HttpClient client = _sharedHttpClient;
@@ -155,21 +133,13 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
         // added on the server later. Avoid having future calls to resolve
         // fail to check the network again.
         await response.drain<List<int>>(<int>[]);
-        throw painting.NetworkImageLoadException(
-          statusCode: response.statusCode,
-          uri: resolved,
-        );
+        throw painting.NetworkImageLoadException(statusCode: response.statusCode, uri: resolved);
       }
 
       final Uint8List bytes = await consolidateHttpClientResponseBytes(
         response,
         onBytesReceived: (int cumulative, int? total) {
-          chunkEvents.add(
-            ImageChunkEvent(
-              cumulativeBytesLoaded: cumulative,
-              expectedTotalBytes: total,
-            ),
-          );
+          chunkEvents.add(ImageChunkEvent(cumulativeBytesLoaded: cumulative, expectedTotalBytes: total));
         },
       );
       if (bytes.lengthInBytes == 0) {
@@ -177,12 +147,7 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
       }
       final ui.Codec codec;
       try {
-        codec = await _decode(
-          bytes,
-          decode,
-          decodeBufferDeprecated,
-          decodeDeprecated,
-        );
+        codec = await _decode(bytes, decode, decodeBufferDeprecated, decodeDeprecated);
       } finally {
         try {
           final file = await _getCacheFile('$cacheKey.tmp');
@@ -211,19 +176,13 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
     DecoderBufferCallback? decodeDeprecated,
   ) async {
     if (decode != null) {
-      final ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(
-        bytes,
-      );
+      final ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
       return decode(buffer);
     } else if (decodeBufferDeprecated != null) {
-      final ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(
-        bytes,
-      );
+      final ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
       return decodeBufferDeprecated(buffer);
     } else {
-      final ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(
-        bytes,
-      );
+      final ui.ImmutableBuffer buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
       assert(decodeDeprecated != null);
       return decodeDeprecated!(buffer);
     }
@@ -234,9 +193,7 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
     if (Platform.isWindows) {
       cacheDir = join(
         (await getTemporaryDirectory()).path,
-        (await getApplicationSupportDirectory()).parent.path
-            .split(Platform.pathSeparator)
-            .last,
+        (await getApplicationSupportDirectory()).parent.path.split(Platform.pathSeparator).last,
         'images',
       );
     } else {
@@ -261,10 +218,8 @@ class CacheImage extends painting.ImageProvider<painting.NetworkImage>
   int get hashCode => Object.hash(url, scale);
 
   @override
-  String toString() =>
-      '${objectRuntimeType(this, 'NetworkImage')}("$url", scale: $scale)';
+  String toString() => '${objectRuntimeType(this, 'NetworkImage')}("$url", scale: $scale)';
 
   @override
-  WebHtmlElementStrategy get webHtmlElementStrategy =>
-      WebHtmlElementStrategy.never;
+  WebHtmlElementStrategy get webHtmlElementStrategy => WebHtmlElementStrategy.never;
 }

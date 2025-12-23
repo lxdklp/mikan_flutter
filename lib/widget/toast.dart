@@ -11,15 +11,10 @@ class ToastWidget extends StatelessWidget {
     return Container(
       decoration: ShapeDecoration(
         color: theme.colorScheme.inverseSurface,
-        shape: const RoundedSuperellipseBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12.0)),
-        ),
+        shape: const RoundedSuperellipseBorder(borderRadius: BorderRadius.all(Radius.circular(12.0))),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-      child: Text(
-        msg,
-        style: TextStyle(color: theme.colorScheme.onInverseSurface),
-      ),
+      child: Text(msg, style: TextStyle(color: theme.colorScheme.onInverseSurface)),
     );
   }
 }

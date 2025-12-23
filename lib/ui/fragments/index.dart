@@ -136,15 +136,13 @@ class _IndexFragmentState extends LifecycleState<IndexFragment> {
   Widget _buildWeekSection(ThemeData theme, BangumiRow bangumiRow) {
     final simple = [
       if (bangumiRow.updatedNum > 0) '🚀 ${bangumiRow.updatedNum}部',
-      if (bangumiRow.subscribedUpdatedNum > 0)
-        '💖 ${bangumiRow.subscribedUpdatedNum}部',
+      if (bangumiRow.subscribedUpdatedNum > 0) '💖 ${bangumiRow.subscribedUpdatedNum}部',
       if (bangumiRow.subscribedNum > 0) '❤ ${bangumiRow.subscribedNum}部',
       '🎬 ${bangumiRow.num}部',
     ].join('，');
     final full = [
       if (bangumiRow.updatedNum > 0) '更新${bangumiRow.updatedNum}部',
-      if (bangumiRow.subscribedUpdatedNum > 0)
-        '订阅更新${bangumiRow.subscribedUpdatedNum}部',
+      if (bangumiRow.subscribedUpdatedNum > 0) '订阅更新${bangumiRow.subscribedUpdatedNum}部',
       if (bangumiRow.subscribedNum > 0) '订阅${bangumiRow.subscribedNum}部',
       '共${bangumiRow.num}部',
     ].join('，');
@@ -168,12 +166,7 @@ class _IndexFragmentState extends LifecycleState<IndexFragment> {
               ),
               Tooltip(
                 message: full,
-                child: Text(
-                  simple,
-                  style: theme.textTheme.bodySmall,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                child: Text(simple, style: theme.textTheme.bodySmall, maxLines: 1, overflow: TextOverflow.ellipsis),
               ),
             ],
           ),
@@ -198,29 +191,18 @@ class _IndexFragmentState extends LifecycleState<IndexFragment> {
                   return AnimatedBuilder(
                     animation: _infiniteScrollController,
                     builder: (_, __) {
-                      final diff =
-                          _infiniteScrollController.offset - currentOffset;
+                      final diff = _infiniteScrollController.offset - currentOffset;
                       final ver = (diff / 36.0).abs();
                       return Padding(
-                        padding: EdgeInsetsDirectional.only(
-                          start: 24.0,
-                          top: (ver > 12.0 ? 12.0 : ver),
-                          bottom: 8.0,
-                        ),
+                        padding: EdgeInsetsDirectional.only(start: 24.0, top: (ver > 12.0 ? 12.0 : ver), bottom: 8.0),
                         child: TransitionContainer(
                           builder: (context, open) {
                             return RippleTap(
                               onTap: open,
-                              child: Image(
-                                fit: BoxFit.cover,
-                                image: CacheImage(carousel.cover),
-                              ),
+                              child: Image(fit: BoxFit.cover, image: CacheImage(carousel.cover)),
                             );
                           },
-                          next: BangumiPage(
-                            bangumiId: carousel.id,
-                            cover: carousel.cover,
-                          ),
+                          next: BangumiPage(bangumiId: carousel.id, cover: carousel.cover),
                         ),
                       );
                     },
@@ -256,10 +238,7 @@ class _IndexFragmentState extends LifecycleState<IndexFragment> {
           children: [
             SliverPinnedHeader(
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24.0,
-                  vertical: 8.0,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
                 decoration: BoxDecoration(color: theme.scaffoldBackgroundColor),
                 child: Row(
                   children: <Widget>[
@@ -285,10 +264,7 @@ class _IndexFragmentState extends LifecycleState<IndexFragment> {
               ),
             ),
             SliverPadding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24.0,
-                vertical: 4.0,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
               sliver: SliverWaterfallFlow(
                 gridDelegate: SliverWaterfallFlowDelegateWithMaxCrossAxisExtent(
                   crossAxisSpacing: margins,
@@ -309,17 +285,11 @@ class _IndexFragmentState extends LifecycleState<IndexFragment> {
 }
 
 void showSettingsPanel(BuildContext context) {
-  MBottomSheet.show(
-    context,
-    (context) => const MBottomSheet(child: SettingsPanel()),
-  );
+  MBottomSheet.show(context, (context) => const MBottomSheet(child: SettingsPanel()));
 }
 
 void showYearSeasonBottomSheet(BuildContext context) {
-  MBottomSheet.show(
-    context,
-    (context) => const MBottomSheet(child: SelectSeasonFragment()),
-  );
+  MBottomSheet.show(context, (context) => const MBottomSheet(child: SelectSeasonFragment()));
 }
 
 class _PinedHeader extends StatelessWidget {
@@ -340,168 +310,127 @@ class _PinedHeader extends StatelessWidget {
           delegate: WrapSliverPersistentHeaderDelegate(
             maxExtent: maxHeight,
             minExtent: minHeight,
-            onBuild:
-                (
-                  BuildContext context,
-                  double shrinkOffset,
-                  bool overlapsContent,
-                ) {
-                  final offsetRatio = math.min(
-                    shrinkOffset / offsetHeight,
-                    1.0,
-                  );
-                  final display = offsetRatio >= 0.8;
-                  final children = <Widget>[
-                    if (display)
-                      RippleTap(
-                        onTap: () {
-                          showYearSeasonBottomSheet(context);
-                        },
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(2.0),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12.0,
-                            vertical: 8.0,
+            onBuild: (BuildContext context, double shrinkOffset, bool overlapsContent) {
+              final offsetRatio = math.min(shrinkOffset / offsetHeight, 1.0);
+              final display = offsetRatio >= 0.8;
+              final children = <Widget>[
+                if (display)
+                  RippleTap(
+                    onTap: () {
+                      showYearSeasonBottomSheet(context);
+                    },
+                    borderRadius: const BorderRadius.all(Radius.circular(2.0)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                      child: Row(
+                        children: [
+                          Selector<IndexModel, Season?>(
+                            selector: (_, model) => model.selectedSeason,
+                            shouldRebuild: (pre, next) => pre != next,
+                            builder: (_, season, __) {
+                              return season == null
+                                  ? const SizedBox()
+                                  : Text(season.title, style: theme.textTheme.titleLarge);
+                            },
                           ),
-                          child: Row(
-                            children: [
-                              Selector<IndexModel, Season?>(
-                                selector: (_, model) => model.selectedSeason,
-                                shouldRebuild: (pre, next) => pre != next,
-                                builder: (_, season, __) {
-                                  return season == null
-                                      ? const SizedBox()
-                                      : Text(
-                                          season.title,
-                                          style: theme.textTheme.titleLarge,
-                                        );
-                                },
-                              ),
-                              const Gap(8),
-                              const Icon(Icons.keyboard_arrow_down_rounded),
-                            ],
+                          const Gap(8),
+                          const Icon(Icons.keyboard_arrow_down_rounded),
+                        ],
+                      ),
+                    ),
+                  ),
+                const Spacer(),
+              ];
+              if (!isTablet) {
+                children.add(
+                  TransitionContainer(
+                    next: const SearchPage(),
+                    builder: (context, open) {
+                      return RippleTap(
+                        onTap: open,
+                        shape: const CircleBorder(),
+                        child: const Padding(padding: EdgeInsets.all(8.0), child: Icon(Icons.search_rounded)),
+                      );
+                    },
+                  ),
+                );
+                children.add(buildAvatarWithAction(context));
+              }
+              return Stack(
+                children: [
+                  PositionedDirectional(
+                    start: 12.0,
+                    bottom: 12.0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Selector<IndexModel, User?>(
+                            selector: (_, model) => model.user,
+                            shouldRebuild: (pre, next) => pre != next,
+                            builder: (_, user, __) {
+                              final withoutName = user == null || user.name.isNullOrBlank;
+                              return Text(
+                                withoutName ? 'Mikan Project' : 'Hi, ${user.name}',
+                                style: theme.textTheme.bodySmall,
+                              );
+                            },
                           ),
                         ),
-                      ),
-                    const Spacer(),
-                  ];
-                  if (!isTablet) {
-                    children.add(
-                      TransitionContainer(
-                        next: const SearchPage(),
-                        builder: (context, open) {
-                          return RippleTap(
-                            onTap: open,
-                            shape: const CircleBorder(),
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Icon(Icons.search_rounded),
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                    children.add(buildAvatarWithAction(context));
-                  }
-                  return Stack(
-                    children: [
-                      PositionedDirectional(
-                        start: 12.0,
-                        bottom: 12.0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0,
-                              ),
-                              child: Selector<IndexModel, User?>(
-                                selector: (_, model) => model.user,
-                                shouldRebuild: (pre, next) => pre != next,
-                                builder: (_, user, __) {
-                                  final withoutName =
-                                      user == null || user.name.isNullOrBlank;
-                                  return Text(
-                                    withoutName
-                                        ? 'Mikan Project'
-                                        : 'Hi, ${user.name}',
-                                    style: theme.textTheme.bodySmall,
-                                  );
-                                },
-                              ),
-                            ),
-                            RippleTap(
-                              onTap: () {
-                                showYearSeasonBottomSheet(context);
-                              },
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(2.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12.0,
-                                  vertical: 8.0,
+                        RippleTap(
+                          onTap: () {
+                            showYearSeasonBottomSheet(context);
+                          },
+                          borderRadius: const BorderRadius.all(Radius.circular(2.0)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                            child: Row(
+                              children: [
+                                Selector<IndexModel, Season?>(
+                                  selector: (_, model) => model.selectedSeason,
+                                  shouldRebuild: (pre, next) => pre != next,
+                                  builder: (_, season, __) {
+                                    return season == null
+                                        ? const SizedBox()
+                                        : Text(season.title, style: theme.textTheme.headlineMedium);
+                                  },
                                 ),
-                                child: Row(
-                                  children: [
-                                    Selector<IndexModel, Season?>(
-                                      selector: (_, model) =>
-                                          model.selectedSeason,
-                                      shouldRebuild: (pre, next) => pre != next,
-                                      builder: (_, season, __) {
-                                        return season == null
-                                            ? const SizedBox()
-                                            : Text(
-                                                season.title,
-                                                style: theme
-                                                    .textTheme
-                                                    .headlineMedium,
-                                              );
-                                      },
-                                    ),
-                                    const Gap(8),
-                                    const Icon(
-                                      Icons.keyboard_arrow_down_rounded,
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                const Gap(8),
+                                const Icon(Icons.keyboard_arrow_down_rounded),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        left: 0.0,
-                        right: 0.0,
-                        top: 0.0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.surface,
-                            border: offsetRatio > 0.1
-                                ? Border(
-                                    bottom: Divider.createBorderSide(
-                                      context,
-                                      color: theme.colorScheme.outlineVariant,
-                                      width: 0.0,
-                                    ),
-                                  )
-                                : null,
                           ),
-                          padding: EdgeInsetsDirectional.only(
-                            start: 12.0,
-                            end: 12.0,
-                            top: statusBarHeight,
-                          ),
-                          height: statusBarHeight + appbarHeight,
-                          child: Row(children: children),
                         ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    left: 0.0,
+                    right: 0.0,
+                    top: 0.0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.surface,
+                        border: offsetRatio > 0.1
+                            ? Border(
+                                bottom: Divider.createBorderSide(
+                                  context,
+                                  color: theme.colorScheme.outlineVariant,
+                                  width: 0.0,
+                                ),
+                              )
+                            : null,
                       ),
-                    ],
-                  );
-                },
+                      padding: EdgeInsetsDirectional.only(start: 12.0, end: 12.0, top: statusBarHeight),
+                      height: statusBarHeight + appbarHeight,
+                      child: Row(children: children),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         );
       },

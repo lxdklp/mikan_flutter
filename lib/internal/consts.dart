@@ -1,7 +1,4 @@
-const APP_CHANNEL = String.fromEnvironment(
-  'APP_CHANNEL',
-  defaultValue: 'github',
-);
+const APP_CHANNEL = String.fromEnvironment('APP_CHANNEL', defaultValue: 'github');
 
 class MikanFunc {
   const MikanFunc._();
@@ -21,17 +18,13 @@ class MikanFunc {
   static const String subscribedSeason = 'SUBSCRIBED_SEASON';
   static const String refreshLoginToken = 'REFRESH_LOGIN_TOKEN';
   static const String refreshRegisterToken = 'REFRESH_REGISTER_TOKEN';
-  static const String refreshForgotPasswordToken =
-      'REFRESH_FORGOTPASSWORD_TOKEN';
+  static const String refreshForgotPasswordToken = 'REFRESH_FORGOTPASSWORD_TOKEN';
 }
 
 class MikanUrls {
   const MikanUrls._();
 
-  static const List<String> baseUrls = [
-    'https://mikanime.tv',
-    'https://mikanani.me',
-  ];
+  static const List<String> baseUrls = ['https://mikanime.tv', 'https://mikanani.me'];
 
   static late String baseUrl;
 
@@ -83,6 +76,5 @@ class ExtraUrl {
 
   static const String fontsBaseUrl = 'https://fonts.bytex.space';
   static const String fontsManifest = '$fontsBaseUrl/fonts-manifest.json';
-  static const String releaseVersion =
-      'https://api.github.com/repos/iota9star/mikan_flutter/releases/latest';
+  static const String releaseVersion = 'https://api.github.com/repos/iota9star/mikan_flutter/releases/latest';
 }

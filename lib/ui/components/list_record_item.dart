@@ -24,16 +24,10 @@ class ListRecordItem extends StatelessWidget {
     final theme = Theme.of(context);
     final subgroups = record.groups;
     final subgroupsName = subgroups.map((e) => e.name).join('/');
-    final closedColor = ElevationOverlay.applySurfaceTint(
-      theme.cardColor,
-      theme.colorScheme.surfaceTint,
-      1.0,
-    );
+    final closedColor = ElevationOverlay.applySurfaceTint(theme.cardColor, theme.colorScheme.surfaceTint, 1.0);
     return TransitionContainer(
       closedColor: closedColor,
-      shape: const RoundedSuperellipseBorder(
-        borderRadius: BorderRadius.all(Radius.circular(24.0)),
-      ),
+      shape: const RoundedSuperellipseBorder(borderRadius: BorderRadius.all(Radius.circular(24.0))),
       builder: (context, open) {
         return RippleTap(
           onTap: open,
@@ -41,12 +35,7 @@ class ListRecordItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 8.0,
-                  right: 8.0,
-                  top: 8.0,
-                  bottom: 4.0,
-                ),
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 4.0),
                 child: Row(
                   children: [
                     Expanded(
@@ -56,9 +45,7 @@ class ListRecordItem extends StatelessWidget {
                           closedColor: closedColor,
                           builder: (context, open) {
                             return RippleTap(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(6.0),
-                              ),
+                              borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                               onTap: () {
                                 if (subgroups.length == 1) {
                                   final subgroup = subgroups[0];
@@ -70,11 +57,7 @@ class ListRecordItem extends StatelessWidget {
                                 } else {
                                   MBottomSheet.show(
                                     context,
-                                    (context) => MBottomSheet(
-                                      child: SelectSubgroup(
-                                        subgroups: subgroups,
-                                      ),
-                                    ),
+                                    (context) => MBottomSheet(child: SelectSubgroup(subgroups: subgroups)),
                                   );
                                 }
                               },
@@ -87,23 +70,16 @@ class ListRecordItem extends StatelessWidget {
                                       width: 40.0,
                                       height: 40.0,
                                       decoration: BoxDecoration(
-                                        color:
-                                            theme.colorScheme.primaryContainer,
+                                        color: theme.colorScheme.primaryContainer,
                                         shape: BoxShape.circle,
                                       ),
                                       alignment: AlignmentDirectional.center,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 2.0,
-                                      ),
+                                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
                                       child: AutoSizeText(
-                                        subgroups
-                                            .map((e) => e.name[0].toUpperCase())
-                                            .join(),
+                                        subgroups.map((e) => e.name[0].toUpperCase()).join(),
                                         style: TextStyle(
                                           fontWeight: FontWeight.w700,
-                                          color: theme
-                                              .colorScheme
-                                              .onPrimaryContainer,
+                                          color: theme.colorScheme.onPrimaryContainer,
                                         ),
                                         minFontSize: 8.0,
                                       ),
@@ -111,8 +87,7 @@ class ListRecordItem extends StatelessWidget {
                                     const Gap(8),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             subgroupsName,
@@ -139,11 +114,7 @@ class ListRecordItem extends StatelessWidget {
                       ),
                     ),
                     const Gap(8),
-                    TMSMenuButton(
-                      torrent: record.torrent,
-                      magnet: record.magnet,
-                      share: record.share,
-                    ),
+                    TMSMenuButton(torrent: record.torrent, magnet: record.magnet, share: record.share),
                   ],
                 ),
               ),
@@ -152,53 +123,34 @@ class ListRecordItem extends StatelessWidget {
                 child: Text(record.title, style: theme.textTheme.bodySmall),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                  right: 16.0,
-                  top: 8.0,
-                  bottom: 20.0,
-                ),
+                padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 20.0),
                 child: Wrap(
                   runSpacing: 6.0,
                   spacing: 6.0,
                   children: [
                     if (record.size.isNotBlank)
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6.0,
-                          vertical: 4.0,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                         decoration: BoxDecoration(
                           color: theme.colorScheme.secondaryContainer,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(6.0),
-                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                         ),
                         child: Text(
                           record.size,
-                          style: theme.textTheme.labelSmall!.copyWith(
-                            color: theme.colorScheme.onSecondaryContainer,
-                          ),
+                          style: theme.textTheme.labelSmall!.copyWith(color: theme.colorScheme.onSecondaryContainer),
                         ),
                       ),
                     if (!record.tags.isNullOrEmpty)
                       ...List.generate(record.tags.length, (index) {
                         return Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6.0,
-                            vertical: 4.0,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 4.0),
                           decoration: BoxDecoration(
                             color: theme.colorScheme.tertiaryContainer,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(6.0),
-                            ),
+                            borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                           ),
                           child: Text(
                             record.tags[index],
-                            style: theme.textTheme.labelSmall!.copyWith(
-                              color: theme.colorScheme.onTertiaryContainer,
-                            ),
+                            style: theme.textTheme.labelSmall!.copyWith(color: theme.colorScheme.onTertiaryContainer),
                           ),
                         );
                       }),

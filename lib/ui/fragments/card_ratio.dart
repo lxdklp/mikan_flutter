@@ -19,9 +19,7 @@ class CardRatio extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
               child: ValueListenableBuilder(
-                valueListenable: MyHive.settings.listenable(
-                  keys: [SettingsHiveKey.cardRatio],
-                ),
+                valueListenable: MyHive.settings.listenable(keys: [SettingsHiveKey.cardRatio]),
                 builder: (context, _, child) {
                   final value = MyHive.getCardRatio();
                   return Slider(

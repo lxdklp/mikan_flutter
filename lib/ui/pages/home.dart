@@ -119,10 +119,7 @@ class _HomePageState extends State<HomePage> {
                               TransitionContainer(
                                 next: const SearchPage(),
                                 builder: (context, open) {
-                                  return IconButton(
-                                    onPressed: open,
-                                    icon: const Icon(Icons.search_rounded),
-                                  );
+                                  return IconButton(onPressed: open, icon: const Icon(Icons.search_rounded));
                                 },
                               ),
                             ],

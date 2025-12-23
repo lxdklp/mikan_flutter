@@ -51,10 +51,5 @@ class Index extends HiveObject {
           user == other.user;
 
   @override
-  int get hashCode =>
-      years.hashCode ^
-      bangumiRows.hashCode ^
-      rss.hashCode ^
-      carousels.hashCode ^
-      user.hashCode;
+  int get hashCode => years.hashCode ^ bangumiRows.hashCode ^ rss.hashCode ^ carousels.hashCode ^ user.hashCode;
 }

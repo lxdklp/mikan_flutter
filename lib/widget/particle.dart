@@ -38,9 +38,7 @@ class ParticleEffect {
     );
 
     final overlayEntry = OverlayEntry(
-      builder: (_) => Positioned.fill(
-        child: IgnorePointer(child: effectWidget),
-      ),
+      builder: (_) => Positioned.fill(child: IgnorePointer(child: effectWidget)),
     );
 
     _currentOverlayEntry?.remove();
@@ -81,8 +79,7 @@ class _ParticleEffectWidget extends StatefulWidget {
   State<_ParticleEffectWidget> createState() => _ParticleEffectWidgetState();
 }
 
-class _ParticleEffectWidgetState extends State<_ParticleEffectWidget>
-    with SingleTickerProviderStateMixin {
+class _ParticleEffectWidgetState extends State<_ParticleEffectWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late List<Particle> _particles;
 
@@ -99,10 +96,7 @@ class _ParticleEffectWidgetState extends State<_ParticleEffectWidget>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration ?? _defaultDuration,
-    );
+    _controller = AnimationController(vsync: this, duration: widget.duration ?? _defaultDuration);
     _generateParticles();
     _controller.forward();
 
@@ -116,30 +110,21 @@ class _ParticleEffectWidgetState extends State<_ParticleEffectWidget>
   void _generateParticles() {
     final minSize = widget.minSize ?? _defaultMinSize;
     final maxSize = widget.maxSize ?? _defaultMaxSize;
-    final minPercentOfDistance =
-        widget.minPercentOfDistance ?? _defaultMinPercentOfDistance;
-    final maxPercentOfDistance =
-        widget.maxPercentOfDistance ?? _defaultMaxPercentOfDistance;
-    final maxNumberOfParticle = widget.particleCount ??
-        _random.nextInt(_defaultMaxNumberOfParticle - _defaultMinNumberOfParticle +
-            1) +
-        _defaultMinNumberOfParticle;
-    final minSpeedOfRotate =
-        widget.minSpeedOfRotate ?? _defaultMinSpeedOfRotate;
-    final maxSpeedOfRotate =
-        widget.maxSpeedOfRotate ?? _defaultMaxSpeedOfRotate;
+    final minPercentOfDistance = widget.minPercentOfDistance ?? _defaultMinPercentOfDistance;
+    final maxPercentOfDistance = widget.maxPercentOfDistance ?? _defaultMaxPercentOfDistance;
+    final maxNumberOfParticle =
+        widget.particleCount ??
+        _random.nextInt(_defaultMaxNumberOfParticle - _defaultMinNumberOfParticle + 1) + _defaultMinNumberOfParticle;
+    final minSpeedOfRotate = widget.minSpeedOfRotate ?? _defaultMinSpeedOfRotate;
+    final maxSpeedOfRotate = widget.maxSpeedOfRotate ?? _defaultMaxSpeedOfRotate;
 
     _particles = List.generate(maxNumberOfParticle, (index) {
       return Particle(
         size: _random.nextDouble() * (maxSize - minSize) + minSize,
         color: widget.color,
-        percentOfDistance: _random.nextDouble() *
-                (maxPercentOfDistance - minPercentOfDistance) +
-            minPercentOfDistance,
+        percentOfDistance: _random.nextDouble() * (maxPercentOfDistance - minPercentOfDistance) + minPercentOfDistance,
         shape: ParticleShape.from(_random.nextDouble()),
-        speedOfRotate: _random.nextDouble() *
-                (maxSpeedOfRotate - minSpeedOfRotate) +
-            minSpeedOfRotate,
+        speedOfRotate: _random.nextDouble() * (maxSpeedOfRotate - minSpeedOfRotate) + minSpeedOfRotate,
       );
     });
   }
@@ -157,11 +142,7 @@ class _ParticleEffectWidgetState extends State<_ParticleEffectWidget>
         animation: _controller,
         builder: (context, child) {
           return CustomPaint(
-            painter: ParticlePainter(
-              particles: _particles,
-              animation: _controller.view,
-              curve: Curves.easeOutCubic,
-            ),
+            painter: ParticlePainter(particles: _particles, animation: _controller.view, curve: Curves.easeOutCubic),
           );
         },
       ),
@@ -212,21 +193,11 @@ class Particle {
           shape == other.shape;
 
   @override
-  int get hashCode => Object.hash(
-        size,
-        color,
-        percentOfDistance,
-        speedOfRotate,
-        shape,
-      );
+  int get hashCode => Object.hash(size, color, percentOfDistance, speedOfRotate, shape);
 }
 
 class ParticlePainter extends CustomPainter {
-  ParticlePainter({
-    required this.particles,
-    required this.animation,
-    required this.curve,
-  }) : super(repaint: animation);
+  ParticlePainter({required this.particles, required this.animation, required this.curve}) : super(repaint: animation);
 
   final List<Particle> particles;
   final Animation<double> animation;
@@ -259,9 +230,7 @@ class ParticlePainter extends CustomPainter {
       final particle = particles[i];
 
       if (particle.shape == ParticleShape.rectangle) {
-        final rectAlpha = progress > 0.70
-            ? (progress < 0.99 ? 1.0 : (1 - progress) / 0.01)
-            : progress / 0.70;
+        final rectAlpha = progress > 0.70 ? (progress < 0.99 ? 1.0 : (1 - progress) / 0.01) : progress / 0.70;
 
         if (rectAlpha <= 0.0) {
           continue;
@@ -274,8 +243,7 @@ class ParticlePainter extends CustomPainter {
         rectanglePaint.color = particle.color.withValues(alpha: rectAlpha);
 
         final rect = Rect.fromCenter(
-          center:
-              Offset(tx, ty + height / 2 * (1 - progress) + particle.size / 2),
+          center: Offset(tx, ty + height / 2 * (1 - progress) + particle.size / 2),
           width: particle.size,
           height: math.max(particle.size, height / 2 * (1 - progress)),
         );
@@ -289,11 +257,7 @@ class ParticlePainter extends CustomPainter {
 
         if (particle.shape == ParticleShape.circle) {
           normalPaint.color = particleColor;
-          canvas.drawCircle(
-            Offset(tx, ty + particle.size / 2),
-            particle.size / 2,
-            normalPaint,
-          );
+          canvas.drawCircle(Offset(tx, ty + particle.size / 2), particle.size / 2, normalPaint);
         } else {
           canvas.save();
           canvas.translate(tx, ty + particle.size / 2);
@@ -306,12 +270,7 @@ class ParticlePainter extends CustomPainter {
           final halfSize = particle.size / 2;
 
           if (particle.shape == ParticleShape.square) {
-            final rect = Rect.fromLTRB(
-              -halfSize,
-              -halfSize,
-              halfSize,
-              halfSize,
-            );
+            final rect = Rect.fromLTRB(-halfSize, -halfSize, halfSize, halfSize);
             normalPaint.color = particleColor;
             canvas.scale(scale);
             canvas.drawRect(rect, normalPaint);

@@ -3,11 +3,7 @@ import 'record_item.dart';
 import 'subgroup.dart';
 
 class SearchResult {
-  SearchResult({
-    required this.bangumis,
-    required this.subgroups,
-    required this.records,
-  });
+  SearchResult({required this.bangumis, required this.subgroups, required this.records});
 
   final List<Bangumi> bangumis;
   final List<Subgroup> subgroups;

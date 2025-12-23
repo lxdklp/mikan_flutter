@@ -28,10 +28,10 @@ class Md3eHeader extends Header {
     super.maxOverOffset,
     this.noMoreIcon,
   }) : super(
-          readySpringBuilder: readySpringBuilder ?? kMaterialSpringBuilder,
-          frictionFactor: frictionFactor ?? kMaterialFrictionFactor,
-          horizontalFrictionFactor: frictionFactor ?? kMaterialHorizontalFrictionFactor,
-        );
+         readySpringBuilder: readySpringBuilder ?? kMaterialSpringBuilder,
+         frictionFactor: frictionFactor ?? kMaterialFrictionFactor,
+         horizontalFrictionFactor: frictionFactor ?? kMaterialHorizontalFrictionFactor,
+       );
 
   final Key? key;
 
@@ -91,14 +91,10 @@ class _Md3eIndicatorState extends State<_Md3eIndicator> {
         children: [
           AnimatedScale(
             duration: widget.disappearDuration,
-            scale:
-                _mode == IndicatorMode.processed || _mode == IndicatorMode.done
-                    ? 0
-                    : 1,
+            scale: _mode == IndicatorMode.processed || _mode == IndicatorMode.done ? 0 : 1,
             child: const ExpressiveLoadingIndicator(),
           ),
-          if (_mode == IndicatorMode.inactive &&
-              _result == IndicatorResult.noMore)
+          if (_mode == IndicatorMode.inactive && _result == IndicatorResult.noMore)
             widget.noMoreIcon ?? const Icon(Icons.inbox_outlined),
         ],
       ),
@@ -110,8 +106,7 @@ class _Md3eIndicatorState extends State<_Md3eIndicator> {
     double offset = _offset;
     if (widget.state.indicator.infiniteOffset != null &&
         widget.state.indicator.position == IndicatorPosition.locator &&
-        (_mode != IndicatorMode.inactive ||
-            _result == IndicatorResult.noMore)) {
+        (_mode != IndicatorMode.inactive || _result == IndicatorResult.noMore)) {
       offset = _actualTriggerOffset;
     }
     final padding = math.max(_offset - _kCircularProgressIndicatorSize, 0) / 2;
@@ -125,27 +120,25 @@ class _Md3eIndicatorState extends State<_Md3eIndicator> {
         Positioned(
           top: _axis == Axis.vertical
               ? widget.reverse
-                  ? padding
-                  : null
+                    ? padding
+                    : null
               : 0,
           bottom: _axis == Axis.vertical
               ? widget.reverse
-                  ? null
-                  : padding
+                    ? null
+                    : padding
               : 0,
           left: _axis == Axis.horizontal
               ? widget.reverse
-                  ? padding
-                  : null
+                    ? padding
+                    : null
               : 0,
           right: _axis == Axis.horizontal
               ? widget.reverse
-                  ? null
-                  : padding
+                    ? null
+                    : padding
               : 0,
-          child: Center(
-            child: _buildIndicator(),
-          ),
+          child: Center(child: _buildIndicator()),
         ),
       ],
     );

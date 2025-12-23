@@ -8,8 +8,7 @@ import 'base_model.dart';
 class RegisterModel extends BaseModel {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _qqController = TextEditingController();
 
@@ -21,8 +20,7 @@ class RegisterModel extends BaseModel {
 
   TextEditingController get qqController => _qqController;
 
-  TextEditingController get confirmPasswordController =>
-      _confirmPasswordController;
+  TextEditingController get confirmPasswordController => _confirmPasswordController;
 
   bool _loading = false;
 

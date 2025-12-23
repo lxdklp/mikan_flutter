@@ -56,10 +56,7 @@ Future<void> main() async {
 Future<void> _initWindow() async {
   if (isDesktop) {
     await windowManager.ensureInitialized();
-    const windowOptions = WindowOptions(
-      minimumSize: Size(480, 320),
-      title: 'MikanProject',
-    );
+    const windowOptions = WindowOptions(minimumSize: Size(480, 320), title: 'MikanProject');
     unawaited(
       windowManager.waitUntilReadyToShow(windowOptions, () async {
         await windowManager.show();
@@ -71,9 +68,7 @@ Future<void> _initWindow() async {
 
 Future _initFirebase() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
-    kDebugMode,
-  );
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(kDebugMode);
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 }
 
@@ -149,13 +144,8 @@ class _MikanAppState extends State<MikanApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<FontsModel>(
-          create: (context) => FontsModel(),
-          lazy: false,
-        ),
-        ChangeNotifierProvider<SubscribedModel>(
-          create: (_) => SubscribedModel(),
-        ),
+        ChangeNotifierProvider<FontsModel>(create: (context) => FontsModel(), lazy: false),
+        ChangeNotifierProvider<SubscribedModel>(create: (_) => SubscribedModel()),
         ChangeNotifierProvider<OpModel>(create: (_) => OpModel()),
         ChangeNotifierProvider<IndexModel>(
           create: (context) => IndexModel(context.read<SubscribedModel>()),
@@ -208,14 +198,10 @@ class _MikanAppState extends State<MikanApp> {
           builder: FlutterSmartDialog.init(
             toastBuilder: (msg) => ToastWidget(msg: msg),
             loadingBuilder: (msg) => LoadingWidget(msg: msg),
-            builder: (context, child) =>
-                GestureDetector(onTap: hideKeyboard, child: child),
+            builder: (context, child) => GestureDetector(onTap: hideKeyboard, child: child),
           ),
           onGenerateRoute: (RouteSettings settings) {
-            return onGenerateRoute(
-              settings: settings,
-              getRouteSettings: getRouteSettings,
-            );
+            return onGenerateRoute(settings: settings, getRouteSettings: getRouteSettings);
           },
           navigatorKey: navKey,
           navigatorObservers: navigatorObservers,
@@ -235,12 +221,7 @@ class _MikanAppState extends State<MikanApp> {
 class ThemeProvider extends StatefulWidget {
   const ThemeProvider({super.key, required this.builder});
 
-  final Widget Function(
-    ThemeMode mode,
-    ColorScheme lightColorScheme,
-    ColorScheme darkColorScheme,
-    String? fontFamily,
-  )
+  final Widget Function(ThemeMode mode, ColorScheme lightColorScheme, ColorScheme darkColorScheme, String? fontFamily)
   builder;
 
   @override
@@ -289,21 +270,13 @@ class _ThemeProviderState extends LifecycleAppState<ThemeProvider> {
             final themeMode = MyHive.getThemeMode();
             final dynamicColorEnabled = MyHive.dynamicColorEnabled();
             if (dynamicColorEnabled && pair != null) {
-              return widget.builder.call(
-                themeMode,
-                pair.light,
-                pair.dark,
-                fontFamily,
-              );
+              return widget.builder.call(themeMode, pair.light, pair.dark, fontFamily);
             }
             final colorSeed = Color(MyHive.getColorSeed());
             return widget.builder.call(
               themeMode,
               ColorScheme.fromSeed(seedColor: colorSeed),
-              ColorScheme.fromSeed(
-                seedColor: colorSeed,
-                brightness: Brightness.dark,
-              ),
+              ColorScheme.fromSeed(seedColor: colorSeed, brightness: Brightness.dark),
               fontFamily,
             );
           },
@@ -323,20 +296,12 @@ class AlwaysStretchScrollBehavior extends ScrollBehavior {
   TargetPlatform getPlatform(BuildContext context) => TargetPlatform.android;
 
   @override
-  Widget buildScrollbar(
-    BuildContext context,
-    Widget child,
-    ScrollableDetails details,
-  ) {
+  Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
     return child;
   }
 
   @override
-  Widget buildOverscrollIndicator(
-    BuildContext context,
-    Widget child,
-    ScrollableDetails details,
-  ) {
+  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) {
     return StretchingOverscrollIndicator(
       axisDirection: details.direction,
       clipBehavior: details.decorationClipBehavior ?? Clip.hardEdge,
