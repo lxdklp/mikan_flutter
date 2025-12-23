@@ -23,7 +23,9 @@ class SelectTabletMode extends StatelessWidget {
               return RadioListTile<TabletMode>(
                 title: Text(mode.label),
                 value: mode,
+                // ignore: deprecated_member_use
                 groupValue: selectedMode,
+                // ignore: deprecated_member_use
                 onChanged: (value) {
                   MyHive.setTabletMode(mode);
                   Navigator.pop(context);

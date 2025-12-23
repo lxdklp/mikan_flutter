@@ -31,7 +31,9 @@ class SelectMirror extends StatelessWidget {
                         return RadioListTile<String>(
                           title: Text(url + (url.endsWith('.me') ? '' : ' (中国大陆)')),
                           value: url,
+                          // ignore: deprecated_member_use
                           groupValue: selected,
+                          // ignore: deprecated_member_use
                           onChanged: (value) {
                             notifier.value = value!;
                           },
