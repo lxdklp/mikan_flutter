@@ -1,6 +1,6 @@
 # Mikan Project
 
-![最新release](https://img.shields.io/github/v/release/iota9star/mikan_flutter) ![Platform](https://img.shields.io/badge/support%20platform-android%20%7C%20ios%20%7C%20windows%20%7C%20macos%20%7C%20linux-green) ![Apache License 2.0](https://img.shields.io/github/license/iota9star/mikan_flutter) ![下载量](https://img.shields.io/github/downloads/iota9star/mikan_flutter/total) ![open issues](https://img.shields.io/github/issues/iota9star/mikan_flutter) ![fork](https://img.shields.io/github/forks/iota9star/mikan_flutter?style=social) ![代码行数](https://img.shields.io/tokei/lines/github/iota9star/mikan_flutter) ![build](https://img.shields.io/github/actions/workflow/status/iota9star/mikan_flutter/build-apps.yml) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f969750dc4aa424ead664219ddcf321d)](https://app.codacy.com/gh/iota9star/mikan_flutter?utm_source=github.com&utm_medium=referral&utm_content=iota9star/mikan_flutter&utm_campaign=Badge_Grade)
+![最新release](https://img.shields.io/github/v/release/iota9star/mikan_flutter) ![Platform](https://img.shields.io/badge/support%20platform-android%20%7C%20ios%20%7C%20windows%20%7C%20macos%20%7C%20linux-green) ![Apache License 2.0](https://img.shields.io/github/license/iota9star/mikan_flutter) ![下载量](https://img.shields.io/github/downloads/iota9star/mikan_flutter/total) ![open issues](https://img.shields.io/github/issues/iota9star/mikan_flutter) ![fork](https://img.shields.io/github/forks/iota9star/mikan_flutter?style=social) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f969750dc4aa424ead664219ddcf321d)](https://app.codacy.com/gh/iota9star/mikan_flutter?utm_source=github.com&utm_medium=referral&utm_content=iota9star/mikan_flutter&utm_campaign=Badge_Grade)
 
 ![[MikanProject](https://mikanani.me)](static/art/banner.png)
 
@@ -49,14 +49,6 @@
     <td><img alt="" src="static/screenshot/img_2.png"></td>
   <tr>
 </table>
-
-## Thanks
-
-特别感谢 [JetBrains](https://www.jetbrains.com/?from=mikan_flutter)
-提供的 [IntelliJ IDEA](https://www.jetbrains.com/idea)
-等全家桶对开源项目的支持.
-
-[<img src="static/jetbrains/jetbrains.png" width="200"/>](https://www.jetbrains.com/?from=mikan_flutter)
 
 ## Licenses
 
