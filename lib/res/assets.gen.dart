@@ -11,9 +11,20 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsJsGen {
+  const $AssetsJsGen();
+
+  /// File path: assets/js/api.js
+  String get api => 'assets/js/api.js';
+
+  /// List of all assets
+  List<String> get values => [api];
+}
+
 class Assets {
   const Assets._();
 
+  static const $AssetsJsGen js = $AssetsJsGen();
   static const AssetGenImage mikan = AssetGenImage('assets/mikan.png');
 
   /// List of all assets

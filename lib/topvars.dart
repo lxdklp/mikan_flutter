@@ -6,8 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide EdgeInsets;
 import 'package:gap/gap.dart';
 
-import 'internal/kit.dart';
-import 'widget/md3e_header.dart';
+import 'shared/internal/kit.dart';
+import 'shared/widgets/md3e_header.dart';
 
 EdgeInsets edge16WithStatusBar(BuildContext context) =>
     EdgeInsets.only(top: 16.0 + context.statusBarHeight, left: 16.0, right: 16.0, bottom: 16.0);
@@ -55,10 +55,10 @@ const dur3000 = Duration(milliseconds: 3000);
 const emptySliverToBoxAdapter = SliverToBoxAdapter();
 
 const centerLoading = Center(
-  child: ExpressiveLoadingIndicator(
-    constraints: BoxConstraints.tightFor(width: 24, height: 24),
-  ),
+  child: ExpressiveLoadingIndicator(constraints: BoxConstraints.tightFor(width: 24, height: 24)),
 );
+
+const defaultLoadingWidget = centerLoading;
 
 double kMaterialHeaderFactorFactor(double overscrollFraction) => 2.0 * math.pow(1 - overscrollFraction, 2);
 

@@ -5,8 +5,7 @@ import 'package:args/args.dart';
 import 'package:yaml/yaml.dart';
 
 Future<void> main(List<String> arguments) async {
-  final parser = ArgParser()
-    ..addOption('file', abbr: 'f', defaultsTo: 'windows_inno_setup.iss', help: 'ISS file path');
+  final parser = ArgParser()..addOption('file', abbr: 'f', defaultsTo: 'windows_inno_setup.iss', help: 'ISS file path');
 
   final parse = parser.parse(arguments);
   final file = parse['file'];
@@ -34,7 +33,7 @@ Future<void> main(List<String> arguments) async {
 
   final bytes = issFile.readAsBytesSync();
   final content = utf8.decode(bytes);
-  final pattern = RegExp(r'#define MyAppVersion ".*"');
+  final pattern = RegExp('#define MyAppVersion ".*"');
 
   if (!content.contains(pattern)) {
     print('Error: Cannot find MyAppVersion definition in $file');
