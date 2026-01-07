@@ -2,17 +2,17 @@
 // Do not modify
 // Check in to version control
 
-import 'package:hive_ce/hive_ce.dart';
-import 'package:mikan/model/announcement.dart';
-import 'package:mikan/model/bangumi.dart';
-import 'package:mikan/model/bangumi_row.dart';
-import 'package:mikan/model/carousel.dart';
-import 'package:mikan/model/index.dart';
-import 'package:mikan/model/record_item.dart';
-import 'package:mikan/model/season.dart';
-import 'package:mikan/model/subgroup.dart';
-import 'package:mikan/model/user.dart';
-import 'package:mikan/model/year_season.dart';
+import 'package:hive_ce/hive.dart';
+import 'package:mikan/shared/models/announcement.dart';
+import 'package:mikan/shared/models/bangumi.dart';
+import 'package:mikan/shared/models/bangumi_row.dart';
+import 'package:mikan/shared/models/carousel.dart';
+import 'package:mikan/shared/models/index.dart';
+import 'package:mikan/shared/models/record_item.dart';
+import 'package:mikan/shared/models/season.dart';
+import 'package:mikan/shared/models/subgroup.dart';
+import 'package:mikan/shared/models/user.dart';
+import 'package:mikan/shared/models/year_season.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {

@@ -6,8 +6,8 @@ version: 2.0.2+88
 publish_to: none
 
 environment:
-  sdk: ">=3.8.0 <4.0.0"
-  flutter: ">=3.29.0 <4.0.0"
+  sdk: ">=3.10.0 <4.0.0"
+  flutter: ">=3.38.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -18,10 +18,6 @@ dependencies:
   firebase_analytics: ^12.1.0
   firebase_crashlytics: ^5.0.6
   path_provider: ^2.1.5
-  dio: ^5.7.0
-  dio_cookie_manager: ^3.0.0
-  html: ^0.15.4
-  provider: ^6.1.2
   hive_ce: ^2.16.0
   hive_ce_flutter: ^2.0.0
   clipboard: ^3.0.8
@@ -40,9 +36,7 @@ dependencies:
   flex_color_picker: ^3.8.0
   intl: ^0.20.2
   collection: ^1.19.0
-  json_annotation: ^4.9.0
   path: ^1.9.0
-  cookie_jar: ^4.0.2
   async: ^2.11.0
   auto_size_text: ^3.0.0
   easy_refresh: ^3.3.2+1
@@ -57,6 +51,12 @@ dependencies:
   in_app_update: ^4.2.5
   gap: ^3.0.1
   expressive_loading_indicator: ^0.0.1
+  flutter_hooks: ^0.21.3+1
+  riverpod_annotation: ^4.0.0
+  hooks_riverpod: ^3.1.0
+  fjs: ^1.4.0
+  riverpod: ^3.1.0
+  f_limit: ^1.1.0
 
 dev_dependencies:
   args: ^2.4.1
@@ -64,13 +64,14 @@ dev_dependencies:
   glob: ^2.1.1
   http: ^1.6.0
   process_run: ^1.0.0+1
-  build_runner: ^2.4.13
+  build_runner: ^2.10.4
   flutter_gen: ^5.12.0
   flutter_gen_runner: ^5.12.0
-  json_serializable: ^6.11.3
-  hive_ce_generator: ^1.1.0
   flutter_lints: ^6.0.0
   quiver: ^3.2.1
+  riverpod_generator: ^4.0.0+1
+  riverpod_lint: ^3.1.0
+  hive_ce_generator: ^1.10.0
 
 dependency_overrides:
   collection: ^1.19.0
@@ -79,6 +80,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/js/
 
 flutter_gen:
   output: lib/res/

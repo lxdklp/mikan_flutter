@@ -39,3 +39,6 @@ pubspec.lock
 
 # Claude Code
 .claude/
+
+/api/coverage/
+/api/node_modules/

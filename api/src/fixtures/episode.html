@@ -1,0 +1,2383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="新番,动漫,动漫下載,新番下载,animation,bangumi,动画,蜜柑计划,Mikan Project" />
+    <meta name="description" content="蜜柑计划：新一代的动漫下载站" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 若用户有Google Chrome Frame,那么ie浏览时让IE使用chrome内核 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- 若是双核浏览器,默认webkit渲染(chrome) -->
+    <meta name="renderer" content="webkit">
+    <title>&#x871C;&#x67D1;&#x8BA1;&#x5212; - Mikan Project</title>
+
+    <!-- here put import css lib -->
+    
+    
+        <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css?v=7s5uDGW3AHqw6xtJmNNtr-OBRJUlgkNJEo78P4b0yRw" />
+        <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=3dkvEK0WLHRJ7_Csr0BZjAWxERc5WH7bdeUya2aXxdU" />
+        <link rel="stylesheet" href="/css/thirdparty.min.css?v=c2SZy6n-55iljz60XCAALXejEZvjc43kgwamU5DAYUU" />
+        <link rel="stylesheet" href="/css/animate.min.css?v=w_eXqGX0NdMPQ0LZNhdQ8B-DQMYAxelvLoIP39dzmus" />
+        <link rel="stylesheet" href="/css/mikan.min.css?v=BgnOAfR_3VfhpdfW0WBlvPvNAZl933rSFc0qtUGyqJg" />
+
+        <script src="/lib/jquery/dist/jquery.min.js?v=BbhdlvQf_xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44"></script>
+        <script src="/lib/bootstrap/dist/js/bootstrap.min.js?v=KXn5puMvxCw-dAYznun-drMdG1IFl3agK0p_pqT9KAo"></script>
+        <script src="/js/thirdparty.min.js?v=NsK_w5fw7Nm4ZPm4eZDgsivasZNgT6ArhIjmj-bRnR0"></script>
+        <script src="/js/darkreader.min.js?v=Lr_8XODLEDSPtT6LqaeLKzREs4jocJUzV8HvQPItIic"></script>
+        <script src="/js/ScrollMagic.min.js?v=1xuIM3UJWEZX_wWN9zrA8W7CWukfsMaEqb759CeHo3U"></script>
+        <script src="/js/jquery.ScrollMagic.min.js?v=SyygQh9gWWfvyS13QwI0SKGAQyHDachlaigiK4X59iw"></script>
+    
+
+    <link rel="icon" href="/images/favicon.ico?v=2" />
+    <link rel="apple-touch-icon" href="\Images\apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="\Images\apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="\Images\apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="\Images\apple-touch-icon-144x144.png">
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-8911610-8', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body class="main">
+    <div id="sk-header" class="hidden-xs hidden-sm">
+        <div id="sk-top-nav" class="container">
+            <a id="logo" href="/" style="width:205px;"><img id="mikan-pic" src="/images/mikan-pic.png" /><img src="/images/mikan-text.svg" style="height:30px;" /></a>
+            <div id="nav-list">
+                <ul class="list-inline nav-ul">
+                    <li class="active">
+                        <div class="sk-col"><a href="/"><i class="fa fa-home fa-lg"></i>主页</a></div>
+                    </li>
+                    <li class="">
+                        <div class="sk-col"><a href="/Home/MyBangumi"><i class="fa fa-rss fa-lg"></i>订阅</a></div>
+                    </li>
+                    <li class="">
+                        <div class="sk-col"><a href="/Home/Classic"><i class="fa fa-slack fa-lg"></i>列表</a></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="search-form">
+                <form method="get" action="/Home/Search">
+                    <div class="form-group has-feedback">
+                        <label for="search" class="sr-only">搜索</label>
+                        <input type="text" class="form-control input-sm" name="searchstr" id="header-search" placeholder="搜索">
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                </form>
+            </div>
+
+            
+
+<section id="login">
+        <div id="user-login" class="pull-right">
+            <a href="/Account/Register" class="text-right">注册</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a onclick="ToggleActive(this)" class="text-right" data-toggle="popover-x" data-target="#login-popover" data-placement="bottom bottom-right" rel="popover">登录</a>
+<form action="/Account/Login?ReturnUrl=%2F" class="form-vertical" method="post">                <div id="login-popover" class="popover popover-default">
+                    <div class="arrow"></div>
+                    <div id="login-popover-conent">
+                        <div id="login-popover-input">
+                            <div id="login-popover-div-username">
+                                <img src="/images/user-name_login_icon.png" />
+                                <input type="text" placeholder="用户名" id="login-popover-input-username" name="UserName" />
+                            </div>
+                            <div id="login-popover-div-password">
+                                <img src="/images/password_login_icon.png" style="margin-left:3px;" />
+                                <input type="password" placeholder="密码" id="login-popover-input-password" name="Password" />
+                            </div>
+                        </div>
+                        <button id="login-popover-submit" type="submit" class="btn">登&nbsp;&nbsp;&nbsp;录</button>
+                        <div class="checkbox" id="login-popover-password">
+                            <label id="login-popover-remember-password"><input type="checkbox" value="true" name="RememberMe"><input type="hidden" value="false" name="RememberMe">记住密码</label>
+                            <div id="login-popover-forget-password" class="pull-right"><a href="/Account/ForgotPassword" class="forget-password">忘记密码</a></div>
+                        </div>
+
+                        <a id="login-popover-create-account">还没有账号？赶紧来注册一个吧~</a>
+                    </div>
+                </div>
+<input name="__RequestVerificationToken" type="hidden" value="CfDJ8MyNMqFNaC9JmJW13PvY-91iwnMH2RqEpMXvz6DXZf3E5WaSW8-JBY2EsqSVznJMO8ew8ipRb_zZ31aosV-32E3mYfP9KJ7wbWHQ8x5dKjHs-2Of0X3DqLfmIHlrVWR3u0Epfj6D0LajgD306r9Up60" /></form>        </div>
+        <script>
+            var AdvancedSubscriptionEnabled = false;
+        </script>
+</section>
+        </div>
+        <div class="ribbon">
+            <span class="ribbon-color1"></span>
+            <span class="ribbon-color2"></span>
+            <span class="ribbon-color3"></span>
+            <span class="ribbon-color4"></span>
+            <span class="ribbon-color5"></span>
+            <span class="ribbon-color6"></span>
+            <span class="ribbon-color7"></span>
+        </div>
+    </div>
+    <div class="m-home-nav hidden-lg hidden-md" id="sk-mobile-header">
+        <div class="m-home-tool-left clickable" data-toggle="modal" data-target="#modal-nav">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+        <div class="m-home-tool-left"></div>
+        <div style="text-align: center; height:100%;flex:1;">
+            <a href="/" style="text-decoration:none">
+                <img src="/images/mikan-pic.png" style="height: 3rem;margin-top: 0.5rem;">
+                <img src="/images/mikan-text.png" style="height: 1.5rem;margin-top: 0.5rem;">
+            </a>
+        </div>
+        <div class="m-home-tool-right clickable" data-toggle="modal" data-target="#modal-login">
+            <i class="fa fa-user" aria-hidden="true" style="margin-right: 1rem;"></i>
+        </div>
+        <div class="m-home-tool-right clickable" onclick="ShowNavSearch()">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="m-nav-search" style="width: 100%;">
+        <div style="flex: 1;">
+            <form method="get" action="/Home/Search">
+                <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon1" style="border: none;background-color: white;">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="搜索" name="searchstr" aria-describedby="sizing-addon1" style="border: none;font-size:16px;">
+                </div>
+            </form>
+        </div>
+        <div style="width: 4rem;" onclick="HideNavSearch()">
+            <span style="font-size: 1.25rem;">取消</span>
+        </div>
+    </div>
+    
+
+
+
+<div id="sk-data-nav-anchor" class="hidden-sm hidden-xs"></div>
+<div id="sk-data-nav" class="row hidden-sm hidden-xs">
+    <div class="container">
+        <ul class="list-inline data-nav-ul">
+                <li class=" date-li-6" data-anchor="#data-row-6">
+                    <div class="sk-col date-cir">Sat</div>
+                    <div class="sk-col date-cn">&#x661F;&#x671F;&#x516D;</div>
+                </li>
+                <li class=" date-li-5" data-anchor="#data-row-5">
+                    <div class="sk-col date-cir">Fri</div>
+                    <div class="sk-col date-cn">&#x661F;&#x671F;&#x4E94;</div>
+                </li>
+                <li class=" date-li-4" data-anchor="#data-row-4">
+                    <div class="sk-col date-cir">Thu</div>
+                    <div class="sk-col date-cn">&#x661F;&#x671F;&#x56DB;</div>
+                </li>
+                <li class=" date-li-3" data-anchor="#data-row-3">
+                    <div class="sk-col date-cir">Wed</div>
+                    <div class="sk-col date-cn">&#x661F;&#x671F;&#x4E09;</div>
+                </li>
+                <li class=" date-li-2" data-anchor="#data-row-2">
+                    <div class="sk-col date-cir">Tue</div>
+                    <div class="sk-col date-cn">&#x661F;&#x671F;&#x4E8C;</div>
+                </li>
+                <li class=" date-li-1" data-anchor="#data-row-1">
+                    <div class="sk-col date-cir">Mon</div>
+                    <div class="sk-col date-cn">&#x661F;&#x671F;&#x4E00;</div>
+                </li>
+                <li class=" date-li-0" data-anchor="#data-row-0">
+                    <div class="sk-col date-cir">Sun</div>
+                    <div class="sk-col date-cn">&#x661F;&#x671F;&#x65E5;</div>
+                </li>
+            <li class="date-li-7" data-anchor="#data-row-7">
+                <div class="sk-col date-cir">Mov</div>
+                <div class="sk-col date-cn">剧场版</div>
+            </li>
+            <li class="date-li-8" data-anchor="#data-row-8">
+                <div class="sk-col date-cir">OVA</div>
+                <div class="sk-col date-cn">OVA</div>
+            </li>
+        </ul>
+
+        
+<ul class="navbar-nav date-select">
+    <li class="sk-col dropdown date-btn">
+        <div class="dropdown-toggle btn btn-default dropdown-custom" data-toggle="dropdown">
+            <div class="sk-col glyphicon glyphicon-calendar"></div>
+            <div class="sk-col date-text"> 2026 &#x51AC;&#x5B63;&#x756A;&#x7EC4; <span class="caret"></span> </div>
+        </div>
+        <ul class="dropdown-menu" role="menu">
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2026</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2026" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2025</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2025" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2025" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2025" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2025" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2024</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2024" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2024" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2024" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2024" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2023</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2023" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2023" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2023" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2023" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2022</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2022" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2022" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2022" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2022" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2021</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2021" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2021" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2021" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2021" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2020</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2020" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2020" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2020" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2020" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2019</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2019" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2019" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2019" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2019" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2018</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2018" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2018" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2018" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2018" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2017</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2017" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2017" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2017" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2017" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2016</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2016" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2016" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2016" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2016" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2015</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2015" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2015" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2015" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2015" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2014</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2014" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2014" data-season="&#x590F;">&#x590F;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2014" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2014" data-season="&#x51AC;">&#x51AC;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2013</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2013" data-season="&#x79CB;">&#x79CB;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="default-cursor">2012</a>
+                    <ul class="dropdown-menu">
+                            <li><a href="javaScript:void(0);" onclick="UpdateBangumiCoverFlow(this, true)" data-year="2012" data-season="&#x6625;">&#x6625;&#x5B63;&#x756A;&#x7EC4;</a></li>
+                    </ul>
+                </li>
+        </ul>
+    </li>
+</ul>
+    </div>
+</div>
+
+
+<div id="sk-container" class="container hidden-sm hidden-xs">
+    <section class="main-content">
+        
+<div id="an-list">
+	<div id="an-list-nav">
+		<div class="sk-col my-rss">我的字幕组订阅更新</div>
+		<div class="sk-col my-rss-date js-episode-update active" data-predate="1" data-enddate="1" data-maximumitems="6">昨天至今</div>
+		<div class="sk-col my-rss-date js-episode-update" data-predate="0" data-enddate="1" data-maximumitems="6">今天</div>
+		<div class="sk-col my-rss-date js-episode-update" data-predate="1" data-enddate="0" data-maximumitems="6">昨天</div>
+		<div class="sk-col my-rss-date js-episode-update" data-predate="2" data-enddate="1" data-maximumitems="6">近三天</div>
+		<div class="sk-col my-rss-date js-episode-update" data-predate="-1" data-enddate="-1" data-maximumitems="10">OVA/剧场版 (beta)</div>
+
+			<div class="sk-col my-rss-date indent-btn active" onclick="ToggleEpisodeUpdates(this)"><i class="fa fa-angle-down fa-2x"></i></div>
+	</div>
+
+	<div id="an-episode-updates">
+		
+    <div class="no-episode-update">
+        <img src="/images/mikan-pic.png" style="height:150px;" /><img src="/images/no-episode-update.png" style="height:60px;margin-left:30px;" />
+    </div>
+
+
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div style="margin-top: 10px; margin-bottom: -10px;">
+            
+
+<div style="width:100%; margin-right: auto; margin-left: auto;" class="hidden-xs hidden-sm">
+    <a href="https://equity.tmall.com/tm?agentId=030f9003a26d4361&amp;bc_fl_src=tmall_market_llb_1_2698459&amp;llbPlatform=_pube&amp;llbOsd=1&amp;di=__IDFA__&amp;dim=__IMEI__&amp;oaid=__OAID__&amp;caid=__CAID__&amp;sy=llb" onclick="ga('send', 'event', 'sswj_lg', 'clicked', 'ad');">
+        <img src="/images/SSWJ/sswj9_lg.jpg" style='height: 100%; width: 100%; object-fit: contain' />
+    </a>
+</div>
+
+<div style="width:100%; margin-right: auto; margin-left: auto;" class="hidden-lg hidden-md">
+    <a href="https://equity.tmall.com/tm?agentId=030f9003a26d4361&amp;bc_fl_src=tmall_market_llb_1_2698459&amp;llbPlatform=_pube&amp;llbOsd=1&amp;di=__IDFA__&amp;dim=__IMEI__&amp;oaid=__OAID__&amp;caid=__CAID__&amp;sy=llb" onclick="ga('send', 'event', 'sswj_sm', 'clicked', 'ad');">
+        <img src="/images/SSWJ/sswj9_sm.jpg" style='height: 100%; width: 100%; object-fit: contain' />
+    </a>
+</div>
+        </div>
+
+        <div id="sk-body">
+            
+<svg width="0" height="0">
+    <defs>
+        <clipPath id="clip-triangle-1">
+            <polygon points="0 15,80 15,100 0,120 15,1120 15,1120 370,0 370" />
+        </clipPath>
+        <clipPath id="clip-triangle-2">
+            <polygon points="0 15,310 15,330 0,350 15,1120 15,1120 370,0 370" />
+        </clipPath>
+        <clipPath id="clip-triangle-3">
+            <polygon points="0 15,540 15,560 0,580 15,1120 15,1120 370,0 370" />
+        </clipPath>
+        <clipPath id="clip-triangle-4">
+            <polygon points="0 15,770 15,790 0,810 15,1120 15,1120 370,0 370" />
+        </clipPath>
+        <clipPath id="clip-triangle-5">
+            <polygon points="0 15,995 15,1015 0,1035 15,1120 15,1120 370,0 370" />
+        </clipPath>
+        <linearGradient id="row-bg-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#e4dedf" />
+            <stop offset="100%" stop-color="#cbbcc4" />
+        </linearGradient>
+    </defs>
+</svg>
+
+    <div class="sk-bangumi" data-dayofweek="6">
+        <div id="data-row-6" class="row">
+            &#x661F;&#x671F;&#x516D;
+        </div>
+
+<div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202510/833dfc7e.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3756" data-bangumiindex="1" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/12/29 更新</div>
+                <a href="/Home/Bangumi/3756" target="_blank" class="an-text" title="&#x81F4;&#x4E0D;&#x706D;&#x7684;&#x4F60; &#x7B2C;&#x4E09;&#x5B63;">&#x81F4;&#x4E0D;&#x706D;&#x7684;&#x4F60; &#x7B2C;&#x4E09;&#x5B63;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3756" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202510/c9fabb85.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3768" data-bangumiindex="2" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/12/28 更新</div>
+                <a href="/Home/Bangumi/3768" target="_blank" class="an-text" title="&#x4E1C;&#x5C9B;&#x4E39;&#x4E09;&#x90CE;&#x60F3;&#x6210;&#x4E3A;&#x5047;&#x9762;&#x9A91;&#x58EB;">&#x4E1C;&#x5C9B;&#x4E39;&#x4E09;&#x90CE;&#x60F3;&#x6210;&#x4E3A;&#x5047;&#x9762;&#x9A91;&#x58EB;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3768" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202510/b5756bf3.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3780" data-bangumiindex="3" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/12/28 更新</div>
+                <a href="/Home/Bangumi/3780" target="_blank" class="an-text" title="&#x53E4;&#x8BFA;&#x5E0C;&#x4E9A;">&#x53E4;&#x8BFA;&#x5E0C;&#x4E9A;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3780" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/a4a6bc78.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3862" data-bangumiindex="4" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2026/01/02 更新</div>
+                <a href="/Home/Bangumi/3862" target="_blank" class="an-text" title="&#x73B0;&#x5728;&#x591A;&#x95FB;&#x541B;&#x662F;&#x54EA;&#x4E00;&#x9762;&#xFF01;&#xFF1F;">&#x73B0;&#x5728;&#x591A;&#x95FB;&#x541B;&#x662F;&#x54EA;&#x4E00;&#x9762;&#xFF01;&#xFF1F;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3862" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202512/82e74c23.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3820"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x9752;&#x4E4B;&#x58EC;&#x751F;&#x6D6A; -&#x82B9;&#x6CFD;&#x6697;&#x6740;&#x7BC7;-">&#x9752;&#x4E4B;&#x58EC;&#x751F;&#x6D6A; -&#x82B9;&#x6CFD;&#x6697;&#x6740;&#x7BC7;-</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/cbad1678.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3822"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x91D1;&#x724C;&#x5F97;&#x4E3B; &#x7B2C;&#x4E8C;&#x5B63;">&#x91D1;&#x724C;&#x5F97;&#x4E3B; &#x7B2C;&#x4E8C;&#x5B63;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/940b3636.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3840"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x6B7B;&#x4EA1;&#x8D26;&#x53F7;">&#x6B7B;&#x4EA1;&#x8D26;&#x53F7;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/5174d0fa.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3841"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x52C7;&#x8005;&#x5904;&#x5211; &#x60E9;&#x7F5A;&#x52C7;&#x8005;9004&#x961F;&#x670D;&#x5211;&#x8BB0;&#x5F55;">&#x52C7;&#x8005;&#x5904;&#x5211; &#x60E9;&#x7F5A;&#x52C7;&#x8005;9004&#x961F;&#x670D;&#x5211;&#x8BB0;&#x5F55;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/70b1cdbc.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3845"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x975E;&#x4EBA;&#x5B66;&#x751F;&#x4E0E;&#x538C;&#x4E16;&#x6559;&#x5E08;">&#x975E;&#x4EBA;&#x5B66;&#x751F;&#x4E0E;&#x538C;&#x4E16;&#x6559;&#x5E08;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/51b8d587.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3848"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5361;&#x7247;&#x6218;&#x6597;&#x5148;&#x5BFC;&#x8005; Divinez &#x5E7B;&#x771F;&#x661F;&#x6218;&#x7BC7;">&#x5361;&#x7247;&#x6218;&#x6597;&#x5148;&#x5BFC;&#x8005; Divinez &#x5E7B;&#x771F;&#x661F;&#x6218;&#x7BC7;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/90685175.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3850"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5B89;&#x9038;&#x9886;&#x4E3B;&#x7684;&#x6109;&#x5FEB;&#x9886;&#x5730;&#x9632;&#x536B;&#xFF5E;&#x4EE5;&#x751F;&#x4EA7;&#x7CFB;&#x9B54;&#x672F;&#x5C06;&#x65E0;&#x540D;&#x5C0F;&#x6751;&#x6253;&#x9020;&#x6210;&#x6700;&#x5F3A;&#x8981;&#x585E;&#x90FD;&#x5E02;&#xFF5E;">&#x5B89;&#x9038;&#x9886;&#x4E3B;&#x7684;&#x6109;&#x5FEB;&#x9886;&#x5730;&#x9632;&#x536B;&#xFF5E;&#x4EE5;&#x751F;&#x4EA7;&#x7CFB;&#x9B54;&#x672F;&#x5C06;&#x65E0;&#x540D;&#x5C0F;&#x6751;&#x6253;&#x9020;&#x6210;&#x6700;&#x5F3A;&#x8981;&#x585E;&#x90FD;&#x5E02;&#xFF5E;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/09a8370b.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3851"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="TRIGUN STARGAZE">TRIGUN STARGAZE</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/080d0973.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3855"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x8F6C;&#x751F;&#x4E4B;&#x540E;&#x7684;&#x6211;&#x53D8;&#x6210;&#x4E86;&#x9F99;&#x86CB;">&#x8F6C;&#x751F;&#x4E4B;&#x540E;&#x7684;&#x6211;&#x53D8;&#x6210;&#x4E86;&#x9F99;&#x86CB;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/38b1ae51.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3858"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x52C7;&#x8005;&#x4E4B;&#x5C51;">&#x52C7;&#x8005;&#x4E4B;&#x5C51;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div>    </div>
+    <div class="sk-bangumi" data-dayofweek="5">
+        <div id="data-row-5" class="row">
+            &#x661F;&#x671F;&#x4E94;
+        </div>
+
+<div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/200504/1df90634.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="681" data-bangumiindex="1" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/12/29 更新</div>
+                <a href="/Home/Bangumi/681" target="_blank" class="an-text" title="&#x54C6;&#x5566;A&#x68A6;">&#x54C6;&#x5566;A&#x68A6;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="681" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202304/1d84a9bf.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3015" data-bangumiindex="2" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/12/19 更新</div>
+                <a href="/Home/Bangumi/3015" target="_blank" class="an-text" title="&#x5B9D;&#x53EF;&#x68A6; &#x5730;&#x5E73;&#x7EBF;">&#x5B9D;&#x53EF;&#x68A6; &#x5730;&#x5E73;&#x7EBF;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3015" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202204/d8ef46c0.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3288" data-bangumiindex="3" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/10/16 更新</div>
+                <a href="/Home/Bangumi/3288" target="_blank" class="an-text" title="&#x5409;&#x4F0A;&#x5361;&#x54C7;">&#x5409;&#x4F0A;&#x5361;&#x54C7;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3288" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/199204/fedf5d50.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="1235"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x8721;&#x7B14;&#x5C0F;&#x65B0;">&#x8721;&#x7B14;&#x5C0F;&#x65B0;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/87a60922.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3821"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x846C;&#x9001;&#x7684;&#x8299;&#x8389;&#x83B2; &#x7B2C;&#x4E8C;&#x5B63;">&#x846C;&#x9001;&#x7684;&#x8299;&#x8389;&#x83B2; &#x7B2C;&#x4E8C;&#x5B63;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/71a15e6e.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3830"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x9AD8;&#x6821;&#x5947;&#x9762;&#x7EC4;">&#x9AD8;&#x6821;&#x5947;&#x9762;&#x7EC4;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/55312669.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3834"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5730;&#x72F1;&#x6A21;&#x5F0F; &#xFF5E;&#x559C;&#x6B22;&#x901F;&#x901A;&#x6E38;&#x620F;&#x7684;&#x73A9;&#x5BB6;&#x5728;&#x5E9F;&#x8BBE;&#x5B9A;&#x5F02;&#x4E16;&#x754C;&#x65E0;&#x53CC;&#xFF5E;">&#x5730;&#x72F1;&#x6A21;&#x5F0F; &#xFF5E;&#x559C;&#x6B22;&#x901F;&#x901A;&#x6E38;&#x620F;&#x7684;&#x73A9;&#x5BB6;&#x5728;&#x5E9F;&#x8BBE;&#x5B9A;&#x5F02;&#x4E16;&#x754C;&#x65E0;&#x53CC;&#xFF5E;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/9bc5a571.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3867"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x548C;&#x673A;&#x5668;&#x4EBA;&#x556A;&#x556A;&#x556A;&#x80FD;&#x7B97;&#x5728;&#x7ECF;&#x9A8C;&#x6B21;&#x6570;&#x91CC;&#x5417;&#xFF1F;">&#x548C;&#x673A;&#x5668;&#x4EBA;&#x556A;&#x556A;&#x556A;&#x80FD;&#x7B97;&#x5728;&#x7ECF;&#x9A8C;&#x6B21;&#x6570;&#x91CC;&#x5417;&#xFF1F;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div>    </div>
+    <div class="sk-bangumi" data-dayofweek="4">
+        <div id="data-row-4" class="row">
+            &#x661F;&#x671F;&#x56DB;
+        </div>
+
+<div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/d25fb2da.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3825"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x9B54;&#x90FD;&#x7CBE;&#x5175;&#x7684;&#x5974;&#x96B6; &#x7B2C;&#x4E8C;&#x5B63;">&#x9B54;&#x90FD;&#x7CBE;&#x5175;&#x7684;&#x5974;&#x96B6; &#x7B2C;&#x4E8C;&#x5B63;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/0ad0c2d7.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3844"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5384;&#x91CC;&#x65AF;&#x7684;&#x5723;&#x676F;">&#x5384;&#x91CC;&#x65AF;&#x7684;&#x5723;&#x676F;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/7fb9528d.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3847"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5492;&#x672F;&#x56DE;&#x6218; &#x6B7B;&#x706D;&#x56DE;&#x6E38; &#x524D;&#x7BC7;">&#x5492;&#x672F;&#x56DE;&#x6218; &#x6B7B;&#x706D;&#x56DE;&#x6E38; &#x524D;&#x7BC7;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/512cc36c.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3854"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x900F;&#x660E;&#x7537;&#x4E0E;&#x4EBA;&#x7C7B;&#x5973;&#xFF5E;&#x4E0D;&#x4E45;&#x6210;&#x4E3A;&#x592B;&#x5987;&#x7684;&#x4E8C;&#x4EBA;&#xFF5E;">&#x900F;&#x660E;&#x7537;&#x4E0E;&#x4EBA;&#x7C7B;&#x5973;&#xFF5E;&#x4E0D;&#x4E45;&#x6210;&#x4E3A;&#x592B;&#x5987;&#x7684;&#x4E8C;&#x4EBA;&#xFF5E;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/af608578.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3860"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x8611;&#x83C7;&#x9B54;&#x5973;">&#x8611;&#x83C7;&#x9B54;&#x5973;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/5396a014.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3861"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x300C;&#x51ED;&#x4F60;&#x4E5F;&#x60F3;&#x8BA8;&#x4F10;&#x9B54;&#x738B;&#xFF1F;&#x300D;&#x88AB;&#x52C7;&#x8005;&#x5C0F;&#x961F;&#x9010;&#x51FA;&#x961F;&#x4F0D;&#xFF0C;&#x53EA;&#x597D;&#x5728;&#x738B;&#x90FD;&#x81EA;&#x5728;&#x8FC7;&#x6D3B;">&#x300C;&#x51ED;&#x4F60;&#x4E5F;&#x60F3;&#x8BA8;&#x4F10;&#x9B54;&#x738B;&#xFF1F;&#x300D;&#x88AB;&#x52C7;&#x8005;&#x5C0F;&#x961F;&#x9010;&#x51FA;&#x961F;&#x4F0D;&#xFF0C;&#x53EA;&#x597D;&#x5728;&#x738B;&#x90FD;&#x81EA;&#x5728;&#x8FC7;&#x6D3B;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div>    </div>
+    <div class="sk-bangumi" data-dayofweek="3">
+        <div id="data-row-3" class="row">
+            &#x661F;&#x671F;&#x4E09;
+        </div>
+
+<div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202504/7ea16a61.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3633" data-bangumiindex="1" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/04/03 更新</div>
+                <a href="/Home/Bangumi/3633" target="_blank" class="an-text" title="&#x8FDB;&#x5165;&#x82B1;&#x56ED;">&#x8FDB;&#x5165;&#x82B1;&#x56ED;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3633" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/4ea89792.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3827"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x9B54;&#x738B;&#x7684;&#x5973;&#x513F;&#x592A;&#x6E29;&#x67D4;&#x4E86;&#xFF01;&#xFF01;">&#x9B54;&#x738B;&#x7684;&#x5973;&#x513F;&#x592A;&#x6E29;&#x67D4;&#x4E86;&#xFF01;&#xFF01;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/f8350f52.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3835"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="29&#x5C81;&#x5355;&#x8EAB;&#x5192;&#x9669;&#x5BB6;&#x7684;&#x65E5;&#x5E38;">29&#x5C81;&#x5355;&#x8EAB;&#x5192;&#x9669;&#x5BB6;&#x7684;&#x65E5;&#x5E38;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/4522133c.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3839"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x9760;&#x6B7B;&#x4EA1;&#x6E38;&#x620F;&#x6DF7;&#x996D;&#x5403;&#x3002;">&#x9760;&#x6B7B;&#x4EA1;&#x6E38;&#x620F;&#x6DF7;&#x996D;&#x5403;&#x3002;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/6ab7c0e1.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3857"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x8D35;&#x65CF;&#x8F6C;&#x751F; &#xFF5E;&#x5F97;&#x5929;&#x7737;&#x987E;&#x4E00;&#x51FA;&#x751F;&#x5C31;&#x83B7;&#x5F97;&#x6700;&#x5F3A;&#x529B;&#x91CF;&#xFF5E;">&#x8D35;&#x65CF;&#x8F6C;&#x751F; &#xFF5E;&#x5F97;&#x5929;&#x7737;&#x987E;&#x4E00;&#x51FA;&#x751F;&#x5C31;&#x83B7;&#x5F97;&#x6700;&#x5F3A;&#x529B;&#x91CF;&#xFF5E;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/e3bc974a.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3863"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x4F18;&#x96C5;&#x8D35;&#x65CF;&#x7684;&#x4F11;&#x5047;&#x6307;&#x5357;&#x3002;">&#x4F18;&#x96C5;&#x8D35;&#x65CF;&#x7684;&#x4F11;&#x5047;&#x6307;&#x5357;&#x3002;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div>    </div>
+    <div class="sk-bangumi" data-dayofweek="2">
+        <div id="data-row-2" class="row">
+            &#x661F;&#x671F;&#x4E8C;
+        </div>
+
+<div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/a953b0a9.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3823"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x94E0;&#x771F;&#x4F20; &#x6B66;&#x58EB;&#x519B;&#x56E2;">&#x94E0;&#x771F;&#x4F20; &#x6B66;&#x58EB;&#x519B;&#x56E2;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/887ba87e.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3828"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5348;&#x591C;&#x7684;&#x503E;&#x5FC3;&#x65CB;&#x5F8B;">&#x5348;&#x591C;&#x7684;&#x503E;&#x5FC3;&#x65CB;&#x5F8B;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/b2537e9b.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3829"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x963F;&#x5C14;&#x6D85;&#x7684;&#x4E8B;&#x4EF6;&#x7C3F;">&#x963F;&#x5C14;&#x6D85;&#x7684;&#x4E8B;&#x4EF6;&#x7C3F;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/5b290c28.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3832"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x8EAB;&#x4E3A;&#x9B54;&#x65CF;&#x7684;&#x6211;&#x60F3;&#x5411;&#x52C7;&#x8005;&#x5C0F;&#x961F;&#x7684;&#x53EF;&#x7231;&#x5973;&#x5B69;&#x544A;&#x767D;&#x3002;">&#x8EAB;&#x4E3A;&#x9B54;&#x65CF;&#x7684;&#x6211;&#x60F3;&#x5411;&#x52C7;&#x8005;&#x5C0F;&#x961F;&#x7684;&#x53EF;&#x7231;&#x5973;&#x5B69;&#x544A;&#x767D;&#x3002;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/48da1a32.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3852"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x8FBE;&#x5C14;&#x6587;&#x4E8B;&#x53D8;">&#x8FBE;&#x5C14;&#x6587;&#x4E8B;&#x53D8;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/14e82ab8.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3853"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5F02;&#x4E16;&#x754C;&#x7684;&#x5B89;&#x6CF0;&#x5168;&#x770B;&#x793E;&#x755C;">&#x5F02;&#x4E16;&#x754C;&#x7684;&#x5B89;&#x6CF0;&#x5168;&#x770B;&#x793E;&#x755C;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div>    </div>
+    <div class="sk-bangumi" data-dayofweek="1">
+        <div id="data-row-1" class="row">
+            &#x661F;&#x671F;&#x4E00;
+        </div>
+
+<div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/15d6d3fa.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3824"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x9EC4;&#x91D1;&#x795E;&#x5A01; &#x6700;&#x7EC8;&#x7AE0;">&#x9EC4;&#x91D1;&#x795E;&#x5A01; &#x6700;&#x7EC8;&#x7AE0;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/2ee03b0e.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3826"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x80FD;&#x5E2E;&#x6211;&#x5F04;&#x5E72;&#x51C0;&#x5417;&#xFF1F;">&#x80FD;&#x5E2E;&#x6211;&#x5F04;&#x5E72;&#x51C0;&#x5417;&#xFF1F;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/1b29a4ba.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3831"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x548C;&#x9752;&#x6885;&#x7AF9;&#x9A6C;&#x4E4B;&#x95F4;&#x4E0D;&#x4F1A;&#x6709;&#x604B;&#x7231;&#x559C;&#x5267;">&#x548C;&#x9752;&#x6885;&#x7AF9;&#x9A6C;&#x4E4B;&#x95F4;&#x4E0D;&#x4F1A;&#x6709;&#x604B;&#x7231;&#x559C;&#x5267;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div>    </div>
+    <div class="sk-bangumi" data-dayofweek="0">
+        <div id="data-row-0" class="row">
+            &#x661F;&#x671F;&#x65E5;
+        </div>
+
+<div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/201310/91d95f43.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="227" data-bangumiindex="1" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2026/01/02 更新</div>
+                <a href="/Home/Bangumi/227" target="_blank" class="an-text" title="&#x540D;&#x4FA6;&#x63A2;&#x67EF;&#x5357;">&#x540D;&#x4FA6;&#x63A2;&#x67EF;&#x5357;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="227" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/201310/0aa598c7.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="228" data-bangumiindex="2" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/12/29 更新</div>
+                <a href="/Home/Bangumi/228" target="_blank" class="an-text" title="&#x822A;&#x6D77;&#x738B;">&#x822A;&#x6D77;&#x738B;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="228" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202501/06be31dd.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3503" data-bangumiindex="3" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/01/06 更新</div>
+                <a href="/Home/Bangumi/3503" target="_blank" class="an-text" title="Fate/strange Fake">Fate/strange Fake</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3503" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202502/4462a4be.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3570" data-bangumiindex="4" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/12/28 更新</div>
+                <a href="/Home/Bangumi/3570" target="_blank" class="an-text" title="Idol&#x5149;&#x4E4B;&#x7F8E;&#x5C11;&#x5973;&#x4F60;&#x4E0E;&#x6211;&#x266A;">Idol&#x5149;&#x4E4B;&#x7F8E;&#x5C11;&#x5973;&#x4F60;&#x4E0E;&#x6211;&#x266A;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3570" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202510/02a0fa4c.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3763" data-bangumiindex="5" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/12/22 更新</div>
+                <a href="/Home/Bangumi/3763" target="_blank" class="an-text" title="&#x84DD;&#x8272;&#x7BA1;&#x5F26;&#x4E50; &#x7B2C;&#x4E8C;&#x5B63;">&#x84DD;&#x8272;&#x7BA1;&#x5F26;&#x4E50; &#x7B2C;&#x4E8C;&#x5B63;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3763" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202510/1a3b9803.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3786" data-bangumiindex="1" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/12/21 更新</div>
+                <a href="/Home/Bangumi/3786" target="_blank" class="an-text" title="&#x6570;&#x7801;&#x5B9D;&#x8D1D; BEATBREAK">&#x6570;&#x7801;&#x5B9D;&#x8D1D; BEATBREAK</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3786" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202510/4a658f7a.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3797" data-bangumiindex="2" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2025/12/28 更新</div>
+                <a href="/Home/Bangumi/3797" target="_blank" class="an-text" title="SI-VIS&#xFF1A;&#x82F1;&#x96C4;&#x4E4B;&#x58F0;">SI-VIS&#xFF1A;&#x82F1;&#x96C4;&#x4E4B;&#x58F0;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3797" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/0f4a10c5.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3871" data-bangumiindex="3" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2026/01/02 更新</div>
+                <a href="/Home/Bangumi/3871" target="_blank" class="an-text" title="&#x6781;&#x901F;&#x8F66;&#x9B42; &#x7B2C;&#x4E09;&#x5B63;">&#x6781;&#x901F;&#x8F66;&#x9B42; &#x7B2C;&#x4E09;&#x5B63;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3871" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/199501/5730cce9.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="1236"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x6A31;&#x6843;&#x5C0F;&#x4E38;&#x5B50;">&#x6A31;&#x6843;&#x5C0F;&#x4E38;&#x5B50;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/196910/cffe212e.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="1327"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x6D77;&#x87BA;&#x5C0F;&#x59D0;">&#x6D77;&#x87BA;&#x5C0F;&#x59D0;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/198810/0856bd82.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="2330"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x9762;&#x5305;&#x8D85;&#x4EBA;">&#x9762;&#x5305;&#x8D85;&#x4EBA;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/5e541293.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3819"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x6CDB;&#x800C;&#x4E0D;&#x7CBE;&#x7684;&#x6211;&#x88AB;&#x9010;&#x51FA;&#x4E86;&#x52C7;&#x8005;&#x961F;&#x4F0D;">&#x6CDB;&#x800C;&#x4E0D;&#x7CBE;&#x7684;&#x6211;&#x88AB;&#x9010;&#x51FA;&#x4E86;&#x52C7;&#x8005;&#x961F;&#x4F0D;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/bcea2e8c.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3833"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5F02;&#x56FD;&#x65E5;&#x8BB0;">&#x5F02;&#x56FD;&#x65E5;&#x8BB0;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/6c42642a.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3836"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x706B;&#x55B0;&#x9E1F; &#x7FBD;&#x5DDE;&#x8934;&#x891B;&#x9E22;&#x7EC4;">&#x706B;&#x55B0;&#x9E1F; &#x7FBD;&#x5DDE;&#x8934;&#x891B;&#x9E22;&#x7EC4;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/67fc01c7.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3837"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x9B54;&#x672F;&#x5E08;&#x5E93;&#x8BFA;&#x770B;&#x5F97;&#x89C1;&#x4E00;&#x5207;">&#x9B54;&#x672F;&#x5E08;&#x5E93;&#x8BFA;&#x770B;&#x5F97;&#x89C1;&#x4E00;&#x5207;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/c58ed39a.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3838"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x82B1;&#x6837;&#x5C11;&#x5E74;&#x5C11;&#x5973;">&#x82B1;&#x6837;&#x5C11;&#x5E74;&#x5C11;&#x5973;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/017507e1.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3842"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x6253;&#x5DE5;&#x4ED4;&#x7684;&#x62F7;&#x95EE;&#x65E5;&#x5E38;">&#x6253;&#x5DE5;&#x4ED4;&#x7684;&#x62F7;&#x95EE;&#x65E5;&#x5E38;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/30772e19.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3843"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x88AB;&#x90BB;&#x56FD;&#x738B;&#x5B50;&#x6EBA;&#x7231;&#x7684;&#x53CD;&#x6D3E;&#x5973;&#x4E3B;">&#x88AB;&#x90BB;&#x56FD;&#x738B;&#x5B50;&#x6EBA;&#x7231;&#x7684;&#x53CD;&#x6D3E;&#x5973;&#x4E3B;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/c6af8784.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3846"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5730;&#x72F1;&#x4E50; &#x7B2C;&#x4E8C;&#x5B63;">&#x5730;&#x72F1;&#x4E50; &#x7B2C;&#x4E8C;&#x5B63;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/0f561b69.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3849"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x76F8;&#x53CD;&#x7684;&#x4F60;&#x548C;&#x6211;">&#x76F8;&#x53CD;&#x7684;&#x4F60;&#x548C;&#x6211;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/44ca168f.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3856"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x795E;&#x516B;&#x5C0F;&#x59B9;&#x4E0D;&#x53EF;&#x6015;">&#x795E;&#x516B;&#x5C0F;&#x59B9;&#x4E0D;&#x53EF;&#x6015;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/9ec35c3e.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3859"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x768E;&#x6D01;&#x8FCE;&#x5BB5;&#x4E4B;&#x6708;">&#x768E;&#x6D01;&#x8FCE;&#x5BB5;&#x4E4B;&#x6708;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/ce6252ff.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3864"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x6709;&#x6816;&#x5DDD;&#x7149;&#x3063;&#x3066;&#x30DB;&#x30F3;&#x30C8;&#x306F;&#x5973;&#x306A;&#x3093;&#x3060;&#x3088;&#x306D;&#x3002;">&#x6709;&#x6816;&#x5DDD;&#x7149;&#x3063;&#x3066;&#x30DB;&#x30F3;&#x30C8;&#x306F;&#x5973;&#x306A;&#x3093;&#x3060;&#x3088;&#x306D;&#x3002;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/ebbed022.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3865"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x6697;&#x829D;&#x5C45; &#x7B2C;&#x5341;&#x516D;&#x5B63;">&#x6697;&#x829D;&#x5C45; &#x7B2C;&#x5341;&#x516D;&#x5B63;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/2314ab8c.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3866"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x8349;&#x8393;&#x54C0;&#x6B4C;">&#x8349;&#x8393;&#x54C0;&#x6B4C;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div>    </div>
+    <div class="sk-bangumi" data-dayofweek="7">
+        <div id="data-row-7" class="row">
+            &#x5267;&#x573A;&#x7248;
+        </div>
+
+<div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202411/44ac5303.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3498" data-bangumiindex="1" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2024/11/09 更新</div>
+                <a href="/Home/Bangumi/3498" target="_blank" class="an-text" title="&#x84E6;&#x7136;&#x56DE;&#x9996;">&#x84E6;&#x7136;&#x56DE;&#x9996;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3498" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202509/d0867c27.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3731"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x65E0;&#x540D;&#x7684;&#x4EBA;&#x751F;">&#x65E0;&#x540D;&#x7684;&#x4EBA;&#x751F;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/fb690d72.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3807"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5267;&#x573A;&#x7248; &#x6B4C;&#x4E4B;&#x738B;&#x5B50;&#x6BBF;&#x4E0B; TABOO NIGHT XXXX">&#x5267;&#x573A;&#x7248; &#x6B4C;&#x4E4B;&#x738B;&#x5B50;&#x6BBF;&#x4E0B; TABOO NIGHT XXXX</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/5d6f0c60.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3808"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5C0F;&#x6797;&#x5BB6;&#x7684;&#x9F99;&#x5973;&#x4EC6; &#x6015;&#x5BC2;&#x5BDE;&#x7684;&#x9F99;">&#x5C0F;&#x6797;&#x5BB6;&#x7684;&#x9F99;&#x5973;&#x4EC6; &#x6015;&#x5BC2;&#x5BDE;&#x7684;&#x9F99;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/35ba7b5d.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3809"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="Princess Principal Crown Handler &#x7B2C;4&#x7AE0;">Princess Principal Crown Handler &#x7B2C;4&#x7AE0;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/c17791b0.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3810"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5267;&#x573A;&#x7248; Idol&#x5149;&#x4E4B;&#x7F8E;&#x5C11;&#x5973;&#x4F60;&#x4E0E;&#x6211;&#x266A; &#x4E45;&#x7B49;&#x4E86;&#xFF01;&#x4E3A;&#x4F60;&#x732E;&#x4E0A;&#x95EA;&#x8000;&#x821E;&#x53F0;&#xFF01;">&#x5267;&#x573A;&#x7248; Idol&#x5149;&#x4E4B;&#x7F8E;&#x5C11;&#x5973;&#x4F60;&#x4E0E;&#x6211;&#x266A; &#x4E45;&#x7B49;&#x4E86;&#xFF01;&#x4E3A;&#x4F60;&#x732E;&#x4E0A;&#x95EA;&#x8000;&#x821E;&#x53F0;&#xFF01;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/094492ba.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3811"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="AS ONE">AS ONE</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/111d100a.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3812"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="KING OF PRISM -Your Endless Call- &#x307F;&#xFF5E;&#x3093;&#x306A;&#x304D;&#x3089;&#x3081;&#x3051;&#xFF01;&#x30D7;&#x30EA;&#x30BA;&#x30E0;&#x2606;&#x30C4;&#x30A2;&#x30FC;&#x30BA;">KING OF PRISM -Your Endless Call- &#x307F;&#xFF5E;&#x3093;&#x306A;&#x304D;&#x3089;&#x3081;&#x3051;&#xFF01;&#x30D7;&#x30EA;&#x30BA;&#x30E0;&#x2606;&#x30C4;&#x30A2;&#x30FC;&#x30BA;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/5053a59f.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3813"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x8721;&#x7B14;&#x5C0F;&#x65B0;&#xFF1A;&#x8D85;&#x534E;&#x4E3D;&#xFF01;&#x707C;&#x70ED;&#x7684;&#x6625;&#x65E5;&#x90E8;&#x821E;&#x8005;">&#x8721;&#x7B14;&#x5C0F;&#x65B0;&#xFF1A;&#x8D85;&#x534E;&#x4E3D;&#xFF01;&#x707C;&#x70ED;&#x7684;&#x6625;&#x65E5;&#x90E8;&#x821E;&#x8005;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/8ecb89eb.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3814"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x7535;&#x5F71; &#x5C0F;&#x9CA8;&#x9C7C;&#x53BB;&#x90CA;&#x6E38;">&#x7535;&#x5F71; &#x5C0F;&#x9CA8;&#x9C7C;&#x53BB;&#x90CA;&#x6E38;</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div><div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202601/c13352ab.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3815"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x5076;&#x50CF;&#x6D3B;&#x52A8;&#xD7;&#x7F8E;&#x5999;&#x5929;&#x5802; &#x7535;&#x5F71;">&#x5076;&#x50CF;&#x6D3B;&#x52A8;&#xD7;&#x7F8E;&#x5999;&#x5929;&#x5802; &#x7535;&#x5F71;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/5883c23e.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3816"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x7535;&#x5F71; &#x9C81;&#x90A6;&#x4E09;&#x4E16; &#x4E0D;&#x6B7B;&#x8EAB;&#x7684;&#x8840;&#x65CF;">&#x7535;&#x5F71; &#x9C81;&#x90A6;&#x4E09;&#x4E16; &#x4E0D;&#x6B7B;&#x8EAB;&#x7684;&#x8840;&#x65CF;</div>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/5fc5e192.jpg?width=400&height=400&format=webp" class="b-lazy greyout" style="cursor:default;" data-bangumiid="3817"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">此番组下暂无作品</div>
+                <div class="date-text" style="width:130px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden" title="&#x4E0E;&#x7231;&#x4E3D;&#x4E1D;&#x68A6;&#x6E38;&#x4ED9;&#x5883; -Dive in Wonderland-">&#x4E0E;&#x7231;&#x4E3D;&#x4E1D;&#x68A6;&#x6E38;&#x4ED9;&#x5883; -Dive in Wonderland-</div>
+            </div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div>    </div>
+    <div class="sk-bangumi" data-dayofweek="8">
+        <div id="data-row-8" class="row">
+            OVA
+        </div>
+
+<div class="an-box animated fadeIn"><ul class="list-inline an-ul">
+    <li>
+        <span data-src="/images/Bangumi/202512/fe480940.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3869" data-bangumiindex="1" data-showsubscribed="false"></span>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2026/01/02 更新</div>
+                <a href="/Home/Bangumi/3869" target="_blank" class="an-text" title="&#x8F89;&#x591C;&#x5927;&#x5C0F;&#x59D0;&#x60F3;&#x8BA9;&#x6211;&#x544A;&#x767D; &#x901A;&#x5F80;&#x5927;&#x4EBA;&#x7684;&#x9636;&#x68AF;">&#x8F89;&#x591C;&#x5927;&#x5C0F;&#x59D0;&#x60F3;&#x8BA9;&#x6211;&#x544A;&#x767D; &#x901A;&#x5F80;&#x5927;&#x4EBA;&#x7684;&#x9636;&#x68AF;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3869" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+
+    <li>
+        <span data-src="/images/Bangumi/202601/2917cf04.jpg?width=400&height=400&format=webp" class="js-expand_bangumi b-lazy" data-bangumiid="3870" data-bangumiindex="2" data-showsubscribed="false"></span>
+            <div class="num-node text-center">6</div>
+        <div class="an-info">
+            <div class="an-info-group">
+                <div class="date-text">2026/01/02 更新</div>
+                <a href="/Home/Bangumi/3870" target="_blank" class="an-text" title="&#x6211;&#x4EEC;&#x4E0D;&#x53EF;&#x80FD;&#x6210;&#x4E3A;&#x604B;&#x4EBA;&#xFF01;&#x7EDD;&#x5BF9;&#x4E0D;&#x884C;&#x3002; (&#x203B;&#x4F3C;&#x4E4E;&#x53EF;&#x884C;&#xFF1F;) &#x301C;&#x518D;&#x6B21;&#x95EA;&#x8000;&#xFF01;&#x301C;">&#x6211;&#x4EEC;&#x4E0D;&#x53EF;&#x80FD;&#x6210;&#x4E3A;&#x604B;&#x4EBA;&#xFF01;&#x7EDD;&#x5BF9;&#x4E0D;&#x884C;&#x3002; (&#x203B;&#x4F3C;&#x4E4E;&#x53EF;&#x884C;&#xFF1F;) &#x301C;&#x518D;&#x6B21;&#x95EA;&#x8000;&#xFF01;&#x301C;</a>
+            </div>
+                <div class="an-info-icon js-subscribe_bangumi" data-subtitlegroupid="" data-bangumiid="3870" data-toggle="tooltip" data-placement="bottom" title="订阅"><i class="fa fa-rss "></i></div>
+        </div>
+    </li>
+</ul></div><div class="row an-res-row-frame" style="display:none;"></div>    </div>
+
+        </div>
+    </section>
+
+    <div class="flag note note--mikan" id="announcement" data-announcementid="10">
+        <div class="flag__image note__icon">
+            <i class="fa fa-info-circle fa-2x"></i>
+        </div>
+        <div class="flag__body note__text">
+            新域名 <a target="_blank" href="https://mikanime.tv/">&gt;&gt;mikanime.tv&lt;&lt;</a> 仅限国内使用
+        </div>
+        <a href="#" class="note__close">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <a href="#0" class="cd-top cd-top-btn">Top</a>
+    <a class="cd-top cd-top-announcement" data-toggle="popover-x" data-target="#announcement-popover" data-placement="left left-bottom">Announcement</a>
+    <div id="announcement-popover" class="popover popover-default cd-top">
+        <div class="arrow"></div>
+        <div class="popover-title"><span class="close pull-right" data-dismiss="popover-x">&times;</span>公告</div>
+        <div class="popover-content">
+            <div class="announcement-popover-content">
+                    <div><span class="anndate">2023/05/07</span> 新域名 <a target="_blank" href="https://mikanime.tv/">&gt;&gt;mikanime.tv&lt;&lt;</a> 仅限国内使用</div>
+                    <div><span class="anndate">2020/04/24</span> 大家好，刚刚进行了一次小更新尝试解决大家关心的网站加载慢的问题，网站在保持美观的前提下减小了番组图片的尺寸和质量。</div>
+                    <div><span class="anndate">2020/04/10</span> 大家好，蜜柑计划刚刚进行了一次内部更新，表面上没有改变但是内部几乎全部重写了。如果遇到问题请来微博 @蜜柑计划 反映，或者点击链接<a target="_blank" href="https://mikanani.me/Home/Contact">联系我们</a></div>
+                    <div><span class="anndate">2019/06/25</span> 最近我们对字幕组分类进行了更新：各类压制组单独以压制组命名，不再标注字幕组。如果遇到任何问题请联系我们~</div>
+                    <div><span class="anndate">2019/01/01</span> 大家2019年新年快乐！！蜜柑计划感谢大家一直以来的支持，新年新气象，蜜柑计划这次增加了繁简过滤功能，<b>已注册用户</b>可以在账号设置里打开高级订阅启用，请快去试试吧~</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sk-mobile-container" class="m-home hidden-lg hidden-md">
+    <div style="height:16rem;">
+    <!-- Indicators -->
+    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel" style="padding-top:3.9rem;">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active carousel-bg"
+                style="background-image:url('/images/Promotion/202510/2025_10_bangumi_3780.webp?format=webp');"
+                onclick="window.open('/Home/Bangumi/3780', '_self');">
+            </div>
+            <div class="item carousel-bg"
+                style="background-image: url('/images/Promotion/202510/2025_10_bangumi_3746.webp?format=webp');"
+                onclick="window.open('/Home/Bangumi/3746', '_self');">
+            </div>
+            <div class="item carousel-bg"
+                style="background-image: url('/images/Promotion/202510/2025_10_bangumi_3768.webp?format=webp');"
+                onclick="window.open('/Home/Bangumi/3768', '_self');">
+            </div>
+            <div class="item carousel-bg"
+                style="background-image: url('/images/Promotion/202510/2025_10_bangumi_3764.webp?format=webp');"
+                onclick="window.open('/Home/Bangumi/3764', '_self');">
+            </div>
+        </div>
+        <div class="carousel-indicators" style="z-index:2;">
+            <img src="./../images/mikan-subscribe.png"
+                style="border-radius: 5rem;width: 5rem;height: 5rem;margin-top: -2.5rem;">
+        </div>
+    </div>
+</div>
+
+    
+<div class="m-home-subscribe">
+    <img src="./../images/mikan-subscribe.png" style="border-radius: 5rem;width: 5rem;height: 5rem;margin-top: -2.5rem;">
+    <div class="m-title">
+        <span class="title">我的订阅更新</span>
+        <div>
+            <div class="dropdown material-dropdown">
+                <button class="dropdown-toggle material-dropdown__btn" data-toggle="dropdown">
+                    <span style="color: #3bc0c3;font-size: 1.25rem;" class="js-mobile-episode-update-date">昨天至今</span>
+                    <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                </button>
+                <ul class="dropdown-menu material-dropdown-menu">
+                    <li><a href="javascript:void(0);" class="material-dropdown-menu__link js-mobile-episode-update" data-predate="1" data-enddate="1" data-maximumitems="6">昨天至今</a></li>
+                    <li><a href="javascript:void(0);" class="material-dropdown-menu__link js-mobile-episode-update" data-predate="0" data-enddate="1" data-maximumitems="6">今天</a></li>
+                    <li><a href="javascript:void(0);" class="material-dropdown-menu__link js-mobile-episode-update" data-predate="1" data-enddate="0" data-maximumitems="6">昨天</a></li>
+                    <li><a href="javascript:void(0);" class="material-dropdown-menu__link js-mobile-episode-update" data-predate="2" data-enddate="1" data-maximumitems="6">近三天</a></li>
+                    <li><a href="javascript:void(0);" class="material-dropdown-menu__link js-mobile-episode-update" data-predate="6" data-enddate="1" data-maximumitems="6">最近一周</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-subscribe-list">
+            <div style="height: 3rem;color: #888;border: none;font-size: 1.25rem;">
+        暂无更新，添加更多订阅吧！
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div style="margin-top: 0px; margin-bottom: 10px; padding-left: 1.5rem; padding-right: 1.5rem;">
+        
+
+<div style="width:100%; margin-right: auto; margin-left: auto;" class="hidden-xs hidden-sm">
+    <a href="https://equity.tmall.com/tm?agentId=030f9003a26d4361&amp;bc_fl_src=tmall_market_llb_1_2698459&amp;llbPlatform=_pube&amp;llbOsd=1&amp;di=__IDFA__&amp;dim=__IMEI__&amp;oaid=__OAID__&amp;caid=__CAID__&amp;sy=llb" onclick="ga('send', 'event', 'sswj_lg', 'clicked', 'ad');">
+        <img src="/images/SSWJ/sswj8_lg.jpg" style='height: 100%; width: 100%; object-fit: contain' />
+    </a>
+</div>
+
+<div style="width:100%; margin-right: auto; margin-left: auto;" class="hidden-lg hidden-md">
+    <a href="https://equity.tmall.com/tm?agentId=030f9003a26d4361&amp;bc_fl_src=tmall_market_llb_1_2698459&amp;llbPlatform=_pube&amp;llbOsd=1&amp;di=__IDFA__&amp;dim=__IMEI__&amp;oaid=__OAID__&amp;caid=__CAID__&amp;sy=llb" onclick="ga('send', 'event', 'sswj_sm', 'clicked', 'ad');">
+        <img src="/images/SSWJ/sswj8_sm.jpg" style='height: 100%; width: 100%; object-fit: contain' />
+    </a>
+</div>
+    </div>
+
+    <div class="m-home-week">
+        
+<div class="m-home-week-item" onclick="SetActive(this)">
+    <div class="title">
+        <span class="monday">&#x661F;&#x671F;&#x516D;</span>
+    </div>
+    <div class="detail">
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3756" target="_blank" title="&#x81F4;&#x4E0D;&#x706D;&#x7684;&#x4F60; &#x7B2C;&#x4E09;&#x5B63;">
+                        <img data-src="/images/Bangumi/202510/833dfc7e.jpg?width=400&height=400&format=webp" alt="&#x81F4;&#x4E0D;&#x706D;&#x7684;&#x4F60; &#x7B2C;&#x4E09;&#x5B63;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x81F4;&#x4E0D;&#x706D;&#x7684;&#x4F60; &#x7B2C;&#x4E09;&#x5B63;</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3768" target="_blank" title="&#x4E1C;&#x5C9B;&#x4E39;&#x4E09;&#x90CE;&#x60F3;&#x6210;&#x4E3A;&#x5047;&#x9762;&#x9A91;&#x58EB;">
+                        <img data-src="/images/Bangumi/202510/c9fabb85.jpg?width=400&height=400&format=webp" alt="&#x4E1C;&#x5C9B;&#x4E39;&#x4E09;&#x90CE;&#x60F3;&#x6210;&#x4E3A;&#x5047;&#x9762;&#x9A91;&#x58EB;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x4E1C;&#x5C9B;&#x4E39;&#x4E09;&#x90CE;&#x60F3;&#x6210;&#x4E3A;&#x5047;&#x9762;&#x9A91;&#x58EB;</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3780" target="_blank" title="&#x53E4;&#x8BFA;&#x5E0C;&#x4E9A;">
+                        <img data-src="/images/Bangumi/202510/b5756bf3.jpg?width=400&height=400&format=webp" alt="&#x53E4;&#x8BFA;&#x5E0C;&#x4E9A;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x53E4;&#x8BFA;&#x5E0C;&#x4E9A;</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3862" target="_blank" title="&#x73B0;&#x5728;&#x591A;&#x95FB;&#x541B;&#x662F;&#x54EA;&#x4E00;&#x9762;&#xFF01;&#xFF1F;">
+                        <img data-src="/images/Bangumi/202601/a4a6bc78.jpg?width=400&height=400&format=webp" alt="&#x73B0;&#x5728;&#x591A;&#x95FB;&#x541B;&#x662F;&#x54EA;&#x4E00;&#x9762;&#xFF01;&#xFF1F;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x73B0;&#x5728;&#x591A;&#x95FB;&#x541B;&#x662F;&#x54EA;&#x4E00;&#x9762;&#xFF01;&#xFF1F;</div>
+                </div>
+            </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x9752;&#x4E4B;&#x58EC;&#x751F;&#x6D6A; -&#x82B9;&#x6CFD;&#x6697;&#x6740;&#x7BC7;-">
+                            <img data-src="/images/Bangumi/202512/82e74c23.jpg?width=400&height=400&format=webp" alt="&#x9752;&#x4E4B;&#x58EC;&#x751F;&#x6D6A; -&#x82B9;&#x6CFD;&#x6697;&#x6740;&#x7BC7;-" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x9752;&#x4E4B;&#x58EC;&#x751F;&#x6D6A; -&#x82B9;&#x6CFD;&#x6697;&#x6740;&#x7BC7;-</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x91D1;&#x724C;&#x5F97;&#x4E3B; &#x7B2C;&#x4E8C;&#x5B63;">
+                            <img data-src="/images/Bangumi/202601/cbad1678.jpg?width=400&height=400&format=webp" alt="&#x91D1;&#x724C;&#x5F97;&#x4E3B; &#x7B2C;&#x4E8C;&#x5B63;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x91D1;&#x724C;&#x5F97;&#x4E3B; &#x7B2C;&#x4E8C;&#x5B63;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x6B7B;&#x4EA1;&#x8D26;&#x53F7;">
+                            <img data-src="/images/Bangumi/202601/940b3636.jpg?width=400&height=400&format=webp" alt="&#x6B7B;&#x4EA1;&#x8D26;&#x53F7;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x6B7B;&#x4EA1;&#x8D26;&#x53F7;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x52C7;&#x8005;&#x5904;&#x5211; &#x60E9;&#x7F5A;&#x52C7;&#x8005;9004&#x961F;&#x670D;&#x5211;&#x8BB0;&#x5F55;">
+                            <img data-src="/images/Bangumi/202601/5174d0fa.jpg?width=400&height=400&format=webp" alt="&#x52C7;&#x8005;&#x5904;&#x5211; &#x60E9;&#x7F5A;&#x52C7;&#x8005;9004&#x961F;&#x670D;&#x5211;&#x8BB0;&#x5F55;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x52C7;&#x8005;&#x5904;&#x5211; &#x60E9;&#x7F5A;&#x52C7;&#x8005;9004&#x961F;&#x670D;&#x5211;&#x8BB0;&#x5F55;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x975E;&#x4EBA;&#x5B66;&#x751F;&#x4E0E;&#x538C;&#x4E16;&#x6559;&#x5E08;">
+                            <img data-src="/images/Bangumi/202601/70b1cdbc.jpg?width=400&height=400&format=webp" alt="&#x975E;&#x4EBA;&#x5B66;&#x751F;&#x4E0E;&#x538C;&#x4E16;&#x6559;&#x5E08;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x975E;&#x4EBA;&#x5B66;&#x751F;&#x4E0E;&#x538C;&#x4E16;&#x6559;&#x5E08;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5361;&#x7247;&#x6218;&#x6597;&#x5148;&#x5BFC;&#x8005; Divinez &#x5E7B;&#x771F;&#x661F;&#x6218;&#x7BC7;">
+                            <img data-src="/images/Bangumi/202601/51b8d587.jpg?width=400&height=400&format=webp" alt="&#x5361;&#x7247;&#x6218;&#x6597;&#x5148;&#x5BFC;&#x8005; Divinez &#x5E7B;&#x771F;&#x661F;&#x6218;&#x7BC7;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5361;&#x7247;&#x6218;&#x6597;&#x5148;&#x5BFC;&#x8005; Divinez &#x5E7B;&#x771F;&#x661F;&#x6218;&#x7BC7;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5B89;&#x9038;&#x9886;&#x4E3B;&#x7684;&#x6109;&#x5FEB;&#x9886;&#x5730;&#x9632;&#x536B;&#xFF5E;&#x4EE5;&#x751F;&#x4EA7;&#x7CFB;&#x9B54;&#x672F;&#x5C06;&#x65E0;&#x540D;&#x5C0F;&#x6751;&#x6253;&#x9020;&#x6210;&#x6700;&#x5F3A;&#x8981;&#x585E;&#x90FD;&#x5E02;&#xFF5E;">
+                            <img data-src="/images/Bangumi/202601/90685175.jpg?width=400&height=400&format=webp" alt="&#x5B89;&#x9038;&#x9886;&#x4E3B;&#x7684;&#x6109;&#x5FEB;&#x9886;&#x5730;&#x9632;&#x536B;&#xFF5E;&#x4EE5;&#x751F;&#x4EA7;&#x7CFB;&#x9B54;&#x672F;&#x5C06;&#x65E0;&#x540D;&#x5C0F;&#x6751;&#x6253;&#x9020;&#x6210;&#x6700;&#x5F3A;&#x8981;&#x585E;&#x90FD;&#x5E02;&#xFF5E;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5B89;&#x9038;&#x9886;&#x4E3B;&#x7684;&#x6109;&#x5FEB;&#x9886;&#x5730;&#x9632;&#x536B;&#xFF5E;&#x4EE5;&#x751F;&#x4EA7;&#x7CFB;&#x9B54;&#x672F;&#x5C06;&#x65E0;&#x540D;&#x5C0F;&#x6751;&#x6253;&#x9020;&#x6210;&#x6700;&#x5F3A;&#x8981;&#x585E;&#x90FD;&#x5E02;&#xFF5E;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="TRIGUN STARGAZE">
+                            <img data-src="/images/Bangumi/202601/09a8370b.jpg?width=400&height=400&format=webp" alt="TRIGUN STARGAZE" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">TRIGUN STARGAZE</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x8F6C;&#x751F;&#x4E4B;&#x540E;&#x7684;&#x6211;&#x53D8;&#x6210;&#x4E86;&#x9F99;&#x86CB;">
+                            <img data-src="/images/Bangumi/202601/080d0973.jpg?width=400&height=400&format=webp" alt="&#x8F6C;&#x751F;&#x4E4B;&#x540E;&#x7684;&#x6211;&#x53D8;&#x6210;&#x4E86;&#x9F99;&#x86CB;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x8F6C;&#x751F;&#x4E4B;&#x540E;&#x7684;&#x6211;&#x53D8;&#x6210;&#x4E86;&#x9F99;&#x86CB;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x52C7;&#x8005;&#x4E4B;&#x5C51;">
+                            <img data-src="/images/Bangumi/202601/38b1ae51.jpg?width=400&height=400&format=webp" alt="&#x52C7;&#x8005;&#x4E4B;&#x5C51;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x52C7;&#x8005;&#x4E4B;&#x5C51;</div>
+                    </div>
+                </div>
+    </div>
+</div>
+<div class="m-home-week-item" onclick="SetActive(this)">
+    <div class="title">
+        <span class="monday">&#x661F;&#x671F;&#x4E94;</span>
+    </div>
+    <div class="detail">
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/681" target="_blank" title="&#x54C6;&#x5566;A&#x68A6;">
+                        <img data-src="/images/Bangumi/200504/1df90634.jpg?width=400&height=400&format=webp" alt="&#x54C6;&#x5566;A&#x68A6;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x54C6;&#x5566;A&#x68A6;</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3015" target="_blank" title="&#x5B9D;&#x53EF;&#x68A6; &#x5730;&#x5E73;&#x7EBF;">
+                        <img data-src="/images/Bangumi/202304/1d84a9bf.jpg?width=400&height=400&format=webp" alt="&#x5B9D;&#x53EF;&#x68A6; &#x5730;&#x5E73;&#x7EBF;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x5B9D;&#x53EF;&#x68A6; &#x5730;&#x5E73;&#x7EBF;</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3288" target="_blank" title="&#x5409;&#x4F0A;&#x5361;&#x54C7;">
+                        <img data-src="/images/Bangumi/202204/d8ef46c0.jpg?width=400&height=400&format=webp" alt="&#x5409;&#x4F0A;&#x5361;&#x54C7;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x5409;&#x4F0A;&#x5361;&#x54C7;</div>
+                </div>
+            </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x8721;&#x7B14;&#x5C0F;&#x65B0;">
+                            <img data-src="/images/Bangumi/199204/fedf5d50.jpg?width=400&height=400&format=webp" alt="&#x8721;&#x7B14;&#x5C0F;&#x65B0;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x8721;&#x7B14;&#x5C0F;&#x65B0;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x846C;&#x9001;&#x7684;&#x8299;&#x8389;&#x83B2; &#x7B2C;&#x4E8C;&#x5B63;">
+                            <img data-src="/images/Bangumi/202601/87a60922.jpg?width=400&height=400&format=webp" alt="&#x846C;&#x9001;&#x7684;&#x8299;&#x8389;&#x83B2; &#x7B2C;&#x4E8C;&#x5B63;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x846C;&#x9001;&#x7684;&#x8299;&#x8389;&#x83B2; &#x7B2C;&#x4E8C;&#x5B63;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x9AD8;&#x6821;&#x5947;&#x9762;&#x7EC4;">
+                            <img data-src="/images/Bangumi/202601/71a15e6e.jpg?width=400&height=400&format=webp" alt="&#x9AD8;&#x6821;&#x5947;&#x9762;&#x7EC4;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x9AD8;&#x6821;&#x5947;&#x9762;&#x7EC4;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5730;&#x72F1;&#x6A21;&#x5F0F; &#xFF5E;&#x559C;&#x6B22;&#x901F;&#x901A;&#x6E38;&#x620F;&#x7684;&#x73A9;&#x5BB6;&#x5728;&#x5E9F;&#x8BBE;&#x5B9A;&#x5F02;&#x4E16;&#x754C;&#x65E0;&#x53CC;&#xFF5E;">
+                            <img data-src="/images/Bangumi/202601/55312669.jpg?width=400&height=400&format=webp" alt="&#x5730;&#x72F1;&#x6A21;&#x5F0F; &#xFF5E;&#x559C;&#x6B22;&#x901F;&#x901A;&#x6E38;&#x620F;&#x7684;&#x73A9;&#x5BB6;&#x5728;&#x5E9F;&#x8BBE;&#x5B9A;&#x5F02;&#x4E16;&#x754C;&#x65E0;&#x53CC;&#xFF5E;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5730;&#x72F1;&#x6A21;&#x5F0F; &#xFF5E;&#x559C;&#x6B22;&#x901F;&#x901A;&#x6E38;&#x620F;&#x7684;&#x73A9;&#x5BB6;&#x5728;&#x5E9F;&#x8BBE;&#x5B9A;&#x5F02;&#x4E16;&#x754C;&#x65E0;&#x53CC;&#xFF5E;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x548C;&#x673A;&#x5668;&#x4EBA;&#x556A;&#x556A;&#x556A;&#x80FD;&#x7B97;&#x5728;&#x7ECF;&#x9A8C;&#x6B21;&#x6570;&#x91CC;&#x5417;&#xFF1F;">
+                            <img data-src="/images/Bangumi/202601/9bc5a571.jpg?width=400&height=400&format=webp" alt="&#x548C;&#x673A;&#x5668;&#x4EBA;&#x556A;&#x556A;&#x556A;&#x80FD;&#x7B97;&#x5728;&#x7ECF;&#x9A8C;&#x6B21;&#x6570;&#x91CC;&#x5417;&#xFF1F;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x548C;&#x673A;&#x5668;&#x4EBA;&#x556A;&#x556A;&#x556A;&#x80FD;&#x7B97;&#x5728;&#x7ECF;&#x9A8C;&#x6B21;&#x6570;&#x91CC;&#x5417;&#xFF1F;</div>
+                    </div>
+                </div>
+    </div>
+</div>
+<div class="m-home-week-item" onclick="SetActive(this)">
+    <div class="title">
+        <span class="monday">&#x661F;&#x671F;&#x56DB;</span>
+    </div>
+    <div class="detail">
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x9B54;&#x90FD;&#x7CBE;&#x5175;&#x7684;&#x5974;&#x96B6; &#x7B2C;&#x4E8C;&#x5B63;">
+                            <img data-src="/images/Bangumi/202601/d25fb2da.jpg?width=400&height=400&format=webp" alt="&#x9B54;&#x90FD;&#x7CBE;&#x5175;&#x7684;&#x5974;&#x96B6; &#x7B2C;&#x4E8C;&#x5B63;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x9B54;&#x90FD;&#x7CBE;&#x5175;&#x7684;&#x5974;&#x96B6; &#x7B2C;&#x4E8C;&#x5B63;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5384;&#x91CC;&#x65AF;&#x7684;&#x5723;&#x676F;">
+                            <img data-src="/images/Bangumi/202601/0ad0c2d7.jpg?width=400&height=400&format=webp" alt="&#x5384;&#x91CC;&#x65AF;&#x7684;&#x5723;&#x676F;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5384;&#x91CC;&#x65AF;&#x7684;&#x5723;&#x676F;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5492;&#x672F;&#x56DE;&#x6218; &#x6B7B;&#x706D;&#x56DE;&#x6E38; &#x524D;&#x7BC7;">
+                            <img data-src="/images/Bangumi/202601/7fb9528d.jpg?width=400&height=400&format=webp" alt="&#x5492;&#x672F;&#x56DE;&#x6218; &#x6B7B;&#x706D;&#x56DE;&#x6E38; &#x524D;&#x7BC7;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5492;&#x672F;&#x56DE;&#x6218; &#x6B7B;&#x706D;&#x56DE;&#x6E38; &#x524D;&#x7BC7;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x900F;&#x660E;&#x7537;&#x4E0E;&#x4EBA;&#x7C7B;&#x5973;&#xFF5E;&#x4E0D;&#x4E45;&#x6210;&#x4E3A;&#x592B;&#x5987;&#x7684;&#x4E8C;&#x4EBA;&#xFF5E;">
+                            <img data-src="/images/Bangumi/202601/512cc36c.jpg?width=400&height=400&format=webp" alt="&#x900F;&#x660E;&#x7537;&#x4E0E;&#x4EBA;&#x7C7B;&#x5973;&#xFF5E;&#x4E0D;&#x4E45;&#x6210;&#x4E3A;&#x592B;&#x5987;&#x7684;&#x4E8C;&#x4EBA;&#xFF5E;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x900F;&#x660E;&#x7537;&#x4E0E;&#x4EBA;&#x7C7B;&#x5973;&#xFF5E;&#x4E0D;&#x4E45;&#x6210;&#x4E3A;&#x592B;&#x5987;&#x7684;&#x4E8C;&#x4EBA;&#xFF5E;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x8611;&#x83C7;&#x9B54;&#x5973;">
+                            <img data-src="/images/Bangumi/202601/af608578.jpg?width=400&height=400&format=webp" alt="&#x8611;&#x83C7;&#x9B54;&#x5973;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x8611;&#x83C7;&#x9B54;&#x5973;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x300C;&#x51ED;&#x4F60;&#x4E5F;&#x60F3;&#x8BA8;&#x4F10;&#x9B54;&#x738B;&#xFF1F;&#x300D;&#x88AB;&#x52C7;&#x8005;&#x5C0F;&#x961F;&#x9010;&#x51FA;&#x961F;&#x4F0D;&#xFF0C;&#x53EA;&#x597D;&#x5728;&#x738B;&#x90FD;&#x81EA;&#x5728;&#x8FC7;&#x6D3B;">
+                            <img data-src="/images/Bangumi/202601/5396a014.jpg?width=400&height=400&format=webp" alt="&#x300C;&#x51ED;&#x4F60;&#x4E5F;&#x60F3;&#x8BA8;&#x4F10;&#x9B54;&#x738B;&#xFF1F;&#x300D;&#x88AB;&#x52C7;&#x8005;&#x5C0F;&#x961F;&#x9010;&#x51FA;&#x961F;&#x4F0D;&#xFF0C;&#x53EA;&#x597D;&#x5728;&#x738B;&#x90FD;&#x81EA;&#x5728;&#x8FC7;&#x6D3B;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x300C;&#x51ED;&#x4F60;&#x4E5F;&#x60F3;&#x8BA8;&#x4F10;&#x9B54;&#x738B;&#xFF1F;&#x300D;&#x88AB;&#x52C7;&#x8005;&#x5C0F;&#x961F;&#x9010;&#x51FA;&#x961F;&#x4F0D;&#xFF0C;&#x53EA;&#x597D;&#x5728;&#x738B;&#x90FD;&#x81EA;&#x5728;&#x8FC7;&#x6D3B;</div>
+                    </div>
+                </div>
+    </div>
+</div>
+<div class="m-home-week-item" onclick="SetActive(this)">
+    <div class="title">
+        <span class="monday">&#x661F;&#x671F;&#x4E09;</span>
+    </div>
+    <div class="detail">
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3633" target="_blank" title="&#x8FDB;&#x5165;&#x82B1;&#x56ED;">
+                        <img data-src="/images/Bangumi/202504/7ea16a61.jpg?width=400&height=400&format=webp" alt="&#x8FDB;&#x5165;&#x82B1;&#x56ED;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x8FDB;&#x5165;&#x82B1;&#x56ED;</div>
+                </div>
+            </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x9B54;&#x738B;&#x7684;&#x5973;&#x513F;&#x592A;&#x6E29;&#x67D4;&#x4E86;&#xFF01;&#xFF01;">
+                            <img data-src="/images/Bangumi/202601/4ea89792.jpg?width=400&height=400&format=webp" alt="&#x9B54;&#x738B;&#x7684;&#x5973;&#x513F;&#x592A;&#x6E29;&#x67D4;&#x4E86;&#xFF01;&#xFF01;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x9B54;&#x738B;&#x7684;&#x5973;&#x513F;&#x592A;&#x6E29;&#x67D4;&#x4E86;&#xFF01;&#xFF01;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="29&#x5C81;&#x5355;&#x8EAB;&#x5192;&#x9669;&#x5BB6;&#x7684;&#x65E5;&#x5E38;">
+                            <img data-src="/images/Bangumi/202601/f8350f52.jpg?width=400&height=400&format=webp" alt="29&#x5C81;&#x5355;&#x8EAB;&#x5192;&#x9669;&#x5BB6;&#x7684;&#x65E5;&#x5E38;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">29&#x5C81;&#x5355;&#x8EAB;&#x5192;&#x9669;&#x5BB6;&#x7684;&#x65E5;&#x5E38;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x9760;&#x6B7B;&#x4EA1;&#x6E38;&#x620F;&#x6DF7;&#x996D;&#x5403;&#x3002;">
+                            <img data-src="/images/Bangumi/202601/4522133c.jpg?width=400&height=400&format=webp" alt="&#x9760;&#x6B7B;&#x4EA1;&#x6E38;&#x620F;&#x6DF7;&#x996D;&#x5403;&#x3002;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x9760;&#x6B7B;&#x4EA1;&#x6E38;&#x620F;&#x6DF7;&#x996D;&#x5403;&#x3002;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x8D35;&#x65CF;&#x8F6C;&#x751F; &#xFF5E;&#x5F97;&#x5929;&#x7737;&#x987E;&#x4E00;&#x51FA;&#x751F;&#x5C31;&#x83B7;&#x5F97;&#x6700;&#x5F3A;&#x529B;&#x91CF;&#xFF5E;">
+                            <img data-src="/images/Bangumi/202601/6ab7c0e1.jpg?width=400&height=400&format=webp" alt="&#x8D35;&#x65CF;&#x8F6C;&#x751F; &#xFF5E;&#x5F97;&#x5929;&#x7737;&#x987E;&#x4E00;&#x51FA;&#x751F;&#x5C31;&#x83B7;&#x5F97;&#x6700;&#x5F3A;&#x529B;&#x91CF;&#xFF5E;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x8D35;&#x65CF;&#x8F6C;&#x751F; &#xFF5E;&#x5F97;&#x5929;&#x7737;&#x987E;&#x4E00;&#x51FA;&#x751F;&#x5C31;&#x83B7;&#x5F97;&#x6700;&#x5F3A;&#x529B;&#x91CF;&#xFF5E;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x4F18;&#x96C5;&#x8D35;&#x65CF;&#x7684;&#x4F11;&#x5047;&#x6307;&#x5357;&#x3002;">
+                            <img data-src="/images/Bangumi/202601/e3bc974a.jpg?width=400&height=400&format=webp" alt="&#x4F18;&#x96C5;&#x8D35;&#x65CF;&#x7684;&#x4F11;&#x5047;&#x6307;&#x5357;&#x3002;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x4F18;&#x96C5;&#x8D35;&#x65CF;&#x7684;&#x4F11;&#x5047;&#x6307;&#x5357;&#x3002;</div>
+                    </div>
+                </div>
+    </div>
+</div>
+<div class="m-home-week-item" onclick="SetActive(this)">
+    <div class="title">
+        <span class="monday">&#x661F;&#x671F;&#x4E8C;</span>
+    </div>
+    <div class="detail">
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x94E0;&#x771F;&#x4F20; &#x6B66;&#x58EB;&#x519B;&#x56E2;">
+                            <img data-src="/images/Bangumi/202601/a953b0a9.jpg?width=400&height=400&format=webp" alt="&#x94E0;&#x771F;&#x4F20; &#x6B66;&#x58EB;&#x519B;&#x56E2;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x94E0;&#x771F;&#x4F20; &#x6B66;&#x58EB;&#x519B;&#x56E2;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5348;&#x591C;&#x7684;&#x503E;&#x5FC3;&#x65CB;&#x5F8B;">
+                            <img data-src="/images/Bangumi/202601/887ba87e.jpg?width=400&height=400&format=webp" alt="&#x5348;&#x591C;&#x7684;&#x503E;&#x5FC3;&#x65CB;&#x5F8B;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5348;&#x591C;&#x7684;&#x503E;&#x5FC3;&#x65CB;&#x5F8B;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x963F;&#x5C14;&#x6D85;&#x7684;&#x4E8B;&#x4EF6;&#x7C3F;">
+                            <img data-src="/images/Bangumi/202601/b2537e9b.jpg?width=400&height=400&format=webp" alt="&#x963F;&#x5C14;&#x6D85;&#x7684;&#x4E8B;&#x4EF6;&#x7C3F;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x963F;&#x5C14;&#x6D85;&#x7684;&#x4E8B;&#x4EF6;&#x7C3F;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x8EAB;&#x4E3A;&#x9B54;&#x65CF;&#x7684;&#x6211;&#x60F3;&#x5411;&#x52C7;&#x8005;&#x5C0F;&#x961F;&#x7684;&#x53EF;&#x7231;&#x5973;&#x5B69;&#x544A;&#x767D;&#x3002;">
+                            <img data-src="/images/Bangumi/202601/5b290c28.jpg?width=400&height=400&format=webp" alt="&#x8EAB;&#x4E3A;&#x9B54;&#x65CF;&#x7684;&#x6211;&#x60F3;&#x5411;&#x52C7;&#x8005;&#x5C0F;&#x961F;&#x7684;&#x53EF;&#x7231;&#x5973;&#x5B69;&#x544A;&#x767D;&#x3002;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x8EAB;&#x4E3A;&#x9B54;&#x65CF;&#x7684;&#x6211;&#x60F3;&#x5411;&#x52C7;&#x8005;&#x5C0F;&#x961F;&#x7684;&#x53EF;&#x7231;&#x5973;&#x5B69;&#x544A;&#x767D;&#x3002;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x8FBE;&#x5C14;&#x6587;&#x4E8B;&#x53D8;">
+                            <img data-src="/images/Bangumi/202601/48da1a32.jpg?width=400&height=400&format=webp" alt="&#x8FBE;&#x5C14;&#x6587;&#x4E8B;&#x53D8;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x8FBE;&#x5C14;&#x6587;&#x4E8B;&#x53D8;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5F02;&#x4E16;&#x754C;&#x7684;&#x5B89;&#x6CF0;&#x5168;&#x770B;&#x793E;&#x755C;">
+                            <img data-src="/images/Bangumi/202601/14e82ab8.jpg?width=400&height=400&format=webp" alt="&#x5F02;&#x4E16;&#x754C;&#x7684;&#x5B89;&#x6CF0;&#x5168;&#x770B;&#x793E;&#x755C;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5F02;&#x4E16;&#x754C;&#x7684;&#x5B89;&#x6CF0;&#x5168;&#x770B;&#x793E;&#x755C;</div>
+                    </div>
+                </div>
+    </div>
+</div>
+<div class="m-home-week-item" onclick="SetActive(this)">
+    <div class="title">
+        <span class="monday">&#x661F;&#x671F;&#x4E00;</span>
+    </div>
+    <div class="detail">
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x9EC4;&#x91D1;&#x795E;&#x5A01; &#x6700;&#x7EC8;&#x7AE0;">
+                            <img data-src="/images/Bangumi/202601/15d6d3fa.jpg?width=400&height=400&format=webp" alt="&#x9EC4;&#x91D1;&#x795E;&#x5A01; &#x6700;&#x7EC8;&#x7AE0;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x9EC4;&#x91D1;&#x795E;&#x5A01; &#x6700;&#x7EC8;&#x7AE0;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x80FD;&#x5E2E;&#x6211;&#x5F04;&#x5E72;&#x51C0;&#x5417;&#xFF1F;">
+                            <img data-src="/images/Bangumi/202601/2ee03b0e.jpg?width=400&height=400&format=webp" alt="&#x80FD;&#x5E2E;&#x6211;&#x5F04;&#x5E72;&#x51C0;&#x5417;&#xFF1F;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x80FD;&#x5E2E;&#x6211;&#x5F04;&#x5E72;&#x51C0;&#x5417;&#xFF1F;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x548C;&#x9752;&#x6885;&#x7AF9;&#x9A6C;&#x4E4B;&#x95F4;&#x4E0D;&#x4F1A;&#x6709;&#x604B;&#x7231;&#x559C;&#x5267;">
+                            <img data-src="/images/Bangumi/202601/1b29a4ba.jpg?width=400&height=400&format=webp" alt="&#x548C;&#x9752;&#x6885;&#x7AF9;&#x9A6C;&#x4E4B;&#x95F4;&#x4E0D;&#x4F1A;&#x6709;&#x604B;&#x7231;&#x559C;&#x5267;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x548C;&#x9752;&#x6885;&#x7AF9;&#x9A6C;&#x4E4B;&#x95F4;&#x4E0D;&#x4F1A;&#x6709;&#x604B;&#x7231;&#x559C;&#x5267;</div>
+                    </div>
+                </div>
+    </div>
+</div>
+<div class="m-home-week-item" onclick="SetActive(this)">
+    <div class="title">
+        <span class="monday">&#x661F;&#x671F;&#x65E5;</span>
+    </div>
+    <div class="detail">
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/227" target="_blank" title="&#x540D;&#x4FA6;&#x63A2;&#x67EF;&#x5357;">
+                        <img data-src="/images/Bangumi/201310/91d95f43.jpg?width=400&height=400&format=webp" alt="&#x540D;&#x4FA6;&#x63A2;&#x67EF;&#x5357;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x540D;&#x4FA6;&#x63A2;&#x67EF;&#x5357;</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/228" target="_blank" title="&#x822A;&#x6D77;&#x738B;">
+                        <img data-src="/images/Bangumi/201310/0aa598c7.jpg?width=400&height=400&format=webp" alt="&#x822A;&#x6D77;&#x738B;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x822A;&#x6D77;&#x738B;</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3503" target="_blank" title="Fate/strange Fake">
+                        <img data-src="/images/Bangumi/202501/06be31dd.jpg?width=400&height=400&format=webp" alt="Fate/strange Fake" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">Fate/strange Fake</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3570" target="_blank" title="Idol&#x5149;&#x4E4B;&#x7F8E;&#x5C11;&#x5973;&#x4F60;&#x4E0E;&#x6211;&#x266A;">
+                        <img data-src="/images/Bangumi/202502/4462a4be.jpg?width=400&height=400&format=webp" alt="Idol&#x5149;&#x4E4B;&#x7F8E;&#x5C11;&#x5973;&#x4F60;&#x4E0E;&#x6211;&#x266A;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">Idol&#x5149;&#x4E4B;&#x7F8E;&#x5C11;&#x5973;&#x4F60;&#x4E0E;&#x6211;&#x266A;</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3763" target="_blank" title="&#x84DD;&#x8272;&#x7BA1;&#x5F26;&#x4E50; &#x7B2C;&#x4E8C;&#x5B63;">
+                        <img data-src="/images/Bangumi/202510/02a0fa4c.jpg?width=400&height=400&format=webp" alt="&#x84DD;&#x8272;&#x7BA1;&#x5F26;&#x4E50; &#x7B2C;&#x4E8C;&#x5B63;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x84DD;&#x8272;&#x7BA1;&#x5F26;&#x4E50; &#x7B2C;&#x4E8C;&#x5B63;</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3786" target="_blank" title="&#x6570;&#x7801;&#x5B9D;&#x8D1D; BEATBREAK">
+                        <img data-src="/images/Bangumi/202510/1a3b9803.jpg?width=400&height=400&format=webp" alt="&#x6570;&#x7801;&#x5B9D;&#x8D1D; BEATBREAK" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x6570;&#x7801;&#x5B9D;&#x8D1D; BEATBREAK</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3797" target="_blank" title="SI-VIS&#xFF1A;&#x82F1;&#x96C4;&#x4E4B;&#x58F0;">
+                        <img data-src="/images/Bangumi/202510/4a658f7a.jpg?width=400&height=400&format=webp" alt="SI-VIS&#xFF1A;&#x82F1;&#x96C4;&#x4E4B;&#x58F0;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">SI-VIS&#xFF1A;&#x82F1;&#x96C4;&#x4E4B;&#x58F0;</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3871" target="_blank" title="&#x6781;&#x901F;&#x8F66;&#x9B42; &#x7B2C;&#x4E09;&#x5B63;">
+                        <img data-src="/images/Bangumi/202601/0f4a10c5.jpg?width=400&height=400&format=webp" alt="&#x6781;&#x901F;&#x8F66;&#x9B42; &#x7B2C;&#x4E09;&#x5B63;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x6781;&#x901F;&#x8F66;&#x9B42; &#x7B2C;&#x4E09;&#x5B63;</div>
+                </div>
+            </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x6A31;&#x6843;&#x5C0F;&#x4E38;&#x5B50;">
+                            <img data-src="/images/Bangumi/199501/5730cce9.jpg?width=400&height=400&format=webp" alt="&#x6A31;&#x6843;&#x5C0F;&#x4E38;&#x5B50;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x6A31;&#x6843;&#x5C0F;&#x4E38;&#x5B50;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x6D77;&#x87BA;&#x5C0F;&#x59D0;">
+                            <img data-src="/images/Bangumi/196910/cffe212e.jpg?width=400&height=400&format=webp" alt="&#x6D77;&#x87BA;&#x5C0F;&#x59D0;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x6D77;&#x87BA;&#x5C0F;&#x59D0;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x9762;&#x5305;&#x8D85;&#x4EBA;">
+                            <img data-src="/images/Bangumi/198810/0856bd82.jpg?width=400&height=400&format=webp" alt="&#x9762;&#x5305;&#x8D85;&#x4EBA;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x9762;&#x5305;&#x8D85;&#x4EBA;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x6CDB;&#x800C;&#x4E0D;&#x7CBE;&#x7684;&#x6211;&#x88AB;&#x9010;&#x51FA;&#x4E86;&#x52C7;&#x8005;&#x961F;&#x4F0D;">
+                            <img data-src="/images/Bangumi/202601/5e541293.jpg?width=400&height=400&format=webp" alt="&#x6CDB;&#x800C;&#x4E0D;&#x7CBE;&#x7684;&#x6211;&#x88AB;&#x9010;&#x51FA;&#x4E86;&#x52C7;&#x8005;&#x961F;&#x4F0D;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x6CDB;&#x800C;&#x4E0D;&#x7CBE;&#x7684;&#x6211;&#x88AB;&#x9010;&#x51FA;&#x4E86;&#x52C7;&#x8005;&#x961F;&#x4F0D;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5F02;&#x56FD;&#x65E5;&#x8BB0;">
+                            <img data-src="/images/Bangumi/202601/bcea2e8c.jpg?width=400&height=400&format=webp" alt="&#x5F02;&#x56FD;&#x65E5;&#x8BB0;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5F02;&#x56FD;&#x65E5;&#x8BB0;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x706B;&#x55B0;&#x9E1F; &#x7FBD;&#x5DDE;&#x8934;&#x891B;&#x9E22;&#x7EC4;">
+                            <img data-src="/images/Bangumi/202601/6c42642a.jpg?width=400&height=400&format=webp" alt="&#x706B;&#x55B0;&#x9E1F; &#x7FBD;&#x5DDE;&#x8934;&#x891B;&#x9E22;&#x7EC4;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x706B;&#x55B0;&#x9E1F; &#x7FBD;&#x5DDE;&#x8934;&#x891B;&#x9E22;&#x7EC4;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x9B54;&#x672F;&#x5E08;&#x5E93;&#x8BFA;&#x770B;&#x5F97;&#x89C1;&#x4E00;&#x5207;">
+                            <img data-src="/images/Bangumi/202601/67fc01c7.jpg?width=400&height=400&format=webp" alt="&#x9B54;&#x672F;&#x5E08;&#x5E93;&#x8BFA;&#x770B;&#x5F97;&#x89C1;&#x4E00;&#x5207;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x9B54;&#x672F;&#x5E08;&#x5E93;&#x8BFA;&#x770B;&#x5F97;&#x89C1;&#x4E00;&#x5207;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x82B1;&#x6837;&#x5C11;&#x5E74;&#x5C11;&#x5973;">
+                            <img data-src="/images/Bangumi/202601/c58ed39a.jpg?width=400&height=400&format=webp" alt="&#x82B1;&#x6837;&#x5C11;&#x5E74;&#x5C11;&#x5973;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x82B1;&#x6837;&#x5C11;&#x5E74;&#x5C11;&#x5973;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x6253;&#x5DE5;&#x4ED4;&#x7684;&#x62F7;&#x95EE;&#x65E5;&#x5E38;">
+                            <img data-src="/images/Bangumi/202601/017507e1.jpg?width=400&height=400&format=webp" alt="&#x6253;&#x5DE5;&#x4ED4;&#x7684;&#x62F7;&#x95EE;&#x65E5;&#x5E38;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x6253;&#x5DE5;&#x4ED4;&#x7684;&#x62F7;&#x95EE;&#x65E5;&#x5E38;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x88AB;&#x90BB;&#x56FD;&#x738B;&#x5B50;&#x6EBA;&#x7231;&#x7684;&#x53CD;&#x6D3E;&#x5973;&#x4E3B;">
+                            <img data-src="/images/Bangumi/202601/30772e19.jpg?width=400&height=400&format=webp" alt="&#x88AB;&#x90BB;&#x56FD;&#x738B;&#x5B50;&#x6EBA;&#x7231;&#x7684;&#x53CD;&#x6D3E;&#x5973;&#x4E3B;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x88AB;&#x90BB;&#x56FD;&#x738B;&#x5B50;&#x6EBA;&#x7231;&#x7684;&#x53CD;&#x6D3E;&#x5973;&#x4E3B;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5730;&#x72F1;&#x4E50; &#x7B2C;&#x4E8C;&#x5B63;">
+                            <img data-src="/images/Bangumi/202601/c6af8784.jpg?width=400&height=400&format=webp" alt="&#x5730;&#x72F1;&#x4E50; &#x7B2C;&#x4E8C;&#x5B63;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5730;&#x72F1;&#x4E50; &#x7B2C;&#x4E8C;&#x5B63;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x76F8;&#x53CD;&#x7684;&#x4F60;&#x548C;&#x6211;">
+                            <img data-src="/images/Bangumi/202601/0f561b69.jpg?width=400&height=400&format=webp" alt="&#x76F8;&#x53CD;&#x7684;&#x4F60;&#x548C;&#x6211;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x76F8;&#x53CD;&#x7684;&#x4F60;&#x548C;&#x6211;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x795E;&#x516B;&#x5C0F;&#x59B9;&#x4E0D;&#x53EF;&#x6015;">
+                            <img data-src="/images/Bangumi/202601/44ca168f.jpg?width=400&height=400&format=webp" alt="&#x795E;&#x516B;&#x5C0F;&#x59B9;&#x4E0D;&#x53EF;&#x6015;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x795E;&#x516B;&#x5C0F;&#x59B9;&#x4E0D;&#x53EF;&#x6015;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x768E;&#x6D01;&#x8FCE;&#x5BB5;&#x4E4B;&#x6708;">
+                            <img data-src="/images/Bangumi/202601/9ec35c3e.jpg?width=400&height=400&format=webp" alt="&#x768E;&#x6D01;&#x8FCE;&#x5BB5;&#x4E4B;&#x6708;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x768E;&#x6D01;&#x8FCE;&#x5BB5;&#x4E4B;&#x6708;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x6709;&#x6816;&#x5DDD;&#x7149;&#x3063;&#x3066;&#x30DB;&#x30F3;&#x30C8;&#x306F;&#x5973;&#x306A;&#x3093;&#x3060;&#x3088;&#x306D;&#x3002;">
+                            <img data-src="/images/Bangumi/202601/ce6252ff.jpg?width=400&height=400&format=webp" alt="&#x6709;&#x6816;&#x5DDD;&#x7149;&#x3063;&#x3066;&#x30DB;&#x30F3;&#x30C8;&#x306F;&#x5973;&#x306A;&#x3093;&#x3060;&#x3088;&#x306D;&#x3002;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x6709;&#x6816;&#x5DDD;&#x7149;&#x3063;&#x3066;&#x30DB;&#x30F3;&#x30C8;&#x306F;&#x5973;&#x306A;&#x3093;&#x3060;&#x3088;&#x306D;&#x3002;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x6697;&#x829D;&#x5C45; &#x7B2C;&#x5341;&#x516D;&#x5B63;">
+                            <img data-src="/images/Bangumi/202601/ebbed022.jpg?width=400&height=400&format=webp" alt="&#x6697;&#x829D;&#x5C45; &#x7B2C;&#x5341;&#x516D;&#x5B63;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x6697;&#x829D;&#x5C45; &#x7B2C;&#x5341;&#x516D;&#x5B63;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x8349;&#x8393;&#x54C0;&#x6B4C;">
+                            <img data-src="/images/Bangumi/202601/2314ab8c.jpg?width=400&height=400&format=webp" alt="&#x8349;&#x8393;&#x54C0;&#x6B4C;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x8349;&#x8393;&#x54C0;&#x6B4C;</div>
+                    </div>
+                </div>
+    </div>
+</div>
+<div class="m-home-week-item" onclick="SetActive(this)">
+    <div class="title">
+        <span class="monday">&#x5267;&#x573A;&#x7248;</span>
+    </div>
+    <div class="detail">
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3498" target="_blank" title="&#x84E6;&#x7136;&#x56DE;&#x9996;">
+                        <img data-src="/images/Bangumi/202411/44ac5303.jpg?width=400&height=400&format=webp" alt="&#x84E6;&#x7136;&#x56DE;&#x9996;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x84E6;&#x7136;&#x56DE;&#x9996;</div>
+                </div>
+            </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x65E0;&#x540D;&#x7684;&#x4EBA;&#x751F;">
+                            <img data-src="/images/Bangumi/202509/d0867c27.jpg?width=400&height=400&format=webp" alt="&#x65E0;&#x540D;&#x7684;&#x4EBA;&#x751F;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x65E0;&#x540D;&#x7684;&#x4EBA;&#x751F;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5267;&#x573A;&#x7248; &#x6B4C;&#x4E4B;&#x738B;&#x5B50;&#x6BBF;&#x4E0B; TABOO NIGHT XXXX">
+                            <img data-src="/images/Bangumi/202601/fb690d72.jpg?width=400&height=400&format=webp" alt="&#x5267;&#x573A;&#x7248; &#x6B4C;&#x4E4B;&#x738B;&#x5B50;&#x6BBF;&#x4E0B; TABOO NIGHT XXXX" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5267;&#x573A;&#x7248; &#x6B4C;&#x4E4B;&#x738B;&#x5B50;&#x6BBF;&#x4E0B; TABOO NIGHT XXXX</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5C0F;&#x6797;&#x5BB6;&#x7684;&#x9F99;&#x5973;&#x4EC6; &#x6015;&#x5BC2;&#x5BDE;&#x7684;&#x9F99;">
+                            <img data-src="/images/Bangumi/202601/5d6f0c60.jpg?width=400&height=400&format=webp" alt="&#x5C0F;&#x6797;&#x5BB6;&#x7684;&#x9F99;&#x5973;&#x4EC6; &#x6015;&#x5BC2;&#x5BDE;&#x7684;&#x9F99;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5C0F;&#x6797;&#x5BB6;&#x7684;&#x9F99;&#x5973;&#x4EC6; &#x6015;&#x5BC2;&#x5BDE;&#x7684;&#x9F99;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="Princess Principal Crown Handler &#x7B2C;4&#x7AE0;">
+                            <img data-src="/images/Bangumi/202601/35ba7b5d.jpg?width=400&height=400&format=webp" alt="Princess Principal Crown Handler &#x7B2C;4&#x7AE0;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">Princess Principal Crown Handler &#x7B2C;4&#x7AE0;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5267;&#x573A;&#x7248; Idol&#x5149;&#x4E4B;&#x7F8E;&#x5C11;&#x5973;&#x4F60;&#x4E0E;&#x6211;&#x266A; &#x4E45;&#x7B49;&#x4E86;&#xFF01;&#x4E3A;&#x4F60;&#x732E;&#x4E0A;&#x95EA;&#x8000;&#x821E;&#x53F0;&#xFF01;">
+                            <img data-src="/images/Bangumi/202601/c17791b0.jpg?width=400&height=400&format=webp" alt="&#x5267;&#x573A;&#x7248; Idol&#x5149;&#x4E4B;&#x7F8E;&#x5C11;&#x5973;&#x4F60;&#x4E0E;&#x6211;&#x266A; &#x4E45;&#x7B49;&#x4E86;&#xFF01;&#x4E3A;&#x4F60;&#x732E;&#x4E0A;&#x95EA;&#x8000;&#x821E;&#x53F0;&#xFF01;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5267;&#x573A;&#x7248; Idol&#x5149;&#x4E4B;&#x7F8E;&#x5C11;&#x5973;&#x4F60;&#x4E0E;&#x6211;&#x266A; &#x4E45;&#x7B49;&#x4E86;&#xFF01;&#x4E3A;&#x4F60;&#x732E;&#x4E0A;&#x95EA;&#x8000;&#x821E;&#x53F0;&#xFF01;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="AS ONE">
+                            <img data-src="/images/Bangumi/202601/094492ba.jpg?width=400&height=400&format=webp" alt="AS ONE" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">AS ONE</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="KING OF PRISM -Your Endless Call- &#x307F;&#xFF5E;&#x3093;&#x306A;&#x304D;&#x3089;&#x3081;&#x3051;&#xFF01;&#x30D7;&#x30EA;&#x30BA;&#x30E0;&#x2606;&#x30C4;&#x30A2;&#x30FC;&#x30BA;">
+                            <img data-src="/images/Bangumi/202601/111d100a.jpg?width=400&height=400&format=webp" alt="KING OF PRISM -Your Endless Call- &#x307F;&#xFF5E;&#x3093;&#x306A;&#x304D;&#x3089;&#x3081;&#x3051;&#xFF01;&#x30D7;&#x30EA;&#x30BA;&#x30E0;&#x2606;&#x30C4;&#x30A2;&#x30FC;&#x30BA;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">KING OF PRISM -Your Endless Call- &#x307F;&#xFF5E;&#x3093;&#x306A;&#x304D;&#x3089;&#x3081;&#x3051;&#xFF01;&#x30D7;&#x30EA;&#x30BA;&#x30E0;&#x2606;&#x30C4;&#x30A2;&#x30FC;&#x30BA;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x8721;&#x7B14;&#x5C0F;&#x65B0;&#xFF1A;&#x8D85;&#x534E;&#x4E3D;&#xFF01;&#x707C;&#x70ED;&#x7684;&#x6625;&#x65E5;&#x90E8;&#x821E;&#x8005;">
+                            <img data-src="/images/Bangumi/202601/5053a59f.jpg?width=400&height=400&format=webp" alt="&#x8721;&#x7B14;&#x5C0F;&#x65B0;&#xFF1A;&#x8D85;&#x534E;&#x4E3D;&#xFF01;&#x707C;&#x70ED;&#x7684;&#x6625;&#x65E5;&#x90E8;&#x821E;&#x8005;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x8721;&#x7B14;&#x5C0F;&#x65B0;&#xFF1A;&#x8D85;&#x534E;&#x4E3D;&#xFF01;&#x707C;&#x70ED;&#x7684;&#x6625;&#x65E5;&#x90E8;&#x821E;&#x8005;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x7535;&#x5F71; &#x5C0F;&#x9CA8;&#x9C7C;&#x53BB;&#x90CA;&#x6E38;">
+                            <img data-src="/images/Bangumi/202601/8ecb89eb.jpg?width=400&height=400&format=webp" alt="&#x7535;&#x5F71; &#x5C0F;&#x9CA8;&#x9C7C;&#x53BB;&#x90CA;&#x6E38;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x7535;&#x5F71; &#x5C0F;&#x9CA8;&#x9C7C;&#x53BB;&#x90CA;&#x6E38;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x5076;&#x50CF;&#x6D3B;&#x52A8;&#xD7;&#x7F8E;&#x5999;&#x5929;&#x5802; &#x7535;&#x5F71;">
+                            <img data-src="/images/Bangumi/202601/c13352ab.jpg?width=400&height=400&format=webp" alt="&#x5076;&#x50CF;&#x6D3B;&#x52A8;&#xD7;&#x7F8E;&#x5999;&#x5929;&#x5802; &#x7535;&#x5F71;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x5076;&#x50CF;&#x6D3B;&#x52A8;&#xD7;&#x7F8E;&#x5999;&#x5929;&#x5802; &#x7535;&#x5F71;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x7535;&#x5F71; &#x9C81;&#x90A6;&#x4E09;&#x4E16; &#x4E0D;&#x6B7B;&#x8EAB;&#x7684;&#x8840;&#x65CF;">
+                            <img data-src="/images/Bangumi/202601/5883c23e.jpg?width=400&height=400&format=webp" alt="&#x7535;&#x5F71; &#x9C81;&#x90A6;&#x4E09;&#x4E16; &#x4E0D;&#x6B7B;&#x8EAB;&#x7684;&#x8840;&#x65CF;" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x7535;&#x5F71; &#x9C81;&#x90A6;&#x4E09;&#x4E16; &#x4E0D;&#x6B7B;&#x8EAB;&#x7684;&#x8840;&#x65CF;</div>
+                    </div>
+                </div>
+                <div class="m-week-square">
+                    <div class="greyout">
+                        <a href="javascript:void(0);" title="&#x4E0E;&#x7231;&#x4E3D;&#x4E1D;&#x68A6;&#x6E38;&#x4ED9;&#x5883; -Dive in Wonderland-">
+                            <img data-src="/images/Bangumi/202601/5fc5e192.jpg?width=400&height=400&format=webp" alt="&#x4E0E;&#x7231;&#x4E3D;&#x4E1D;&#x68A6;&#x6E38;&#x4ED9;&#x5883; -Dive in Wonderland-" class="b-lazy">
+                        </a>
+                        <div class="small-title ellipsis">&#x4E0E;&#x7231;&#x4E3D;&#x4E1D;&#x68A6;&#x6E38;&#x4ED9;&#x5883; -Dive in Wonderland-</div>
+                    </div>
+                </div>
+    </div>
+</div>
+<div class="m-home-week-item" onclick="SetActive(this)">
+    <div class="title">
+        <span class="monday">OVA</span>
+    </div>
+    <div class="detail">
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3869" target="_blank" title="&#x8F89;&#x591C;&#x5927;&#x5C0F;&#x59D0;&#x60F3;&#x8BA9;&#x6211;&#x544A;&#x767D; &#x901A;&#x5F80;&#x5927;&#x4EBA;&#x7684;&#x9636;&#x68AF;">
+                        <img data-src="/images/Bangumi/202512/fe480940.jpg?width=400&height=400&format=webp" alt="&#x8F89;&#x591C;&#x5927;&#x5C0F;&#x59D0;&#x60F3;&#x8BA9;&#x6211;&#x544A;&#x767D; &#x901A;&#x5F80;&#x5927;&#x4EBA;&#x7684;&#x9636;&#x68AF;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x8F89;&#x591C;&#x5927;&#x5C0F;&#x59D0;&#x60F3;&#x8BA9;&#x6211;&#x544A;&#x767D; &#x901A;&#x5F80;&#x5927;&#x4EBA;&#x7684;&#x9636;&#x68AF;</div>
+                </div>
+            </div>
+            <div class="m-week-square">
+                <div>
+                    <a href="/Home/Bangumi/3870" target="_blank" title="&#x6211;&#x4EEC;&#x4E0D;&#x53EF;&#x80FD;&#x6210;&#x4E3A;&#x604B;&#x4EBA;&#xFF01;&#x7EDD;&#x5BF9;&#x4E0D;&#x884C;&#x3002; (&#x203B;&#x4F3C;&#x4E4E;&#x53EF;&#x884C;&#xFF1F;) &#x301C;&#x518D;&#x6B21;&#x95EA;&#x8000;&#xFF01;&#x301C;">
+                        <img data-src="/images/Bangumi/202601/2917cf04.jpg?width=400&height=400&format=webp" alt="&#x6211;&#x4EEC;&#x4E0D;&#x53EF;&#x80FD;&#x6210;&#x4E3A;&#x604B;&#x4EBA;&#xFF01;&#x7EDD;&#x5BF9;&#x4E0D;&#x884C;&#x3002; (&#x203B;&#x4F3C;&#x4E4E;&#x53EF;&#x884C;&#xFF1F;) &#x301C;&#x518D;&#x6B21;&#x95EA;&#x8000;&#xFF01;&#x301C;" class="b-lazy">
+                    </a>
+                    <div class="small-title ellipsis">&#x6211;&#x4EEC;&#x4E0D;&#x53EF;&#x80FD;&#x6210;&#x4E3A;&#x604B;&#x4EBA;&#xFF01;&#x7EDD;&#x5BF9;&#x4E0D;&#x884C;&#x3002; (&#x203B;&#x4F3C;&#x4E4E;&#x53EF;&#x884C;&#xFF1F;) &#x301C;&#x518D;&#x6B21;&#x95EA;&#x8000;&#xFF01;&#x301C;</div>
+                </div>
+            </div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+<link rel="stylesheet" href="/css/bootstrap-toggle-round.css?v=ZHx5lTKQuvWMGeQuWNqkSQvuRt2u8x7w0URRg4MhfUo" />
+
+<script>
+    $(function () {
+        var announcement = $("#announcement");
+
+        announcement.delegate("a.note__close", "click", function (event) {
+            event.preventDefault();
+            $(this).closest("#announcement").fadeOut("slow");
+        });
+
+        var announcementid = readCookie("mikan-announcement");
+        if (announcementid == null || announcementid == '') {
+            createCookie("mikan-announcement", announcement.data("announcementid"), 365);
+        }
+        else if (announcementid != announcement.data("announcementid") && announcement.data("announcementid") != 0) {
+            announcement.fadeIn("slow");
+            setTimeout(function () { announcement.fadeOut("slow"); }, 10000);
+            createCookie("mikan-announcement", announcement.data("announcementid"), 365);
+        }
+    });
+</script>
+
+    <div class="modal modal-fullscreen fade" id="modal-nav" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background-color:#3bc0c3;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" style="margin: auto;width:100%;">
+                    <div class="m-tool">
+                        <span class="m-close clickable"><i class="fa fa-times" aria-hidden="true" data-toggle="modal" data-target="#modal-nav"></i></span>
+                        <div class="m-tool-toolbar">
+                            <img src="/images/mikan-pic.png" style="width: 3rem;">
+                            <img src="/images/mikan-text.png" style="width: 7rem;">
+                        </div>
+                        <div class="m-tool-list">
+                            <ul>
+                                <li><a href="/" class="link">主页</a></li>
+                                <li class="m-tool-search-change"><a href="/Home/MyBangumi" class="link">订阅</a></li>
+                                <li onclick="tool.clickSearch()" class="m-tool-search-change">
+                                    <i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;搜索站内
+                                </li>
+                                <li class="m-tool-search-input">
+                                    <form method="get" action="/Home/Search">
+                                        <div style="display: flex;height: 100%;">
+                                            <input type="text" class="form-control" name="searchstr" style="font-size:16px;" />
+                                            <span style="width: 5rem;" onclick="tool.resetSearch()">取消</span>
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-fullscreen fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background-color:#edf1f2;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" style="margin: auto;width:100%;height:85vh;">
+                    <div class="m-login">
+                        <span class="m-left clickable"><i class="fa fa-angle-left" aria-hidden="true" data-toggle="modal" data-target="#modal-login"></i></span>
+
+                            <div class="m-tool-title">
+                                登陆mikan账号
+                            </div>
+                            <div style="text-align: center;margin-top: 2rem;">
+                                <img src="/images/mikan-pic.png" style="width: 6rem;">
+                            </div>
+<form action="/Account/Login?ReturnUrl=%2F" method="post">                                <div>
+                                    <input type="text" class="form-control" aria-label="..." placeholder="用户名" name="UserName">
+                                    <input type="password" class="form-control" aria-label="..." placeholder="密码" name="Password">
+                                </div>
+                                <button class="form-control" type="submit">登录</button>
+<input name="__RequestVerificationToken" type="hidden" value="CfDJ8MyNMqFNaC9JmJW13PvY-91iwnMH2RqEpMXvz6DXZf3E5WaSW8-JBY2EsqSVznJMO8ew8ipRb_zZ31aosV-32E3mYfP9KJ7wbWHQ8x5dKjHs-2Of0X3DqLfmIHlrVWR3u0Epfj6D0LajgD306r9Up60" /></form>                            <div class="m-goto-registry">
+                                <a href="/Account/Register" class="w-other-c" style="color:#3bc0c3">立即注册</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer hidden-xs hidden-sm">
+        <div id="sk-footer" class="container text-center">
+            <div>Powered by Mikan Project <a href="/Home/Contact" target="_blank">联系我们</a></div>
+            <div>Cooperate by PlaymateCat@Lisa</div>
+        </div>
+    </footer>
+
+    <script>
+        var tool = {};
+        (function () {
+
+            var inputPEl = $('.m-tool-search-input');
+            var inputEl = inputPEl.find('input');
+            var changeEl = $('.m-tool-search-change');
+            inputPEl.hide();
+            tool.clickSearch = clickSearch;
+            tool.resetSearch = resetSearch;
+
+            function clickSearch() {
+                changeEl.hide();
+                inputPEl.show();
+                inputEl.focus();
+            }
+
+            function resetSearch() {
+                changeEl.show();
+                inputPEl.hide();
+                inputEl.val('');
+            }
+        })();
+    </script>
+
+    <script>
+        var pageUtil;
+
+        (function () {
+            pageUtil = {
+                isMobile: isMobile
+            };
+
+            function isMobile() {
+                var check = false;
+                (function (a) {
+                    if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+                })(navigator.userAgent || navigator.vendor || window.opera);
+                return check;
+            }
+        })();
+
+        //detect if page is mobile
+        if (pageUtil.isMobile()) {
+            document.getElementsByTagName('html')[0].style['font-size'] = window.innerWidth / 32 + 'px';
+        }
+    </script>
+</body>
+
+<!-- here put your own javascript -->
+
+
+    <script src="/js/mikan.min.js?v=2Sihj4hqR5g2HrG0PIQWX21XOj8Th6EHd9lwnsj4Xds"></script>
+
+
+
+</html>

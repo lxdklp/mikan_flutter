@@ -14,33 +14,63 @@ import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'firebase_options.dart';
-import 'internal/dynamic_color.dart';
-import 'internal/extension.dart';
-import 'internal/hive.dart';
-import 'internal/http_cache_manager.dart';
-import 'internal/lifecycle.dart';
-import 'internal/log.dart';
-import 'internal/method.dart';
-import 'internal/network_font_loader.dart';
+import 'mikan_api.dart';
 import 'mikan_route.dart';
 import 'mikan_routes.dart';
-import 'providers/fonts_model.dart';
-import 'providers/home_model.dart';
-import 'providers/index_model.dart';
-import 'providers/list_model.dart';
-import 'providers/op_model.dart';
-import 'providers/subscribed_model.dart';
+import 'shared/internal/dynamic_color.dart';
+import 'shared/internal/extension.dart';
+import 'shared/internal/hive.dart';
+import 'shared/internal/http_cache_manager.dart';
+import 'shared/internal/lifecycle.dart';
+import 'shared/internal/log.dart';
+import 'shared/internal/method.dart';
+import 'shared/internal/network_font_loader.dart';
+import 'shared/widgets/loading.dart';
+import 'shared/widgets/restart.dart';
+import 'shared/widgets/toast.dart';
 import 'topvars.dart';
-import 'widget/loading.dart';
-import 'widget/restart.dart';
-import 'widget/toast.dart';
 
 final _analytics = FirebaseAnalytics.instance;
 final _observer = FirebaseAnalyticsObserver(analytics: _analytics);
+
+/// Riverpod observer for debugging and monitoring provider state changes
+base class _RiverpodLogger extends ProviderObserver {
+  @override
+  void didUpdateProvider(ProviderObserverContext context, Object? previousValue, Object? newValue) {
+    if (kDebugMode) {
+      final providerName = context.provider.name ?? context.provider.runtimeType.toString();
+      'Riverpod: [$providerName] updated'.$debug();
+    }
+  }
+
+  @override
+  void providerDidFail(ProviderObserverContext context, Object error, StackTrace stackTrace) {
+    if (kDebugMode) {
+      final providerName = context.provider.name ?? context.provider.runtimeType.toString();
+      'Riverpod: [$providerName] failed with error: $error'.$error(stackTrace: stackTrace);
+    }
+  }
+
+  @override
+  void didAddProvider(ProviderObserverContext context, Object? value) {
+    if (kDebugMode) {
+      final providerName = context.provider.name ?? context.provider.runtimeType.toString();
+      'Riverpod: [$providerName] initialized'.$debug();
+    }
+  }
+
+  @override
+  void didDisposeProvider(ProviderObserverContext context) {
+    if (kDebugMode) {
+      final providerName = context.provider.name ?? context.provider.runtimeType.toString();
+      'Riverpod: [$providerName] disposed'.$debug();
+    }
+  }
+}
 
 final isMobile = Platform.isIOS || Platform.isAndroid;
 final isSupportFirebase = isMobile || Platform.isMacOS;
@@ -77,6 +107,7 @@ Future<void> _initMisc() async {
     MyHive.init(),
     NetworkFontLoader.init(),
     HttpCacheManager.init(),
+    MikanApi.init(),
     if (isSupportFirebase) _initFirebase(),
   ]);
   if (Platform.isAndroid) {
@@ -134,20 +165,7 @@ class _MikanAppState extends State<MikanApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<FontsModel>(create: (context) => FontsModel(), lazy: false),
-        ChangeNotifierProvider<SubscribedModel>(create: (_) => SubscribedModel()),
-        ChangeNotifierProvider<OpModel>(create: (_) => OpModel()),
-        ChangeNotifierProvider<IndexModel>(
-          create: (context) => IndexModel(context.read<SubscribedModel>()),
-          lazy: false,
-        ),
-        ChangeNotifierProvider<ListModel>(create: (_) => ListModel()),
-        ChangeNotifierProvider<HomeModel>(create: (_) => HomeModel()),
-      ],
-      child: _buildMaterialApp(context),
-    );
+    return ProviderScope(observers: [_RiverpodLogger()], child: _buildMaterialApp(context));
   }
 
   Widget _buildMaterialApp(BuildContext context) {
@@ -190,7 +208,10 @@ class _MikanAppState extends State<MikanApp> {
           builder: FlutterSmartDialog.init(
             toastBuilder: (msg) => ToastWidget(msg: msg),
             loadingBuilder: (msg) => LoadingWidget(msg: msg),
-            builder: (context, child) => GestureDetector(onTap: hideKeyboard, child: child),
+            builder: (context, child) => AnnotatedRegion(
+              value: context.fitSystemUiOverlayStyle,
+              child: GestureDetector(onTap: hideKeyboard, child: child),
+            ),
           ),
           onGenerateRoute: (RouteSettings settings) {
             return onGenerateRoute(settings: settings, getRouteSettings: getRouteSettings);
